@@ -112,75 +112,36 @@
 	 	</a>
 
 		
-	 	<div class="row">
-	 		<div id="mep" style="width:1169px;height:300px;">
-	 			<div class="control-left-wrapper">
-	 				<div class="zoom-in" id="zoom-in"><i class="fa fa-plus"></i></div>
-	 				<div class="zoom-out" id="zoom-out"><i></i>></div>
-	 				<div></div>
-	 			</div>
-	 		</div>
-	 	</div>
-	 		
-	 	
-	
-	<script>
-      	
-      	function initMap() {
-        var myLatLng = {lat: 16.059911, lng: 108.209889};
-
-        var map = new google.maps.Map(document.getElementById('mep'), {
-          zoom: 16,
-          center: myLatLng,
-          zoomControl: true, //ẩn or k ẩn nút phóng thu trong map
-          scrollwheel: true, //có or không thể zoom map
-        });
-
-        var marker = new google.maps.Marker({
-          position: myLatLng,
-          map: map,
-          title: 'Trường Đại Học Duy Tân'
-        });
-
-        /*var customerMapType = new google.maps.StyledMapType([
-        	{ stylers: [{hue: '#D2E4C8'}]},
-        	]);
-        var customerMapTypeID = 'customer_style';
-        map.mapTypes.set(customerMapTypeID, customerMapType);
-        map.setMapTypeID(customerMapTypeID);*/
-        
-	 <div id="floating-panel">
+	 	<div id="floating-panel" style="width: 370px">
       <strong>Start:</strong>
-      <select id="start">
-        <option value="Nguyễn Văn Huề, Liên Chiểu, Đà Nẵng">Nguyễn Văn Huề</option>
-        <option value="9 Ngô Văn Sở, Liên Chiểu, Đà Nẵng">9 Ngô Văn Sở</option>
-        <option value="Mộc Bài 8, Liên Chiểu, Đà Nẵng">Mộc Bài 8, MO</option>
-        <option value="254 Nguyễn Văn Linh, Thanh Khê, Đà Nẵng ">254 Nguyễn Văn Linh</option>
-        
-      </select>
+      <input id="start" type="text" value="254 Nguyễn Văn Linh, Thanh Khê, Đà Nẵng" style="width: 300px">
       <br>
       <strong>End:</strong>
-      <select id="end">
-        <option value="Mộc Bài 8, Liên Chiểu, Đà Nẵng">Mộc Bài 8</option>
-        <option value="9 Ngô Văn Sở, Liên Chiểu, Đà Nẵng">9 Ngô Văn Sở</option>
-        <option value="Nguyễn Văn Huề, Liên Chiểu, Đà Nẵng">Nguyễn Văn Huề</option>
-        <option value="254 Nguyễn Văn Linh, Thanh Khê, Đà Nẵng ">254 Nguyễn Văn Linh</option>
-        
-      </select>
+      <input id="end" type="text" value="254 Hoàng Diệu, Hải Châu, Đà Nẵng" style="width: 300px">
+      <input id="submit" type="submit" value="Chỉ đường">
     </div>
 	<div class="row">
-	 		<div id="map" style="width:1169.px;height:300px;z-index: 1px;position: relative;">
+	 		<div id="map" style="width:1169px;height:300px;z-index: 1px;position: relative;">
 	 		</div>
 	 		
 	</div>
+	
+	
+
 	<script>
-		var map;
+      var map;
       function initMap() {
         var directionsDisplay = new google.maps.DirectionsRenderer;
         var directionsService = new google.maps.DirectionsService;
         map = new google.maps.Map(document.getElementById('map'), {
           zoom: 12,
           center: {lat: 16.0544068, lng: 108.2021667}
+        });
+        var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+        var beachMarker = new google.maps.Marker({
+          position: {lat: 16.0544068, lng: 108.2021667},
+          map: map,
+          icon: image
         });
         directionsDisplay.setMap(map);
         directionsDisplay.setPanel(document.getElementById('right-panel'));
@@ -192,9 +153,9 @@
         var onChangeHandler = function() {
           calculateAndDisplayRoute(directionsService, directionsDisplay);
         };
-        document.getElementById('start').addEventListener('change', onChangeHandler);
-        document.getElementById('end').addEventListener('change', onChangeHandler);
-
+        document.getElementById('submit').addEventListener('click', onChangeHandler);
+        //document.getElementById('start').addEventListener('click', onChangeHandler);
+        //document.getElementById('end').addEventListener('click', onChangeHandler);
       }
 
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
@@ -244,30 +205,8 @@
           }
         });
       }
-	</script>
-
-	<script>
-      	/*var map;
-      	function initMap() {
-        var myLatLng = {lat: 16.059911, lng: 108.209889};
-
-        map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 16,
-          center: myLatLng
-        });
-
-        var marker = new google.maps.Marker({
-          position: myLatLng,
-          map: map,
-          title: 'Trường Đại Học Duy Tân',
-        });
-
-        
-      }*/
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVq1eRO3SMYnmnXu213mAa9hTj_B7EMcI&callback=initMap"
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzmyhWaNEQ_i55-LLOfNPka-8BAhZRUaM&callback=initMap"
     async defer></script>
 
-	{{-- test --}}
-	{{-- test --}}
 @endsection

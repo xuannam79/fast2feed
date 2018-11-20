@@ -1,6 +1,10 @@
 
 @if($presentStatus == 1)
-    <img src="/fast2feed/public/templates/admin/images/icon/deactive.gif" alt="" onClick="return ajaxToggleActiveStatus({{ $id }}, 0)" />
+<input type="checkbox" class="switch-input" onchange="return ajaxToggleActiveStatus({{ $id }}, 0)">
+<span class="switch-label"></span>
+<span class="switch-handle"></span>
 @elseif($presentStatus == 0)
-    <img src="/fast2feed/public/templates/admin/images/icon/active.gif" alt="" onClick="return ajaxToggleActiveStatus({{ $id }}, 1)" />
+<input type="checkbox" class="switch-input" checked="true" onchange="return ajaxToggleActiveStatus({{ $id }}, 1)">
+<span class="switch-label"></span>
+<span class="switch-handle"></span>
 @endif

@@ -57,14 +57,19 @@
                                                 <td>{{ $id }}</td>
                                                 <td class="desc">{{ $name }}</td>
                                                 <td>
-                                                    <div class="active{{ $id }}">
+                                                    <label class="switch switch-3d switch-success mr-3" id="active{{$id}}">
                                                         @if($status == 1)
-                                                            <img src="/fast2feed/public/templates/admin/images/icon/active.gif" alt="" onClick="return ajaxToggleActiveStatus({{ $id }}, 1)" />
+                                                        <input type="checkbox" class="switch-input" checked="true" onchange="return ajaxToggleActiveStatus({{ $id }}, 1)">
+                                                        <span class="switch-label"></span>
+                                                        <span class="switch-handle"></span>
+
                                                         @else
-                                                            <img src="/fast2feed/public/templates/admin/images/icon/deactive.gif" alt="" onClick="return ajaxToggleActiveStatus({{ $id }}, 0)" />
+                                                        <input type="checkbox" class="switch-input" onchange="return ajaxToggleActiveStatus({{ $id }}, 0)">
+                                                        <span class="switch-label"></span>
+                                                        <span class="switch-handle"></span>
                                                         @endif
                                                         
-                                                    </div>
+                                                    </label>
                                                 </td>
                                                 
                                                 <td>

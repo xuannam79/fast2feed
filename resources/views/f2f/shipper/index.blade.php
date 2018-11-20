@@ -46,11 +46,7 @@
 		   </div>
 		</div>
 		<div class="row">
-<<<<<<< HEAD
-			<div class="order_panel order_panel_info">
-=======
         <div class="order_panel order_panel_info">
->>>>>>> 92238cdb23441a59ae73d36370c911c7a76dde10
             <div class="order">
                 <h1 class="order_title mb-4 text-center" style="font-size: 20px">Hóa đơn đã nhận</h1>
                 <div class="order_table">
@@ -226,40 +222,12 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-		</div>
-	 	
-	<div id="map" style="width:1100px;height:370px;margin: 20px 0px;">
-		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.12085798816!2d108.20519251494086!3d16.059216988887126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219b15a13c381%3A0x2a8f705f1bfbf085!2zMjU0IE5ndXnhu4VuIFbEg24gTGluaCwgVGjhuqFjIEdpw6FuLCBUaGFuaCBLaMOqLCDEkMOgIE7hurVuZyA1NTAwMDAsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1540132844754"
-				width="1135" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
-	</div>
-	<script>
-=======
     </div>
-	 	
-	<div class="row">
+
+    <div class="row" style="margin-top: 15px">
            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.12085798816!2d108.20519251494088!3d16.05921698888712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219b15a13c381%3A0x2a8f705f1bfbf085!2zMjU0IE5ndXnhu4VuIFbEg24gTGluaCwgVGjhuqFjIEdpw6FuLCBUaGFuaCBLaMOqLCDEkMOgIE7hurVuZyA1NTAwMDAsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1541927221492" width="1169" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
             
     </div>
-    <script>
->>>>>>> 92238cdb23441a59ae73d36370c911c7a76dde10
-        function initMap() {
-            var map;
-            var myLatLng = {lat: 16.059911, lng: 108.209889};
-
-            map = new google.maps.Map(document.getElementById('mep'), {
-                zoom: 16,
-                center: myLatLng
-            });
-
-        var marker = new google.maps.Marker({
-          position: myLatLng,
-          map: map,
-          title: 'Trường Đại Học Duy Tân',
-        });
-      }
-    </script>
-    
 
     <script>
       var map;
@@ -359,14 +327,7 @@
             }
         }
     </script>
-<<<<<<< HEAD
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzmyhWaNEQ_i55-LLOfNPka-8BAhZRUaM&callback=initMap"
     async defer></script>
-=======
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVq1eRO3SMYnmnXu213mAa9hTj_B7EMcI&callback=initMap"
-    async defer></script>
-    <script>
-        
-    </script>
->>>>>>> 92238cdb23441a59ae73d36370c911c7a76dde10
+
 @endsection

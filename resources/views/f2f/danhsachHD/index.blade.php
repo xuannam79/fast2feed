@@ -41,61 +41,45 @@ Trang chủ shipper
    </div>
 </div>
 <div class="row">
-   <div class="order_panel order_panel_info">
-      <div class="order">
-         <h1 class="order_title mb-4 text-center" style="font-size: 20px">Danh sách hóa đơn</h1>
-         <div class="order_table">
-            <div class="order_list">
-               <div class="order_list_heading order_table_row">
-                  <div class="order_table_cell order_list_row_col1">STT
-                  </div>
-                  <div class="order_table_cell order_list_row_col2">Nơi nhận hàng
-                  </div>
-                  <div class="order_table_cell order_list_row_col3">Nơi giao hàng
-                  </div>
-                  <div class="order_table_cell order_list_row_col4">Tiền nhận hàng
-                  </div>
-                  <div class="order_table_cell order_list_row_col5">Tiền giao hàng
-                  </div>
-                  <div class="order_table_cell order_list_row_col6">Trạng thái
-                  </div>
-                  <div class="order_table_cell order_list_row_col7">
-                  </div>
-                  <div class="order_table_cell order_list_row_col8">
-                  </div>
-               </div>
-               <div class="order_table_row">
-                  <div class="order_table_cell order_list_row_col1">01
-                  </div>
-                  <div class="order_table_cell order_list_row_col2">134 Hoàng Diệu, P.2, Q. Hải Châu, TP.Đà
-                     Nẵng
-                  </div>
-                  <div class="order_table_cell order_list_row_col3">148 Tiểu La, P.3, Q. Hải Châu, TP.Đà Nẵng
-                  </div>
-                  <div class="order_table_cell order_list_row_col4">95.000đ
-                  </div>
-                  <div class="order_table_cell order_list_row_col5">116,000đ
-                  </div>
-                  <div class="order_table_cell order_list_row_col6">Còn 5 phút
-                  </div>
-                  <div class="order_table_cell order_list_row_col7">
-                     <button title="Nhấn vào để xem chi tiết"
-<<<<<<< HEAD
-                        class="font_weight_bold order_table_status gray pointer" id="myBtn" style="width: 70px">Xem
-                     </button>
-                     <div id="myModel" class="model">
-                        <!-- model content -->
-                        <div id="myModel" class="model fade1 model-order show1" id="model-order"
-                           tabindex="-1"
-                           role="dialog" data-backdrop="static" data-keyboard="false"
-                           style="padding-right: 16px; display: block;">
-                           <div class="model-dialog model-dialog-centered" role="document">
-                              <div class="model-content model-order-detail">
-                                 <span class="close"
-                                    data-dismiss="model">x</span>
-                                 <div class="model-header">Chi tiết hóa đơn</div>
-                                 <div class="model-body">
-=======
+        <div class="order_panel order_panel_info">
+            <div class="order">
+                <h1 class="order_title mb-4 text-center" style="font-size: 20px">Danh sách hóa đơn</h1>
+                <div class="order_table">
+                    <div class="order_list">
+                        <div class="order_list_heading order_table_row">
+                            <div class="order_table_cell order_list_row_col1">STT
+                            </div>
+                            <div class="order_table_cell order_list_row_col2">Nơi nhận hàng
+                            </div>
+                            <div class="order_table_cell order_list_row_col3">Nơi giao hàng
+                            </div>
+                            <div class="order_table_cell order_list_row_col4">Tiền nhận hàng
+                            </div>
+                            <div class="order_table_cell order_list_row_col5">Tiền giao hàng
+                            </div>
+                            <div class="order_table_cell order_list_row_col6">Trạng thái
+                            </div>
+                            <div class="order_table_cell order_list_row_col7">
+                            </div>
+                            <div class="order_table_cell order_list_row_col8">
+                            </div>
+                        </div>
+                        <div class="order_table_row">
+                            <div class="order_table_cell order_list_row_col1">01
+                            </div>
+                            <div class="order_table_cell order_list_row_col2">134 Hoàng Diệu, P.2, Q. Hải Châu, TP.Đà
+                                Nẵng
+                            </div>
+                            <div class="order_table_cell order_list_row_col3">148 Tiểu La, P.3, Q. Hải Châu, TP.Đà Nẵng
+                            </div>
+                            <div class="order_table_cell order_list_row_col4">95.000đ
+                            </div>
+                            <div class="order_table_cell order_list_row_col5">116,000đ
+                            </div>
+                            <div class="order_table_cell order_list_row_col6">Còn 5 phút
+                            </div>
+                            <div class="order_table_cell order_list_row_col7">
+                                <button title="Nhấn vào để xem chi tiết"
                                         class="font_weight_bold order_table_status gray pointer" id="myBtn"
                                         style="width: 70px">Xem
                                 </button>
@@ -112,7 +96,6 @@ Trang chủ shipper
                                                                                                 data-dismiss="model">x</span>
                                                 <div class="model-header">Chi tiết hóa đơn</div>
                                                 <div class="model-body">
->>>>>>> 92238cdb23441a59ae73d36370c911c7a76dde10
                                                     <div class="order-left">
                                                         <div id="map" class="map-order">
                                                             
@@ -126,22 +109,14 @@ Trang chủ shipper
                                                                     254 Nguyễn Văn Linh, Thanh Khê, Đà Nẵng
                                                                 </div>
                                                                 <div class="direction-to">
-<<<<<<< HEAD
-                                                                    
-=======
                                                                     <div class="">
->>>>>>> 92238cdb23441a59ae73d36370c911c7a76dde10
                                                                         <div class="direction-name"
                                                                              id="shipping-address">
                                                                             <span>Điểm giao hàng - Tên khách</span><span> - Sđt khách </span>
                                                                         </div>
                                                                         <input id="end" type="hidden" value="254 Hoàng Diệu, Hải Châu, Đà Nẵng" style="width: 300px">
                                                                         254 Hoàng Diệu, Hải Châu, Đà Nẵng
-<<<<<<< HEAD
-                                                                    
-=======
                                                                     </div>
->>>>>>> 92238cdb23441a59ae73d36370c911c7a76dde10
                                                                 </div>
                                                             </div>
                                                             <div>
@@ -223,16 +198,6 @@ Trang chủ shipper
                                                         </div>
                                                     </div>
                                                 </div>
-<<<<<<< HEAD
-                                 <div class="model-footer">
-                                    <div class="submit-order">NHẬN</div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-=======
                                                 <div class="model-footer">
                                                     <div class="submit-order">NHẬN</div>
                                                 </div>
@@ -242,66 +207,46 @@ Trang chủ shipper
                                 </div>
 
                             </div>
->>>>>>> 92238cdb23441a59ae73d36370c911c7a76dde10
-                  <div class="order_table_cell order_list_row_col8">
-                     <button title="Nhấn vào để nhận đơn hàng"
-                        class="order_table_status gray pointer" style="width: 105px">Nhận đơn
-                     </button>
-                  </div>
-               </div>
-               <div class="order_table_row">
-                  <div class="order_table_cell order_list_row_col1">02
-                  </div>
-                  <div class="order_table_cell order_list_row_col2">210 Núi Thành, P.1, Q. Hải Châu, TP.Đà
-                     Nẵng
-                  </div>
-                  <div class="order_table_cell order_list_row_col3">121 Lê Đình Lý, P.4, Q. Hải Châu, TP.Đà
-                     Nẵng
-                  </div>
-                  <div class="order_table_cell order_list_row_col4">105.000đ
-                  </div>
-                  <div class="order_table_cell order_list_row_col5">140.000đ
-                  </div>
-                  <div class="order_table_cell order_list_row_col6">Đã hủy
-                  </div>
-                  <div class="order_table_cell order_list_row_col7">
-                  </div>
-                  <div class="order_table_cell order_list_row_col8">
-                  </div>
-               </div>
+                            <div class="order_table_cell order_list_row_col8">
+                                <button title="Nhấn vào để nhận đơn hàng"
+                                        class="order_table_status gray pointer" style="width: 105px">Nhận đơn
+                                </button>
+                            </div>
+                        </div>
+                        <div class="order_table_row">
+                            <div class="order_table_cell order_list_row_col1">02
+                            </div>
+                            <div class="order_table_cell order_list_row_col2">210 Núi Thành, P.1, Q. Hải Châu, TP.Đà
+                                Nẵng
+                            </div>
+                            <div class="order_table_cell order_list_row_col3">121 Lê Đình Lý, P.4, Q. Hải Châu, TP.Đà
+                                Nẵng
+                            </div>
+                            <div class="order_table_cell order_list_row_col4">105.000đ
+                            </div>
+                            <div class="order_table_cell order_list_row_col5">140.000đ
+                            </div>
+                            <div class="order_table_cell order_list_row_col6">Đã hủy
+                            </div>
+                            <div class="order_table_cell order_list_row_col7">
+
+                            </div>
+                            <div class="order_table_cell order_list_row_col8">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </div>
-   </div>
-</div>
-<div class="row">
-<<<<<<< HEAD
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.12085798816!2d108.20519251494088!3d16.05921698888712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219b15a13c381%3A0x2a8f705f1bfbf085!2zMjU0IE5ndXnhu4VuIFbEg24gTGluaCwgVGjhuqFjIEdpw6FuLCBUaGFuaCBLaMOqLCDEkMOgIE7hurVuZyA1NTAwMDAsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1541927221492" width="1169" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
-</div>
-=======
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 15px">
            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.12085798816!2d108.20519251494088!3d16.05921698888712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219b15a13c381%3A0x2a8f705f1bfbf085!2zMjU0IE5ndXnhu4VuIFbEg24gTGluaCwgVGjhuqFjIEdpw6FuLCBUaGFuaCBLaMOqLCDEkMOgIE7hurVuZyA1NTAwMDAsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1541927221492" width="1169" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
             
     </div>
-    <script>
-        function initMap() {
-            var map;
-            var myLatLng = {lat: 16.059911, lng: 108.209889};
-
-            map = new google.maps.Map(document.getElementById('mep'), {
-                zoom: 16,
-                center: myLatLng
-            });
-
-        var marker = new google.maps.Marker({
-          position: myLatLng,
-          map: map,
-          title: 'Trường Đại Học Duy Tân',
-        });
-      }
-    </script>
     
 
->>>>>>> 92238cdb23441a59ae73d36370c911c7a76dde10
     <script>
       var map;
       function initMap() {
@@ -400,13 +345,6 @@ Trang chủ shipper
             }
         }
     </script>
-<<<<<<< HEAD
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzmyhWaNEQ_i55-LLOfNPka-8BAhZRUaM&callback=initMap"
-=======
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVq1eRO3SMYnmnXu213mAa9hTj_B7EMcI&callback=initMap"
->>>>>>> 92238cdb23441a59ae73d36370c911c7a76dde10
     async defer></script>
-    <script>
-        
-    </script>
 @endsection

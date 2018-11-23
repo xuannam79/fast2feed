@@ -85,6 +85,14 @@ Route::namespace('f2f')->group(function(){
 		'uses' => 'QuanLyTKController@index',
 		'as' => 'trangQLTK'
 	]);
+	Route::get('/quan-ly-tai-khoan-shipper',[
+		'uses' => 'QuanLyTKShipperController@index',
+		'as' => 'trangQLTKShipper'
+	]);
+	Route::get('/tai-khoan-ca-nhan',[
+		'uses' => 'TaiSanShipperController@index',
+		'as' => 'trangTaiSanShipper'
+	]);
 });
 
 Route::namespace('Auth')->group(function(){

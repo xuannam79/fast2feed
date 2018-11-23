@@ -20,4 +20,7 @@ class ShipperController extends Controller
         }  
     	return view('f2f.shipper.index', compact('getAdmin'));
     }
+    public function getProfile(){
+         return view('f2f.shipper.get-profile');
+      }
 }

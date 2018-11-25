@@ -37,4 +37,12 @@ class Account extends Model
                         'status' => 1,
                         'role' => 2]);
     }
+    // lấy thông tin tài khoản
+    public function accountInfo($accId)
+    {
+        if(session()->has('admin')){
+             $id = session()->get('admin')[0]->account_id;
+        }
+        return DB::table('account')->join('customer', 'account.account_id', '=', 'customer.account_id')->select('account.username', 'account.email', 'account.avatar', 'customer.phone', 'customer.birthday', 'customer.address')->where('account.account_id', $accId)->get();
+    }
 }

@@ -201,7 +201,7 @@
                </div>
                <div class="clear"></div>
                <div style="border-top: 1px solid #F8F8F8;border-bottom: 1px solid #F8F8F8;">
-               <a href="#" title="">
+               <a href="{{ route('trangTTtaikhoan') }}" title="">
                <div class="account-body">
                <strong><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;Thông tin tài khoản</strong>
                </div>

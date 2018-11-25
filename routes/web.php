@@ -81,9 +81,17 @@ Route::namespace('f2f')->group(function(){
 		'uses' => 'TestMapController@index',
 		'as' => 'trangTestMap'
 	]);
-	Route::get('/quan-ly-tai-khoan',[
+	Route::get('/cap-nhat-tai-khoan',[
 		'uses' => 'QuanLyTKController@index',
-		'as' => 'trangQLTK'
+		'as' => 'trangCapNhatTK'
+	]);
+	Route::post('/cap-nhat-tai-khoan',[
+		'uses' => 'QuanLyTKController@postInfo',
+		'as' => 'trangCapNhatTK'
+	]);
+	Route::get('/thong-tin-tai-khoan',[
+		'uses' => 'AccountInfoController@index',
+		'as' => 'trangTTtaikhoan'
 	]);
 	Route::get('/quan-ly-tai-khoan-shipper',[
 		'uses' => 'QuanLyTKShipperController@index',

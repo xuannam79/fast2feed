@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Model\Admin\Account;
 use App\Http\Controllers\Controller;
 
-class QuanLyTKController extends Controller
+class AccountInfoController extends Controller
 {
 	public function __construct(Account $account)
 	{
@@ -20,10 +20,6 @@ class QuanLyTKController extends Controller
              $accId = session()->get('admin')[0]->account_id;
         } 
         $getAccountInfo = $this->account->accountInfo($accId);
-        return view('f2f.quanLyTK.index', compact('getAdmin', 'getAccountInfo'));
-    }
-    public function postInfo(Request $request)
-    {
-    	
+	    return view('f2f.accountInfo.index', compact('getAdmin', 'getAccountInfo'));
     }
 }

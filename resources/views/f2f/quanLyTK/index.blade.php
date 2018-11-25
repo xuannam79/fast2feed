@@ -1,6 +1,6 @@
 @extends('templates.f2f.master')
 @section('title')
-    Trang chủ shipper
+    Cập nhật tài khoản
 @endsection
 @section('content')
    
@@ -29,22 +29,53 @@
 						<div class="panel-body" style="padding:0px">
 			           		<div class="list-group">
 				                <p href="#" class="list-group-item" position: relative style="font-size: 16px;font-weight: bold; text-align: center; background: #4C66A4; color: white">Cập nhật thông tin cá nhân</p>
-				                <div style="width: 120px;height: 110px; float: right; margin-top: 30px; margin-right: 50px">
+				                <div style="width: 120px;height: 110px; float: right; margin-top: 30px; margin-right: 70px">
 				                	<img src="/fast2feed/public/files/account/khach1.jpg" alt="" width="100" height="100">
 				                	<input type="file" name="">
 				                </div>
-				                Họ và tên: 
-				                <input type="text" name="ten" style="margin-left: 30px; margin-top: 10px; width: 300px"><br>
-								Ngày sinh: 
-								<input type="text" name="ten" style="margin-left: 28.5px; margin-top: 10px; width: 300px"><br>
-								Email: 
-								<input type="text" name="ten" style="margin-left: 56px; margin-top: 10px; width: 300px"><br>
-								Số điện thoại: 
-								<input type="text" name="ten" style="margin-left: 9.5px; margin-top: 10px; width: 300px"><br>
-								Địa chỉ: 
-								<input type="text" name="ten" style="margin-left: 48px; margin-top: 10px; width: 300px"><br>
-								<input type="submit" name="submit" value="Cập nhật" 
-								style="margin-top: 15px; float: right; margin-right: 30px; background: #4C66A4; color: white; width: 100px; height: 35px">
+				                @foreach($getAccountInfo as $key => $info)
+								@php
+									$username = $info->username;
+									$email = $info->email;
+									$avatar = $info->avatar;
+									$phone = $info->phone;
+									$address = $info->address;
+									$birthday = explode('-', $info->birthday);
+									$year = $birthday[0];
+									$month = $birthday[1];
+									$day = $birthday[2];
+								@endphp
+				                <div style="margin: 10px">
+				                	@if ($errors->any())
+			                            @foreach ($errors->all() as $error)
+			                                <script type="text/javascript">alert("{{ $error }}");</script>
+			                            @endforeach
+			                        @endif
+				                	<form action="{{ route('trangCapNhatTK') }}" enctype="multipart/form-data" method="post">
+                                	{{ csrf_field() }}
+
+				                		<strong>Username:</strong>
+						                <input type="text" name="username" style="margin-left: 30px; margin-bottom: 10px; width: 300px" value="{{ $username }}" readonly>
+						                <br>
+										<strong>Ngày sinh:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="number" name="year" min="1" max="5" value="{{ $year }}">
+										<input type="number" name="month" min="1" max="5" value="{{ $month }}">
+										<input type="number" name="day" min="1" max="5" value="{{ $day }}">
+										<br>
+										<strong>Email:</strong>
+										<input type="text" name="email" style="margin-left: 56px; margin-top: 10px; width: 300px" value="{{ $email }}">
+										<br>
+										<strong>Số điện thoại:</strong>
+										<input type="text" name="phone" style="margin-left: 9.5px; margin-top: 10px; width: 300px" value="{{ $phone }}">
+										<br>
+										<strong>Địa chỉ:</strong>
+										<input type="text" name="address" style="margin-left: 48px; margin-top: 10px; width: 300px" value="{{ $address }}">
+				                	</form>
+					                
+									<input type="submit" name="submit" value="Cập nhật" 
+									style="margin-top: 15px; float: right; margin-right: 30px; background: #4C66A4; color: white; width: 100px; height: 35px">
+								</div>
+								@endforeach
 			            	</div>
 			        	</div>
 					</div>

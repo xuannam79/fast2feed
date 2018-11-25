@@ -9,7 +9,7 @@ class Account extends Model
 {
     protected $table = "account";
     protected $primarykey = "account_id";
-    public $timestamp = false;
+    public $timestamps = false;
 
     public function getAll()
     {
@@ -37,6 +37,10 @@ class Account extends Model
                         'status' => 1,
                         'role' => 2]);
     }
+    public function getAccountById($idAcc)
+    {
+        return $this->select('avatar')->where('account_id', $idAcc)->first();
+    }
     // lấy thông tin tài khoản
     public function accountInfo($accId)
     {
@@ -44,5 +48,10 @@ class Account extends Model
              $id = session()->get('admin')[0]->account_id;
         }
         return DB::table('account')->join('customer', 'account.account_id', '=', 'customer.account_id')->select('account.username', 'account.email', 'account.avatar', 'customer.phone', 'customer.birthday', 'customer.address')->where('account.account_id', $accId)->get();
+    }
+    public function updateInfo($idAcc, $arrAcc)
+    {
+        return $this->where('account_id', $idAcc)->update($arrAcc);
+
     }
 }

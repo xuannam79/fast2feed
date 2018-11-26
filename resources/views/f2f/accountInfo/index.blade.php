@@ -40,7 +40,10 @@
 				                <p href="#" class="list-group-item" position: relative style="font-size: 16px;font-weight: bold; text-align: center; background: #4C66A4; color: white">Thông tin cá nhân</p>
 				                
 				                <div  style="margin: 10px;height: 300px">
-				                	<img src="/fast2feed/public/files/account/{{ $avatar }}" alt="" width="100" height="100">
+				                	<div style=" float: right; margin-top: 30px; margin-right: 70px">
+				                		<img src="/fast2feed/public/files/account/{{ $avatar }}" alt="" width="200" height="200">
+						                </div>
+				                	
 				                	<br>
 				                <strong>Username:</strong> <span>{{ $username }}</span>
 				                <br>

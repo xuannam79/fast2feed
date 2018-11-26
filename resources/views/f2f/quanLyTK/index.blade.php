@@ -29,10 +29,7 @@
 						<div class="panel-body" style="padding:0px">
 			           		<div class="list-group">
 				                <p href="#" class="list-group-item" position: relative style="font-size: 16px;font-weight: bold; text-align: center; background: #4C66A4; color: white">Cập nhật thông tin cá nhân</p>
-				                <div style="width: 120px;height: 110px; float: right; margin-top: 30px; margin-right: 70px">
-				                	<img src="/fast2feed/public/files/account/khach1.jpg" alt="" width="100" height="100">
-				                	<input type="file" name="">
-				                </div>
+				                
 				                @foreach($getAccountInfo as $key => $info)
 								@php
 									$username = $info->username;
@@ -44,6 +41,7 @@
 									$year = $birthday[0];
 									$month = $birthday[1];
 									$day = $birthday[2];
+									$now = getdate();
 								@endphp
 				                <div style="margin: 10px">
 				                	@if ($errors->any())
@@ -53,14 +51,17 @@
 			                        @endif
 				                	<form action="{{ route('trangCapNhatTK') }}" enctype="multipart/form-data" method="post">
                                 	{{ csrf_field() }}
-
+										<div style="float: right; margin-top: 30px; margin-right: 70px">
+						                	<img src="/fast2feed/public/files/account/{{$avatar}}" alt="" width="200" height="200">
+						                	<input type="file" name="avatar">
+						                </div>
 				                		<strong>Username:</strong>
 						                <input type="text" name="username" style="margin-left: 30px; margin-bottom: 10px; width: 300px" value="{{ $username }}" readonly>
 						                <br>
 										<strong>Ngày sinh:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="number" name="year" min="1" max="5" value="{{ $year }}">
-										<input type="number" name="month" min="1" max="5" value="{{ $month }}">
-										<input type="number" name="day" min="1" max="5" value="{{ $day }}">
+										<input type="number" name="year" min="1880" max="{{ $now["year"] }}" value="{{ $year }}">
+										<input type="number" name="month" min="1" max="12" value="{{ $month }}">
+										<input type="number" name="day" min="1" max="31" value="{{ $day }}">
 										<br>
 										<strong>Email:</strong>
 										<input type="text" name="email" style="margin-left: 56px; margin-top: 10px; width: 300px" value="{{ $email }}">
@@ -70,10 +71,11 @@
 										<br>
 										<strong>Địa chỉ:</strong>
 										<input type="text" name="address" style="margin-left: 48px; margin-top: 10px; width: 300px" value="{{ $address }}">
+										<input type="submit" name="submit" value="Cập nhật" 
+									style="margin-top: 15px; float: right; margin-right: 30px; background: #4C66A4; color: white; width: 100px; height: 35px">	
 				                	</form>
 					                
-									<input type="submit" name="submit" value="Cập nhật" 
-									style="margin-top: 15px; float: right; margin-right: 30px; background: #4C66A4; color: white; width: 100px; height: 35px">
+									
 								</div>
 								@endforeach
 			            	</div>

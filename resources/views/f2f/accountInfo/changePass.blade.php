@@ -49,30 +49,19 @@
 			                                <script type="text/javascript">alert("{{ $error }}");</script>
 			                            @endforeach
 			                        @endif
-				                	<form action="{{ route('trangCapNhatTK') }}" enctype="multipart/form-data" method="post">
+				                	<form action="{{ route('trangDoiMK') }}" method="post">
                                 	{{ csrf_field() }}
-										<div style="float: right; margin-top: 30px; margin-right: 70px">
-						                	<img src="/fast2feed/public/files/account/{{$avatar}}" alt="" width="200" height="200">
-						                	<input type="file" name="avatar">
-						                </div>
-				                		<strong>Username:</strong>
-						                <input type="text" name="username" style="margin-left: 30px; margin-bottom: 10px; width: 300px" value="{{ $username }}" readonly>
-						                <br>
-										<strong>Ngày sinh:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="number" name="year" min="1880" max="{{ $now["year"] }}" value="{{ $year }}">
-										<input type="number" name="month" min="1" max="12" value="{{ $month }}">
-										<input type="number" name="day" min="1" max="31" value="{{ $day }}">
+										<strong>Mật khẩu hiện tại:</strong>
+										<input type="text" name="pass" style="margin-left: 56px; margin-top: 10px; width: 300px" value="">
 										<br>
-										<strong>Email:</strong>
-										<input type="text" name="email" style="margin-left: 56px; margin-top: 10px; width: 300px" value="{{ $email }}">
+										<strong style="margin-right: 73px">Mật khẩu mới</strong>
+										<input type="text" name="newpass" style="margin-left: 9.5px; margin-top: 10px; width: 300px" value="">
 										<br>
-										<strong>Số điện thoại:</strong>
-										<input type="text" name="phone" style="margin-left: 9.5px; margin-top: 10px; width: 300px" value="{{ $phone }}">
+										<strong>Nhập lại mật khẩu:</strong>
+										<input type="text" name="repass" style="margin-left: 48px; margin-top: 10px; width: 300px" value="">
 										<br>
-										<strong>Địa chỉ:</strong>
-										<input type="text" name="address" style="margin-left: 48px; margin-top: 10px; width: 300px" value="{{ $address }}">
 										<input type="submit" name="submit" value="Cập nhật" 
-									style="margin-top: 15px; float: right; margin-right: 30px; background: #4C66A4; color: white; width: 100px; height: 35px">	
+									style="margin-top: 15px; float: right; margin-right: 365px; background: #4C66A4; color: white; width: 100px; height: 35px">	
 				                	</form>
 					                
 									

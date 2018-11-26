@@ -89,6 +89,14 @@ Route::namespace('f2f')->group(function(){
 		'uses' => 'QuanLyTKController@postInfo',
 		'as' => 'trangCapNhatTK'
 	]);
+	Route::get('/doi-mat-khau',[
+		'uses' => 'ChangePassController@index',
+		'as' => 'trangDoiMK'
+	]);
+	Route::post('/doi-mat-khau',[
+		'uses' => 'ChangePassController@postChangePass',
+		'as' => 'trangDoiMK'
+	]);
 	Route::get('/thong-tin-tai-khoan',[
 		'uses' => 'AccountInfoController@index',
 		'as' => 'trangTTtaikhoan'

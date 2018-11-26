@@ -40,23 +40,25 @@ class QuanLyTKController extends Controller
     	$address = $request->address;
     	$avatar = $request->file('avatar');
     	$oldAvatar = $this->account->getAccountById($idAcc)->avatar;
-    	
+        $image_path = public_path("files/account/{$oldAvatar}");
     	// upload file hình
     	if(isset($avatar)){
-	    	$time = time();
-	    	$end_file = $avatar->getClientOriginalExtension();
-	    	$file_name = 'Account-'.$time.'.'.$end_file;
-	    	$avatar->move('files/account', $file_name);
+            //upload file
+            $time = time();
+            $end_file = $avatar->getClientOriginalExtension();
+            $file_name = 'Account-'.$time.'.'.$end_file;
+            $avatar->move('files/account', $file_name);
 
-    	}
+            
+              if (file_exists($image_path)) {
+                unlink($image_path);
+              } 
+            $arrAcc['avatar'] = $file_name;
+    	}else {
+            $arrAcc['avatar'] = $oldAvatar;
+        }
 
     	// thêm dữ liệu vào mảng
-    	if(isset($avatar)){
-    		$arrAcc['avatar'] = $file_name;
-    		$image_path = public_path("files/account/{$oldAvatar}");
-    		unlink($image_path);
-
-    	}else $arrAcc['avatar'] = session()->get('admin')[0]->avatar;
     	$arrAcc['username'] = $username;
     	$arrAcc['email'] = $email;
 
@@ -76,6 +78,8 @@ class QuanLyTKController extends Controller
         	}else{
             	return redirect(route('trangCapNhatTK'))->with('msg','Cập nhật không thành công');
         	}
+        }else {
+            return redirect(route('trangTTtaikhoan'))->with('msg','Cập nhật thành công');
         }
         if(isset($birthday) || isset($email) || isset($phone) || isset($address)){
         	if($resultInfo2){

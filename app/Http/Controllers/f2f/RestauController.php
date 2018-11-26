@@ -7,14 +7,16 @@ use App\Http\Controllers\Controller;
 use App\Model\Admin\Customer;
 use App\Model\Admin\Account;
 use App\Model\Admin\Menu;
+use App\Model\Admin\Product;
 
 class RestauController extends Controller
 {
-	public function __construct(Customer $customer, Menu $menu,Account $account)
+	public function __construct(Customer $customer, Menu $menu,Account $account, Product $product)
 	{
 		$this->customer = $customer;
         $this->account = $account;
-		$this->menu = $menu;
+        $this->menu = $menu;
+		$this->product = $product;
 	}
     public function index($slug, $cusId)
     {
@@ -24,7 +26,8 @@ class RestauController extends Controller
         } 
     	$getCustomer = $this->customer->getItem($cusId);
     	$getMenu = $this->menu->getItem($cusId);
-    	return view('f2f.restau.index', compact('getCustomer', 'getMenu', 'getAdmin'));
+        $getProduct = $this->product->getProductById($cusId);
+    	return view('f2f.restau.index', compact('getCustomer', 'getMenu', 'getAdmin', 'getProduct'));
     }
 
 }

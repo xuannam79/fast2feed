@@ -66,6 +66,10 @@
                                     <label>Password</label>
                                     <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
                                 </div>
+                                <div class="form-group">
+                                    <label>Re-Password</label>
+                                    <input class="au-input au-input--full" type="password" name="repassword" placeholder="Re-Password">
+                                </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3">
                                         <label for="file-input" class=" form-control-label">Avatar</label>

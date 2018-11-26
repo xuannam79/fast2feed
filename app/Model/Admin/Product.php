@@ -21,4 +21,8 @@ class Product extends Model
             return DB::table('product')->where('product_id', $id)->update(['approved' => 1]);
         }
     }
+    public function getProductById($cusId)
+    {
+        return DB::table('product')->where('customer_id', $cusId)->get();
+    }
 }

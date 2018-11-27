@@ -37,6 +37,7 @@
                                             @php
                                                 $name = $shipper->shipper_name;
                                                 $avatar = $shipper->avatar;
+                                                $action = $shipper->action;
                                                 $username = $shipper->username;
                                             @endphp
                                             <tr class="tr-shadow">
@@ -57,7 +58,7 @@
                                                 <td><span class="block-email">{{ $username }}</span></td>
                                                 <td></td>
                                                 <td>
-                                                    @if($shipper->isOnline())
+                                                    @if($action == 1)
                                                     <label>
                                                         Online
                                                         <div class="table-data-feature">
@@ -80,12 +81,17 @@
                                                 </td>
                                                 
                                                 <td>
+                                                    @if($action == 1)
                                                     <div class="table-data-feature">
                                                         <a href="#" title="">
                                                             Xem vị trí
                                                         </a>
+                                                    </div>
+                                                    @else
+                                                    <div class="table-data-feature">
                                                         
                                                     </div>
+                                                    @endif
                                                 </td>
                                             </tr>
                                             @endforeach

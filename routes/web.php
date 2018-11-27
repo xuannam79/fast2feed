@@ -45,6 +45,10 @@ Route::namespace('f2f')->group(function(){
 		'uses' => 'ShipperController@index',
 		'as' => 'trangShipper'
 	]);
+	Route::get('/profile/edit',[
+		'uses' => 'ShipperController@getProfile',
+		'as' => 'trangThongTinShipper'
+	]);
 	Route::get('/danhsachHD',[
 		'uses' => 'DanhSachHDController@index',
 		'as' => 'trangDanhSachHD'
@@ -108,6 +112,10 @@ Route::namespace('f2f')->group(function(){
 	Route::get('/tai-khoan-ca-nhan',[
 		'uses' => 'TaiSanShipperController@index',
 		'as' => 'trangTaiSanShipper'
+	]);
+	Route::get('/account',[
+		'uses' => 'accountController@index',
+		'as' => 'trangThongTinTaiKhoan'
 	]);
 });
 

@@ -52,13 +52,13 @@
 				                	<form action="{{ route('trangDoiMK') }}" method="post">
                                 	{{ csrf_field() }}
 										<strong>Mật khẩu hiện tại:</strong>
-										<input type="text" name="pass" style="margin-left: 56px; margin-top: 10px; width: 300px" value="">
+										<input type="password" name="pass" style="margin-left: 56px; margin-top: 10px; width: 300px" value="">
 										<br>
 										<strong style="margin-right: 73px">Mật khẩu mới</strong>
-										<input type="text" name="newpass" style="margin-left: 9.5px; margin-top: 10px; width: 300px" value="">
+										<input type="password" name="newpass" style="margin-left: 9.5px; margin-top: 10px; width: 300px" value="">
 										<br>
 										<strong>Nhập lại mật khẩu:</strong>
-										<input type="text" name="repass" style="margin-left: 48px; margin-top: 10px; width: 300px" value="">
+										<input type="password" name="repass" style="margin-left: 48px; margin-top: 10px; width: 300px" value="">
 										<br>
 										<input type="submit" name="submit" value="Cập nhật" 
 									style="margin-top: 15px; float: right; margin-right: 365px; background: #4C66A4; color: white; width: 100px; height: 35px">	

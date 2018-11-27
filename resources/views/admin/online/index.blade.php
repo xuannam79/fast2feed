@@ -37,7 +37,7 @@
                                             @php
                                                 $name = $shipper->shipper_name;
                                                 $avatar = $shipper->avatar;
-                                                $action = $shipper->action;
+                                                $active = $shipper->active;
                                                 $username = $shipper->username;
                                             @endphp
                                             <tr class="tr-shadow">
@@ -58,7 +58,7 @@
                                                 <td><span class="block-email">{{ $username }}</span></td>
                                                 <td></td>
                                                 <td>
-                                                    @if($action == 1)
+                                                    @if($active == 1)
                                                     <label>
                                                         Online
                                                         <div class="table-data-feature">
@@ -81,9 +81,9 @@
                                                 </td>
                                                 
                                                 <td>
-                                                    @if($action == 1)
+                                                    @if($active == 1)
                                                     <div class="table-data-feature">
-                                                        <a href="#" title="">
+                                                        <a href="{{ route('trangDinhViMap') }}" title="">
                                                             Xem vị trí
                                                         </a>
                                                     </div>

@@ -51,6 +51,8 @@
                   if($role == 3){
                   $url1 = route('trangDanhSachHD');
                   $url2 = route('trangShipper');
+                  $url = route('trangDinhViMap');
+                  echo '<li><a href="'.$url.'">Định vị</a></li>';
                   echo '
                   <li><a href="'.$url1.'">Danh sách hóa đơn</a></li>
                   ';
@@ -238,6 +240,7 @@
                </ul>
                </div><!-- /.navbar-collapse -->
             </div>
+
             <!-- /.container-fluid -->
       </nav>
       </div>

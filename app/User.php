@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -30,7 +29,4 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function isOnline(){
-        return Cache::has('user-is-online-' . $this->id);
-    }
 }

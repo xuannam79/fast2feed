@@ -20,7 +20,6 @@ class OnlineController extends Controller
     {
         $this->shipper = $shipper;
         $this->account = $account;
-        $this->middleware('auth');
     }
     /**
      * Show the application dashboard.

@@ -222,6 +222,16 @@ Route::namespace('Admin')->middleware('MyMiddle', 'CustomerMiddle')->prefix('adm
 		'uses' => 'CommentController@index',
 		'as' => 'commentAdmin'
 	]);
+	Route::get('/shipper',[
+		'uses' => 'ShipperController@index',
+		'as' => 'shipperAdmin'
+	]);
+	Route::get('/online-shipper',[
+		'uses' => 'OnlineController@index',
+		'as' => 'onlineShipperAdmin'
+	]);
+
+
 });
 
 // Route::get('/test',[

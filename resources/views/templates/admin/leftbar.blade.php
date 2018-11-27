@@ -24,7 +24,6 @@
                                     <a href="{{ route('menuAdmin') }}">
                                         <i class="fab fa-elementor"></i>Menu</a>
                                 </li>
-                                
                                 <li>
                                     <a href="{{ route('customerAdmin') }}">
                                         <i class="fas fa-warehouse"></i>Customer</a>
@@ -38,7 +37,7 @@
                                         <i class="fas fa-users"></i>Account</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('userAdmin') }}">
+                                    <a href="{{ route('shipperAdmin') }}">
                                         <i class="fas fa-motorcycle"></i>Shipper</a>
                                 </li>
                                 <li>

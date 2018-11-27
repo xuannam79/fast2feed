@@ -117,6 +117,10 @@ Route::namespace('f2f')->group(function(){
 		'uses' => 'accountController@index',
 		'as' => 'trangThongTinTaiKhoan'
 	]);
+	Route::get('/dinh-vi-map',[
+		'uses' => 'DinhViMapController@index',
+		'as' => 'trangDinhViMap'
+	]);
 });
 
 Route::namespace('Auth')->group(function(){

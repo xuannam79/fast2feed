@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Model\Admin\Account;
 use App\Model\Admin\Shipper;
-use Illuminate\Support\Facades\Auth;
+
 use App\Http\Controllers\Controller;
-use App\User;
 
 class OnlineController extends Controller
 {

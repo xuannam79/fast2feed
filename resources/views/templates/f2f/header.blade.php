@@ -36,7 +36,7 @@
                     <div class="collapse navbar-collapse re-navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="{{ route('trangChu') }}">Fast2Feed.vn</a></li>
-                            <li><a href="{{ route('trangDanhMuc') }}">Tất cả</a></li>
+                            <li><a href="{{ route('trangDinhViMap') }}">Tất cả</a></li>
                             <li><a href="{{ route('trangDanhMuc') }}">Đồ ăn</a></li>
                             <li><a href="{{ route('trangDanhMuc') }}">Thức uống</a></li>
                             <li>
@@ -219,5 +219,12 @@
                     <!-- /.container-fluid -->
             </nav>
             </div>
+            <script language="JavaScript">
+window.onbeforeunload = WindowCloseHanlder;
+function WindowCloseHanlder()
+{
+window.alert('My Window is reloading');
+}
+</script>  
             <!-- Kết thúc header -->
 

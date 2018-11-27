@@ -35,9 +35,10 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct(Account $account)
+    public function __construct(Account $account, Shipper $shipper)
     {
         $this->account = $account;
+        $this->shipper = $shipper;
         $this->middleware('guest')->except('logout');
     }
     public function getLogin()
@@ -59,8 +60,17 @@ class LoginController extends Controller
         $password = md5($password);
         $getAccount = $this->account->getAccount($email);
         if($this->account->checkAccount($email, $password)){
+            $idAcc = $this->account->getAccountByEmail($email)->account_id;
+            $roleAcc = $this->account->getAccountByEmail($email)->role;
             $request->session()->put('admin', $getAccount);
-            
+
+            // update active =>1
+            if(session()->has('admin')){
+                if($roleAcc == 3){
+                    $arrShip['active'] = "1";
+                    $this->shipper->updateStatus($idAcc, $arrShip);
+                }
+            }
             if($email == 'xnam7799@gmail.com'){
                 return redirect(route('trangChuAdmin'))->with('msg','Xin chào Admin');
             }else{
@@ -75,6 +85,17 @@ class LoginController extends Controller
     }   
     public function logout(Request $request)
     {
+        // update active => 0
+        if(session()->has('admin')){
+            $email = session()->get('admin')[0]->email;
+            $idAcc = $this->account->getAccountByEmail($email)->account_id;
+            $roleAcc = $this->account->getAccountByEmail($email)->role;
+            if($roleAcc == 3){
+                $arrShip['active'] = "0";
+                $this->shipper->updateStatus($idAcc, $arrShip);
+            }
+        }
+        // huy session
         $request->session()->flush();
         return redirect(route('trangDangNhap'));
 

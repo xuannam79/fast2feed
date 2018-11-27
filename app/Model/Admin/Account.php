@@ -54,4 +54,8 @@ class Account extends Model
         return $this->where('account_id', $idAcc)->update($arrAcc);
 
     }
+    public function getAccountByEmail($email)
+    {
+        return $this->where('email', $email)->first();
+    }
 }

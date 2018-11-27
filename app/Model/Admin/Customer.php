@@ -24,4 +24,7 @@ class Customer extends Model
         return $this->where('account_id', $idAcc)->update($arrCus);
 
     }
+    public function getCusomerById()
+    {
+    }
 }

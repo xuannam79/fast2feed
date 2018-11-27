@@ -82,16 +82,19 @@ class RegisterController extends Controller
             'username' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'avatar' => 'required'
+            'avatar' => 'required',
+            'repassword' => 'required|same:password'
         ],[
             'username.required' => 'Bạn chưa nhập username',
             'email.required' => 'Bạn chưa nhập email',
             'password.required' => 'Bạn chưa nhập password',
+            'repassword.required' => 'Vui lòng điền đầy đủ',
+            'repassword.same' => 'Password không khớp',
             'avatar.required' => 'Bạn chưa thêm avatar'
         ]);
         $username = $request->username;
         $email = $request->email;
-        $password = $request->password;
+        $password = md5($request->password);
 
     	$avatar = $request->file('avatar');
     	$time = time();

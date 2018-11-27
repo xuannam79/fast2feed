@@ -39,7 +39,7 @@ class Account extends Model
     }
     public function getAccountById($idAcc)
     {
-        return $this->select('avatar')->where('account_id', $idAcc)->first();
+        return $this->select('avatar', 'password')->where('account_id', $idAcc)->first();
     }
     // lấy thông tin tài khoản
     public function accountInfo($accId)

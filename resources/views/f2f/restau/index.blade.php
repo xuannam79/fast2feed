@@ -123,8 +123,9 @@
 					  		@foreach($getMenu as $key => $menu)
 					  		@php
 					  			$menuName = title_case($menu->menu_name);
+					  			$idMenu = $menu->menu_id;
 					  		@endphp
-						  	<a href="{{ route('trangDanhMuc') }}" class="list-group-item">{{ $menuName }}</a>
+						  	<a href="#menu{{ $idMenu }}" class="list-group-item">{{ $menuName }}</a>
 						  	
 						  	@endforeach
 						  	{{-- <a id="active" href="{{ route('trangDanhMuc') }}" class="list-group-item">Kem sữa</a> --}}
@@ -157,74 +158,56 @@
 					  		</div>
 						</div>
 					  	<div class="panel-body">
+					  		@foreach($getMenu as $key => $menuProduct)
+					  		@php
+					  			$nameMenu = $menuProduct->menu_name;
+					  			$idMenuPK = $menuProduct->menu_id;
+					  		@endphp
 					  		<div class="item">
-						  		<div class="item-cat">
-						  			<h4>Kem Sữa</h4>
+						  		<div class="item-cat" id="menu{{ $idMenuPK }}">
+						  			<h4>{{ $nameMenu }}</h4>
 						  		</div>
+						  		@foreach($getProduct as $key => $product)
+						  		@php
+						  			$idMenuFK = $product->menu_id;
+						  			$images = $product->images;
+						  			$name = $product->product_name;
+						  			$ordered = $product->quantify_ordered;
+						  			$price = $product->price;
+						  		@endphp
+						  		@if($idMenuFK == $idMenuPK)
 								<div class="list-item">
 									<div class="img-item">
-										<img src="https://media.foody.vn/res/g68/672709/s120x120/201771116955-tra-sua-tran-chau-1.jpg" alt="">
+										<img src="/fast2feed/public/files/product/{{ $images }}" alt="">
 									</div>
 									<div class="name-item">
-										<h4>Sữa tươi trân châu đường hổ</h4>
-										<p>Order <strong style="color: black">921</strong> lần</p>
+										<h4>{{ $name }}</h4>
+										<p>Order <strong style="color: black">{{ $ordered}}</strong> lần</p>
 									</div>
 									<div class="price-item">
-										<span>49.000đ</span><a href="#" title=""><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px"></i></a>
+										<span>{{ $price }}đ</span><a href="#" title=""><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px"></i></a>
 									</div>
 									<div class="clear"></div>
 								</div>
-								<div class="list-item">
-									<div class="img-item">
-										<img src="https://media.foody.vn/res/g68/672709/s120x120/201771116955-tra-sua-tran-chau-1.jpg" alt="">
-									</div>
-									<div class="name-item">
-										<h4>Sữa tươi trân châu đường hổ</h4>
-										<p>Order <strong style="color: black">921</strong> lần</p>
-									</div>
-									<div class="price-item">
-										<span>49.000đ</span><a href="#" title=""><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px"></i></a>
-									</div>
-									<div class="clear"></div>
-								</div>	
+								@endif
+								@endforeach
 							</div>
-							<div class="item">
-						  		<div class="item-cat">
-						  			<h4>Trà nguyên chất</h4>
-						  		</div>
-								<div class="list-item">
-									<div class="img-item">
-										<img src="https://media.foody.vn/res/g71/703601/s120x120/20171218142844-tra-den-mat-ong.jpg" alt="">
-									</div>
-									<div class="name-item">
-										<h4>Trà đen mật ong</h4>
-										<p>Order <strong style="color: black">232</strong> lần</p>
-									</div>
-									<div class="price-item">
-										<span>35.000đ</span><a href="#" title=""><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px"></i></a>
-									</div>
-									<div class="clear"></div>
-								</div>
-								<div class="list-item">
-									<div class="img-item">
-										<img src="https://media.foody.vn/res/g71/703601/s120x120/20171218142844-tra-den-mat-ong.jpg" alt="">
-									</div>
-									<div class="name-item">
-										<h4>Trà bí đao</h4>
-										<p>Order <strong style="color: black">921</strong> lần</p>
-									</div>
-									<div class="price-item">
-										<span>49.000đ</span>
-										<a href="#" title=""><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px"></i></a>
-									</div>
-									<div class="clear"></div>
-								</div>	
-							</div>
+							@endforeach
 					  	</div>
 
 					</div>
 				</div>
 			</div>
+			{{-- //smooth scrolling page --}}
+			<script>
+				$("a[href*='#']:not([href='#])").click(function() {
+				  let target = $(this).attr("href");
+				  $('html,body').stop().animate({
+				    scrollTop: $(target).offset().top
+				  }, 1000);
+				  event.preventDefault();
+				});
+			</script>			
 			<div style="float: right;width: 270px;height: 100%;border: 1px solid #BCE8F1;border-radius: 5px;font-size: 13px">
 
 				<div class="giohang" style="background-color: #F9F9F9;height: 45px;">

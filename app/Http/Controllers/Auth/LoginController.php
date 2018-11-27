@@ -56,6 +56,7 @@ class LoginController extends Controller
         //dd(session('admin'));
         $email = trim($request->email);
         $password = trim($request->password);
+        $password = md5($password);
         $getAccount = $this->account->getAccount($email);
         if($this->account->checkAccount($email, $password)){
             $request->session()->put('admin', $getAccount);

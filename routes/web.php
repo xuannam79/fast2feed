@@ -25,6 +25,10 @@ Route::namespace('f2f')->group(function(){
 		'uses' => 'CartController@index',
 		'as' => 'trangGioHang'
 	]);
+	Route::post('/gio-hang',[
+		'uses' => 'CartController@postCart',
+		'as' => 'trangGioHang'
+	]);
 	Route::get('/lien-he',[
 		'uses' => 'ContactController@index',
 		'as' => 'trangLienHe'

@@ -170,6 +170,7 @@
 						  		@foreach($getProduct as $key => $product)
 						  		@php
 						  			$idMenuFK = $product->menu_id;
+						  			$idProduct = $product->product_id;
 						  			$images = $product->images;
 						  			$name = $product->product_name;
 						  			$ordered = $product->quantify_ordered;
@@ -185,7 +186,15 @@
 										<p>Order <strong style="color: black">{{ $ordered}}</strong> lần</p>
 									</div>
 									<div class="price-item">
-										<span>{{ $price }}đ</span><a href="#" title=""><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px"></i></a>
+										<span>{{ $price }}đ</span>
+										{{-- <a href="#" title=""><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px"></i></a> --}}
+										<form action="{{ route('trangGioHang') }}" method="POST" style="display: inline;">
+											{{ csrf_field() }}
+											<input type="hidden" name="id" value="{{ $idProduct }}">
+											<input type="hidden" name="name" value="{{ $name }}">
+											<input type="hidden" name="price" value="{{ $price }}">
+											<button type="submit" style="border: none;background-color: white"><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px;"></i></button>
+										</form>
 									</div>
 									<div class="clear"></div>
 								</div>

@@ -119,7 +119,7 @@
                                                                              id="shipping-address">
                                                                             <span>Điểm giao hàng - Tên khách</span><span> - Sđt khách </span>
                                                                         </div>
-                                                                        <input id="end" type="hidden" value="254 Hoàng Diệu, Hải Châu, Đà Nẵng" style="width: 300px">254 Hoàng Diệu, Hải Châu, Đà Nẵng
+                                                                        <input id="end" type="hidden" value="25 Đồng Kè, Đà Nẵng" style="width: 300px">25 Đồng Kè, Đà Nẵng
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -130,8 +130,7 @@
                                                                             class="txt-red">3.0km</span></div>
                                                                 <div id="submit" class="change-info">Hiển thị khoảng cách trên bản đồ
                                                                 </div>
-                                                                <div class="change-info"><a href="{{ route('trangTestMap') }}" target="_blank">Chỉ đường đi</a>
-                                                                </div>
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -203,7 +202,17 @@
                                                     </div>
                                                 </div>
                                                 <div class="model-footer">
-                                                    <div class="submit-order">NHẬN</div>
+                                                    <a href="{{ route('trangTestMap') }}" target="_blank" 
+                                                    style="color: #fff;
+                                                    background-color: #0288d1;
+                                                    font-size: 16px;
+                                                    font-weight: 700;
+                                                    display: block;
+                                                    padding: 10px 0;
+                                                    cursor: pointer;
+                                                    transition: all .2s ease;
+                                                    width: 100%;
+                                                    border-radius: 5px;">CHỈ ĐƯỜNG ĐI</a>
                                                 </div>
                                             </div>
                                         </div>

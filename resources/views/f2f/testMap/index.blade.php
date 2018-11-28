@@ -78,18 +78,17 @@
   </head>
   <body>
     <div id="floating-panel" style="width: 370px">
-      <strong>Start:</strong>
-      <input id="start" type="hidden" value="254 Nguyễn Văn Linh, Thanh Khê, Đà Nẵng" style="width: 300px">254 Nguyễn Văn Linh, Thanh Khê, Đà Nẵng
+      <strong>Điểm lấy hàng:</strong>
+      <input id="start" type="text" value="254 Nguyễn Văn Linh, Thanh Khê, Đà Nẵng" style="width: 300px;">
       <br>
-      <strong>End:</strong>
-      <input id="end" type="hidden" value="254 Hoàng Diệu, Hải Châu, Đà Nẵng" style="width: 300px">254 Hoàng Diệu, Hải Châu, Đà Nẵng
-      <br>
+      <strong>Điểm giao hàng:</strong>
+      <input id="end" type="text" value="25 Đồng Kè, Đà Nẵng" style="width: 300px">
       <input id="submit" type="submit" value="Chỉ đường">
     </div>
     <div id="right-panel"></div>
     <div id="map"></div>
     <script>
-      var map;
+      var map, infoWindow, marker;
       function initMap() {
         var directionsDisplay = new google.maps.DirectionsRenderer;
         var directionsService = new google.maps.DirectionsService;
@@ -98,6 +97,30 @@
           center: {lat: 16.0544068, lng: 108.2021667},
           disableDefaultUI: true
         });
+        marker = new google.maps.Marker({
+        
+        map: map,
+      });
+      infoWindow = new google.maps.InfoWindow({
+          content: 'Bạn đang ở đây'
+        });
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            
+        infoWindow.open(map, marker);
+            marker.setPosition(pos);
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
         
         directionsDisplay.setMap(map);
         directionsDisplay.setPanel(document.getElementById('right-panel'));
@@ -116,24 +139,30 @@
 
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         var start = document.getElementById('start').value;
+        var waypts = [];
+          waypts.push({
+              location: document.getElementById('start').value,
+              stopover: true
+            });
         var end = document.getElementById('end').value;
         directionsService.route({
-          origin: start,
+          origin: marker.getPosition(),
           destination: end,
+          waypoints: waypts,
           travelMode: 'DRIVING'
         }, function(response, status) {
           if (status === 'OK') {
             directionsDisplay.setDirections(response);
-            var m = Math.ceil((response.routes[0].overview_path.length)/2);
+            var m = Math.ceil((response.routes[0].overview_path.length)/2)+Math.ceil((response.routes[0].overview_path.length)/3);
             var middle = response.routes[0].overview_path[m];
             var service = new google.maps.DistanceMatrixService;
             service.getDistanceMatrix({
               origins: [start],
               destinations: [end],
               travelMode: 'DRIVING',
-              unitSystem: google.maps.UnitSystem.METRIC,
-              avoidHighways: false,
-              avoidTolls: false
+              //unitSystem: google.maps.UnitSystem.METRIC,
+              //avoidHighways: false,
+              //avoidTolls: false
         }, function(response, status) {
           if (status === 'OK') {
             var originList = response.originAddresses;
@@ -163,7 +192,7 @@
       }
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzmyhWaNEQ_i55-LLOfNPka-8BAhZRUaM&language=vi&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVq1eRO3SMYnmnXu213mAa9hTj_B7EMcI&language=vi&callback=initMap">
     </script>
   </body>
 </html>

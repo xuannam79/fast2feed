@@ -17,6 +17,9 @@
 						  <div class="panel-heading">
 						    <h3 class="panel-title">Thông tin giỏ hàng</h3>
 						  </div>
+						  	@if (Session::has('msg'))
+	                            <p style="color: red">{{ Session::get('msg') }}</p>
+	                        @endif
 						  <div class="panel-body">
 						  	<table class="table table-hover">
 								<thead>

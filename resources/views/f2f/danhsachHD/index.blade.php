@@ -126,8 +126,7 @@ Trang chủ shipper
                                                                             class="txt-red">3.0km</span></div>
                                                                 <div id="submit" class="change-info">Hiển thị khoảng cách trên bản đồ
                                                                 </div>
-                                                                <div class="change-info"><a href="{{ route('trangTestMap') }}" target="_blank">Chỉ đường đi</a>
-                                                                </div>
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>

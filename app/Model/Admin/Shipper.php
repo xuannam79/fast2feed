@@ -19,4 +19,8 @@ class Shipper extends Model
     {
     	return DB::table('shipper')->join('account','account.account_id','=','shipper.account_id')->where('shipper_id', $shiId)->first();
     }
+    public function updateStatus($idAcc, $arrShip)
+    {
+        return $this->where('account_id', $idAcc)->update($arrShip);
+    }
 }

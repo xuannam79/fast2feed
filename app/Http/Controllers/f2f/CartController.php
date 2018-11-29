@@ -41,6 +41,7 @@ class CartController extends Controller
                     ),
                 );
                 $arrCart = $arrCart + $aCart;
+                
                 $request->session()->put('arrCart', $arrCart);
             } else {
                 $arrCart = $request->session()->get('arrCart');

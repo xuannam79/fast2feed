@@ -193,6 +193,7 @@
 											<input type="hidden" name="id" value="{{ $idProduct }}">
 											<input type="hidden" name="name" value="{{ $name }}">
 											<input type="hidden" name="price" value="{{ $price }}">
+											<input type="hidden" name="amount" value="1">
 											<button type="submit" style="border: none;background-color: white"><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px;"></i></button>
 										</form>
 									</div>

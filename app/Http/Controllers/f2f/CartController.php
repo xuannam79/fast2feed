@@ -26,10 +26,37 @@ class CartController extends Controller
     }
     public function postCart(Request $request)
     {
-    	$id = $request->id;
-    	$name = $request->name;
-    	$price = $request->price;
-    	dd($request);
-    	
+    	$idProduct = $request->id;
+    	$nameProduct = $request->name;
+    	$priceProduct = $request->price;
+    	$amountProduct = $request->amount;
+		if (session()->has('arrCart')){
+            $arrCart = $request->session()->get('arrCart');
+            if (!array_key_exists($idProduct, $arrCart)) {
+                $aCart = array(
+                    $idProduct => array(
+                        'nameProduct' => $nameProduct,
+                        'amountProduct' => $amountProduct,
+                        'priceProduct' => $priceProduct
+                    ),
+                );
+                $arrCart = $arrCart + $aCart;
+                $request->session()->put('arrCart', $arrCart);
+            } else {
+                $arrCart = $request->session()->get('arrCart');
+                $arrCart[$idProduct]['amountProduct'] = $arrCart[$idhoa]['amountProduct'] + $amountProduct;
+                $request->session()->put('arrCart',$arrCart);
+            }
+    	} else {
+    		$arrCart = array(
+                $idProduct => array(
+                    'nameProduct' => $nameProduct,
+                    'amountProduct' => $amountProduct,
+                    'priceProduct' => $priceProduct
+                ),
+            );
+            $request->session()->put('arrCart', $arrCart);
+    	}
+		dd(session()->get('arrCart'));
     }
 }

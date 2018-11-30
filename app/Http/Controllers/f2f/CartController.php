@@ -24,5 +24,5 @@ class CartController extends Controller
     	$cats = $this->cat->getAll();
     	return view('f2f.cart.index', compact('cats','getAdmin'));
     }
-    
+
 }

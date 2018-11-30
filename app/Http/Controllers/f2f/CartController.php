@@ -24,41 +24,5 @@ class CartController extends Controller
     	$cats = $this->cat->getAll();
     	return view('f2f.cart.index', compact('cats','getAdmin'));
     }
-    public function postCart(Request $request)
-    {
-    	$idProduct = $request->id;
-    	$nameProduct = $request->name;
-    	$priceProduct = $request->price;
-    	$amountProduct = $request->amount;
-		if (session()->has('arrCart')){
-            $arrCart1 = $request->session()->get('arrCart');
-            if (!array_key_exists($idProduct, $arrCart1)) {
-                $aCart = array(
-                    $idProduct => array(
-                        'nameProduct' => $nameProduct,
-                        'amountProduct' => $amountProduct,
-                        'priceProduct' => $priceProduct
-                    ),
-                );
-
-                $arrCart1 = $arrCart1 + $aCart;
-                $request->session()->put('arrCart', $arrCart1);
-
-            } else {
-                $arrCar1t = $request->session()->get('arrCart');
-                $arrCart1[$idProduct]['amountProduct'] = $arrCart1[$idProduct]['amountProduct'] + $amountProduct;
-                $request->session()->put('arrCart',$arrCart1);
-            }
-    	} else {
-    		$arrCart1 = array(
-                $idProduct => array(
-                    'nameProduct' => $nameProduct,
-                    'amountProduct' => $amountProduct,
-                    'priceProduct' => $priceProduct
-                ),
-            );
-            $request->session()->put('arrCart', $arrCart1);
-    	}
-		dd(session()->get('arrCart'));
-    }
+    
 }

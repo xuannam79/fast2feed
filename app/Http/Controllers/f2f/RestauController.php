@@ -40,10 +40,28 @@ class RestauController extends Controller
         $imagesProduct = $request->images;
         $amountProduct = $request->amount;
         $arrName = 'arrCart'.$cusId;
-        if (session()->has($arrName)){
-            $arrCart = $request->session()->get($arrName);
-            if (!array_key_exists($idProduct, $arrCart)) {
-                $aCart = array(
+        if(session()->has('admin')){
+            if (session()->has($arrName)){
+                $arrCart = $request->session()->get($arrName);
+                if (!array_key_exists($idProduct, $arrCart)) {
+                    $aCart = array(
+                        $idProduct => array(
+                            'nameProduct' => $nameProduct,
+                            'amountProduct' => $amountProduct,
+                            'imagesProduct' => $imagesProduct,
+                            'priceProduct' => $priceProduct
+                        ),
+                    );
+                    $arrCart = $arrCart + $aCart;
+                    $request->session()->put($arrName, $arrCart);
+
+                } else {
+                    $arrCart = $request->session()->get($arrName);
+                    $arrCart[$idProduct]['amountProduct'] = $arrCart[$idProduct]['amountProduct'] + $amountProduct;
+                    $request->session()->put($arrName,$arrCart);
+                }
+            } else {
+                $arrCart = array(
                     $idProduct => array(
                         'nameProduct' => $nameProduct,
                         'amountProduct' => $amountProduct,
@@ -51,26 +69,12 @@ class RestauController extends Controller
                         'priceProduct' => $priceProduct
                     ),
                 );
-                $arrCart = $arrCart + $aCart;
+
                 $request->session()->put($arrName, $arrCart);
 
-            } else {
-                $arrCart = $request->session()->get($arrName);
-                $arrCart[$idProduct]['amountProduct'] = $arrCart[$idProduct]['amountProduct'] + $amountProduct;
-                $request->session()->put($arrName,$arrCart);
             }
         } else {
-            $arrCart = array(
-                $idProduct => array(
-                    'nameProduct' => $nameProduct,
-                    'amountProduct' => $amountProduct,
-                    'imagesProduct' => $imagesProduct,
-                    'priceProduct' => $priceProduct
-                ),
-            );
-
-            $request->session()->put($arrName, $arrCart);
-
+            return redirect()->route('trangDangNhap');
         }
     }
 

@@ -29,5 +29,49 @@ class RestauController extends Controller
         $getProduct = $this->product->getProductById($cusId);
     	return view('f2f.restau.index', compact('getCustomer', 'getMenu', 'getAdmin', 'getProduct'));
     }
+    public function postProduct(Request $request, $slug, $cusId)
+    {
+        $getCustomer = $this->customer->getItem($cusId);
+        $slug = str_slug($getCustomer->customer_name);
+        $cusId = $getCustomer->customer_id;
+        $idProduct = $request->id;
+        $nameProduct = $request->name;
+        $priceProduct = $request->price;
+        $imagesProduct = $request->images;
+        $amountProduct = $request->amount;
+        $arrName = 'arrCart'.$cusId;
+        if (session()->has($arrName)){
+            $arrCart = $request->session()->get($arrName);
+            if (!array_key_exists($idProduct, $arrCart)) {
+                $aCart = array(
+                    $idProduct => array(
+                        'nameProduct' => $nameProduct,
+                        'amountProduct' => $amountProduct,
+                        'imagesProduct' => $imagesProduct,
+                        'priceProduct' => $priceProduct
+                    ),
+                );
+                $arrCart = $arrCart + $aCart;
+                $request->session()->put($arrName, $arrCart);
+
+            } else {
+                $arrCart = $request->session()->get($arrName);
+                $arrCart[$idProduct]['amountProduct'] = $arrCart[$idProduct]['amountProduct'] + $amountProduct;
+                $request->session()->put($arrName,$arrCart);
+            }
+        } else {
+            $arrCart = array(
+                $idProduct => array(
+                    'nameProduct' => $nameProduct,
+                    'amountProduct' => $amountProduct,
+                    'imagesProduct' => $imagesProduct,
+                    'priceProduct' => $priceProduct
+                ),
+            );
+
+            $request->session()->put($arrName, $arrCart);
+
+        }
+    }
 
 }

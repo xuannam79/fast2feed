@@ -11,10 +11,20 @@
 		$rate = round($getCustomer->rate,1);
 		$timeopen = $getCustomer->time_open;
 		$timeclose = $getCustomer->time_close;
-		$min_money = $getCustomer->min_money;
-		$max_money = $getCustomer->max_money;
+		$min_money = number_format($getCustomer->min_money);
+		$max_money = number_format($getCustomer->max_money);
 		$transport_fee = $getCustomer->transport_fee;
-
+		$transport_fee1 = number_format($getCustomer->transport_fee);
+		$idCus = $getCustomer->customer_id;
+		$slug = str_slug($getCustomer->customer_name);
+		$arrName = 'arrCart'.$idCus;
+		if(session()->has('admin')){
+			$avatar = session()->get('admin')[0]->avatar;
+			$accName = session()->get('admin')[0]->username;
+		}else{
+			$avatar = 'userUnKnown.png';
+			$accName = '';
+		}
 
 	@endphp
 	<div class="row">
@@ -27,7 +37,7 @@
 						  
 						  <div class="panel-body">
 					  		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center">
-				                <a href="https://media.foody.vn/res/g77/761834/prof/s/foody-upload-api-foody-mobile-tiger-1-jpg-180911164411.jpg" class="jqzoom" rel="gal1" title="triumph">
+				                <a href="/fast2feed/public/files/customer/{{ $images }}" class="jqzoom" rel="gal1" title="triumph">
 						            <img src="/fast2feed/public/files/customer/{{ $images }}" alt="" style="width:480px;height: 300px">
 						        </a>
 								<p style="margin-top: 35px;font-size: 15px;text-align: left;padding-left: 12px">Đặt món giao hàng tận nơi tại {{ $name }}</p>
@@ -104,7 +114,7 @@
 						  			Phí vận chuyển : 
 						  		</span>
 						  		<span>
-						  			{{ $transport_fee }}đ / 1km
+						  			{{ $transport_fee1 }}đ / 1km
 						  		</span><br>	
 						  	</div>
 						  	
@@ -188,11 +198,12 @@
 									<div class="price-item">
 										<span>{{ $price }}đ</span>
 										{{-- <a href="#" title=""><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px"></i></a> --}}
-										<form action="{{ route('trangGioHang') }}" method="POST" style="display: inline;">
+										<form action="{{ route('trangCustomer', ['slug' => $slug, 'cusId' => $idCus]) }}" method="POST" style="display: inline;">
 											{{ csrf_field() }}
 											<input type="hidden" name="id" value="{{ $idProduct }}">
 											<input type="hidden" name="name" value="{{ $name }}">
 											<input type="hidden" name="price" value="{{ $price }}">
+											<input type="hidden" name="images" value="{{ $images }}">
 											<input type="hidden" name="amount" value="1">
 											<button type="submit" style="border: none;background-color: white"><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px;"></i></button>
 										</form>
@@ -221,42 +232,77 @@
 			<div style="float: right;width: 270px;height: 100%;border: 1px solid #BCE8F1;border-radius: 5px;font-size: 13px">
 
 				<div class="giohang" style="background-color: #F9F9F9;height: 45px;">
-					<img src="/fast2feed/public/templates/f2f/images/user.jpg" class="img-circle" alt="Xuân Nam" width="35px">&nbsp;<span style="font-weight: 800;color: #6D6F71;line-height: 33px">Xuân Nam</span><span style="float: right;line-height: 35px;">2 món</span>
+					<img src="/fast2feed/public/files/account/{{ $avatar }}" class="img-circle" alt="Xuân Nam" width="35px">&nbsp;<span style="font-weight: 800;color: #6D6F71;line-height: 33px">{{ $accName }}</span><span style="float: right;line-height: 35px;">2 món</span>
 				</div>
-				<div class="giohang" style="height: 45px;">
-		  			<a href="#" title=""><i class="fa fa-plus-square" aria-hidden="true" style="color: green"></i></a>
-		  				<strong>1</strong>
-		  			<a href="#" title=""><i class="fa fa-minus-square" aria-hidden="true" style="color: black"></i></a>
-		  			<strong>Trà Ô Long</strong>
-		  			<input type="text" name="" style="border: none" placeholder="Thêm ghi chú..."><span style="float: right;">180.000đ</span>
+				@if(session()->has($arrName))
 
-		  		</div>
-		  		<div class="giohang" style="height: 45px;">
-		  			<a href="#" title=""><i class="fa fa-plus-square" aria-hidden="true" style="color: green"></i></a>
-		  				<strong>1</strong>
-		  			<a href="#" title=""><i class="fa fa-minus-square" aria-hidden="true" style="color: black"></i></a>
-		  			<strong>Ghẹ 50 kí</strong>
-		  			<input type="text" name="" style="border: none" placeholder="Thêm ghi chú..."><span style="float: right;">800.000đ</span>
+					@php
+						$arrCart = session()->get($arrName);
+						$totalPrice = 0;
+					@endphp
+					@foreach($arrCart as $key => $aCart)
+					@php
+						$name = $aCart['nameProduct'];
+						$amount = $aCart['amountProduct'];
+						$price = $aCart['priceProduct'];
+						$countPrice = number_format($amount * $price);
+						$totalPrice += ($amount * $price);
+						$totalPrice1 = number_format($totalPrice);
+					@endphp
+			  		<div class="giohang" style="height: 45px;">
+			  			<a href="#" title=""><i class="fa fa-plus-square" aria-hidden="true" style="color: green"></i></a>
+			  				<strong>{{ $amount }}</strong>
+			  			<a href="#" title=""><i class="fa fa-minus-square" aria-hidden="true" style="color: black"></i></a>
+			  			<strong>{{ $name }}</strong>
+			  			<input type="text" name="" style="border: none" placeholder="Thêm ghi chú..."><span style="float: right;">{{ $countPrice }}đ</span>
 
-		  		</div>
+			  		</div>
+			  		@endforeach
 				<div class="giohang" style="background-color: #F9F9F9;">
 					<span>Cộng</span>
-					<span style="float: right;">360.000đ</span>
+					<span style="float: right;">{{ $totalPrice1 }}đ</span>
 				</div>
 				<div class="giohang" style="background-color: #F9F9F9">
 					<span>Phí vận chuyển (Est.)</span>
-					<span style="float: right;">7.000đ/km</span>
+					<span style="float: right;">{{ $transport_fee1 }}đ/km</span>
 				</div>
 				<div class="giohang" style="background-color: #FBF9D8;height: 30px">
 					<p style="text-align: center;"><span style="color: red">(*)</span>Nhập mã khuyến mãi ở bước hoàn tất</p>
 				</div>
 				<div class="giohang" style="background-color: #F9F9F9">
 					<span>Tổng cộng:</span>
-					<span style="font-size:15px;float: right; color: #0288D1;font-weight: 800;">1.160.000đ</span>
+					<span style="font-size:15px;float: right; color: #0288D1;font-weight: 800;">
+						@php
+							echo number_format($totalPrice + $transport_fee).'đ';
+						@endphp
+					</span>
 				</div>
 				<div class="giohang">
 					<button class="dat-truoc" type="submit" style="" data-toggle="modal" data-target="#payModal"><i class="fa fa-check-circle" aria-hidden="true" style="color: white;font-size: 16px"></i>&nbsp;<span style="color: white">Đặt trước</span></button>
 				</div>
+				@else
+					<div class="giohang" style="background-color: #F9F9F9;">
+						<span>Cộng</span>
+						<span style="float: right;">0</span>
+					</div>
+					<div class="giohang" style="background-color: #F9F9F9">
+						<span>Phí vận chuyển (Est.)</span>
+						<span style="float: right;">{{ $transport_fee1 }}đ/km</span>
+					</div>
+					<div class="giohang" style="background-color: #FBF9D8;height: 30px">
+						<p style="text-align: center;"><span style="color: red">(*)</span>Nhập mã khuyến mãi ở bước hoàn tất</p>
+					</div>
+					<div class="giohang" style="background-color: #F9F9F9">
+						<span>Tổng cộng:</span>
+						<span style="font-size:15px;float: right; color: #0288D1;font-weight: 800;">
+							0
+						</span>
+					</div>
+					<div class="giohang">
+					<button class="dat-truoc" type="submit" style="" data-toggle="modal" data-target="#payModal"><i class="fa fa-check-circle" aria-hidden="true" style="color: white;font-size: 16px"></i>&nbsp;<span style="color: white">Đặt trước</span></button>
+				</div>
+				@endif
+
 			</div>
 			{{-- pay modal --}}
 

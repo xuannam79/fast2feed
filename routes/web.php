@@ -25,10 +25,7 @@ Route::namespace('f2f')->group(function(){
 		'uses' => 'CartController@index',
 		'as' => 'trangGioHang'
 	]);
-	Route::post('/gio-hang',[
-		'uses' => 'CartController@postCart',
-		'as' => 'trangGioHang'
-	]);
+	
 	Route::get('/lien-he',[
 		'uses' => 'ContactController@index',
 		'as' => 'trangLienHe'
@@ -39,6 +36,10 @@ Route::namespace('f2f')->group(function(){
 	]);
 	Route::get('/nha-hang/{slug}-{cusId}',[
 		'uses' => 'RestauController@index',
+		'as' => 'trangCustomer'
+	]);
+	Route::post('/nha-hang/{slug}-{cusId}',[
+		'uses' => 'RestauController@postProduct',
 		'as' => 'trangCustomer'
 	]);
 	Route::get('/postProduct',[

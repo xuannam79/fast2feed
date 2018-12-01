@@ -58,4 +58,11 @@ class Account extends Model
     {
         return $this->where('email', $email)->first();
     }
+    public function managePostInfo($accId)
+    {
+        if(session()->has('admin')){
+             $id = session()->get('admin')[0]->account_id;
+        }
+        return DB::table('customer')->join('account', 'account.account_id', '=', 'customer.account_id')->join('catalog', 'catalog.catalog_id', '=', 'customer.catalog_id')->select('account.account_id','account.username','customer.customer_name','customer.address','catalog.catalog_name','customer.status_customer')->where('account.account_id', $accId)->get();
+    }
 }

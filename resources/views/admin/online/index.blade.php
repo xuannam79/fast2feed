@@ -10,8 +10,14 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- DATA TABLE -->
-                                <h3 class="title-5 m-b-35">Who is online?</h3>
-                                
+                                <h3 class="title-5 m-b-35">WHO IS ONLINE?</h3>
+                                <div class="table-data__tool">
+                                        <div class="table-data__tool-right">
+                                            <a href="{{ route('shipperAdmin') }}" title="" class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                                <i class="zmdi zmdi-undo"></i>Back
+                                            </a>
+                                        </div>
+                                    </div>
                             </div>
                                 <div class="table-responsive table-responsive-data2">
                                     <table class="table table-data2">
@@ -84,7 +90,7 @@
                                                     @if($active == 1)
                                                     <div class="table-data-feature">
                                                         <a href="{{ route('trangDinhViMap') }}" title="">
-                                                            Xem vị trí
+                                                            Xem vị trí <i class="zmdi zmdi-pin"></i>
                                                         </a>
                                                     </div>
                                                     @else

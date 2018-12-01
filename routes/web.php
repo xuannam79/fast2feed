@@ -126,6 +126,10 @@ Route::namespace('f2f')->group(function(){
 		'uses' => 'DinhViMapController@index',
 		'as' => 'trangDinhViMap'
 	]);
+	Route::get('/manage-post',[
+		'uses' => 'ManagePostController@index',
+		'as' => 'trangManagePost'
+	]);
 });
 
 Route::namespace('Auth')->group(function(){
@@ -247,7 +251,10 @@ Route::namespace('Admin')->middleware('MyMiddle', 'CustomerMiddle')->prefix('adm
 		'uses' => 'OnlineController@index',
 		'as' => 'onlineShipperAdmin'
 	]);
-
+	Route::get('/delivery-history-shipper',[
+		'uses' => 'DeliveryHistoryController@index',
+		'as' => 'deliveryHistoryAdmin'
+	]);
 
 });
 

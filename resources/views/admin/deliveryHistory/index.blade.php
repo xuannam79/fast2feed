@@ -10,18 +10,11 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- DATA TABLE -->
-                                <h3 class="title-5 m-b-35">data shipper</h3>
+                                <h3 class="title-5 m-b-35">DELIVERY HISTORY</h3>
                                 <div class="table-data__tool">
                                         <div class="table-data__tool-right">
-                                            
-                                            <a href="#" title="" class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                                <i class="zmdi zmdi-plus"></i>add shipper
-                                            </a>
-                                            <a href="{{ route('onlineShipperAdmin') }}" title="" class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                                <i class="zmdi zmdi-account"></i>Watch Online
-                                            </a>
-                                            <a href="{{ route('deliveryHistoryAdmin') }}" title="" class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                                <i class="zmdi zmdi-view-list"></i>Delivery History
+                                            <a href="{{ route('shipperAdmin') }}" title="" class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                                <i class="zmdi zmdi-undo"></i>Back
                                             </a>
                                         </div>
                                     </div>
@@ -38,24 +31,22 @@
                                                 </th>
                                                 <th>name</th>
                                                 <th>avatar</th>
-                                                <th>address</th>
-                                                <th>phone</th>
+                                                <th>order_id</th>
+                                                <th>total</th>
+                                                <th>payment</th>
                                                 <th>status</th>
-                                                <th>account_name</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($shippers as $key => $shipper)
+                                            @foreach($orders as $key => $order)
                                             @php
-                                                $name = $shipper->shipper_name;
-                                                $avatar = $shipper->avatar;
-                                                $address = $shipper->address;
-                                                $phone = $shipper->phone;
-                                                $status = $shipper->status;
-                                                $username = $shipper->username;
-                                                
-
+                                                $name = $order->shipper_name;
+                                                $avatar = $order->avatar;
+                                                $order_id = $order->order_id;
+                                                $status_2 = $order->status_2;
+                                                $total = $order->total;
+                                                $payment = $order->payment;
                                             @endphp
                                             <tr class="tr-shadow">
                                                 <td>
@@ -72,25 +63,26 @@
                                                         </a>
                                                     </div>
                                                 </td>
-                                                <td>{{ $address }}</td>
-                                                <td>{{ $phone }}</td>
+                                                <td><span class="block-email">{{ $order_id }}</span></td>
+                                                <td><span class="block-email">{{ $total }}</td>
                                                 <td>
-                                                    <label class="switch switch-3d switch-success mr-3">
-                                                        <input type="checkbox" class="switch-input" 
-                                                        @if($status == 1)
-                                                        checked="true"
-                                                        @endif
-                                                        >
-                                                        <span class="switch-label"></span>
-                                                        <span class="switch-handle"></span>
-                                                    </label>
+                                                    @if($payment == 1)
+                                                    <span class="block-email">Trực Tiếp</span>
+                                                    @else
+                                                    <span class="block-email">Online</span>
+                                                    @endif
                                                 </td>
                                                 <td>
-                                                    <span class="block-email">{{ $username }}</span>
+                                                    @if($status_2 == 1)
+                                                    <span class="block-email">Đã Giao</span>
+                                                    @elseif($status_2 == 2)
+                                                    <span class="block-email">Đang Giao</span>
+                                                    @else
+                                                    <span class="block-email">Đã Hủy</span>
+                                                    @endif
                                                 </td>
-                                                
                                                 <td>
-                                                    <div class="table-data-feature">
+                                                   <div class="table-data-feature">
                                                         <a href="#" title="" class="item">
                                                             <i class="zmdi zmdi-edit"></i>
                                                         </a>
@@ -110,4 +102,5 @@
                     </div>
                 </div>
             </div>
+    
 @endsection

@@ -22,7 +22,7 @@ class QuanLyTKController extends Controller
              $accId = session()->get('admin')[0]->account_id;
         } 
         $getAccountInfo = $this->account->accountInfo($accId);
-        return view('f2f.quanLyTK.index', compact('getAdmin', 'getAccountInfo'));
+        return view('f2f.accountInfo.capNhat', compact('getAdmin', 'getAccountInfo'));
     }
     public function postInfo(Request $request)
     {

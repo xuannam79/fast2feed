@@ -16,8 +16,8 @@
 						        <a href="#" class="list-group-item">Kiểu thanh toán</a>
 						        <a href="#" class="list-group-item">Đăng sản phẩm</a>
 						        <a href="#" class="list-group-item">Lịch sử đặt hàng</a>
-						        <a href="#" class="list-group-item">Lịch sử đăng hàng</a>
-						        <a href="#" class="list-group-item">Đăng xuất</a>
+						        <a href="{{ route('trangManagePost') }}" class="list-group-item">Lịch sử đăng hàng</a>
+						        <a href="{{ route('trangChu') }}" class="list-group-item">Đăng xuất</a>
 			            	</div>
 			        	</div>
 			    	</div>

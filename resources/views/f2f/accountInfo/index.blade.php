@@ -27,14 +27,13 @@
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clearpadding">
 					<div class="panel panel-info">
 						<div class="panel-body" style="padding:0px">
-							@foreach($getAccountInfo as $key => $info)
 							@php
-								$username = $info->username;
-								$email = $info->email;
-								$avatar = $info->avatar;
-								$phone = $info->phone;
-								$address = $info->address;
-								$birthday = $info->birthday;
+								$username = $getAccountInfo[0]->username;
+								$email = $getAccountInfo[0]->email;
+								$avatar = $getAccountInfo[0]->avatar;
+								$phone = $getAccountInfo[0]->phone;
+								$address = $getAccountInfo[0]->address;
+								$birthday = $getAccountInfo[0]->birthday;
 							@endphp
 			           		<div class="list-group">
 				                <p href="#" class="list-group-item" position: relative style="font-size: 16px;font-weight: bold; text-align: center; background: #4C66A4; color: white">Thông tin cá nhân</p>
@@ -62,7 +61,6 @@
 								<br>
 								</div>
 			            	</div>
-			            	@endforeach
 			        	</div>
 					</div>
 				</div>

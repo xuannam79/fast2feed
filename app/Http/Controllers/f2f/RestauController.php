@@ -55,14 +55,14 @@ class RestauController extends Controller
                     );
                     $arrCart = $arrCart + $aCart;
                     $request->session()->put($arrName, $arrCart);
-                    return view('f2f.restau.ajaxToggleCart', compact('nameProduct', 'amountProduct', 'priceProduct', 'tmp'));
+                    return view('f2f.restau.ajaxToggleCart', compact('idProduct', 'nameProduct', 'amountProduct', 'priceProduct', 'tmp'));
                 } else {
                     $tmp = 1;
                     $arrCart = $request->session()->get($arrName);
                     $arrCart[$idProduct]['amountProduct'] = $arrCart[$idProduct]['amountProduct'] + $amountProduct;
                     $newAmount = $arrCart[$idProduct]['amountProduct'];
                     $request->session()->put($arrName,$arrCart);
-                    return view('f2f.restau.ajaxToggleCart', compact('newAmount'));
+                    return view('f2f.restau.ajaxToggleCart', compact('newAmount', 'tmp'));
                 }
             } else {
                 $tmp = 0;
@@ -76,7 +76,7 @@ class RestauController extends Controller
                 );
 
                 $request->session()->put($arrName, $arrCart);
-                return view('f2f.restau.ajaxToggleCart', compact('nameProduct', 'amountProduct', 'priceProduct', 'tmp'));
+                return view('f2f.restau.ajaxToggleCart', compact('idProduct', 'nameProduct', 'amountProduct', 'priceProduct', 'tmp'));
             }
         } else {
             return redirect()->route('trangDangNhap');

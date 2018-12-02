@@ -23,4 +23,8 @@ class Shipper extends Model
     {
         return $this->where('account_id', $idAcc)->update($arrShip);
     }
+    public function getShipperByEmail($email)
+    {
+        return DB::table('shipper')->join('account', 'account.account_id', '=', 'shipper.account_id')->select('shipper.shipper_name', 'shipper.email', 'shipper.phone', 'account.avatar', 'shipper.birthday', 'shipper.address')->where('shipper.email', $email)->first();
+    }
 }

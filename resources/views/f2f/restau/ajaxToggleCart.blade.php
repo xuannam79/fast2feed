@@ -10,5 +10,5 @@
 		<input type="text" name="" style="border: none" placeholder="Thêm ghi chú..."><span style="float: right;">{{ $countPrice }}đ</span>
 	</div>
 @elseif($tmp == 1)
-	<span >{{ $newAmount }}</span>
+	<span class="onCartProduct{{$idProduct}}">{{ $newAmount }}</span>
 @endif

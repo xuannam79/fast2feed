@@ -6,6 +6,8 @@
     <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
     <script src="/fast2feed/public/templates/f2f/js/jquery-3.1.1.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="/fast2feed/public/templates/f2f/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/fast2feed/public/templates/f2f/bootstrap/css/bootstrap.min.js">

@@ -38,9 +38,10 @@ Route::namespace('f2f')->group(function(){
 		'uses' => 'RestauController@index',
 		'as' => 'trangCustomer'
 	]);
-	Route::post('/nha-hang/{slug}-{cusId}',[
+
+	Route::post('/nha-hang/ajaxCart/{slug}-{cusId}',[
 		'uses' => 'RestauController@postProduct',
-		'as' => 'trangCustomer'
+		'as' => 'trangAjaxCart'
 	]);
 	Route::get('/postProduct',[
 		'uses' => 'PostProductController@index',
@@ -130,6 +131,10 @@ Route::namespace('f2f')->group(function(){
 		'uses' => 'ManagePostController@index',
 		'as' => 'trangManagePost'
 	]);
+	// Route::get('/ajaxCart',[
+	// 	'uses' => 'AjaxCartController@index',
+	// 	'as' => 'trangAjaxCart'
+	// ]);
 });
 
 Route::namespace('Auth')->group(function(){

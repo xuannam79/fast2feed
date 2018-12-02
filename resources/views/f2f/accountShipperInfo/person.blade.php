@@ -1,6 +1,6 @@
 @extends('templates.f2f.master')
 @section('title')
-    Trang chủ shipper
+    Tài khoản cá nhân
 @endsection
 @section('content')
    
@@ -11,11 +11,11 @@
 			        	<div class="panel-body" style="padding:0px">
 			           		<div class="list-group">
 				                <p href="#" class="list-group-item" position: relative style="font-size: 16px; font-weight: bold; text-align: center; background: #4C66A4; color: white">Thông tin tài khoản</p>
-				                <a href="#" class="list-group-item">Cập nhật thông tin</a>
-				                <a href="#" class="list-group-item">Đổi mật khẩu</a>
-						        <a href="#" class="list-group-item">Tài khoản cá nhân</a>
-						        <a href="#" class="list-group-item">Lịch sử giao hàng</a>
-						        <a href="#" class="list-group-item">Đăng xuất</a>
+				                <a href="{{ route('trangQLTKShipper') }}" class="list-group-item">Cập nhật thông tin</a>
+				                <a href="{{ route('trangDoiMKShipper') }}" class="list-group-item">Đổi mật khẩu</a>
+						        <a href="{{ route('trangTaiSanShipper') }}" class="list-group-item">Tài khoản cá nhân</a>
+						        <a href="{{ route('trangDeliveryHistoryShipper') }}" class="list-group-item">Lịch sử giao hàng</a>
+						        <a href="{{ route('trangChu') }}" class="list-group-item">Đăng xuất</a>
 			            	</div>
 			        	</div>
 			    	</div>
@@ -26,7 +26,7 @@
 					<div class="panel panel-info">
 						<div class="panel-body" style="padding:0px">
 			           		<div class="list-group">
-				                <p class="list-group-item" position: relative style="font-size: 16px;font-weight: bold; text-align: center; background: #4C66A4; color: white">Tài Khoản Cá Nhân</p>
+				                <p class="list-group-item" position: relative style="font-size: 16px;font-weight: bold; text-align: center; background: #4C66A4; color: white">TÀI KHOẢN CÁ NHÂN</p>
 				                <p style="margin-top: 10px">Xin chào,<strong style="font-size: 20px">Võ Văn An</strong></p>
 				                <p>Trạng thái: <i style="color: blue">đã kích hoạt</i></p>
 				                <div style="margin: 0 auto;width: 339px; height: 225px;background-image: url('/fast2feed/public/files/shipper/the-ngan-hang1.png');background-repeat: no-repeat;background-size: 339px 220px ">

@@ -1,6 +1,6 @@
 @extends('templates.f2f.master')
 @section('title')
-    Cập nhật tài khoản
+    Đổi mật khẩu
 @endsection
 @section('content')
    
@@ -11,12 +11,10 @@
 			        	<div class="panel-body" style="padding:0px">
 			           		<div class="list-group">
 				                <p href="#" class="list-group-item" position: relative style="font-size: 16px; font-weight: bold; text-align: center; background: #4C66A4; color: white">Thông tin tài khoản</p>
-				                <a href="{{ route('trangCapNhatTK') }}" class="list-group-item">Cập nhật thông tin</a>
-				                <a href="{{ route('trangDoiMK') }}" class="list-group-item">Đổi mật khẩu</a>
-						        <a href="{{ route('trangPayment') }}" class="list-group-item">Phương thức thanh toán</a>
-						        <a href="{{ route('trangPost') }}" class="list-group-item">Đăng sản phẩm</a>
-						        <a href="{{ route('trangTransactionHistory') }}" class="list-group-item">Lịch sử đặt hàng</a>
-						        <a href="{{ route('trangManagePost') }}" class="list-group-item">Lịch sử đăng hàng</a>
+				                <a href="{{ route('trangQLTKShipper') }}" class="list-group-item">Cập nhật thông tin</a>
+				                <a href="{{ route('trangDoiMKShipper') }}" class="list-group-item">Đổi mật khẩu</a>
+						        <a href="{{ route('trangTaiSanShipper') }}" class="list-group-item">Tài khoản cá nhân</a>
+						        <a href="{{ route('trangDeliveryHistoryShipper') }}" class="list-group-item">Lịch sử giao hàng</a>
 						        <a href="{{ route('trangChu') }}" class="list-group-item">Đăng xuất</a>
 			            	</div>
 			        	</div>
@@ -28,28 +26,12 @@
 					<div class="panel panel-info">
 						<div class="panel-body" style="padding:0px">
 			           		<div class="list-group">
-				                <p href="#" class="list-group-item" position: relative style="font-size: 16px;font-weight: bold; text-align: center; background: #4C66A4; color: white">Cập nhật thông tin cá nhân</p>
+				                <p href="#" class="list-group-item" position: relative style="font-size: 16px;font-weight: bold; text-align: center; background: #4C66A4; color: white">ĐỔI MẬT KHẨU</p>
 				                
-				                @foreach($getAccountInfo as $key => $info)
-								@php
-									$username = $info->username;
-									$email = $info->email;
-									$avatar = $info->avatar;
-									$phone = $info->phone;
-									$address = $info->address;
-									$birthday = explode('-', $info->birthday);
-									$year = $birthday[0];
-									$month = $birthday[1];
-									$day = $birthday[2];
-									$now = getdate();
-								@endphp
+				                
 				                <div style="margin: 10px">
-				                	@if ($errors->any())
-			                            @foreach ($errors->all() as $error)
-			                                <script type="text/javascript">alert("{{ $error }}");</script>
-			                            @endforeach
-			                        @endif
-				                	<form action="{{ route('trangDoiMK') }}" method="post">
+				                	
+				                	<form action="#" method="post">
                                 	{{ csrf_field() }}
 										<strong>Mật khẩu hiện tại:</strong>
 										<input type="password" name="pass" style="margin-left: 56px; margin-top: 10px; width: 300px" value="">
@@ -66,7 +48,6 @@
 					                
 									
 								</div>
-								@endforeach
 			            	</div>
 			        	</div>
 					</div>
@@ -74,6 +55,5 @@
 			</div>
 		</div>
 	</div>
-	<script src="/js/jquery.min.js" type="text/javascript"></script>
-	<script src="/js/ajaxupload.js" type="text/javascript"></script>
+
 @endsection

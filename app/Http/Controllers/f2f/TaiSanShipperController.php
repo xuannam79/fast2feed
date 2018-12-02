@@ -9,6 +9,6 @@ class TaiSanShipperController extends Controller
 {
     public function index()
     {
-        return view('f2f.taiSanShipper.index');
+        return view('f2f.accountShipperInfo.person');
     }
 }

@@ -35,50 +35,49 @@
                                         <thead>
                                             <tr>
                                                 <th>STT</th>
-                                                <th>Tên quán</th>
-                                                <th>Địa chỉ</th>
-                                                <th>Loại sản phẩm</th>
-                                                <th>Ngày đăng</th>
+                                                <th>Mã hóa đơn</th>
+                                                <th>Nhà hàng</th>
+                                                <th>Ngày đặt</th>
+                                                <th>Tổng tiền</th>
+                                                <th>Kiểu thanh toán</th>
                                                 <th>Trạng thái</th>
-                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($getManagePostInfo as $key => $info)
+                                            @foreach($getTransactionHistory as $key => $info)
 											@php
 												$restaurant = $info->customer_name;
-												$address = $info->address;
-												$catalog = $info->catalog_name;
-                                                $date = $info->date;
+                                                $order = $info->order_id;
+                                                $date = $info->date_create;
+                                                $total = $info->total;
+                                                $payment = $info->status;
 												$status = $info->status_customer;
 											@endphp
                                             <tr>
                                                 <td>
                                                     1
                                                 </td>
-                                                <td style="width: 150px"><span>{{ $restaurant }}</span></td>
+                                                <td style="width: 100px"><span>{{ $order }}</span></td>
                                                 <td style="width: 200px">
-                                                    <span>{{ $address }}</span>
+                                                    <span><span>{{ $restaurant }}</span>
                                                 </td>
-                                                <td><span>{{ $catalog }}</span></td>
-                                                <td>{{ $date }}</td>
+                                                <td><span>{{ $date }}</span></td>
+                                                <td>{{ $total }}</td>
                                                 <td>
-                                                    @if($status == 1)
-                                                    <span>Đã phê duyệt</span>
+                                                    @if($payment == 1)
+                                                    <span>Trực tiếp</span>
                                                     @else
-                                                    <span>Chờ phê duyệt</span>
+                                                    <span>Onine</span>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="#" title="Chọn để xem chi tiết">
-                                                            <i class="glyphicon glyphicon-eye-open"></i>
-                                                    </a>
-                                                    <a href="#" title="Chọn để sửa">
-                                                            <i class="glyphicon glyphicon-edit" style="margin-left: 5px"></i>
-                                                    </a>
-                                                    <a href="#" title="Chọn để xóa">
-                                                            <i class="glyphicon glyphicon-remove" style="margin-left: 5px"></i>
-                                                    </a>
+                                                    @if($status == 1)
+                                                    <span>Đã thanh toán</span>
+                                                    @elseif($status == 2)
+                                                    <span>Chưa thanh toán</span>
+                                                    @else
+                                                    <span>Đã hủy</span>
+                                                    @endif
                                                 </td>
                                                 
                                             </tr>

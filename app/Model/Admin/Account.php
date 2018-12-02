@@ -63,6 +63,13 @@ class Account extends Model
         if(session()->has('admin')){
              $id = session()->get('admin')[0]->account_id;
         }
-        return DB::table('customer')->join('account', 'account.account_id', '=', 'customer.account_id')->join('catalog', 'catalog.catalog_id', '=', 'customer.catalog_id')->select('account.account_id','account.username','customer.customer_name','customer.address','catalog.catalog_name','customer.status_customer')->where('account.account_id', $accId)->get();
+        return DB::table('customer')->join('account', 'account.account_id', '=', 'customer.account_id')->join('catalog', 'catalog.catalog_id', '=', 'customer.catalog_id')->select('account.account_id','customer.date','customer.customer_name','customer.address','catalog.catalog_name','customer.status_customer')->where('account.account_id', $accId)->get();
+    }
+    public function transactionHistory($accId)
+    {
+        if(session()->has('admin')){
+             $id = session()->get('admin')[0]->account_id;
+        }
+        return DB::table('customer')->join('account', 'account.account_id', '=', 'customer.account_id')->join('orders', 'orders.customer_id', '=', 'customer.customer_id')->select('account.account_id','customer.status_customer','customer.customer_name','orders.order_id','orders.date_create','orders.total','orders.status')->where('account.account_id', $accId)->get();
     }
 }

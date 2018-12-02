@@ -34,7 +34,7 @@ class RestauController extends Controller
         $getCustomer = $this->customer->getItem($cusId);
         $slug = str_slug($getCustomer->customer_name);
         $cusId = $getCustomer->customer_id;
-        $idProduct = $request->id;
+        $idProduct = $request->idProduct;
         $nameProduct = $request->name;
         $priceProduct = $request->price;
         $imagesProduct = $request->images;
@@ -44,6 +44,7 @@ class RestauController extends Controller
             if (session()->has($arrName)){
                 $arrCart = $request->session()->get($arrName);
                 if (!array_key_exists($idProduct, $arrCart)) {
+                    $tmp = 0;
                     $aCart = array(
                         $idProduct => array(
                             'nameProduct' => $nameProduct,
@@ -54,13 +55,17 @@ class RestauController extends Controller
                     );
                     $arrCart = $arrCart + $aCart;
                     $request->session()->put($arrName, $arrCart);
-
+                    return view('f2f.restau.ajaxToggleCart', compact('nameProduct', 'amountProduct', 'priceProduct', 'tmp'));
                 } else {
+                    $tmp = 1;
                     $arrCart = $request->session()->get($arrName);
                     $arrCart[$idProduct]['amountProduct'] = $arrCart[$idProduct]['amountProduct'] + $amountProduct;
+                    $newAmount = $arrCart[$idProduct]['amountProduct'];
                     $request->session()->put($arrName,$arrCart);
+                    return view('f2f.restau.ajaxToggleCart', compact('newAmount'));
                 }
             } else {
+                $tmp = 0;
                 $arrCart = array(
                     $idProduct => array(
                         'nameProduct' => $nameProduct,
@@ -71,7 +76,7 @@ class RestauController extends Controller
                 );
 
                 $request->session()->put($arrName, $arrCart);
-
+                return view('f2f.restau.ajaxToggleCart', compact('nameProduct', 'amountProduct', 'priceProduct', 'tmp'));
             }
         } else {
             return redirect()->route('trangDangNhap');

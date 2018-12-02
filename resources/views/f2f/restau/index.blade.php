@@ -185,6 +185,7 @@
 						  			$name = $product->product_name;
 						  			$ordered = $product->quantify_ordered;
 						  			$price = $product->price;
+						  			$amount = 1;
 						  		@endphp
 						  		@if($idMenuFK == $idMenuPK)
 								<div class="list-item">
@@ -207,6 +208,7 @@
 											<input type="hidden" name="amount" value="1">
 											<button type="submit" style="border: none;background-color: white"><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px;"></i></button>
 										</form>
+										<button onclick="ajaxToggleCartUpdate('{{$slug}}', {{$idCus}}, {{$idProduct}}, '{{$name}}', {{$price}}, {{$amount}});">submit</button>
 									</div>
 									<div class="clear"></div>
 								</div>
@@ -219,6 +221,30 @@
 					</div>
 				</div>
 			</div>
+			{{-- ajaxCart --}}
+			<script type="text/javascript">
+		        function ajaxToggleCartUpdate(slug, idCus, idProduct, name, price, amount){
+		            $.ajaxSetup({
+		                headers: {
+		                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		                  }
+		            });
+
+		            $.ajax({
+		                url: "{{ route('trangAjaxCart', ['slug' => $slug, 'cusId' => $idCus]) }}",
+		                type: 'POST',
+		                cache: false,
+		                data: {idProduct:idProduct, name:name, price:price, amount:amount},
+		                success: function(data){
+		                    $('.onCart'+idCus).append(data);
+		                },
+		                error: function (){
+		                    alert('có lỗi xảy ra');
+		                }
+		            });
+		       }
+		    </script>
+
 			{{-- //smooth scrolling page --}}
 			<script>
 				$("a[href*='#']:not([href='#])").click(function() {
@@ -228,12 +254,18 @@
 				  }, 1000);
 				  event.preventDefault();
 				});
-			</script>			
+			</script>	
+
 			<div style="float: right;width: 270px;height: 100%;border: 1px solid #BCE8F1;border-radius: 5px;font-size: 13px">
 
 				<div class="giohang" style="background-color: #F9F9F9;height: 45px;">
 					<img src="/fast2feed/public/files/account/{{ $avatar }}" class="img-circle" alt="Xuân Nam" width="35px">&nbsp;<span style="font-weight: 800;color: #6D6F71;line-height: 33px">{{ $accName }}</span><span style="float: right;line-height: 35px;">2 món</span>
 				</div>
+				@if(!session()->has($arrName))
+					<div class="onCart{{$idCus}}">
+						
+					</div>
+				@endif
 				@if(session()->has($arrName))
 
 					@php
@@ -249,14 +281,16 @@
 						$totalPrice += ($amount * $price);
 						$totalPrice1 = number_format($totalPrice);
 					@endphp
-			  		<div class="giohang" style="height: 45px;">
-			  			<a href="#" title=""><i class="fa fa-plus-square" aria-hidden="true" style="color: green"></i></a>
-			  				<strong>{{ $amount }}</strong>
-			  			<a href="#" title=""><i class="fa fa-minus-square" aria-hidden="true" style="color: black"></i></a>
-			  			<strong>{{ $name }}</strong>
-			  			<input type="text" name="" style="border: none" placeholder="Thêm ghi chú..."><span style="float: right;">{{ $countPrice }}đ</span>
+			  			<div class="onCart{{$idCus}}">
+			  				<div class="giohang" style="height: 45px;">
+					  			<a href="#" title=""><i class="fa fa-plus-square" aria-hidden="true" style="color: green"></i></a>
+					  				<strong>{{ $amount }}</strong>
+					  			<a href="#" title=""><i class="fa fa-minus-square" aria-hidden="true" style="color: black"></i></a>
+					  			<strong>{{ $name }}</strong>
+					  			<input type="text" name="" style="border: none" placeholder="Thêm ghi chú..."><span style="float: right;">{{ $countPrice }}đ</span>
 
-			  		</div>
+					  		</div>
+			  			</div>
 			  		@endforeach
 				<div class="giohang" style="background-color: #F9F9F9;">
 					<span>Cộng</span>

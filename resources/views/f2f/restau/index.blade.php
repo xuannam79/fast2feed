@@ -18,6 +18,7 @@
 		$idCus = $getCustomer->customer_id;
 		$slug = str_slug($getCustomer->customer_name);
 		$arrName = 'arrCart'.$idCus;
+		$adminStatus = 0;
 		if(session()->has('admin')){
 			$avatar = session()->get('admin')[0]->avatar;
 			$accName = session()->get('admin')[0]->username;
@@ -188,6 +189,7 @@
 						  			$amount = 1;
 						  			$bool = 0;
 						  			if(session()->has('admin')){
+						  				$adminStatus = 1;
 										if (session()->has($arrName)){
 											$arrCart = session()->get($arrName);
 											if (!array_key_exists($idProduct, $arrCart)) {
@@ -211,7 +213,7 @@
 										<span>{{ $price }}đ</span>
 										{{-- <a href="#" title=""><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px"></i></a> --}}
 										
-										<button onclick="ajaxToggleCartUpdate('{{$slug}}', {{$idCus}}, {{$idProduct}}, '{{$name}}', {{$price}}, {{$amount}}, {{$bool}});" style="border: none;background-color: white"><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px;"></i></button>
+										<button onclick="ajaxToggleCartUpdate('{{$slug}}', {{$idCus}}, {{$idProduct}}, '{{$name}}', {{$price}}, {{$amount}}, {{$bool}}, {{$adminStatus}});" style="border: none;background-color: white"><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px;"></i></button>
 									</div>
 									<div class="clear"></div>
 								</div>
@@ -226,28 +228,33 @@
 			</div>
 			{{-- ajaxCart --}}
 			<script type="text/javascript">
-		        function ajaxToggleCartUpdate(slug, idCus, idProduct, name, price, amount, bool){
-		            $.ajaxSetup({
-		                headers: {
-		                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		                  }
-		            });
-		            $.ajax({
-		                url: "{{ route('trangAjaxCart', ['slug' => $slug, 'cusId' => $idCus]) }}",
-		                type: 'POST',
-		                cache: false,
-		                data: {idProduct:idProduct, name:name, price:price, amount:amount},
-		                success: function(data){
-		                    if(bool == 0){
-		                    	$('.onCart'+idCus).append(data);
-		                    }else{
-		                    	$('.onCartProduct'+idProduct).replaceWith(data);
-		                    }
-		                },
-		                error: function (){
-		                    alert('có lỗi xảy ra');
-		                }
-		            });
+		        function ajaxToggleCartUpdate(slug, idCus, idProduct, name, price, amount, bool, adminStatus){
+		        	if(adminStatus != 1){
+		        		top.location.href = '/fast2feed/public/dang-nhap';
+		        	}else {
+		        		$.ajaxSetup({
+			                headers: {
+			                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			                  }
+			            });
+			            $.ajax({
+			                url: "{{ route('trangAjaxCart', ['slug' => $slug, 'cusId' => $idCus]) }}",
+			                type: 'POST',
+			                cache: false,
+			                data: {idProduct:idProduct, name:name, price:price, amount:amount},
+			                success: function(data){
+			                    if(bool == 0){
+			                    	$('.onCart'+idCus).append(data);
+			                    }else{
+			                    	$('.onCart'+idCus).find($('span.onCartProduct'+idProduct)).replaceWith(data);
+			                    	$('.onCartProduct'+idProduct).replaceWith(data);
+			                    }
+			                },
+			                error: function (){
+			                    alert('có lỗi xảy ra');
+			                }
+			            });
+		        	}
 		       }
 		    </script>
 

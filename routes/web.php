@@ -110,7 +110,7 @@ Route::namespace('f2f')->group(function(){
 		'uses' => 'AccountInfoController@index',
 		'as' => 'trangTTtaikhoan'
 	]);
-	Route::get('/quan-ly-tai-khoan-shipper',[
+	Route::get('/quan-ly-tai-khoan',[
 		'uses' => 'QuanLyTKShipperController@index',
 		'as' => 'trangQLTKShipper'
 	]);
@@ -129,6 +129,26 @@ Route::namespace('f2f')->group(function(){
 	Route::get('/manage-post',[
 		'uses' => 'ManagePostController@index',
 		'as' => 'trangManagePost'
+	]);
+	Route::get('/doi-mat-khau-shipper',[
+		'uses' => 'ChangePassShipperController@index',
+		'as' => 'trangDoiMKShipper'
+	]);
+	Route::get('/delivery-history',[
+		'uses' => 'DeliveryHistoryShipperController@index',
+		'as' => 'trangDeliveryHistoryShipper'
+	]);
+	Route::get('/lich-su-dat-hang',[
+		'uses' => 'TransactionHistoryController@index',
+		'as' => 'trangTransactionHistory'
+	]);
+	Route::get('/post-product',[
+		'uses' => 'PostController@index',
+		'as' => 'trangPost'
+	]);
+	Route::get('/payment',[
+		'uses' => 'PaymentController@index',
+		'as' => 'trangPayment'
 	]);
 });
 

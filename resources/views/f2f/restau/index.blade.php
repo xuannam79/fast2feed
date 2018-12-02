@@ -267,7 +267,7 @@
 					</div>
 				@endif
 				@if(session()->has($arrName))
-
+					
 					@php
 						$arrCart = session()->get($arrName);
 						$totalPrice = 0;
@@ -281,7 +281,7 @@
 						$totalPrice += ($amount * $price);
 						$totalPrice1 = number_format($totalPrice);
 					@endphp
-			  			<div class="onCart{{$idCus}}">
+
 			  				<div class="giohang" style="height: 45px;">
 					  			<a href="#" title=""><i class="fa fa-plus-square" aria-hidden="true" style="color: green"></i></a>
 					  				<strong>{{ $amount }}</strong>
@@ -290,8 +290,10 @@
 					  			<input type="text" name="" style="border: none" placeholder="Thêm ghi chú..."><span style="float: right;">{{ $countPrice }}đ</span>
 
 					  		</div>
-			  			</div>
+			  			
 			  		@endforeach
+			  	<div class="onCart{{$idCus}}">
+			  	</div>
 				<div class="giohang" style="background-color: #F9F9F9;">
 					<span>Cộng</span>
 					<span style="float: right;">{{ $totalPrice1 }}đ</span>
@@ -314,6 +316,7 @@
 				<div class="giohang">
 					<button class="dat-truoc" type="submit" style="" data-toggle="modal" data-target="#payModal"><i class="fa fa-check-circle" aria-hidden="true" style="color: white;font-size: 16px"></i>&nbsp;<span style="color: white">Đặt trước</span></button>
 				</div>
+				
 				@else
 					<div class="giohang" style="background-color: #F9F9F9;">
 						<span>Cộng</span>

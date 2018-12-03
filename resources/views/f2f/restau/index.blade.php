@@ -227,6 +227,7 @@
 					</div>
 				</div>
 			</div>
+
 			{{-- ajaxCart --}}
 			<script type="text/javascript">
 		        function ajaxToggleCartUpdate(slug, idCus, idProduct, name, price, amount, bool, adminStatus){
@@ -247,10 +248,22 @@
 			                    if(bool == 0){
 			                    	$('.onCart'+idCus).append(data);
 			                    }else{
-			                    	var inputVal = $(data).val();
-			                    	console.log(inputVal);
+			                    	// function showDetails(data) {
+
+									    // var newCountPrice = data.getAttribute("data-newCountPrice");
+									    // console.log($dataParse.filter("#onCartProduct1_"+idProduct));
+									    // alert("The " + animal.innerHTML + " is a " + animalType + ".");
+									// }
+			                    	// console.log(inputVal);
 			                    	$('.onCartProduct1_'+idProduct).replaceWith(data);
 			                    	//document.getElementById("demo").innerHTML = "Paragraph changed!";
+			                    	var count = $("#onCartProduct1_"+idProduct).text();
+			                    	var newCountPrice = count * price;
+			                    	$('.onCartProduct2_'+idProduct).replaceWith(newCountPrice);
+			                    	// <span style='float: right;' class='onCartProduct2_'>đ</span>
+			                    	console.log(newCountPrice);
+								    // $( "#onCartProduct1_"+idProduct ).keyup(count * price);
+
 			                    }
 			                },
 			                error: function (){

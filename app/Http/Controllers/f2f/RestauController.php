@@ -61,8 +61,10 @@ class RestauController extends Controller
                     $arrCart = $request->session()->get($arrName);
                     $arrCart[$idProduct]['amountProduct'] = $arrCart[$idProduct]['amountProduct'] + $amountProduct;
                     $newAmount = $arrCart[$idProduct]['amountProduct'];
+                    $newCountPrice = $newAmount * $arrCart[$idProduct]['priceProduct'];
+                    
                     $request->session()->put($arrName,$arrCart);
-                    return view('f2f.restau.ajaxToggleCart', compact('newAmount', 'tmp', 'idProduct'));
+                    return view('f2f.restau.ajaxToggleCart', compact('newAmount', 'tmp', 'idProduct','newCountPrice'));
                 }
             } else {
                 $tmp = 0;

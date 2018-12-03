@@ -246,7 +246,6 @@
 			                    if(bool == 0){
 			                    	$('.onCart'+idCus).append(data);
 			                    }else{
-			                    	$('.onCart'+idCus).find($('span.onCartProduct'+idProduct)).replaceWith(data);
 			                    	$('.onCartProduct'+idProduct).replaceWith(data);
 			                    }
 			                },

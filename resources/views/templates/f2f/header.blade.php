@@ -180,7 +180,15 @@
                                             </div>
                                             <div class="clear"></div>
                                             <div style="border-top: 1px solid #F8F8F8;border-bottom: 1px solid #F8F8F8;">
-                                                <a href="{{ route('trangTTtaikhoan') }}" title="">
+                                                @php
+                                                    if(session()->get('admin')[0]->role == 3){
+                                                        $routeInfo = route('trangInfoShipper');
+                                                    }else{
+                                                        $routeInfo = route('trangTTtaikhoan');
+                                                    }
+                                                @endphp
+                                                
+                                                <a href="{{ $routeInfo }}" title="">
                                                     <div class="account-body">
                                                         <strong><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;Thông tin tài khoản</strong>
                                                     </div>

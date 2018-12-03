@@ -55,7 +55,7 @@
 											@endphp
                                             <tr>
                                                 <td>
-                                                    1
+                                                    {{ $loop->index+1 }}
                                                 </td>
                                                 <td style="width: 100px"><span>{{ $order }}</span></td>
                                                 <td style="width: 200px">

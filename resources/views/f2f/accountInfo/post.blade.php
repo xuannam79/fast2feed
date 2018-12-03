@@ -87,8 +87,12 @@
 											<input type="file" name="email" style="margin-left: 40px; width: 200px" value="">
 										</div>
 										<div style="float: right;">
+											<label>Số lượng:</label><br>
+											<input type="text" name="email" style="margin-right: 20px; width: 80px" value="">
+										</div>
+										<div style="float: right;">
 											<label>Giá:</label><br>
-											<input type="text" name="email" style="margin-right: 20px; width: 200px" value="">
+											<input type="text" name="email" style="margin-right: 20px; width: 100px" value="">
 										</div>
 									</div>
 									<input type="submit" name="submit" value="Cập nhật" style="float: right;margin-right: 20px;color: white; width: 100px; height: 25px;background: #4C66A4;">
@@ -101,11 +105,13 @@
                                                 	<th>Tên sản phẩm</th>
                                                 	<th>Hình ảnh</th>
                                                 	<th>Giá</th>
+                                                	<th>Số lượng</th>
                                                 	<th></th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr>
+													<td>data</td>
 													<td>data</td>
 													<td>data</td>
 													<td>data</td>

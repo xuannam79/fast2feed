@@ -11,13 +11,11 @@
 			        	<div class="panel-body" style="padding:0px">
 			           		<div class="list-group">
 				                <p href="#" class="list-group-item" position: relative style="font-size: 16px; font-weight: bold; text-align: center; background: #4C66A4; color: white">Thông tin tài khoản</p>
-				                <a href="#" class="list-group-item">Cập nhật thông tin</a>
-				                <a href="#" class="list-group-item">Đổi mật khẩu</a>
-						        <a href="#" class="list-group-item">Phương thức thanh toán</a>
-						        <a href="#" class="list-group-item">Đăng sản phẩm</a>
-						        <a href="#" class="list-group-item">Lịch sử đặt hàng</a>
-						        <a href="#" class="list-group-item">Lịch sử đăng hàng</a>
-						        <a href="#" class="list-group-item">Đăng xuất</a>
+				                <a href="{{ route('trangQLTKShipper') }}" class="list-group-item">Cập nhật thông tin</a>
+                                <a href="{{ route('trangDoiMKShipper') }}" class="list-group-item">Đổi mật khẩu</a>
+                                <a href="{{ route('trangTaiSanShipper') }}" class="list-group-item">Tài khoản cá nhân</a>
+                                <a href="{{ route('trangDeliveryHistoryShipper') }}" class="list-group-item">Lịch sử giao hàng</a>
+
 			            	</div>
 			        	</div>
 			    	</div>

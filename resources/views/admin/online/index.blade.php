@@ -1,6 +1,6 @@
 @extends('templates.admin.master')
 @section('title')
-	Shipper
+	Manage Online Shipper
 @endsection
 @section('content')
 	<!-- MAIN CONTENT-->
@@ -65,7 +65,7 @@
                                                 <td></td>
                                                 <td>
                                                     @if($active == 1)
-                                                    <label>
+                                                    <label style="color: green">
                                                         Online
                                                         <div class="table-data-feature">
                                                             <p href="#" title="" class="item" style="background: green; height: 15px;width: 15px">
@@ -89,7 +89,7 @@
                                                 <td>
                                                     @if($active == 1)
                                                     <div class="table-data-feature">
-                                                        <a href="{{ route('trangDinhViMap') }}" title="">
+                                                        <a href="{{ route('trangDinhViMap') }}" title="" target="_blank">
                                                             Xem vị trí <i class="zmdi zmdi-pin"></i>
                                                         </a>
                                                     </div>

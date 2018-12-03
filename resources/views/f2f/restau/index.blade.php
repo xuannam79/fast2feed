@@ -19,6 +19,7 @@
 		$slug = str_slug($getCustomer->customer_name);
 		$arrName = 'arrCart'.$idCus;
 		$adminStatus = 0;
+
 		if(session()->has('admin')){
 			$avatar = session()->get('admin')[0]->avatar;
 			$accName = session()->get('admin')[0]->username;
@@ -246,7 +247,10 @@
 			                    if(bool == 0){
 			                    	$('.onCart'+idCus).append(data);
 			                    }else{
-			                    	$('.onCartProduct'+idProduct).replaceWith(data);
+			                    	var inputVal = $(data).val();
+			                    	console.log(inputVal);
+			                    	$('.onCartProduct1_'+idProduct).replaceWith(data);
+			                    	//document.getElementById("demo").innerHTML = "Paragraph changed!";
 			                    }
 			                },
 			                error: function (){
@@ -295,10 +299,10 @@
 
 			  				<div class="giohang" style="height: 45px;">
 					  			<a href="#" title=""><i class="fa fa-plus-square" aria-hidden="true" style="color: green"></i></a>
-					  				<strong><span class="onCartProduct{{$key}}">{{ $amount }}</span></strong>
+					  				<strong><span class="onCartProduct1_{{$key}}">{{ $amount }}</span></strong>
 					  			<a href="#" title=""><i class="fa fa-minus-square" aria-hidden="true" style="color: black"></i></a>
 					  			<strong>{{ $name }}</strong>
-					  			<input type="text" name="" style="border: none" placeholder="Thêm ghi chú..."><span style="float: right;">{{ $countPrice }}đ</span>
+					  			<input type="text" name="" style="border: none" placeholder="Thêm ghi chú..."><span style="float: right;" class="onCartProduct2_{{$key}}">{{ $countPrice }}đ</span>
 
 					  		</div>
 			  		@endforeach

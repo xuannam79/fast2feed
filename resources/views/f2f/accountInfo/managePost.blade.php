@@ -54,7 +54,7 @@
 											@endphp
                                             <tr>
                                                 <td>
-                                                    1
+                                                    {{ $loop->index+1 }}
                                                 </td>
                                                 <td style="width: 150px"><span>{{ $restaurant }}</span></td>
                                                 <td style="width: 200px">

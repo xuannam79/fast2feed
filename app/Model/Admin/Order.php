@@ -15,6 +15,10 @@ class Order extends Model
     {
     	return DB::table('shipper')->join('orders', 'shipper.shipper_id', '=', 'orders.shipper_id')->join('account', 'account.account_id', '=', 'shipper.account_id')->get();
     }
+    public function getTransaction()
+    {
+        return DB::table('orders')->join('customer', 'customer.customer_id', '=', 'orders.customer_id')->get();
+    }
     public function getAllDanhSachHD()
     {
         return DB::table('orders')->join('customer',function($join)

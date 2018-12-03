@@ -1,6 +1,6 @@
 @extends('templates.f2f.master')
 @section('title')
-    Cập nhật tài khoản
+    Lịch sử đặt hàng
 @endsection
 @section('content')
 
@@ -28,7 +28,7 @@
 					<div class="panel panel-info">
 						<div class="panel-body" style="padding:0px">
 			           		<div class="list-group">
-				                <p href="#" class="list-group-item" position: relative style="font-size: 16px;font-weight: bold; text-align: center; background: #4C66A4; color: white">Quản Lý Bài Đăng</p>
+				                <p href="#" class="list-group-item" position: relative style="font-size: 16px;font-weight: bold; text-align: center; background: #4C66A4; color: white">Lịch sử đặt hàng</p>
 				                
                                 <div>
                                     <table class="table table-data2">
@@ -50,7 +50,7 @@
                                                 $order = $info->order_id;
                                                 $date = $info->date_create;
                                                 $total = $info->total;
-                                                $payment = $info->status;
+                                                $payment = $info->payment;
 												$status = $info->status_customer;
 											@endphp
                                             <tr>
@@ -73,8 +73,6 @@
                                                 <td>
                                                     @if($status == 1)
                                                     <span>Đã thanh toán</span>
-                                                    @elseif($status == 2)
-                                                    <span>Chưa thanh toán</span>
                                                     @else
                                                     <span>Đã hủy</span>
                                                     @endif

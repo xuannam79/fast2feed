@@ -282,6 +282,14 @@ Route::namespace('Admin')->middleware('MyMiddle', 'CustomerMiddle')->prefix('adm
 		'uses' => 'DeliveryHistoryController@index',
 		'as' => 'deliveryHistoryAdmin'
 	]);
+	Route::get('/transaction-history-customer',[
+		'uses' => 'TransactionHistoryAdminController@index',
+		'as' => 'transactionHistoryAdmin'
+	]);
+	Route::get('/manage_post',[
+		'uses' => 'ManagePostAdminController@index',
+		'as' => 'managePostAdmin'
+	]);
 
 });
 

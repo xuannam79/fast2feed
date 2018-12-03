@@ -15,6 +15,14 @@ class Customer extends Model
     {
     	return DB::table('customer')->join('catalog', 'customer.catalog_id', '=', 'catalog.catalog_id')->join('account', 'account.account_id', '=', 'customer.account_id')->get();
     }
+    public function getPost()
+    {
+        return DB::table('customer')->join('catalog', 'customer.catalog_id', '=', 'catalog.catalog_id')->where('customer.status_customer','=','1')->get();
+    }
+    public function getNoPost()
+    {
+        return DB::table('customer')->join('catalog', 'customer.catalog_id', '=', 'catalog.catalog_id')->where('customer.status_customer','=','2')->get();
+    }
     public function getItem($cusId)
     {
     	return DB::table('customer')->join('catalog', 'customer.catalog_id', '=', 'catalog.catalog_id')->join('account', 'account.account_id', '=', 'customer.account_id')->where('customer_id', $cusId)->first();

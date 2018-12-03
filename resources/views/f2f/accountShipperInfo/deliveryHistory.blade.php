@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 
-    <div class="row">
+    <div class="row" style="margin-bottom: 150px">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clearpadding" style="margin-top: 15px;">
         		<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 clearpaddingl">
     				<div class="panel panel-info">
@@ -15,7 +15,7 @@
                                 <a href="{{ route('trangDoiMKShipper') }}" class="list-group-item">Đổi mật khẩu</a>
                                 <a href="{{ route('trangTaiSanShipper') }}" class="list-group-item">Tài khoản cá nhân</a>
                                 <a href="{{ route('trangDeliveryHistoryShipper') }}" class="list-group-item">Lịch sử giao hàng</a>
-                                <a href="{{ route('trangChu') }}" class="list-group-item">Đăng xuất</a>
+                                
 			            	</div>
 			        	</div>
 			    	</div>
@@ -33,7 +33,7 @@
                                         <thead>
                                             <tr>
                                                 <th>STT</th>
-                                                <th>Mã hóa đơn</th>
+                                                <th>Hóa đơn</th>
                                                 <th>Nhà hàng</th>
                                                 <th>Khách hàng</th>
                                                 <th>Ngày giao</th>
@@ -41,23 +41,33 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            
+                                            @foreach($getDeliveryHistory as $key => $value)
+                                            @php
+                                                $order = $value->order_id;
+                                                $name_res = $value->customer_name;
+                                                $name_cus = $value->restaurant_name;
+                                                $date = $value->date_create;
+                                                $status = $value->status;
+                                            @endphp
                                             <tr>
                                                 <td>
-                                                    1
+                                                    {{ $loop->index+1 }}
                                                 </td>
-                                                <td style="width: 100px">1</td>
+                                                <td style="width: 100px">{{$order}}</td>
                                                 <td>
-                                                    <span>Cơm gà</span>
+                                                    <span>{{ $name_res }}</span>
                                                 </td>
-                                                <td><span>Võ Văn An</span></td>
-                                                <td>21/11/2018</td>
+                                                <td><span>{{ $name_cus }}</span></td>
+                                                <td>{{ $date }}</td>
                                                 <td>
+                                                    @if($status == 1)
                                                     Đã giao
+                                                    @else
+                                                    Đang giao
+                                                    @endif
                                                 </td>
-
-                                                
                                             </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

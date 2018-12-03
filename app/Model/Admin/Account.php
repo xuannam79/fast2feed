@@ -49,11 +49,34 @@ class Account extends Model
         }
         return DB::table('account')->join('customer', 'account.account_id', '=', 'customer.account_id')->select('account.username', 'account.email', 'account.avatar', 'customer.phone', 'customer.birthday', 'customer.address')->where('account.account_id', $accId)->get();
     }
+    public function accountShipperInfo($accId)
+    {
+        if(session()->has('admin')){
+             $id = session()->get('admin')[0]->account_id;
+        }
+        return DB::table('account')->join('shipper', 'account.account_id', '=', 'shipper.account_id')->select('account.username', 'account.email', 'account.avatar', 'shipper.phone', 'shipper.birthday', 'shipper.address')->where('account.account_id', $accId)->get();
+    }
     public function updateInfo($idAcc, $arrAcc)
     {
         return $this->where('account_id', $idAcc)->update($arrAcc);
 
     }
+    /*public function danhSachHoaDon($accId)
+    {
+        if(session()->has('admin')){
+             $id = session()->get('admin')[0]->account_id;
+        }
+        return DB::table('orders')
+        ->join('customer',function($join)
+            {
+                $join->on('customer.customer_id','=','orders.customer_id')
+                ->join('account','account.account_id','=','customer.account_id');
+            })
+        ->join('shipper', 'shipper.shipper_id', '=', 'orders.shipper_id')
+        ->select('account.account_id','customer.status_customer','customer.customer_name','orders.order_id','orders.date_create','orders.total','orders.status')
+        ->where('account.account_id', $accId)
+        ->get();
+    }*/
     public function getAccountByEmail($email)
     {
         return $this->where('email', $email)->first();
@@ -72,4 +95,23 @@ class Account extends Model
         }
         return DB::table('customer')->join('account', 'account.account_id', '=', 'customer.account_id')->join('orders', 'orders.customer_id', '=', 'customer.customer_id')->select('account.account_id','customer.status_customer','customer.customer_name','orders.order_id','orders.date_create','orders.total','orders.status')->where('account.account_id', $accId)->get();
     }
+    public function deliveryHistory($accId)
+    {
+        if(session()->has('admin')){
+             $id = session()->get('admin')[0]->account_id;
+        }
+        return DB::table('shipper')->join('orders',function($join)
+            {
+                $join->on('orders.shipper_id','=','shipper.shipper_id')
+                ->join('customer','customer.customer_id','=','orders.customer_id');
+            })->join('account', 'account.account_id', '=', 'shipper.account_id')->select('account.account_id','orders.order_id','orders.date_create','orders.total','orders.status','customer.restaurant_name','customer.customer_name')->where('account.account_id', $accId)->get();
+    }
+    public function personal($accId)
+    {
+        if(session()->has('admin')){
+             $id = session()->get('admin')[0]->account_id;
+        }
+        return DB::table('shipper')->join('account','account.account_id','=','shipper.account_id')->join('personal_account', 'personal_account.personal_id', '=', 'shipper.personal_id')->select('account.account_id','personal_account.money','personal_account.status','shipper.shipper_name','personal_account.EXP','personal_account.number')->where('account.account_id', $accId)->get();
+    }
+
 }

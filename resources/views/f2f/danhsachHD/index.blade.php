@@ -40,49 +40,49 @@ Trang chủ shipper
       </a>
    </div>
 </div>
-<div class="row">
+<div onload="initialize()" class="row">
         <div class="order_panel order_panel_info">
             <div class="order">
                 <h1 class="order_title mb-4 text-center" style="font-size: 20px">Danh sách hóa đơn</h1>
                 <div class="order_table">
                     <div class="order_list">
-                        <div class="order_list_heading order_table_row">
-                            <div class="order_table_cell order_list_row_col1">STT
-                            </div>
-                            <div class="order_table_cell order_list_row_col2">Nơi nhận hàng
-                            </div>
-                            <div class="order_table_cell order_list_row_col3">Nơi giao hàng
-                            </div>
-                            <div class="order_table_cell order_list_row_col4">Tiền nhận hàng
-                            </div>
-                            <div class="order_table_cell order_list_row_col5">Tiền giao hàng
-                            </div>
-                            <div class="order_table_cell order_list_row_col6">Trạng thái
-                            </div>
-                            <div class="order_table_cell order_list_row_col7">
-                            </div>
-                            <div class="order_table_cell order_list_row_col8">
-                            </div>
-                        </div>
-                        <div class="order_table_row">
-                            <div class="order_table_cell order_list_row_col1">01
-                            </div>
-                            <div class="order_table_cell order_list_row_col2">134 Hoàng Diệu, P.2, Q. Hải Châu, TP.Đà
-                                Nẵng
-                            </div>
-                            <div class="order_table_cell order_list_row_col3">148 Tiểu La, P.3, Q. Hải Châu, TP.Đà Nẵng
-                            </div>
-                            <div class="order_table_cell order_list_row_col4">95.000đ
-                            </div>
-                            <div class="order_table_cell order_list_row_col5">116,000đ
-                            </div>
-                            <div class="order_table_cell order_list_row_col6">Còn 5 phút
-                            </div>
-                            <div class="order_table_cell order_list_row_col7">
-                                <button title="Nhấn vào để xem chi tiết"
+                        <table class="table table-data2">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Mã hóa đơn</th>
+                                    <th style="width: 310px">Nơi nhận hàng</th>
+                                    <th style="width: 310px">Nơi giao hàng</th>
+                                    <th style="width: 150px">Trạng thái</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($getTransactionHistory as $key => $value)
+                                @php
+                                    $order = $value->order_id;
+                                    $address = $value->address_res;
+                                    $address_cus = $value->address;
+                                    $status = $value->status;
+                                @endphp
+                                <tr>
+                                    <td>{{ $loop->index+1 }}</td>
+                                    <td style="padding-left: 40px">{{ $order }}</td>
+                                    <td>{{ $address }}</td>
+                                    <td>{{ $address_cus }}</td>
+                                    <td>
+                                        @if($status == 1)
+                                        Còn 10 phút
+                                        @else
+                                        Đã hủy
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($status == 1)
+                                        <button title="Nhấn vào để xem chi tiết"
                                         class="font_weight_bold order_table_status gray pointer" id="myBtn"
-                                        style="width: 70px">Xem
-                                </button>
+                                        style="width: 70px;float: left;">Xem
+                                        </button>
 
                                 <div id="myModel" class="model">
 
@@ -92,7 +92,7 @@ Trang chủ shipper
                                          role="dialog" data-backdrop="static" data-keyboard="false"
                                          style="padding-right: 16px; display: block;">
                                         <div class="model-dialog model-dialog-centered" role="document">
-                                            <div class="model-content model-order-detail"><span class="close"
+                                            <div class="model-content model-order-detail"><span id="x" class="close"
                                                                                                 data-dismiss="model">x</span>
                                                 <div class="model-header">Chi tiết hóa đơn</div>
                                                 <div class="model-body">
@@ -103,27 +103,27 @@ Trang chủ shipper
                                                         <div class="direction-content">
                                                             <div class="direction-info">
                                                                 <div class="direction-from">
-                                                                    <div class="direction-name">Điểm lấy hàng - Tên quán
+                                                                    <div class="direction-name">Điểm lấy hàng - tên quán
                                                                     </div>
-                                                                    <input id="start" type="hidden" value="254 Nguyễn Văn Linh, Thanh Khê, Đà Nẵng" style="width: 300px">
-                                                                    254 Nguyễn Văn Linh, Thanh Khê, Đà Nẵng
+                                                                    <input id="start" type="hidden" value="{{ $address }}" style="width: 300px">
+                                                                    {{ $address }}
                                                                 </div>
                                                                 <div class="direction-to">
                                                                     <div class="">
                                                                         <div class="direction-name"
                                                                              id="shipping-address">
-                                                                            <span>Điểm giao hàng - Tên khách</span><span> - Sđt khách </span>
+                                                                            <span>Điểm giao hàng - tên khách</span><span> - phone </span>
                                                                         </div>
-                                                                        <input id="end" type="hidden" value="254 Hoàng Diệu, Hải Châu, Đà Nẵng" style="width: 300px">
-                                                                        254 Hoàng Diệu, Hải Châu, Đà Nẵng
+                                                                        <input id="end" type="hidden" value="{{ $address_cus }}" style="width: 300px">
+                                                                        {{ $address_cus }}
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div>
                                                                 <div class="direction-time"><span class="fa"><i
                                                                                 class="far fa-clock"></i></span><span
-                                                                            class="txt-bold"> Thời gian giao:  15:35 - 24/10 - </span><span
-                                                                            class="txt-red">3.0km</span></div>
+                                                                            class="txt-bold"> Thời gian giao:  15:35 - 24/10 - </span><span id="abc"
+                                                                            class="txt-red">km</span></div>
                                                                 <div id="submit" class="change-info">Hiển thị khoảng cách trên bản đồ
                                                                 </div>
                                                                 
@@ -133,25 +133,22 @@ Trang chủ shipper
                                                     <div class="order-right"><p class="title-popup-order">Thông tin sản
                                                             phẩm</p>
                                                         <div class="order-list">
-                                                            <div class="order-item"><span
-                                                                        class="order-item-number">1</span>
+                                                            <div class="order-item">
+                                                                @foreach($getAmountProduct as $key => $value)
+                                                                @php
+                                                                    $product_name = $value->product_name;
+                                                                    $amount = $value->amount;
+                                                                @endphp
+                                                                <span class="order-item-number">{{ $amount }}</span>
                                                                 <div class="order-item-info">
-                                                                    <div class="order-item-name"><span class="txt-bold">Bún thịt nướng chả giò&nbsp;</span>
+                                                                    <div class="order-item-name"><span class="txt-bold">{{ $product_name }}&nbsp;</span>
+                                                                
                                                                     </div>
                                                                     <div class="order-item-note"></div>
                                                                 </div>
-                                                                <div class="order-item-price">55,000 <span class="unit">đ</span>
+                                                                <div class="order-item-price">54000 <span class="unit">đ</span>
                                                                 </div>
-                                                            </div>
-                                                            <div class="order-item"><span
-                                                                        class="order-item-number">1</span>
-                                                                <div class="order-item-info">
-                                                                    <div class="order-item-name"><span class="txt-bold">Cơm gà&nbsp;</span>
-                                                                    </div>
-                                                                    <div class="order-item-note"></div>
-                                                                </div>
-                                                                <div class="order-item-price">40,000 <span class="unit">đ</span>
-                                                                </div>
+                                                                @endforeach
                                                             </div>
                                                         </div>
                                                         <div class="info-order">
@@ -186,7 +183,9 @@ Trang chủ shipper
                                                                             class="txt-bold font16 txt-black">Kiểu thanh toán</span>
                                                                 </div>
                                                                 <div class="cel-auto"><span
-                                                                            class="txt-blue">Trực tiếp</span><i
+                                                                            class="txt-blue">
+                                                                        Trực tiếp
+                                                                    </span><i
                                                                             class="icon-arrow-thin right"
                                                                             aria-hidden="true"></i></div>
                                                             </div>
@@ -206,34 +205,20 @@ Trang chủ shipper
                                 </div>
 
                             </div>
-                            <div class="order_table_cell order_list_row_col8">
-                                <button title="Nhấn vào để nhận đơn hàng"
-                                        class="order_table_status gray pointer" style="width: 105px">Nhận đơn
-                                </button>
+                            <button title="Nhấn vào để nhận đơn hàng"
+                                        class="order_table_status gray pointer" style="width: 105px; float: right;">Nhận đơn
+                            </button>
+                            @else
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+                       <div class="pagination" style="float: right;margin-top: 30px; margin-right: 10px">
+                                {{ $getTransactionHistory->links() }}
                             </div>
-                        </div>
-                        <div class="order_table_row">
-                            <div class="order_table_cell order_list_row_col1">02
-                            </div>
-                            <div class="order_table_cell order_list_row_col2">210 Núi Thành, P.1, Q. Hải Châu, TP.Đà
-                                Nẵng
-                            </div>
-                            <div class="order_table_cell order_list_row_col3">121 Lê Đình Lý, P.4, Q. Hải Châu, TP.Đà
-                                Nẵng
-                            </div>
-                            <div class="order_table_cell order_list_row_col4">105.000đ
-                            </div>
-                            <div class="order_table_cell order_list_row_col5">140.000đ
-                            </div>
-                            <div class="order_table_cell order_list_row_col6">Đã hủy
-                            </div>
-                            <div class="order_table_cell order_list_row_col7">
-
-                            </div>
-                            <div class="order_table_cell order_list_row_col8">
-
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -259,8 +244,6 @@ Trang chủ shipper
         
         directionsDisplay.setMap(map);
         directionsDisplay.setPanel(document.getElementById('right-panel'));
-        
-        
 
         var onChangeHandler = function() {
           calculateAndDisplayRoute(directionsService, directionsDisplay);
@@ -317,6 +300,7 @@ Trang chủ shipper
           }
         });
       }
+        
       // Get the model
         var model = document.getElementById('myModel');
 
@@ -334,6 +318,7 @@ Trang chủ shipper
         // When the user clicks on <span> (x), close the model
         span.onclick = function () {
             model.style.display = "none";
+            initMap();
 
         }
 
@@ -346,4 +331,5 @@ Trang chủ shipper
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzmyhWaNEQ_i55-LLOfNPka-8BAhZRUaM&callback=initMap"
     async defer></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 @endsection

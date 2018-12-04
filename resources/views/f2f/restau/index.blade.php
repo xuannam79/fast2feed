@@ -19,6 +19,7 @@
 		$slug = str_slug($getCustomer->customer_name);
 		$arrName = 'arrCart'.$idCus;
 		$adminStatus = 0;
+		$totalPrice = 0;
 
 		if(session()->has('admin')){
 			$avatar = session()->get('admin')[0]->avatar;
@@ -201,6 +202,20 @@
 										}
 									}
 						  		@endphp
+						  		@if(session()->has($arrName))
+									@php
+										$arrCart = session()->get($arrName);
+										$totalPrice = 0;
+									@endphp
+									@foreach($arrCart as $key => $aCart)
+										@php
+											$price = $aCart['priceProduct'];
+											$amount = $aCart['amountProduct'];
+
+											$totalPrice += ($amount * $price);
+										@endphp
+									@endforeach
+								@endif
 						  		@if($idMenuFK == $idMenuPK)
 								<div class="list-item">
 									<div class="img-item">
@@ -213,8 +228,9 @@
 									<div class="price-item">
 										<span>{{ $price }}đ</span>
 										{{-- <a href="#" title=""><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px"></i></a> --}}
-										
-										<button onclick="ajaxToggleCartUpdate('{{$slug}}', {{$idCus}}, {{$idProduct}}, '{{$name}}', {{$price}}, {{$amount}}, {{$bool}}, {{$adminStatus}});" style="border: none;background-color: white"><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px;"></i></button>
+										@php
+										@endphp
+										<button onclick="ajaxToggleCartUpdate('{{$slug}}', {{$idCus}}, {{$idProduct}}, '{{$name}}', {{$price}}, {{$amount}}, {{$bool}}, {{$adminStatus}}, {{$totalPrice}}, {{$transport_fee}});" style="border: none;background-color: white"><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px;"></i></button>
 									</div>
 									<div class="clear"></div>
 								</div>
@@ -230,7 +246,7 @@
 
 			{{-- ajaxCart --}}
 			<script type="text/javascript">
-		        function ajaxToggleCartUpdate(slug, idCus, idProduct, name, price, amount, bool, adminStatus){
+		        function ajaxToggleCartUpdate(slug, idCus, idProduct, name, price, amount, bool, adminStatus, oldTotalPrice, transport_fee){
 		        	if(adminStatus != 1){
 		        		top.location.href = '/fast2feed/public/dang-nhap';
 		        	}else {
@@ -248,21 +264,20 @@
 			                    if(bool == 0){
 			                    	$('.onCart'+idCus).append(data);
 			                    }else{
-			                    	// function showDetails(data) {
-
 									    // var newCountPrice = data.getAttribute("data-newCountPrice");
 									    // console.log($dataParse.filter("#onCartProduct1_"+idProduct));
 									    // alert("The " + animal.innerHTML + " is a " + animalType + ".");
-									// }
-			                    	// console.log(inputVal);
 			                    	$('.onCartProduct1_'+idProduct).replaceWith(data);
-			                    	//document.getElementById("demo").innerHTML = "Paragraph changed!";
 			                    	var count = $("#onCartProduct1_"+idProduct).text();
 			                    	var newCountPrice = count * price;
-			                    	$('.onCartProduct2_'+idProduct).replaceWith(newCountPrice);
-			                    	// <span style='float: right;' class='onCartProduct2_'>đ</span>
-			                    	console.log(newCountPrice);
-								    // $( "#onCartProduct1_"+idProduct ).keyup(count * price);
+			                    	$('.onCartProduct2_'+idProduct).replaceWith('<span style="float: right;" class="onCartProduct2_'+idProduct+'">'+newCountPrice+'đ</span>');
+
+			                    	var newTotalPrice = oldTotalPrice + price;
+			                    	$('.onCart2_'+idCus).replaceWith('<span style="float: right;" class="onCart2_'+idCus+'">'+newTotalPrice+'đ</span>');
+
+			                    	var TotalPriceOnFee = newTotalPrice + 7000;
+			                    	$('.onCart3_'+idCus).replaceWith('<span style="font-size:15px;float: right; color: #0288D1;font-weight: 800;" class="onCart3_'+idCus+'">'+TotalPriceOnFee+'đ</span>');
+			                    	console.log(TotalPriceOnFee);
 
 			                    }
 			                },
@@ -288,11 +303,10 @@
 			<div style="float: right;width: 270px;height: 100%;border: 1px solid #BCE8F1;border-radius: 5px;font-size: 13px">
 
 				<div class="giohang" style="background-color: #F9F9F9;height: 45px;">
-					<img src="/fast2feed/public/files/account/{{ $avatar }}" class="img-circle" alt="{{$accName}}" width="35px">&nbsp;<span style="font-weight: 800;color: #6D6F71;line-height: 33px">{{ $accName }}</span><span style="float: right;line-height: 35px;">2 món</span>
+					<img src="/fast2feed/public/files/account/{{ $avatar }}" class="img-circle" alt="{{$accName}}" width="35px">&nbsp;<span style="font-weight: 800;color: #6D6F71;line-height: 33px">{{ $accName }}</span><span style="float: right;line-height: 35px;"></span>
 				</div>
 				@if(!session()->has($arrName))
 					<div class="onCart{{$idCus}}"></div>
-					
 				@endif
 				@if(session()->has($arrName))
 					
@@ -324,7 +338,7 @@
 			  	</div>
 				<div class="giohang" style="background-color: #F9F9F9;">
 					<span>Cộng</span>
-					<span style="float: right;">{{ $totalPrice1 }}đ</span>
+					<span style="float: right;" class="onCart2_{{$idCus}}">{{ $totalPrice1 }}đ</span>
 				</div>
 				<div class="giohang" style="background-color: #F9F9F9">
 					<span>Phí vận chuyển (Est.)</span>
@@ -335,12 +349,13 @@
 				</div>
 				<div class="giohang" style="background-color: #F9F9F9">
 					<span>Tổng cộng:</span>
-					<span style="font-size:15px;float: right; color: #0288D1;font-weight: 800;">
+					<span style="font-size:15px;float: right; color: #0288D1;font-weight: 800;" class="onCart3_{{$idCus}}">
 						@php
 							echo number_format($totalPrice + $transport_fee).'đ';
 						@endphp
 					</span>
 				</div>
+
 				<div class="giohang">
 					<button class="dat-truoc" type="submit" style="" data-toggle="modal" data-target="#payModal"><i class="fa fa-check-circle" aria-hidden="true" style="color: white;font-size: 16px"></i>&nbsp;<span style="color: white">Đặt trước</span></button>
 				</div>
@@ -430,12 +445,12 @@
 				          			</a>
 				          		</div>
 				          		<div class="pay-right-top-body">
+
 				          			<div class="list-order">
 				          				<span class="order-number">1</span><strong class="order-name">Bibimbap gạo lứt trộn gà cay </strong><span>[Sốt thêm]</span><span class="order-price">66,000đ</span>
 				          			</div>
-				          			<div class="list-order">
-				          				<span class="order-number">1</span><strong class="order-name">Cơm gạo lứt đậu phụ sốt sả ớt & rau xào </strong><span>[Sốt thêm]</span><span class="order-price">44,000đ</span>
-				          			</div>
+				          			
+
 
 				          		</div>
 				          	</div>

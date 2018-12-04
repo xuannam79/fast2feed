@@ -38,22 +38,20 @@
                                                 </th>
                                                 <th>name</th>
                                                 <th>images</th>
-                                                <th>address</th>
-                                                <th>transport_fee</th>
+                                                <th>email</th>
+                                                <th>password</th>
                                                 <th>status</th>
-                                                <th>account_name</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($customers as $key => $customer)
+                                            @foreach($customers as $key => $account)
                                             @php
-                                                $name = $customer->customer_name;
-                                                $images = $customer->images;
-                                                $address = $customer->address;
-                                                $transport_fee = $customer->transport_fee;
-                                                $status = $customer->status_customer;
-                                                $username = $customer->username;
+                                                $username = $account->username;
+                                                    $email = $account->email;
+                                                    $avatar = $account->avatar;
+                                                    $status = $account->status;
+                                                    $password = $account->password;
                                                 
 
                                             @endphp
@@ -64,16 +62,16 @@
                                                         <span class="au-checkmark"></span>
                                                     </label>
                                                 </td>
-                                                <td class="desc">{{ $name }}</td>
+                                                <td class="desc">{{ $username }}</td>
                                                 <td>
                                                     <div class="image">
-                                                        <a href="/fast2feed/public/files/customer/{{ $images }}">
-                                                            <img src="/fast2feed/public/files/customer/{{ $images }}" alt="Admin" width="50px" />
+                                                        <a href="/fast2feed/public/files/account/{{ $avatar }}">
+                                                            <img src="/fast2feed/public/files/account/{{ $avatar }}" alt="Admin" width="50px" />
                                                         </a>
                                                     </div>
                                                 </td>
-                                                <td>{{ $address }}</td>
-                                                <td>{{ $transport_fee }}</td>
+                                                <td>{{ $email }}</td>
+                                                <td>{{ $password }}</td>
                                                 <td>
                                                     <label class="switch switch-3d switch-success mr-3">
                                                         <input type="checkbox" class="switch-input" 
@@ -85,10 +83,6 @@
                                                         <span class="switch-handle"></span>
                                                     </label>
                                                 </td>
-                                                <td>
-                                                    <span class="block-email">{{ $username }}</span>
-                                                </td>
-                                                
                                                 <td>
                                                     <div class="table-data-feature">
                                                         <a href="#" title="" class="item">

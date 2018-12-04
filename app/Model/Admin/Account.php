@@ -15,6 +15,10 @@ class Account extends Model
     {
     	return $this->all();
     }
+        public function getCus()
+    {
+        return DB::table('account')->where('role','=',2)->get();
+    }
     public function checkAccount($email,$password)
     {
     	$count = DB::table('account')->where('email', $email)->where('password', $password)->where('status', 1)->count();

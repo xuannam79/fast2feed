@@ -1,5 +1,5 @@
 <!-- Leftbar -->
-				<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 clearpaddingl">
+				<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 clearpaddingl" style="margin-bottom: 20px">
 					<div class="panel panel-info">
 					  <div class="panel-body" style="padding:0px">
 					  	<div style="padding-left: 20px">

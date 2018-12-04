@@ -38,4 +38,14 @@ class Cat extends Model
             return DB::table('catalog')->where('catalog_id', $id)->update(['status' => 1]);
         }
     }
+    public function getCatOffset0()
+    {
+        return $this->offset(0)->limit(2)->get();
+    }
+    public function getCatOffset2()
+    {
+        $count = DB::table('catalog')->count();
+        return $this->offset(0)->limit($count-2)->get();
+
+    }
 }

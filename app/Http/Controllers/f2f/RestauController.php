@@ -8,15 +8,17 @@ use App\Model\Admin\Customer;
 use App\Model\Admin\Account;
 use App\Model\Admin\Menu;
 use App\Model\Admin\Product;
+use App\Model\Admin\Cat;
 
 class RestauController extends Controller
 {
-	public function __construct(Customer $customer, Menu $menu,Account $account, Product $product)
+	public function __construct(Customer $customer, Menu $menu,Account $account, Product $product, Cat $cat)
 	{
 		$this->customer = $customer;
         $this->account = $account;
         $this->menu = $menu;
-		$this->product = $product;
+        $this->product = $product;
+		$this->cat = $cat;
 	}
     public function index($slug, $cusId)
     {
@@ -24,10 +26,12 @@ class RestauController extends Controller
              $mail = session()->get('admin')[0]->email;
              $getAdmin = $this->account->getAccount($mail);
         } 
+        $getCatOffset0 = $this->cat->getCatOffset0();
+        $getCatOffset2 = $this->cat->getCatOffset2();
     	$getCustomer = $this->customer->getItem($cusId);
     	$getMenu = $this->menu->getItem($cusId);
         $getProduct = $this->product->getProductById($cusId);
-    	return view('f2f.restau.index', compact('getCustomer', 'getMenu', 'getAdmin', 'getProduct'));
+    	return view('f2f.restau.index', compact('getCustomer', 'getMenu', 'getAdmin', 'getProduct', 'getCatOffset0', 'getCatOffset2'));
     }
     public function postProduct(Request $request, $slug, $cusId)
     {

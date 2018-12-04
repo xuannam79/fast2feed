@@ -21,8 +21,10 @@ class CartController extends Controller
              $mail = session()->get('admin')[0]->email;
              $getAdmin = $this->account->getAccount($mail);
         } 
+        $getCatOffset0 = $this->cat->getCatOffset0();
+        $getCatOffset2 = $this->cat->getCatOffset2();
     	$cats = $this->cat->getAll();
-    	return view('f2f.cart.index', compact('cats','getAdmin'));
+    	return view('f2f.cart.index', compact('cats','getAdmin', 'getCatOffset0', 'getCatOffset2'));
     }
 
 }

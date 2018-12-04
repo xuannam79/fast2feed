@@ -59,7 +59,7 @@ class RestauController extends Controller
                 } else {
                     $tmp = 1;
                     $arrCart = $request->session()->get($arrName);
-                    $arrCart[$idProduct]['amountProduct'] = $arrCart[$idProduct]['amountProduct'] + $amountProduct;
+                    $arrCart[$idProduct]['amountProduct'] = $arrCart[$idProduct]['amountProduct'] + 1;
                     $newAmount = $arrCart[$idProduct]['amountProduct'];
                     $newCountPrice = $newAmount * $arrCart[$idProduct]['priceProduct'];
                     

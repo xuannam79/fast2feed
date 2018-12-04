@@ -39,14 +39,21 @@
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="{{ route('trangChu') }}">Fast2Feed.vn</a></li>
                             <li><a href="{{ route('trangDinhViMap') }}">Tất cả</a></li>
-                            <li><a href="{{ route('trangDanhMuc') }}">Đồ ăn</a></li>
-                            <li><a href="{{ route('trangDanhMuc') }}">Thức uống</a></li>
+                            @foreach($getCatOffset0 as $key => $catOffset0)
+                                @php
+                                    $nameCatOffset0 = title_case($catOffset0->catalog_name);
+                                @endphp
+                                <li><a href="{{ route('trangDanhMuc') }}">{{ $nameCatOffset0 }}</a></li>
+                            @endforeach
                             <li>
                                 <a href="#">...</a>
                                 <ul class="sub-menu">
-                                    <li><a href="{{ route('trangDanhMuc') }}">Thức uống</a></li>
-                                    <li><a href="{{ route('trangDanhMuc') }}">Thức uống</a></li>
-                                    <li><a href="{{ route('trangDanhMuc') }}">Thức uống</a></li>
+                                    @foreach($getCatOffset2 as $key => $catOffset2)
+                                    @php
+                                        $nameCatOffset2 = title_case($catOffset2->catalog_name);
+                                    @endphp
+                                        <li><a href="{{ route('trangDanhMuc') }}">{{ $nameCatOffset2 }}</a></li>
+                                    @endforeach
                                 </ul>
                             </li>
                             @if(session()->has('admin')) @php $role = session()->get('admin')[0]->role; if($role == 3){ $url1 = route('trangDanhSachHD'); $url2 = route('trangShipper'); echo '

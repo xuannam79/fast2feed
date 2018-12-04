@@ -25,9 +25,12 @@ class IndexController extends Controller
              $mail = session()->get('admin')[0]->email;
              $getAdmin = $this->account->getAccount($mail);
         } 
-    	return view('f2f.index.index', compact('customers', 'cats', 'getAdmin'));
+        $getCatOffset0 = $this->cat->getCatOffset0();
+        $getCatOffset2 = $this->cat->getCatOffset2();
+    	return view('f2f.index.index', compact('customers', 'cats', 'getAdmin', 'getCatOffset0', 'getCatOffset2'));
 
     }
+
     
 
 }

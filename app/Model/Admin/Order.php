@@ -25,11 +25,11 @@ class Order extends Model
             {
                 $join->on('customer.customer_id','=','orders.customer_id')
                 ->join('account','account.account_id','=','customer.account_id');
-            })->select('orders.status','orders.order_id','customer.address','customer.address_res','customer.customer_name','customer.phone_res')->simplePaginate(5);
-    }
+            })->select('orders.status','orders.order_id','customer.address','customer.address_res','customer.customer_name','customer.phone_res','account.username')->simplePaginate(5);
+    }   
     public function getAmountProduct()
     {
-        return DB::table('transaction')->join('orders', 'transaction.order_id', '=', 'orders.order_id')->join('product', 'product.product_id', '=', 'transaction.product_id')->select('transaction.amount','product.product_name')->get();
+        return DB::table('transaction')->join('orders', 'transaction.order_id', '=', 'orders.order_id')->join('product', 'product.product_id', '=', 'transaction.product_id')->select('transaction.amount','product.product_name','transaction.price')->get();
     }
     public function getItem($shiId)
     {

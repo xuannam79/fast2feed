@@ -63,6 +63,9 @@ Trang chủ shipper
                                     $order = $value->order_id;
                                     $address = $value->address_res;
                                     $address_cus = $value->address;
+                                    $restaurant_name = $value->customer_name;
+                                    $phone = $value->phone_res;
+                                    $customer_name = $value->username;
                                     $status = $value->status;
                                 @endphp
                                 <tr>
@@ -103,7 +106,7 @@ Trang chủ shipper
                                                         <div class="direction-content">
                                                             <div class="direction-info">
                                                                 <div class="direction-from">
-                                                                    <div class="direction-name">Điểm lấy hàng - tên quán
+                                                                    <div class="direction-name">Điểm lấy hàng - {{ $restaurant_name }}
                                                                     </div>
                                                                     <input id="start" type="hidden" value="{{ $address }}" style="width: 300px">
                                                                     {{ $address }}
@@ -112,7 +115,7 @@ Trang chủ shipper
                                                                     <div class="">
                                                                         <div class="direction-name"
                                                                              id="shipping-address">
-                                                                            <span>Điểm giao hàng - tên khách</span><span> - phone </span>
+                                                                            <span>Điểm giao hàng - {{ $customer_name }}</span><span> - {{ $phone }} </span>
                                                                         </div>
                                                                         <input id="end" type="hidden" value="{{ $address_cus }}" style="width: 300px">
                                                                         {{ $address_cus }}
@@ -120,9 +123,9 @@ Trang chủ shipper
                                                                 </div>
                                                             </div>
                                                             <div>
-                                                                <div class="direction-time"><span class="fa"><i
+                                                                <div id="result" class="direction-time"><span class="fa"><i
                                                                                 class="far fa-clock"></i></span><span
-                                                                            class="txt-bold"> Thời gian giao:  15:35 - 24/10 - </span><span id="abc"
+                                                                            class="txt-bold"> Thời gian giao:  15:35 - 24/10 - </span><span id="in_kilo"
                                                                             class="txt-red">km</span></div>
                                                                 <div id="submit" class="change-info">Hiển thị khoảng cách trên bản đồ
                                                                 </div>
@@ -130,15 +133,23 @@ Trang chủ shipper
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    @php
+                                                        $count_product = 0;
+                                                        $total_product = 0;
+                                                    @endphp
                                                     <div class="order-right"><p class="title-popup-order">Thông tin sản
                                                             phẩm</p>
                                                         <div class="order-list">
-                                                            <div class="order-item">
-                                                                @foreach($getAmountProduct as $key => $value)
+                                                            @foreach($getAmountProduct as $key => $value)
                                                                 @php
                                                                     $product_name = $value->product_name;
                                                                     $amount = $value->amount;
+                                                                    $price = $value->price;
+                                                                    $total = $amount * $price;
+                                                                    $count_product = $loop->count;
+                                                                    $total_product = $total_product + $total;
                                                                 @endphp
+                                                            <div class="order-item">
                                                                 <span class="order-item-number">{{ $amount }}</span>
                                                                 <div class="order-item-info">
                                                                     <div class="order-item-name"><span class="txt-bold">{{ $product_name }}&nbsp;</span>
@@ -146,23 +157,24 @@ Trang chủ shipper
                                                                     </div>
                                                                     <div class="order-item-note"></div>
                                                                 </div>
-                                                                <div class="order-item-price">54000 <span class="unit">đ</span>
+                                                                <div class="order-item-price">{{ $total }} <span class="unit">đ</span>
                                                                 </div>
-                                                                @endforeach
+                                                               
                                                             </div>
+                                                            @endforeach
                                                         </div>
                                                         <div class="info-order">
                                                             <div class="row1">
                                                                 <div class="cel">Tổng tiền lấy <span
-                                                                            class="txt-bold">2</span>
+                                                                            class="txt-bold">{{ $count_product }}</span>
                                                                     sản phẩm
                                                                 </div>
-                                                                <div class="cel-auto txt-bold">95,000 <span
+                                                                <div class="cel-auto txt-bold">{{ $total_product }} <span
                                                                             class="unit">đ</span></div>
                                                             </div>
                                                             <div class="row1">
                                                                 <div class="cel">Phí vận chuyển: <span
-                                                                            class="txt-red">3.0km</span><span
+                                                                            class="txt-red">3.0</span>km<span
                                                                             class="show1-fee-min">&nbsp;</span>
                                                                 </div>
                                                                 <div class="cel-auto">21,000 <span class="unit">đ</span>
@@ -300,7 +312,42 @@ Trang chủ shipper
           }
         });
       }
-        
+        function khoangcach(){
+            var start = document.getElementById('start').value;
+            var end = document.getElementById('end').value;
+            var service = new google.maps.DistanceMatrixService();
+            service.getDistanceMatrix({
+                origins: [start],
+                destinations: [end],
+                travelMode: 'DRIVING',
+                unitSystem: google.maps.UnitSystem.METRIC,
+                avoidHighways: false,
+                avoidTolls: false
+                }, callback);
+        }
+        function callback(reponse, status){
+            if(status != google.maps.DistanceMatrixStatus.OK){
+                $('#result').html(err);
+            } else {
+                var start = reponse.originAddresses[0];
+                var end = reponse.destinationAddresses[0];
+                if(response.rows[0].element[0].status === "ZERO_RESULTS"){
+                    $('#result').html("a" + start + "and" + end);
+                } else {
+                    var distance = reponse.rows[0].element[0].distance;
+                    var duration = reponse.rows[0].element[0].duration;
+                    console.log(reponse.rows[0].element[0].distance);
+                    var distance_in_kilo = distance.value / 1000;
+                    var duration_text = duration.text;
+                    var duration_value = duration.value;
+                    $('in_kilo').text(distance_in_kilo.toFixed(2));
+                }
+            }
+        }
+        $('#distance_form').submit(function(e){
+            e.preventDefault();
+            khoangcach();
+        });
       // Get the model
         var model = document.getElementById('myModel');
 
@@ -313,6 +360,8 @@ Trang chủ shipper
         // When the user clicks the button, open the model
         btn.onclick = function () {
             model.style.display = "block";
+            e.preventDefault();
+            khoangcach();
         }
 
         // When the user clicks on <span> (x), close the model

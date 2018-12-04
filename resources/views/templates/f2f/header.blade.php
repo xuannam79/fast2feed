@@ -41,18 +41,23 @@
                             <li><a href="{{ route('trangDinhViMap') }}">Tất cả</a></li>
                             @foreach($getCatOffset0 as $key => $catOffset0)
                                 @php
+                                    $idCatOffset0 = $catOffset0->catalog_id;
+                                    $slug = str_slug($catOffset0->catalog_name);
                                     $nameCatOffset0 = title_case($catOffset0->catalog_name);
                                 @endphp
-                                <li><a href="{{ route('trangDanhMuc') }}">{{ $nameCatOffset0 }}</a></li>
+                                <li><a href="{{ route('trangDanhMuc', ['slug' => $slug, 'cid' => $idCatOffset0]) }}">{{ $nameCatOffset0 }}</a></li>
                             @endforeach
                             <li>
                                 <a href="#">...</a>
                                 <ul class="sub-menu">
                                     @foreach($getCatOffset2 as $key => $catOffset2)
                                     @php
+                                        $idCatOffset2 = $catOffset2->catalog_id;
+                                        $slug2 = str_slug($catOffset2->catalog_name);
                                         $nameCatOffset2 = title_case($catOffset2->catalog_name);
                                     @endphp
-                                        <li><a href="{{ route('trangDanhMuc') }}">{{ $nameCatOffset2 }}</a></li>
+                                        <li><a href="{{ route('trangDanhMuc', ['slug' => $slug2, 'cid' => $idCatOffset2]) }}">{{ $nameCatOffset2 }}</a>
+                                        </li>
                                     @endforeach
                                 </ul>
                             </li>

@@ -10,12 +10,12 @@
 					  	</div>
 					  	<div class="list-group">
 					  		@foreach($cats as $key => $cat)
-
-                                            @php
-                                                $id = $cat->catalog_id;
-                                                $name = $cat->catalog_name;
-                                            @endphp
-						  <a href="{{ route('trangDanhMuc') }}" class="list-group-item">{{ $name }}</a>
+                                @php
+                                    $id = $cat->catalog_id;
+                                    $name = title_case($cat->catalog_name);
+                                    $slug = str_slug($cat->catalog_name);
+                                @endphp
+						  <a href="{{ route('trangDanhMuc', ['slug' => $slug, 'cid' => $id]) }}" class="list-group-item">{{ $name }}</a>
 						  @endforeach
 						</div>
 					  </div>

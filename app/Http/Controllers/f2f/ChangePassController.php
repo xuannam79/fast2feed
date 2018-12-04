@@ -12,7 +12,8 @@ class ChangePassController extends Controller
 {
 	public function __construct(Account $account,Cat $cat)
 	{
-		$this->account = $account;
+        $this->account = $account;
+		$this->cat = $cat;
 	}
     public function index()
     {

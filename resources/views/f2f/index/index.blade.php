@@ -105,7 +105,7 @@
 				</div>
 			</div>
 		</div>
-	 	<a href="{{ route('trangDanhMuc') }}" title="Xem thêm sản phẩm">
+	 	<a href="" title="Xem thêm sản phẩm">
 	 		<div style="border: 1px solid #BCE8F1;width: 1135px;height: 50px;margin: 20px 0px;color: black">
 	 			<p style="text-align: center;line-height: 50px">Xem thêm &nbsp;<span class="glyphicon">&#xe092;</span></p>
 	 		</div>

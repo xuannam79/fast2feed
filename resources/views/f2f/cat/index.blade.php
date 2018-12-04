@@ -59,22 +59,26 @@
 				@include('templates.f2f.leftbar')
 				<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 clearpaddingr">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clearpadding">
+						
 						<div class="panel panel-info">
+							<div class="panel-heading">
+							    <h3 class="panel-title">{{ $getCat->catalog_name }}</h3>
+							  </div>
 						  <div class="panel-body">
 						  	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clearpadding">
-						  		{{-- @foreach($customers as $key => $customer)
+						  		@foreach($getCusomerByCid as $key => $cusomerByCid)
 						  		@php
-						  			$cusId = $customer->customer_id;
-						  			$images = $customer->images;
-						  			$customer_name = $customer->customer_name;
+						  			$cusId = $cusomerByCid->customer_id;
+						  			$images = $cusomerByCid->images;
+						  			$customer_name = $cusomerByCid->customer_name;
 						  			$slug = str_slug($customer_name);
 						  			$name = title_case($customer_name);
-						  			$catalog = title_case($customer->catalog_name);
-						  			$oldAddress = title_case($customer->address);
+						  			$catalog = title_case($cusomerByCid->catalog_name);
+						  			$oldAddress = title_case($cusomerByCid->address);
 						  			$address = str_limit($oldAddress, 25);
 						  			$url = route('trangCustomer',['slug' => $slug, 'cusId' => $cusId])
-						  		@endphp --}}
-								{{-- <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 re-padding">
+						  		@endphp
+								<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 re-padding">
 						  			<div class="product_item">
 						  				<div class="product-image">
 						  					<a href="{{ $url }}"><img src="/fast2feed/public/files/customer/{{ $images }}" alt="" class=""></a>
@@ -86,9 +90,9 @@
 										<p style="color: black;font-size: 14px;">{{ $catalog }}</p>
 						  			</div>
 								</div>
-								@endforeach --}}
+								@endforeach
 
-								<!-- <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 re-padding">
+								{{-- <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 re-padding">
 						  			<div class="product_item">
 						  				<div class="product-image">
 						  					<a href=""><img src="/fast2feed/public/templates/f2f/images/product/somi.png" alt="" class=""></a>
@@ -97,7 +101,7 @@
 										<p><span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="Số lượt xem"></span> 190 <span class="glyphicon glyphicon-star-empty" aria-hidden="true" title="Số lượng đặt mua">9</p>
 										<a href=""><button class='btn btn-info'><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Thêm giỏ hàng</button></a>
 						  			</div>
-								</div> -->
+								</div> --}}
 					  		</div>
 						  </div>
 						</div>

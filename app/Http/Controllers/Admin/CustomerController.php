@@ -20,7 +20,7 @@ class CustomerController extends Controller
              $mail = session()->get('admin')[0]->email;
              $getAdmin = $this->account->getAccount($mail);
         }  
-    	$customers = $this->customer->getAll();
+    	$customers = $this->account->getCus();
     	return view('admin.customer.index', compact('customers', 'getAdmin'));
     }
     public function getAdd()

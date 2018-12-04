@@ -35,4 +35,8 @@ class Customer extends Model
     public function getCusomerById()
     {
     }
+    public function getCusomerByCid($Cid)
+    {
+        return DB::table('customer')->join('catalog', 'customer.catalog_id', '=', 'catalog.catalog_id')->where('customer.catalog_id', $Cid)->get();
+    }
 }

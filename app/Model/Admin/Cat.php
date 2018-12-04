@@ -45,7 +45,7 @@ class Cat extends Model
     public function getCatOffset2()
     {
         $count = DB::table('catalog')->count();
-        return $this->offset(0)->limit($count-2)->get();
+        return $this->offset(2)->limit($count-2)->get();
 
     }
 }

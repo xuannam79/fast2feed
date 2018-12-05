@@ -167,6 +167,7 @@
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#">Tải App</a></li>
+
                             @if(session()->has('admin')) @foreach($getAdmin as $key => $admin)
                             <li>
                                 <div class="dropdownInfo">
@@ -178,6 +179,8 @@
                                         <div class="">
                                             <div class="account-head-img">
                                                 <img src="/fast2feed/public/files/account/{{ $admin->avatar }}" alt="" width="60px" height="60px">
+
+
                                             </div>
                                             <div class="account-head-info">
                                                 <p><strong>{{ $admin->username }}</strong></p>

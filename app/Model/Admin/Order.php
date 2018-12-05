@@ -17,7 +17,7 @@ class Order extends Model
     }
     public function getTransaction()
     {
-        return DB::table('orders')->join('customer', 'customer.customer_id', '=', 'orders.customer_id')->select('orders.order_id','customer.address','customer.address_res')->get();
+        return DB::table('orders')->join('customer', 'customer.customer_id', '=', 'orders.customer_id')->select('orders.order_id','customer.address','customer.address_res')->simplePaginate(1);
     }
     public function getAllDanhSachHD()
     {
@@ -25,7 +25,7 @@ class Order extends Model
             {
                 $join->on('customer.customer_id','=','orders.customer_id')
                 ->join('account','account.account_id','=','customer.account_id');
-            })->select('orders.status','orders.order_id','customer.address','customer.address_res','customer.customer_name','customer.phone_res','account.username','customer.transport_fee')->simplePaginate(5);
+            })->select('orders.status','orders.order_id','customer.address','customer.address_res','customer.customer_name','customer.phone_res','customer.restaurant_name','account.username','customer.transport_fee','orders.date_create')->simplePaginate(5);
     } 
 
     public function getAmountProduct()

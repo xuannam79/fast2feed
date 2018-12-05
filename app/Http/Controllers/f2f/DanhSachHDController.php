@@ -7,6 +7,7 @@ use App\Model\Admin\Account;
 use App\Model\Admin\Order;
 use App\Model\Admin\Transaction;
 use App\Model\Admin\Cat;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 
 class DanhSachHDController extends Controller
@@ -20,6 +21,7 @@ class DanhSachHDController extends Controller
 	}
     public function index()
     {
+        $dt = Carbon::now('Asia/Ho_Chi_Minh');
         $getCatOffset0 = $this->cat->getCatOffset0();
         $getCatOffset2 = $this->cat->getCatOffset2();
     	if(session()->has('admin')){
@@ -29,6 +31,6 @@ class DanhSachHDController extends Controller
         }
         $getAllDanhSachHD = $this->order->getAllDanhSachHD();
         $getAmountProduct = $this->order->getAmountProduct();    
-    	return view('f2f.danhsachHD.index', compact('getAdmin','getAllDanhSachHD','getAmountProduct','getCatOffset0','getCatOffset2'));
+    	return view('f2f.danhsachHD.index', compact('getAdmin','getAllDanhSachHD','getAmountProduct','getCatOffset0','getCatOffset2','dt'));
     }
 }

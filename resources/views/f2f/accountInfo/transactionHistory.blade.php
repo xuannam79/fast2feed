@@ -52,7 +52,7 @@
                                                 $date = $info->date_create;
                                                 $total = $info->total;
                                                 $payment = $info->payment;
-												$status = $info->status_2;
+												$status = $info->payment;
 											@endphp
                                             <tr>
                                                 <td>

@@ -5,16 +5,18 @@ namespace App\Http\Controllers\f2f;
 use Illuminate\Http\Request;
 use App\Model\Admin\Account;
 use App\Model\Admin\Shipper;
+use App\Model\Admin\Order;
 use App\Model\Admin\Cat;
 use App\Http\Controllers\Controller;
 
 class ShipperController extends Controller
 {
-	public function __construct(Account $account, Shipper $shipper, Cat $cat)
+	public function __construct(Account $account, Shipper $shipper, Cat $cat, Order $order)
 	{
         $this->account = $account;
 		$this->shipper = $shipper;
         $this->cat = $cat;
+        $this->order = $order;
 	}
     public function index()
     {
@@ -24,7 +26,8 @@ class ShipperController extends Controller
         }  
         $getCatOffset0 = $this->cat->getCatOffset0();
         $getCatOffset2 = $this->cat->getCatOffset2();
-    	return view('f2f.shipper.index', compact('getAdmin','getCatOffset0','getCatOffset2'));
+        $getAllDanhSachHD = $this->order->getAllDanhSachHD();
+    	return view('f2f.shipper.index', compact('getAdmin','getAllDanhSachHD','getCatOffset0','getCatOffset2'));
     }
     public function getProfile(){
          return view('f2f.shipper.edit-profile');

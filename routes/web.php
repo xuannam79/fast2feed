@@ -34,6 +34,10 @@ Route::namespace('f2f')->group(function(){
 		'uses' => 'CatController@index',
 		'as' => 'trangDanhMuc'
 	]);
+	Route::get('/tat-ca-danh-muc/',[
+		'uses' => 'CatController@getAllCat',
+		'as' => 'trangAllDanhMuc'
+	]);
 	Route::get('/nha-hang/{slug}-{cusId}',[
 		'uses' => 'RestauController@index',
 		'as' => 'trangCustomer'

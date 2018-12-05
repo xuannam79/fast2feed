@@ -13,7 +13,7 @@ class Customer extends Model
 
     public function getAll()
     {
-    	return DB::table('customer')->join('catalog', 'customer.catalog_id', '=', 'catalog.catalog_id')->join('account', 'account.account_id', '=', 'customer.account_id')->get();
+    	return DB::table('customer')->join('catalog', 'customer.catalog_id', '=', 'catalog.catalog_id')->join('account', 'account.account_id', '=', 'customer.account_id')->offset(0)->limit(8)->orderBy('customer.customer_id', 'DESC')->get();
     }
     public function getPost()
     {
@@ -38,5 +38,9 @@ class Customer extends Model
     public function getCusomerByCid($Cid)
     {
         return DB::table('customer')->join('catalog', 'customer.catalog_id', '=', 'catalog.catalog_id')->where('customer.catalog_id', $Cid)->get();
+    }
+    public function getAllCat()
+    {
+        return DB::table('customer')->join('catalog', 'customer.catalog_id', '=', 'catalog.catalog_id')->orderBy('customer.customer_id', 'DESC')->get();
     }
 }

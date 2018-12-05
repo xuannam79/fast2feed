@@ -145,41 +145,15 @@
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#">Tải App</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"><span class="badge">1</span></span> Giỏ Hàng<span class="caret"></span></a>
-                                <ul class="dropdown-menu" style="width: 350px;">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Ảnh</th>
-                                                    <th>LS</th>
-                                                    <th>Tên <span></span></th>
-                                                    <th>Giá</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td> <img style="height: 30px;width: 40px;border-radius: 30%;" src="https://media.foody.vn/res/g19/184588/prof/s/foody-mobile-main-avatar-foody-ap.jpg" alt=""></td>
-                                                    <td>1</td>
-                                                    <td>Trà sữa</td>
-                                                    <td>30.000 VNĐ</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <a href="{{ route('trangGioHang') }}" type="button" class="btn btn-success"> Chi Tiết Giỏ Hàng </a>
-                                        <a href="#" type="button" class="btn btn-danger pull-right"> Xóa </a>
-                                    </div>
-                                </ul>
-                            </li>
+                            
                             @if(session()->has('admin')) @php $role = session()->get('admin')[0]->role; if($role == 2){ $url = route('trangpostProduct'); echo '
                             <li><a href="'.$url.'">Đăng sản phẩm</a></li>'; } @endphp @endif @if(session()->has('admin')) @foreach($getAdmin as $key => $admin)
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
-               <img src="/fast2feed/public/files/account/{{ $admin->avatar }}" alt="" width="20px" height="20px">
-               <span>{{ $admin->username }}</span>
-               <span class="caret"></span>
-               </a>
+                               <img src="/fast2feed/public/files/account/{{ $admin->avatar }}" alt="" width="20px" height="20px">
+                               <span>{{ $admin->username }}</span>
+                               <span class="caret"></span>
+                               </a>
                                 <ul class="dropdown-menu" style="width: 250px;">
                                     <div class="table-responsive" style="width: 250px">
                                         <div class="account">

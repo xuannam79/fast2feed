@@ -210,7 +210,7 @@
 									@foreach($arrCart as $key => $aCart)
 										@php
 											$price = $aCart['priceProduct'];
-											$amount = $aCart['amountProduct'];
+											$amount = 1;
 
 											$totalPrice += ($amount * $price);
 										@endphp
@@ -246,7 +246,18 @@
 
 			{{-- ajaxCart --}}
 			<script type="text/javascript">
-		        function ajaxToggleCartUpdate(slug, idCus, idProduct, name, price, amount, bool, adminStatus, oldTotalPrice, transport_fee){
+		        function ajaxToggleCartUpdate(slug, idCus, idProduct, name, price, amount, bool, adminStatus,
+		         oldTotalPrice, transport_fee){
+		         	function formatMoney(n, c, d, t) {
+					  var c = isNaN(c = Math.abs(c)) ? 0 : c,
+					    d = d == undefined ? "." : d,
+					    t = t == undefined ? "," : t,
+					    s = n < 0 ? "-" : "",
+					    i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
+					    j = (j = i.length) > 3 ? j % 3 : 0;
+
+					  return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+					};
 		        	if(adminStatus != 1){
 		        		top.location.href = '/fast2feed/public/dang-nhap';
 		        	}else {
@@ -268,17 +279,18 @@
 									    // console.log($dataParse.filter("#onCartProduct1_"+idProduct));
 									    // alert("The " + animal.innerHTML + " is a " + animalType + ".");
 			                    	$('.onCartProduct1_'+idProduct).replaceWith(data);
+
 			                    	var count = $("#onCartProduct1_"+idProduct).text();
 			                    	var newCountPrice = count * price;
-			                    	$('.onCartProduct2_'+idProduct).replaceWith('<span style="float: right;" class="onCartProduct2_'+idProduct+'">'+newCountPrice+'đ</span>');
+			                    	var newCountPriceFormat = formatMoney(newCountPrice);
+			                    	$('.onCartProduct2_'+idProduct).replaceWith('<span style="float: right;" class="onCartProduct2_'+idProduct+'">'+newCountPriceFormat+'đ</span>');
 
 			                    	var newTotalPrice = oldTotalPrice + price;
-			                    	$('.onCart2_'+idCus).replaceWith('<span style="float: right;" class="onCart2_'+idCus+'">'+newTotalPrice+'đ</span>');
+			                    	var newTotalPriceFormat = formatMoney(newTotalPrice);
+			                    	$('.onCart2_'+idCus).replaceWith('<span style="float: right;" class="onCart2_'+idCus+'">'+newTotalPriceFormat+'đ</span>');
 
-			                    	var TotalPriceOnFee = newTotalPrice + 7000;
+			                    	var TotalPriceOnFee	 = formatMoney(newTotalPrice + 7000);
 			                    	$('.onCart3_'+idCus).replaceWith('<span style="font-size:15px;float: right; color: #0288D1;font-weight: 800;" class="onCart3_'+idCus+'">'+TotalPriceOnFee+'đ</span>');
-			                    	console.log(TotalPriceOnFee);
-
 			                    }
 			                },
 			                error: function (){

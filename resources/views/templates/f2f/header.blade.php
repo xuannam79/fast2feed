@@ -18,9 +18,30 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVq1eRO3SMYnmnXu213mAa9hTj_B7EMcI&callback=initMap"
     async defer></script>
+     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+    <style>
+
+</style>
 </head>
 
 <body onload="initialize()">
+            
+            <script>
+                //paste this code under head tag or in a seperate js file.
+                // Wait for window load
+                $(window).load(function() {
+                    // Animate loader off screen
+                    $(".se-pre-con").fadeOut("slow");;
+                });
+            </script>
+                <!-- Paste this code after body tag -->
+                <div class="se-pre-con"></div>
+                <!-- Ends -->
+                
+                
+
+                
     <div class="container">
         <a href="{{ route('trangChu') }}" title=""><img src="/fast2feed/public/templates/f2f/images/f2f.png" alt="" width="290px" height="145px"></a>
         <a href="#" title=""><img src="/fast2feed/public/templates/f2f/images/banner.gif" alt="" width="845px" height="110px"></a>
@@ -146,71 +167,52 @@
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#">Tải App</a></li>
-                            
-                            @if(session()->has('admin')) @php $role = session()->get('admin')[0]->role; if($role == 2){ $url = route('trangpostProduct'); echo '
-                            <li><a href="'.$url.'">Đăng sản phẩm</a></li>'; } @endphp @endif @if(session()->has('admin')) @foreach($getAdmin as $key => $admin)
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
-                               <img src="/fast2feed/public/files/account/{{ $admin->avatar }}" alt="" width="20px" height="20px">
-                               <span>{{ $admin->username }}</span>
-                               <span class="caret"></span>
-                               </a>
-                                <ul class="dropdown-menu" style="width: 250px;">
-                                    <div class="table-responsive" style="width: 250px">
-                                        <div class="account">
-                                            <div class="account-head">
-                                                <div class="account-head-img">
-                                                    <img src="/fast2feed/public/files/account/{{ $admin->avatar }}" alt="" width="60px" height="60px">
-                                                </div>
-                                                <div class="account-head-info">
-                                                    <p><strong>{{ $admin->username }}</strong></p>
-                                                    <span style="color: #9F9F9C;">{{ $admin->email }}</span>
-                                                </div>
+                            @if(session()->has('admin')) @foreach($getAdmin as $key => $admin)
+                            <li>
+                                <div class="dropdownInfo">
+                                <button onclick="myFunction()" class="dropbtnInfo">
+                                        {{ $admin->username }}<span class="caret"></span>
+                                </button>
+                                  <div id="myDropdown" class="dropdownInfo-content">
+                                    <a href="#home">
+                                        <div class="">
+                                            <div class="account-head-img">
+                                                <img src="/fast2feed/public/files/account/{{ $admin->avatar }}" alt="" width="60px" height="60px">
                                             </div>
-                                            <div class="clear"></div>
-                                            <div style="border-top: 1px solid #F8F8F8;border-bottom: 1px solid #F8F8F8;">
-                                                @php
-                                                    if(session()->get('admin')[0]->role == 3){
-                                                        $routeInfo = route('trangInfoShipper');
-                                                    }else{
-                                                        $routeInfo = route('trangTTtaikhoan');
-                                                    }
-                                                @endphp
-                                                
-                                                <a href="{{ $routeInfo }}" title="">
-                                                    <div class="account-body">
-                                                        <strong><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;Thông tin tài khoản</strong>
-                                                    </div>
-                                                </a>
-                                                <a href="#" title="">
-                                                    <div class="account-body">
-                                                        <strong><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;Tổng tiền</strong>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            @if (Session::has('msg'))
-                                            <script type="text/javascript">
-                                                alert("{{ Session::get('msg') }}");
-                                            </script>
-                                            @endif
-                                            <div class="account-foot">
-                                                <a href="#" title="">
-                                                    <a href="{{ route('trangDangXuat') }}" title="">
-                                                        <div class="account-body">
-                                                            <strong><i class="fa fa-power-off"></i>&nbsp;Đăng xuất</strong>
-                                                        </div>
-                                                    </a>
-                                                </a>
+                                            <div class="account-head-info">
+                                                <p><strong>{{ $admin->username }}</strong></p>
+                                                <span style="color: #9F9F9C;">{{ $admin->email }}</span>
                                             </div>
                                         </div>
-                                    </div>
-                                </ul>
+                                    </a>
+                                    @php
+                                        if(session()->get('admin')[0]->role == 3){
+                                            $routeInfo = route('trangInfoShipper');
+                                        }else{
+                                            $routeInfo = route('trangTTtaikhoan');
+                                        }
+                                    @endphp
+                                    <a href="{{ $routeInfo }}"><strong><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;Thông tin tài khoản</strong></a>
+                                    @if (Session::has('msg'))
+                                        <script type="text/javascript">
+                                            alert("{{ Session::get('msg') }}");
+                                        </script>
+                                    @endif
+                                    <a href="{{ route('trangDangXuat') }}"><strong><i class="fa fa-power-off"></i>&nbsp;Đăng xuất</strong></a>
+                                  </div>
+                                </div>
                             </li>
-                            @endforeach @else()
+                            @endforeach
+                            @else()
                             <li><a href="{{ route('trangDangNhap') }}">Đăng nhập</a></li>
                             @endif @if(!session()->has('admin'))
                             <li><a href="{{ route('trangDangKiShipper') }}">Trở thành shipper</a></li>
                             @endif
+                            @if(session()->has('admin')) @php $role = session()->get('admin')[0]->role; if($role == 2){ $url = route('trangpostProduct'); echo '
+                            <li><a href="'.$url.'">Đăng sản phẩm</a></li>'; } @endphp
+                             @endif
+                             
+
                         </ul>
                         </div>
                         <!-- /.navbar-collapse -->
@@ -218,12 +220,33 @@
                     <!-- /.container-fluid -->
             </nav>
             </div>
+            {{-- script dropdown button --}}
+            <script>
+            function myFunction() {
+                document.getElementById("myDropdown").classList.toggle("show");
+            }
+
+            // Close the dropdown if the user clicks outside of it
+            window.onclick = function(event) {
+              if (!event.target.matches('.dropbtnInfo')) {
+
+                var dropdowns = document.getElementsByClassName("dropdownInfo-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                  var openDropdown = dropdowns[i];
+                  if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                  }
+                }
+              }
+            }
+            </script>
             <script language="JavaScript">
-window.onbeforeunload = WindowCloseHanlder;
-function WindowCloseHanlder()
-{
-window.alert('My Window is reloading');
-}
-</script>  
+            window.onbeforeunload = WindowCloseHanlder;
+            function WindowCloseHanlder()
+            {
+            window.alert('My Window is reloading');
+            }
+            </script>  
             <!-- Kết thúc header -->
 

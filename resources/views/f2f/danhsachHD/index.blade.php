@@ -58,14 +58,11 @@ Trang chủ shipper
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($getTransactionHistory as $key => $value)
+                                @foreach($getAllDanhSachHD as $key => $value)
                                 @php
                                     $order = $value->order_id;
                                     $address = $value->address_res;
                                     $address_cus = $value->address;
-                                    $restaurant_name = $value->customer_name;
-                                    $phone = $value->phone_res;
-                                    $customer_name = $value->username;
                                     $status = $value->status;
                                 @endphp
                                 <tr>
@@ -82,7 +79,7 @@ Trang chủ shipper
                                     </td>
                                     <td>
                                         @if($status == 1)
-                                        <button title="Nhấn vào để xem chi tiết"
+                                        <button onclick="return loadModel();" title="Nhấn vào để xem chi tiết"
                                         class="font_weight_bold order_table_status gray pointer" id="myBtn"
                                         style="width: 70px;float: left;">Xem
                                         </button>
@@ -106,7 +103,7 @@ Trang chủ shipper
                                                         <div class="direction-content">
                                                             <div class="direction-info">
                                                                 <div class="direction-from">
-                                                                    <div class="direction-name">Điểm lấy hàng - {{ $restaurant_name }}
+                                                                    <div class="direction-name">Điểm lấy hàng - Tên quán
                                                                     </div>
                                                                     <input id="start" type="hidden" value="{{ $address }}" style="width: 300px">
                                                                     {{ $address }}
@@ -115,7 +112,7 @@ Trang chủ shipper
                                                                     <div class="">
                                                                         <div class="direction-name"
                                                                              id="shipping-address">
-                                                                            <span>Điểm giao hàng - {{ $customer_name }}</span><span> - {{ $phone }} </span>
+                                                                            <span>Điểm giao hàng - Tên khách</span><span> - SĐT </span>
                                                                         </div>
                                                                         <input id="end" type="hidden" value="{{ $address_cus }}" style="width: 300px">
                                                                         {{ $address_cus }}
@@ -142,18 +139,22 @@ Trang chủ shipper
                                                         <div class="order-list">
                                                             @foreach($getAmountProduct as $key => $value)
                                                                 @php
+                                                                    $sanpham = $value->order_id;
+                                                                    if($order == $sanpham){
                                                                     $product_name = $value->product_name;
                                                                     $amount = $value->amount;
                                                                     $price = $value->price;
                                                                     $total = $amount * $price;
                                                                     $count_product = $loop->count;
                                                                     $total_product = $total_product + $total;
+                                                                }
+                                                                else continue;
                                                                 @endphp
                                                             <div class="order-item">
                                                                 <span class="order-item-number">{{ $amount }}</span>
                                                                 <div class="order-item-info">
-                                                                    <div class="order-item-name"><span class="txt-bold">{{ $product_name }}&nbsp;</span>
-                                                                
+                                                                    <div class="order-item-name"><span class="txt-bold">
+                                                                    {{ $product_name }}&nbsp;</span>
                                                                     </div>
                                                                     <div class="order-item-note"></div>
                                                                 </div>
@@ -228,7 +229,7 @@ Trang chủ shipper
                 </tbody>
             </table>
                        <div class="pagination" style="float: right;margin-top: 30px; margin-right: 10px">
-                                {{ $getTransactionHistory->links() }}
+                                {{ $getAllDanhSachHD->links() }}
                             </div>
                         
                     </div>
@@ -369,10 +370,10 @@ Trang chủ shipper
         // When the user clicks the button, open the model
         btn.onclick = function () {
             model.style.display = "block";
-            e.preventDefault();
-            khoangcach();
         }
-
+        function loadModel(){
+            model.style.display = "block";
+        }
         // When the user clicks on <span> (x), close the model
         span.onclick = function () {
             model.style.display = "none";

@@ -22,8 +22,9 @@ class ShipperController extends Controller
              $mail = session()->get('admin')[0]->email;
              $getAdmin = $this->account->getAccount($mail);
         }  
-
-    	return view('f2f.shipper.index', compact('getAdmin'));
+        $getCatOffset0 = $this->cat->getCatOffset0();
+        $getCatOffset2 = $this->cat->getCatOffset2();
+    	return view('f2f.shipper.index', compact('getAdmin','getCatOffset0','getCatOffset2'));
     }
     public function getProfile(){
          return view('f2f.shipper.edit-profile');

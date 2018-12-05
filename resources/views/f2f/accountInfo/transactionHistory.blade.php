@@ -39,8 +39,9 @@
                                                 <th>Nhà hàng</th>
                                                 <th>Ngày đặt</th>
                                                 <th>Tổng tiền</th>
-                                                <th>Kiểu thanh toán</th>
+                                                <th>Thanh toán</th>
                                                 <th>Trạng thái</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -51,7 +52,7 @@
                                                 $date = $info->date_create;
                                                 $total = $info->total;
                                                 $payment = $info->payment;
-												$status = $info->status_customer;
+												$status = $info->status_2;
 											@endphp
                                             <tr>
                                                 <td>
@@ -64,20 +65,32 @@
                                                 <td><span>{{ $date }}</span></td>
                                                 <td>{{ $total }}</td>
                                                 <td>
-                                                    @if($payment == 1)
-                                                    <span>Trực tiếp</span>
-                                                    @else
-                                                    <span>Onine</span>
-                                                    @endif
-                                                </td>
-                                                <td>
                                                     @if($status == 1)
                                                     <span>Đã thanh toán</span>
+                                                    @elseif($status == 2)
+                                                    <span>Chưa thanh toán</span>
                                                     @else
                                                     <span>Đã hủy</span>
                                                     @endif
                                                 </td>
-                                                
+                                                <td>
+                                                    @if($status == 1)
+                                                    <span>Đã giao</span>
+                                                    @elseif($status == 2)
+                                                    <span>Đang giao</span>
+                                                    @else
+                                                    <span></span>
+                                                    @endif
+                                                </td>
+                                                 <td>
+                                                    @if($status == 1)
+                                                    <span></span>
+                                                    @elseif($status == 2)
+                                                    <a href="#">Xem vị trí</a>
+                                                    @else
+                                                    <span></span>
+                                                    @endif
+                                                 </td>
                                             </tr>
                                            @endforeach
                                         </tbody>

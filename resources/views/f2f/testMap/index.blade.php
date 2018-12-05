@@ -78,12 +78,18 @@
   </head>
   <body>
     <div id="floating-panel" style="width: 370px">
+      @foreach($getTransactionHistory as $key => $value)
+      @php
+        $address_res = $value->address;
+        $address_cus = $value->address_res;
+      @endphp
       <strong>Điểm lấy hàng:</strong>
-      <input id="start" type="text" value="254 Nguyễn Văn Linh, Thanh Khê, Đà Nẵng" style="width: 300px;">
+      <input id="start" type="text" value="{{ $address_res }}" style="width: 300px;">
       <br>
       <strong>Điểm giao hàng:</strong>
-      <input id="end" type="text" value="25 Đồng Kè, Đà Nẵng" style="width: 300px">
+      <input id="end" type="text" value="{{ $address_cus }}" style="width: 300px">
       <input id="submit" type="submit" value="Chỉ đường">
+      @endforeach
     </div>
     <div id="right-panel"></div>
     <div id="map"></div>

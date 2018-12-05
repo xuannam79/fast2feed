@@ -178,15 +178,10 @@
 }
 .account-head-img {
 	float: left;
-	width: 60px;
-	padding: 10px;
+	margin-right: 10px;
 }
 .account-head-info {
-	float: left;
-	width: 170px;
-	margin-left: 15px;
-	line-height: 10px;
-	padding-top: 18px;
+	
 }
 .account-body {
 	height: 45px;
@@ -355,3 +350,66 @@
     top: 8px;
     left: -19px;
 }
+
+/*loader image delay */
+.no-js #loader { display: none;  }
+.js #loader { display: block; position: absolute; left: 100px; top: 0; }
+.se-pre-con {
+position: fixed;
+left: 0px;
+top: 0px;
+width: 100%;
+height: 100%;
+z-index: 9999;
+background: url(/fast2feed/public/templates/f2f/images/loader/Preloader_8.gif) center no-repeat #fff;
+}
+.content {
+    background: url(http://smallenvelop.com/wp-content/uploads/2014/08/simple-pre-loader.jpg
+) center no-repeat;
+    background-size: 100%;
+    width: 100%;
+}
+/*dropdowm account info*/
+
+.dropbtnInfo {
+    background-color: white;
+    color: #337AB7;
+    padding: 16px;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    font-weight: 550;
+}
+
+.dropbtnInfo:hover, .dropbtnInfo:focus {
+    background-color: #2980B9;
+    color: white;
+}
+
+.dropdownInfo {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdownInfo-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    width: 245%;
+}
+
+.dropdownInfo-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+
+}
+
+.dropdownInfo a:hover {background-color: #ddd;}
+
+.show {display: block;}

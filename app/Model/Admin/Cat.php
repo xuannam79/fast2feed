@@ -40,12 +40,12 @@ class Cat extends Model
     }
     public function getCatOffset0()
     {
-        return $this->offset(0)->limit(2)->get();
+        return $this->offset(0)->limit(5)->get();
     }
     public function getCatOffset2()
     {
         $count = DB::table('catalog')->count();
-        return $this->offset(2)->limit($count-2)->get();
+        return $this->offset(5)->limit($count-2)->get();
 
     }
 }

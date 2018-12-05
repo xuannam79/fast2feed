@@ -1,6 +1,6 @@
 @extends('templates.f2f.master')
 @section('title')
-	Trang chủ
+	Danh Mục
 @endsection
 @section('content')
 	<div class="row" style="margin-top: 20px">
@@ -59,18 +59,22 @@
 				@include('templates.f2f.leftbar')
 				<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 clearpaddingr">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clearpadding">
+						
 						<div class="panel panel-info">
+							<div class="panel-heading">
+							    <h3 class="panel-title">Tất cả</h3>
+							  </div>
 						  <div class="panel-body">
 						  	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clearpadding">
-						  		@foreach($customers as $key => $customer)
+						  		@foreach($getAllCat as $key => $allCat)
 						  		@php
-						  			$cusId = $customer->customer_id;
-						  			$images = $customer->images;
-						  			$customer_name = $customer->customer_name;
+						  			$cusId = $allCat->customer_id;
+						  			$images = $allCat->images;
+						  			$customer_name = $allCat->customer_name;
 						  			$slug = str_slug($customer_name);
 						  			$name = title_case($customer_name);
-						  			$catalog = title_case($customer->catalog_name);
-						  			$oldAddress = title_case($customer->address);
+						  			$catalog = title_case($allCat->catalog_name);
+						  			$oldAddress = title_case($allCat->address);
 						  			$address = str_limit($oldAddress, 25);
 						  			$url = route('trangCustomer',['slug' => $slug, 'cusId' => $cusId])
 						  		@endphp
@@ -88,7 +92,7 @@
 								</div>
 								@endforeach
 
-								<!-- <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 re-padding">
+								{{-- <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 re-padding">
 						  			<div class="product_item">
 						  				<div class="product-image">
 						  					<a href=""><img src="/fast2feed/public/templates/f2f/images/product/somi.png" alt="" class=""></a>
@@ -97,7 +101,7 @@
 										<p><span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="Số lượt xem"></span> 190 <span class="glyphicon glyphicon-star-empty" aria-hidden="true" title="Số lượng đặt mua">9</p>
 										<a href=""><button class='btn btn-info'><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Thêm giỏ hàng</button></a>
 						  			</div>
-								</div> -->
+								</div> --}}
 					  		</div>
 						  </div>
 						</div>
@@ -105,11 +109,7 @@
 				</div>
 			</div>
 		</div>
-	 	<a href="{{ route('trangAllDanhMuc') }}" title="Xem thêm sản phẩm">
-	 		<div style="border: 1px solid #BCE8F1;width: 1135px;height: 50px;margin: 20px 0px;color: black">
-	 			<p style="text-align: center;line-height: 50px">Xem thêm &nbsp;<span class="glyphicon">&#xe092;</span></p>
-	 		</div>
-	 	</a>
+	 	
 
 		
 	 	<div id="floating-panel" style="width: 370px">

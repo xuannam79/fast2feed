@@ -230,7 +230,7 @@
 										{{-- <a href="#" title=""><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px"></i></a> --}}
 										@php
 										@endphp
-										<button onclick="ajaxToggleCartUpdate('{{$slug}}', {{$idCus}}, {{$idProduct}}, '{{$name}}', {{$price}}, {{$amount}}, {{$bool}}, {{$adminStatus}}, {{$totalPrice}}, {{$transport_fee}});" style="border: none;background-color: white"><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px;"></i></button>
+										<button onclick="ajaxToggleCartUpdate('{{$slug}}', {{$idCus}}, {{$idProduct}}, '{{$name}}', {{$price}}, {{$amount}}, {{$bool}}, {{$adminStatus}}, {{$totalPrice}}, {{$transport_fee}});" style="border: none;background-color: white"><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px;" ></i></button>
 									</div>
 									<div class="clear"></div>
 								</div>
@@ -244,6 +244,7 @@
 				</div>
 			</div>
 
+    
 			{{-- ajaxCart --}}
 			<script type="text/javascript">
 		        function ajaxToggleCartUpdate(slug, idCus, idProduct, name, price, amount, bool, adminStatus,
@@ -272,35 +273,42 @@
 			                cache: false,
 			                data: {idProduct:idProduct, name:name, price:price, amount:amount},
 			                success: function(data){
-			                    if(bool == 0){
-			                    	$('.onCart'+idCus).append(data);
-			                    }else{
-									    // var newCountPrice = data.getAttribute("data-newCountPrice");
-									    // console.log($dataParse.filter("#onCartProduct1_"+idProduct));
-									    // alert("The " + animal.innerHTML + " is a " + animalType + ".");
-			                    	$('.onCartProduct1_'+idProduct).replaceWith(data);
+			          //           if(bool == 0){
+			          //           	$('.onCart'+idCus).append(data);
+			          //           }else{
+									    // // var newCountPrice = data.getAttribute("data-newCountPrice");
+									    // // console.log($dataParse.filter("#onCartProduct1_"+idProduct));
+									    // // alert("The " + animal.innerHTML + " is a " + animalType + ".");
+			          //           	$('.onCartProduct1_'+idProduct).replaceWith(data);
 
-			                    	var count = $("#onCartProduct1_"+idProduct).text();
-			                    	var newCountPrice = count * price;
-			                    	var newCountPriceFormat = formatMoney(newCountPrice);
-			                    	$('.onCartProduct2_'+idProduct).replaceWith('<span style="float: right;" class="onCartProduct2_'+idProduct+'">'+newCountPriceFormat+'đ</span>');
+			          //           	var count = $("#onCartProduct1_"+idProduct).text();
+			          //           	var newCountPrice = count * price;
+			          //           	var newCountPriceFormat = formatMoney(newCountPrice);
+			          //           	$('.onCartProduct2_'+idProduct).replaceWith('<span style="float: right;" class="onCartProduct2_'+idProduct+'">'+newCountPriceFormat+'đ</span>');
 
-			                    	var newTotalPrice = oldTotalPrice + price;
-			                    	var newTotalPriceFormat = formatMoney(newTotalPrice);
-			                    	$('.onCart2_'+idCus).replaceWith('<span style="float: right;" class="onCart2_'+idCus+'">'+newTotalPriceFormat+'đ</span>');
+			          //           	var newTotalPrice = oldTotalPrice + price;
+			          //           	var newTotalPriceFormat = formatMoney(newTotalPrice);
+			          //           	$('.onCart2_'+idCus).replaceWith('<span style="float: right;" class="onCart2_'+idCus+'">'+newTotalPriceFormat+'đ</span>');
 
-			                    	var TotalPriceOnFee	 = formatMoney(newTotalPrice + 7000);
-			                    	$('.onCart3_'+idCus).replaceWith('<span style="font-size:15px;float: right; color: #0288D1;font-weight: 800;" class="onCart3_'+idCus+'">'+TotalPriceOnFee+'đ</span>');
-			                    }
+			          //           	var TotalPriceOnFee	 = formatMoney(newTotalPrice + 7000);
+			          //           	$('.onCart3_'+idCus).replaceWith('<span style="font-size:15px;float: right; color: #0288D1;font-weight: 800;" class="onCart3_'+idCus+'">'+TotalPriceOnFee+'đ</span>');
+			          //           }
 			                },
 			                error: function (){
 			                    alert('có lỗi xảy ra');
 			                }
 			            });
+
+			            
 		        	}
+		        	window.setTimeout(function(){window.location.reload()}, 300);
 		       }
 		    </script>
-
+			<script>
+        function tai_lai_trang(){
+            location.reload();
+        }
+    </script>
 			{{-- //smooth scrolling page --}}
 			<script>
 				$("a[href*='#']:not([href='#])").click(function() {
@@ -397,7 +405,7 @@
 
 			</div>
 			{{-- pay modal --}}
-
+				@if(session()->has($arrName))
 			  <div class="modal fade" id="payModal" role="dialog">
 			    <div class="modal-dialog modal-lg">
 			      <div class="modal-content" style="height: 610px;background-color: #EBEBEB">
@@ -457,21 +465,44 @@
 				          			</a>
 				          		</div>
 				          		<div class="pay-right-top-body">
+									
+					
+									@php
+										$arrCart = session()->get($arrName);
+										$totalPrice = 0;
+										$count = 0;
+										$countAmount = 0;
+										$newtransport_fee = 0;
+										$bigtotal = 0;
+									@endphp
+									@foreach($arrCart as $key => $aCart)
+									@php
+										$idProduct = $key;
+										$name = $aCart['nameProduct'];
+										$amount = $aCart['amountProduct'];
+										$countAmount += $amount;
+										$price = $aCart['priceProduct'];
+										$totalPrice += ($price * $amount);
+										$totalPrice1 = number_format($totalPrice);
+										$total = number_format($amount * $price);
+										$distance = 0.5;
+										$newtransport_fee = number_format($transport_fee * $distance);
+										$bigtotal = number_format(($transport_fee * $distance) + $totalPrice);
+									@endphp
 
 				          			<div class="list-order">
-				          				<span class="order-number">1</span><strong class="order-name">Bibimbap gạo lứt trộn gà cay </strong><span>[Sốt thêm]</span><span class="order-price">66,000đ</span>
+				          				<span class="order-number">{{$amount}}</span><strong class="order-name">{{$name}}</strong><span>[Sốt thêm]</span><span class="order-price">{{$total}}đ</span>
 				          			</div>
-				          			
-
+				          			@endforeach
 
 				          		</div>
 				          	</div>
 				          	<div class="pay-right-bot">
 				          		<div>
 				          			<div style="padding-left: 10px;height: 54px;font-size: 16px;line-height: 28px;">
-				          				<span style="color: #464646">Tổng cộng <strong>3</strong> phần</span><strong style="float: right;">110,000đ</strong><br>
+				          				<span style="color: #464646">Tổng cộng <strong>{{ $countAmount }}</strong> phần</span><strong style="float: right;">{{$totalPrice1}}đ</strong><br>
 				          				<span style="color: #464646">Phí vận chuyển: </span><span style="color: #CF2127">0.5 km</span>
-										<i class="fa fa-question-circle-o" aria-hidden="true" style="font-size: 15px"></i><span style="float: right;">15,000đ</span>
+										<i class="fa fa-question-circle-o" aria-hidden="true" style="font-size: 15px"></i><span style="float: right;">{{$newtransport_fee}}đ</span>
 				          			</div>
 				          			<div style="background-color: #FBF9D8;height: 32px;font-size: 16px;line-height: 29px;">
 				          				<span style="padding-left: 10px;margin-right: 42px;">Mã khuyến mãi</span>
@@ -479,7 +510,7 @@
 				          				
 				          			</div>
 				          			<div style="padding-left: 10px;height: 50px;font-size: 18px;line-height: 50px;">
-				          				<span><strong>Tổng cộng</strong></span><span style="float: right;">125,000đ</span>
+				          				<span><strong>Tổng cộng</strong></span><span style="float: right;">{{$bigtotal}}đ</span>
 				          			</div>
 				          			<div style="background-color: #FBF9D8;height: 40px;font-size: 18px;line-height: 40px;">
 				          				<a href="" title="">
@@ -496,13 +527,14 @@
 			          <a href="#" title="">
 		          		<div class="payButton">
 		          			<strong><span class="payDathang">Đặt hàng &nbsp;<i class="fa fa-arrow-right" style="font-size:19px"></i></span></strong>
-		          			<span class="payGia">81,000đ</span>
+		          			<span class="payGia">{{$bigtotal}}đ</span>
 		          		</div>
 			          </a>
 			        </div>
 			      </div>
 			    </div>
 			  </div>
+			  @endif
 			</div>
 
 		</div>

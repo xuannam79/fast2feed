@@ -16,6 +16,8 @@ class CatController extends Controller
 		$this->cat = $cat;
 		$this->account = $account;
 		$this->customer = $customer;
+        
+
 	}
     public function index($slug, $cid)
     {
@@ -30,6 +32,13 @@ class CatController extends Controller
         $getCat = $this->cat->getItem($cid);
     	return view('f2f.cat.index',compact('cats', 'getCatOffset0', 'getCatOffset2', 'getAdmin', 'getCusomerByCid', 'getCat'));
 
+    }
+    public function getAllCat(){
+        $cats = $this->cat->getAll();
+        $getAllCat = $this->customer->getAllCat();
+        $getCatOffset0 = $this->cat->getCatOffset0();
+        $getCatOffset2 = $this->cat->getCatOffset2();
+        return view('f2f.cat.allCat', compact('getAllCat', 'cats', 'getCatOffset0', 'getCatOffset2'));
     }
 
 }

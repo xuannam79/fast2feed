@@ -236,8 +236,17 @@ Trang chủ shipper
             </div>
         </div>
     </div>
+    
+    <form onsubmit="showLocation(); return false;">
+      <p>
+        <input type="text" name="address1" value="Address 1" class="address_input" size="40" />
+        <input type="text" name="address2" value="Address 2" class="address_input" size="40" />
+        <input type="submit" name="find" value="Search" />
+      </p>
+    </form>
+    <p id="results"></p>
 
-    <div class="row" style="margin-top: 15px">
+    <div class="row" style="margin-top: 300px">
            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.12085798816!2d108.20519251494088!3d16.05921698888712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219b15a13c381%3A0x2a8f705f1bfbf085!2zMjU0IE5ndXnhu4VuIFbEg24gTGluaCwgVGjhuqFjIEdpw6FuLCBUaGFuaCBLaMOqLCDEkMOgIE7hurVuZyA1NTAwMDAsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1541927221492" width="1169" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
             
     </div>
@@ -378,7 +387,55 @@ Trang chủ shipper
             }
         }
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzmyhWaNEQ_i55-LLOfNPka-8BAhZRUaM&callback=initMap"
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVq1eRO3SMYnmnXu213mAa9hTj_B7EMcI&callback=initMap"
     async defer></script>
+    <script language="javascript">
+        var geocoder, location1, location2;
+        function initialize() {
+        geocoder = new GClientGeocoder();
+    }
+ 
+    function showLocation() {
+        geocoder.getLocations(document.forms[0].address1.value, function (response) {
+            if (!response || response.Status.code != 200)
+            {
+                alert("Sorry, we were unable to geocode the first address");
+            }
+            else
+            {
+                location1 = {lat: response.Placemark[0].Point.coordinates[1], lon: response.Placemark[0].Point.coordinates[0], address: response.Placemark[0].address};
+                geocoder.getLocations(document.forms[0].address2.value, function (response) {
+                    if (!response || response.Status.code != 200)
+                    {
+                        alert("Sorry, we were unable to geocode the second address");
+                    }
+                    else
+                    {
+                        location2 = {lat: response.Placemark[0].Point.coordinates[1], lon: response.Placemark[0].Point.coordinates[0], address: response.Placemark[0].address};
+                        calculateDistance();
+                    }
+                });
+            }
+        });
+    }
+     
+    function calculateDistance()
+    {
+        try
+        {
+            var glatlng1 = new GLatLng(location1.lat, location1.lon);
+            var glatlng2 = new GLatLng(location2.lat, location2.lon);
+            var miledistance = glatlng1.distanceFrom(glatlng2, 3959).toFixed(1);
+            var kmdistance = (miledistance * 1.609344).toFixed(1);
+ 
+            document.getElementById('results').innerHTML = '<strong>Địa chỉ 1: </strong>' + location1.address + '<br /><strong>Địa chỉ 2: </strong>' + location2.address + '<br /><strong>Khoảng cánh: </strong>' + miledistance + ' miles (or ' + kmdistance + ' km)';
+        }
+        catch (error)
+        {
+            alert(error);
+        }
+    }
+ 
+    </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 @endsection

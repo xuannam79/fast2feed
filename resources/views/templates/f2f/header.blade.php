@@ -15,9 +15,11 @@
     <link rel="stylesheet" type="text/css" href="/fast2feed/public/templates/f2f/css/style2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVq1eRO3SMYnmnXu213mAa9hTj_B7EMcI&callback=initMap"
+    async defer></script>
 </head>
 
-<body>
+<body onload="initialize()">
     <div class="container">
         <a href="{{ route('trangChu') }}" title=""><img src="/fast2feed/public/templates/f2f/images/f2f.png" alt="" width="290px" height="145px"></a>
         <a href="#" title=""><img src="/fast2feed/public/templates/f2f/images/banner.gif" alt="" width="845px" height="110px"></a>

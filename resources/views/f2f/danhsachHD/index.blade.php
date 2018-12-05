@@ -63,6 +63,9 @@ Trang chủ shipper
                                     $order = $value->order_id;
                                     $address = $value->address_res;
                                     $address_cus = $value->address;
+                                    $name_res = $value->customer_name;
+                                    $name_cus = $value->restaurant_name;
+                                    $phone = $value->phone_res;
                                     $status = $value->status;
                                     $transport_fee = $value->transport_fee;
                                 @endphp
@@ -79,12 +82,10 @@ Trang chủ shipper
                                         @endif
                                     </td>
                                     <td>
-                                        @if($status == 1)
-                                        <button onclick="return loadModel();" title="Nhấn vào để xem chi tiết"
+                                        <button title="Nhấn vào để xem chi tiết"
                                         class="font_weight_bold order_table_status gray pointer" id="myBtn"
                                         style="width: 70px;float: left;">Xem
                                         </button>
-
                                 <div id="myModel" class="model">
 
                                     <!-- model content -->
@@ -104,7 +105,7 @@ Trang chủ shipper
                                                         <div class="direction-content">
                                                             <div class="direction-info">
                                                                 <div class="direction-from">
-                                                                    <div class="direction-name">Điểm lấy hàng - Tên quán
+                                                                    <div class="direction-name">Điểm lấy hàng - {{ $name_res }}
                                                                     </div>
                                                                     <input id="start" type="hidden" value="{{ $address }}" style="width: 300px">
                                                                     {{ $address }}
@@ -113,7 +114,7 @@ Trang chủ shipper
                                                                     <div class="">
                                                                         <div class="direction-name"
                                                                              id="shipping-address">
-                                                                            <span>Điểm giao hàng - Tên khách</span><span> - SĐT </span>
+                                                                            <span>Điểm giao hàng - {{ $name_cus }}</span><span> - {{ $phone }} </span>
                                                                         </div>
                                                                         <input id="end" type="hidden" value="{{ $address_cus }}" style="width: 300px">
                                                                         {{ $address_cus }}
@@ -123,7 +124,7 @@ Trang chủ shipper
                                                             <div>
                                                                 <div id="result" class="direction-time"><span class="fa"><i
                                                                                 class="far fa-clock"></i></span><span
-                                                                            class="txt-bold"> Thời gian giao:  15:35 - 24/10 - </span><span id="in_kilo"
+                                                                            class="txt-bold"> Thời gian giao:  {{ $dt->toTimeString() }} - {{ $dt->toDateString() }} - </span><span id="in_kilo"
                                                                             class="txt-red"></span></div>
                                                                 <div id="submit" class="change-info">
                                                                 </div>
@@ -134,6 +135,9 @@ Trang chủ shipper
                                                     @php
                                                         $count_product = 0;
                                                         $total_product = 0;
+                                                        if(isset($_POST['submit'])){
+                                                            echo ("<br>Tài khoản: " .$_POST['bienphp']);
+                                                        }
                                                     @endphp
                                                     <div class="order-right"><p class="title-popup-order">Thông tin sản
                                                             phẩm</p>
@@ -179,7 +183,7 @@ Trang chủ shipper
                                                                             class="txt-red" id="in_kilo1"></span><span
                                                                             class="show1-fee-min">&nbsp;</span>
                                                                 </div>
-                                                                <div class="cel-auto">{{ $transport_fee }} <span class="unit">đ</span>
+                                                                <div class="cel-auto"><span id="abcde"></span> <span class="unit">đ</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -217,13 +221,10 @@ Trang chủ shipper
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             <button title="Nhấn vào để nhận đơn hàng"
                                         class="order_table_status gray pointer" style="width: 105px; float: right;">Nhận đơn
                             </button>
-                            @else
-                            @endif
                         </td>
                     </tr>
                     @endforeach
@@ -354,7 +355,8 @@ Trang chủ shipper
             //dt = in_kilo.innerHTML();
             document.getElementById('in_kilo').innerHTML= dt;
             document.getElementById('in_kilo1').innerHTML=dt;
-            var so = parseFloat(dt);
+            var so = 7000*parseFloat(dt);
+            document.getElementById('abcde').innerHTML=so;
           }
         })
           } else {
@@ -409,9 +411,6 @@ Trang chủ shipper
 
         // When the user clicks the button, open the model
         btn.onclick = function () {
-            model.style.display = "block";
-        }
-        function loadModel(){
             model.style.display = "block";
         }
         // When the user clicks on <span> (x), close the model

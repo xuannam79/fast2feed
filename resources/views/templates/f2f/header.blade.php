@@ -147,7 +147,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#">Tải App</a></li>
                             
-                            @if(session()->has('admin')) @php $role = session()->get('admin')[0]->role; if($role == 2){ $url = route('trangpostProduct'); echo '
+                            @if(session()->has('admin')) @php $role = session()->get('admin')[0]->role; if($role == 2){ $url = route('trangPost'); echo '
                             <li><a href="'.$url.'">Đăng sản phẩm</a></li>'; } @endphp @endif @if(session()->has('admin')) @foreach($getAdmin as $key => $admin)
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 

@@ -21,7 +21,8 @@ class PostProductController extends Controller
              $getAdmin = $this->account->getAccount($mail);
         } 
     	$cats = $this->cat->getAll();
-
+        $getCatOffset0 = $this->cat->getCatOffset0();
+        $getCatOffset2 = $this->cat->getCatOffset2();
     	return view('f2f.restau.postProduct', compact('cats', 'getAdmin'));
     }
 }

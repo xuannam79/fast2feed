@@ -1,6 +1,6 @@
 @extends('templates.f2f.master')
 @section('title')
-    Cập nhật tài khoản
+    Lịch sử bài đăng
 @endsection
 @section('content')
 
@@ -28,7 +28,7 @@
 					<div class="panel panel-info">
 						<div class="panel-body" style="padding:0px">
 			           		<div class="list-group">
-				                <p href="#" class="list-group-item" position: relative style="font-size: 16px;font-weight: bold; text-align: center; background: #4C66A4; color: white">Quản Lý Bài Đăng</p>
+				                <p href="#" class="list-group-item" position: relative style="font-size: 16px;font-weight: bold; text-align: center; background: #4C66A4; color: white">Lịch sử đăng hàng</p>
 				                
                                 <div>
                                     <table class="table table-data2">
@@ -40,7 +40,6 @@
                                                 <th>Loại sản phẩm</th>
                                                 <th>Ngày đăng</th>
                                                 <th>Trạng thái</th>
-                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -69,17 +68,7 @@
                                                     <span>Chờ phê duyệt</span>
                                                     @endif
                                                 </td>
-                                                <td>
-                                                    <a href="#" title="Chọn để xem chi tiết">
-                                                            <i class="glyphicon glyphicon-eye-open"></i>
-                                                    </a>
-                                                    <a href="#" title="Chọn để sửa">
-                                                            <i class="glyphicon glyphicon-edit" style="margin-left: 5px"></i>
-                                                    </a>
-                                                    <a href="#" title="Chọn để xóa">
-                                                            <i class="glyphicon glyphicon-remove" style="margin-left: 5px"></i>
-                                                    </a>
-                                                </td>
+                                                
                                                 
                                             </tr>
                                            @endforeach

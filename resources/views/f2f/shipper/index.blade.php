@@ -58,28 +58,25 @@
                             </div>
                             <div class="order_table_cell order_list_row_col3">Nơi giao hàng
                             </div>
-                            <div class="order_table_cell order_list_row_col4">Tiền nhận hàng
-                            </div>
-                            <div class="order_table_cell order_list_row_col5">Tiền giao hàng
-                            </div>
                             <div class="order_table_cell order_list_row_col6">Trạng thái
                             </div>
                             <div class="order_table_cell order_list_row_col7">
                             </div>
-                            <div class="order_table_cell order_list_row_col8">
-                            </div>
                         </div>
                         <div class="order_table_row">
-                            <div class="order_table_cell order_list_row_col1">01
+                            @foreach($getAllDanhSachHD as $key => $value)
+                                @php
+                                    $order = $value->order_id;
+                                    $address = $value->address_res;
+                                    $address_cus = $value->address;
+                                    $status = $value->status;
+                                    $transport_fee = $value->transport_fee;
+                                @endphp
+                            <div class="order_table_cell order_list_row_col1">{{ $order }}
                             </div>
-                            <div class="order_table_cell order_list_row_col2">134 Hoàng Diệu, P.2, Q. Hải Châu, TP.Đà
-                                Nẵng
+                            <div class="order_table_cell order_list_row_col2">{{ $address }}
                             </div>
-                            <div class="order_table_cell order_list_row_col3">148 Tiểu La, P.3, Q. Hải Châu, TP.Đà Nẵng
-                            </div>
-                            <div class="order_table_cell order_list_row_col4">95.000đ
-                            </div>
-                            <div class="order_table_cell order_list_row_col5">116,000đ
+                            <div class="order_table_cell order_list_row_col3">{{ $address_cus }}
                             </div>
                             <div class="order_table_cell order_list_row_col6">Còn 5 phút
                             </div>
@@ -225,6 +222,7 @@
                                         class="order_table_status gray pointer" style="width: 105px">Hủy
                                 </button>
                             </div>
+                            @endforeach
                         </div>
                         
                     </div>

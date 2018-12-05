@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{-- <meta http-equiv="refresh" content="number"> --}}
     
     <script src="/fast2feed/public/templates/f2f/js/jquery-3.1.1.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="/fast2feed/public/templates/f2f/bootstrap/css/bootstrap.css">
@@ -40,7 +41,7 @@
                     <div class="collapse navbar-collapse re-navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="{{ route('trangChu') }}">Fast2Feed.vn</a></li>
-                            <li><a href="{{ route('trangDinhViMap') }}">Tất cả</a></li>
+                            <li><a href="{{ route('trangAllDanhMuc') }}">Tất cả</a></li>
                             @foreach($getCatOffset0 as $key => $catOffset0)
                                 @php
                                     $idCatOffset0 = $catOffset0->catalog_id;

@@ -64,6 +64,7 @@ Trang chủ shipper
                                     $address = $value->address_res;
                                     $address_cus = $value->address;
                                     $status = $value->status;
+                                    $transport_fee = $value->transport_fee;
                                 @endphp
                                 <tr>
                                     <td>{{ $loop->index+1 }}</td>
@@ -123,8 +124,8 @@ Trang chủ shipper
                                                                 <div id="result" class="direction-time"><span class="fa"><i
                                                                                 class="far fa-clock"></i></span><span
                                                                             class="txt-bold"> Thời gian giao:  15:35 - 24/10 - </span><span id="in_kilo"
-                                                                            class="txt-red">km</span></div>
-                                                                <div id="submit" class="change-info">Hiển thị khoảng cách trên bản đồ
+                                                                            class="txt-red"></span></div>
+                                                                <div id="submit" class="change-info">
                                                                 </div>
                                                                 
                                                             </div>
@@ -145,7 +146,7 @@ Trang chủ shipper
                                                                     $amount = $value->amount;
                                                                     $price = $value->price;
                                                                     $total = $amount * $price;
-                                                                    $count_product = $loop->count;
+                                                                    $count_product += $amount;
                                                                     $total_product = $total_product + $total;
                                                                 }
                                                                 else continue;
@@ -168,17 +169,17 @@ Trang chủ shipper
                                                             <div class="row1">
                                                                 <div class="cel">Tổng tiền lấy <span
                                                                             class="txt-bold">{{ $count_product }}</span>
-                                                                    sản phẩm
+                                                                    phần
                                                                 </div>
                                                                 <div class="cel-auto txt-bold">{{ $total_product }} <span
                                                                             class="unit">đ</span></div>
                                                             </div>
                                                             <div class="row1">
                                                                 <div class="cel">Phí vận chuyển: <span
-                                                                            class="txt-red">3.0</span>km<span
+                                                                            class="txt-red" id="in_kilo1"></span><span
                                                                             class="show1-fee-min">&nbsp;</span>
                                                                 </div>
-                                                                <div class="cel-auto">21,000 <span class="unit">đ</span>
+                                                                <div class="cel-auto">{{ $transport_fee }} <span class="unit">đ</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -238,16 +239,9 @@ Trang chủ shipper
         </div>
     </div>
     
-    <form onsubmit="showLocation(); return false;">
-      <p>
-        <input type="text" name="address1" value="Address 1" class="address_input" size="40" />
-        <input type="text" name="address2" value="Address 2" class="address_input" size="40" />
-        <input type="submit" name="find" value="Search" />
-      </p>
-    </form>
     <p id="results"></p>
 
-    <div class="row" style="margin-top: 300px">
+    <div class="row" style="margin-top: 5px">
            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.12085798816!2d108.20519251494088!3d16.05921698888712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219b15a13c381%3A0x2a8f705f1bfbf085!2zMjU0IE5ndXnhu4VuIFbEg24gTGluaCwgVGjhuqFjIEdpw6FuLCBUaGFuaCBLaMOqLCDEkMOgIE7hurVuZyA1NTAwMDAsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1541927221492" width="1169" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
             
     </div>
@@ -269,8 +263,9 @@ Trang chủ shipper
 
         var onChangeHandler = function() {
           calculateAndDisplayRoute(directionsService, directionsDisplay);
+          test(directionsService, directionsDisplay);
         };
-        document.getElementById('submit').addEventListener('click', onChangeHandler);
+        document.getElementById('myBtn').addEventListener('click', onChangeHandler);
         //document.getElementById('start').addEventListener('click', onChangeHandler);
         //document.getElementById('end').addEventListener('click', onChangeHandler);
       }
@@ -322,6 +317,51 @@ Trang chủ shipper
           }
         });
       }
+      function test(directionsService, directionsDisplay) {
+        var start = document.getElementById('start').value;
+        var end = document.getElementById('end').value;
+        directionsService.route({
+          origin: start,
+          destination: end,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+            var m = Math.ceil((response.routes[0].overview_path.length)/2);
+            var middle = response.routes[0].overview_path[m];
+            var service = new google.maps.DistanceMatrixService;
+            service.getDistanceMatrix({
+              origins: [start],
+              destinations: [end],
+              travelMode: 'DRIVING',
+              unitSystem: google.maps.UnitSystem.METRIC,
+              avoidHighways: false,
+              avoidTolls: false
+        }, function(response, status) {
+          if (status === 'OK') {
+            var originList = response.originAddresses;
+            var destinationList = response.destinationAddresses;
+            for (var i = 0; i < originList.length; i++) {
+              var results = response.rows[i].elements;
+              for (var j = 0; j < results.length; j++){
+                var element = results[j];
+                var dt = element.distance.text;
+                var dr = element.duration.text;
+              }
+            }
+            var i = new google.maps.InfoWindow();
+            var myin_kilo = document.getElementById('in_kilo');
+            //dt = in_kilo.innerHTML();
+            document.getElementById('in_kilo').innerHTML= dt;
+            document.getElementById('in_kilo1').innerHTML=dt;
+            var so = parseFloat(dt);
+          }
+        })
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
         function khoangcach(){
             var start = document.getElementById('start').value;
             var end = document.getElementById('end').value;
@@ -360,7 +400,7 @@ Trang chủ shipper
         });
       // Get the model
         var model = document.getElementById('myModel');
-
+        
         // Get the button that opens the model
         var btn = document.getElementById("myBtn");
 
@@ -390,53 +430,5 @@ Trang chủ shipper
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVq1eRO3SMYnmnXu213mAa9hTj_B7EMcI&callback=initMap"
     async defer></script>
-    <script language="javascript">
-        var geocoder, location1, location2;
-        function initialize() {
-        geocoder = new GClientGeocoder();
-    }
- 
-    function showLocation() {
-        geocoder.getLocations(document.forms[0].address1.value, function (response) {
-            if (!response || response.Status.code != 200)
-            {
-                alert("Sorry, we were unable to geocode the first address");
-            }
-            else
-            {
-                location1 = {lat: response.Placemark[0].Point.coordinates[1], lon: response.Placemark[0].Point.coordinates[0], address: response.Placemark[0].address};
-                geocoder.getLocations(document.forms[0].address2.value, function (response) {
-                    if (!response || response.Status.code != 200)
-                    {
-                        alert("Sorry, we were unable to geocode the second address");
-                    }
-                    else
-                    {
-                        location2 = {lat: response.Placemark[0].Point.coordinates[1], lon: response.Placemark[0].Point.coordinates[0], address: response.Placemark[0].address};
-                        calculateDistance();
-                    }
-                });
-            }
-        });
-    }
-     
-    function calculateDistance()
-    {
-        try
-        {
-            var glatlng1 = new GLatLng(location1.lat, location1.lon);
-            var glatlng2 = new GLatLng(location2.lat, location2.lon);
-            var miledistance = glatlng1.distanceFrom(glatlng2, 3959).toFixed(1);
-            var kmdistance = (miledistance * 1.609344).toFixed(1);
- 
-            document.getElementById('results').innerHTML = '<strong>Địa chỉ 1: </strong>' + location1.address + '<br /><strong>Địa chỉ 2: </strong>' + location2.address + '<br /><strong>Khoảng cánh: </strong>' + miledistance + ' miles (or ' + kmdistance + ' km)';
-        }
-        catch (error)
-        {
-            alert(error);
-        }
-    }
- 
-    </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 @endsection

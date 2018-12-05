@@ -27,8 +27,8 @@ class DanhSachHDController extends Controller
              $getAdmin = $this->account->getAccount($mail);
              $accId = session()->get('admin')[0]->account_id;
         }
-        $getTransactionHistory = $this->order->getAllDanhSachHD();
+        $getAllDanhSachHD = $this->order->getAllDanhSachHD();
         $getAmountProduct = $this->order->getAmountProduct();    
-    	return view('f2f.danhsachHD.index', compact('getAdmin','getTransactionHistory','getAmountProduct','getCatOffset0','getCatOffset2'));
+    	return view('f2f.danhsachHD.index', compact('getAdmin','getAllDanhSachHD','getAmountProduct','getCatOffset0','getCatOffset2'));
     }
 }

@@ -25,7 +25,7 @@ class Order extends Model
             {
                 $join->on('customer.customer_id','=','orders.customer_id')
                 ->join('account','account.account_id','=','customer.account_id');
-            })->select('orders.status','orders.order_id','customer.address','customer.address_res','customer.customer_name','customer.phone_res','customer.restaurant_name','account.username','customer.transport_fee','orders.date_create')->simplePaginate(5);
+            })->join('restaurant', 'restaurant.restaurant_id', '=', 'orders.restaurant_id')->select('orders.status','orders.order_id','customer.address','restaurant.address_res','customer.customer_name','restaurant.phone_res','restaurant.restaurant_name','account.username','customer.transport_fee','orders.date_create')->simplePaginate(5);
     } 
 
     public function getAmountProduct()

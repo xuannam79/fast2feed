@@ -61,8 +61,8 @@ Trang chủ shipper
                                 @foreach($getAllDanhSachHD as $key => $value)
                                 @php
                                     $order = $value->order_id;
-                                    $address = $value->address_res;
-                                    $address_cus = $value->address;
+                                    $address = $value->address;
+                                    $address_cus = $value->address_res;
                                     $name_res = $value->customer_name;
                                     $name_cus = $value->restaurant_name;
                                     $phone = $value->phone_res;

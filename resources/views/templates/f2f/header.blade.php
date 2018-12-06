@@ -18,30 +18,26 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVq1eRO3SMYnmnXu213mAa9hTj_B7EMcI&callback=initMap"
     async defer></script>
-     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
     <style>
-
+        
 </style>
 </head>
 
 <body onload="initialize()">
-            
-            <script>
-                //paste this code under head tag or in a seperate js file.
-                // Wait for window load
-                $(window).load(function() {
-                    // Animate loader off screen
-                    $(".se-pre-con").fadeOut("slow");;
-                });
-            </script>
-                <!-- Paste this code after body tag -->
-                <div class="se-pre-con"></div>
-                <!-- Ends -->
-                
-                
-
-                
+    {{-- script loader page --}}
+        <script>
+            $('body').append('<div style="" id="loadingDiv"><div class="loader"></div></div>');
+            $(window).on('load', function(){
+              setTimeout(removeLoader, 300); //wait for page load PLUS two seconds.
+            });
+            function removeLoader(){
+                $( "#loadingDiv" ).fadeOut(500, function() {
+                  // fadeOut complete. Remove the loading div
+                  $( "#loadingDiv" ).remove(); //makes page more lightweight 
+              });  
+            }
+        </script>
     <div class="container">
         <a href="{{ route('trangChu') }}" title=""><img src="/fast2feed/public/templates/f2f/images/f2f.png" alt="" width="290px" height="145px"></a>
         <a href="#" title=""><img src="/fast2feed/public/templates/f2f/images/banner.gif" alt="" width="845px" height="110px"></a>

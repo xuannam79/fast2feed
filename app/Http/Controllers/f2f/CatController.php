@@ -34,11 +34,15 @@ class CatController extends Controller
 
     }
     public function getAllCat(){
+        if(session()->has('admin')){
+             $mail = session()->get('admin')[0]->email;
+             $getAdmin = $this->account->getAccount($mail);
+        }
         $cats = $this->cat->getAll();
         $getAllCat = $this->customer->getAllCat();
         $getCatOffset0 = $this->cat->getCatOffset0();
         $getCatOffset2 = $this->cat->getCatOffset2();
-        return view('f2f.cat.allCat', compact('getAllCat', 'cats', 'getCatOffset0', 'getCatOffset2'));
+        return view('f2f.cat.allCat', compact('getAllCat', 'cats', 'getCatOffset0', 'getCatOffset2', 'getAdmin'));
     }
 
 }

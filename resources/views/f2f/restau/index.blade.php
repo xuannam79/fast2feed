@@ -305,9 +305,9 @@
 		       }
 		    </script>
 			<script>
-        function tai_lai_trang(){
-            location.reload();
-        }
+        // function tai_lai_trang(){
+        //     location.reload();
+        // }
     </script>
 			{{-- //smooth scrolling page --}}
 			<script>

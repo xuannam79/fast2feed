@@ -412,6 +412,7 @@ Trang chủ shipper
         // When the user clicks the button, open the model
         btn.onclick = function () {
             model.style.display = "block";
+            alert("abc");
         }
         // When the user clicks on <span> (x), close the model
         span.onclick = function () {

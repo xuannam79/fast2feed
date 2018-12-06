@@ -68,7 +68,26 @@ Trang chủ shipper
                                     $phone = $value->phone_res;
                                     $status = $value->status;
                                     $transport_fee = $value->transport_fee;
+                                    $count_product = 0;
+                                    $total_product=0;
                                 @endphp
+                                    @foreach($getAmountProduct as $key => $value)
+                                    @php
+                                        $sanpham = $value->order_id;
+                                        if($order == $sanpham){
+                                            $product_name = $value->product_name;
+                                            $amount = $value->amount;
+                                            $price = $value->price;
+                                            $total = $amount * $price;
+                                            $total2 = number_format($total);
+                                            $count_product += $amount;
+                                            $total_product = $total_product + $total;
+                                        }   
+                                        else continue;
+                                    @endphp
+                                    @endforeach
+                                    @php
+                                    @endphp
                                 <tr>
                                     <td>{{ $loop->index+1 }}</td>
                                     <td style="padding-left: 40px">{{ $order }}</td>
@@ -82,9 +101,10 @@ Trang chủ shipper
                                         @endif
                                     </td>
                                     <td>
+                                        @if($status == 1)
                                         <button title="Nhấn vào để xem chi tiết"
                                         class="font_weight_bold order_table_status gray pointer" id="myBtn"
-                                        style="width: 70px;float: left;">Xem
+                                        style="width: 70px;float: left;" data-total-price="{{$total_product}}">Xem
                                         </button>
                                 <div id="myModel" class="model">
 
@@ -135,9 +155,6 @@ Trang chủ shipper
                                                     @php
                                                         $count_product = 0;
                                                         $total_product = 0;
-                                                        if(isset($_POST['submit'])){
-                                                            echo ("<br>Tài khoản: " .$_POST['bienphp']);
-                                                        }
                                                     @endphp
                                                     <div class="order-right"><p class="title-popup-order">Thông tin sản
                                                             phẩm</p>
@@ -146,14 +163,17 @@ Trang chủ shipper
                                                                 @php
                                                                     $sanpham = $value->order_id;
                                                                     if($order == $sanpham){
-                                                                    $product_name = $value->product_name;
-                                                                    $amount = $value->amount;
-                                                                    $price = $value->price;
-                                                                    $total = $amount * $price;
-                                                                    $count_product += $amount;
-                                                                    $total_product = $total_product + $total;
-                                                                }
-                                                                else continue;
+                                                                        $product_name = $value->product_name;
+                                                                        $money_transport_fee = $value->transport_fee_order;
+                                                                        $total = $value->total;
+                                                                        $amount = $value->amount;
+                                                                        $price = $value->price;
+                                                                        $total3 = $amount * $price;
+                                                                        $total2 = number_format($total3);
+                                                                        $count_product += $amount;
+                                                                        $total_product = $total_product + $total3;
+                                                                    }   
+                                                                    else continue;
                                                                 @endphp
                                                             <div class="order-item">
                                                                 <span class="order-item-number">{{ $amount }}</span>
@@ -163,7 +183,7 @@ Trang chủ shipper
                                                                     </div>
                                                                     <div class="order-item-note"></div>
                                                                 </div>
-                                                                <div class="order-item-price">{{ $total }} <span class="unit">đ</span>
+                                                                <div class="order-item-price">{{ $total2 }} <span class="unit">đ</span>
                                                                 </div>
                                                                
                                                             </div>
@@ -175,7 +195,7 @@ Trang chủ shipper
                                                                             class="txt-bold">{{ $count_product }}</span>
                                                                     phần
                                                                 </div>
-                                                                <div class="cel-auto txt-bold">{{ $total_product }} <span
+                                                                <div class="cel-auto txt-bold">{{ number_format($total_product) }} <span
                                                                             class="unit">đ</span></div>
                                                             </div>
                                                             <div class="row1">
@@ -183,7 +203,7 @@ Trang chủ shipper
                                                                             class="txt-red" id="in_kilo1"></span><span
                                                                             class="show1-fee-min">&nbsp;</span>
                                                                 </div>
-                                                                <div class="cel-auto"><span id="abcde"></span> <span class="unit">đ</span>
+                                                                <div class="cel-auto"><span></span>{{ number_format($money_transport_fee) }} <span class="unit">đ</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -191,7 +211,7 @@ Trang chủ shipper
                                                         <div class="pedding-10 txt-bold font16">
                                                             <div class="row1">
                                                                 <div class="cel"><span>Tổng tiền giao hàng</span></div>
-                                                                <div class="cel-auto"><span>116,000 </span><span
+                                                                <div class="cel-auto"><span>{{ number_format($total) }} </span><span
                                                                             class="unit">đ</span></div>
                                                             </div>
                                                         </div>
@@ -225,6 +245,8 @@ Trang chủ shipper
                             <button title="Nhấn vào để nhận đơn hàng"
                                         class="order_table_status gray pointer" style="width: 105px; float: right;">Nhận đơn
                             </button>
+                            @else
+                            @endif
                         </td>
                     </tr>
                     @endforeach
@@ -249,12 +271,22 @@ Trang chủ shipper
     
 
     <script>
+        function formatMoney(n, c, d, t) {
+                      var c = isNaN(c = Math.abs(c)) ? 0 : c,
+                        d = d == undefined ? "." : d,
+                        t = t == undefined ? "," : t,
+                        s = n < 0 ? "-" : "",
+                        i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
+                        j = (j = i.length) > 3 ? j % 3 : 0;
+
+                      return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+                    };
       var map;
       function initMap() {
         var directionsDisplay = new google.maps.DirectionsRenderer;
         var directionsService = new google.maps.DirectionsService;
         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 12,
+          zoom: 15,
           center: {lat: 16.0544068, lng: 108.2021667},
           disableDefaultUI: true
         });
@@ -355,8 +387,8 @@ Trang chủ shipper
             //dt = in_kilo.innerHTML();
             document.getElementById('in_kilo').innerHTML= dt;
             document.getElementById('in_kilo1').innerHTML=dt;
-            var so = 7000*parseFloat(dt);
-            document.getElementById('abcde').innerHTML=so;
+            //var total_price = so * total;
+            
           }
         })
           } else {
@@ -364,6 +396,7 @@ Trang chủ shipper
           }
         });
       }
+
         function khoangcach(){
             var start = document.getElementById('start').value;
             var end = document.getElementById('end').value;
@@ -412,7 +445,8 @@ Trang chủ shipper
         // When the user clicks the button, open the model
         btn.onclick = function () {
             model.style.display = "block";
-        }
+            showDetails(this);
+            }
         // When the user clicks on <span> (x), close the model
         span.onclick = function () {
             model.style.display = "none";

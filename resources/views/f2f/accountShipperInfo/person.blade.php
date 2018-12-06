@@ -33,7 +33,7 @@
 				                	$status = $value->status;
 				                	$soThe = $value->number;
 				                	$date = $value->EXP;
-				                	$money = $value->money;
+				                	$money = number_format($value->money);
 									$name_k = str_slug($name);
 				                @endphp
 				                <p style="margin-top: 10px">Xin chào,<strong style="font-size: 20px">{{ $name }}</strong></p>

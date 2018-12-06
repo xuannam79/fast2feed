@@ -160,6 +160,14 @@ Route::namespace('f2f')->group(function(){
 		'uses' => 'PaymentController@index',
 		'as' => 'trangPayment'
 	]);
+	Route::get('/search',[
+		'uses' => 'SearchController@index',
+		'as' => 'trangTimKiem'
+	]);
+	Route::post('/search',[
+		'uses' => 'SearchController@postSearch',
+		'as' => 'trangTimKiem'
+	]);
 
 });
 

@@ -106,6 +106,7 @@ Trang chủ shipper
                                         class="font_weight_bold order_table_status gray pointer" id="myBtn"
                                         style="width: 70px;float: left;" data-total-price="{{$total_product}}">Xem
                                         </button>
+                            @foreach($getAmountProduct as $key => $value)
                                 <div id="myModel" class="model">
 
                                     <!-- model content -->
@@ -241,6 +242,7 @@ Trang chủ shipper
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
                             <button title="Nhấn vào để nhận đơn hàng"
                                         class="order_table_status gray pointer" style="width: 105px; float: right;">Nhận đơn

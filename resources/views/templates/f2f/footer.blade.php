@@ -50,7 +50,7 @@
 				    	<p>Team TANQ Capstone 1</p>
 				    	<p>Trường Đại Học Duy Tân</p>
 				    	<p>254 Nguyễn Văn Linh, P.Thạc Gián, Q.Thanh Khê, TP.Đà Nẵng</p>
-				    	<img src="https://static.foody.vn/style//fast2feed/public/templates/f2f/images/gov_seals.jpg" alt="" width="180px">
+				    	<img src="/fast2feed/public/templates/f2f/images/footer_DKBCT.jpg" alt="" width="180px">
 				    </div>
 				    
 				</div>

@@ -352,22 +352,47 @@
 }
 
 /*loader image delay */
-.no-js #loader { display: none;  }
-.js #loader { display: block; position: absolute; left: 100px; top: 0; }
-.se-pre-con {
-position: fixed;
-left: 0px;
-top: 0px;
-width: 100%;
-height: 100%;
-z-index: 9999;
-background: url(/fast2feed/public/templates/f2f/images/loader/Preloader_8.gif) center no-repeat #fff;
+		.loader,
+.loader:after {
+    width: 10em;
+    height: 10em;
 }
-.content {
-    background: url(http://smallenvelop.com/wp-content/uploads/2014/08/simple-pre-loader.jpg
-) center no-repeat;
-    background-size: 100%;
+.loader {            
+    position: fixed;
+    left: 0px;
+    top: 0px;
     width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url(/fast2feed/public/templates/f2f/images/loader/Preloader_8.gif) center no-repeat #fff;
+}
+@-webkit-keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+#loadingDiv {
+    position:absolute;;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:#000;
 }
 /*dropdowm account info*/
 

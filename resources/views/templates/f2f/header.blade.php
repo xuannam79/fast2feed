@@ -162,54 +162,73 @@
 
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#">Tải App</a></li>
-
-                            @if(session()->has('admin')) @foreach($getAdmin as $key => $admin)
-                            <li>
-                                <div class="dropdownInfo">
-                                <button onclick="myFunction()" class="dropbtnInfo">
-                                        {{ $admin->username }}<span class="caret"></span>
-                                </button>
-                                  <div id="myDropdown" class="dropdownInfo-content">
-                                    <a href="#home">
-                                        <div class="">
-                                            <div class="account-head-img">
-                                                <img src="/fast2feed/public/files/account/{{ $admin->avatar }}" alt="" width="60px" height="60px">
-
-
+                            @if(session()->has('admin')) @php $role = session()->get('admin')[0]->role; if($role == 2){ $url = route('trangpostProduct'); echo '
+                            <li><a href="'.$url.'">Đăng sản phẩm</a></li>'; } @endphp @endif @if(session()->has('admin')) @foreach($getAdmin as $key => $admin)
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
+                               <img src="/fast2feed/public/files/account/{{ $admin->avatar }}" alt="" width="20px" height="20px">
+                               <span>{{ $admin->username }}</span>
+                               <span class="caret"></span>
+                               </a>
+                                <ul class="dropdown-menu" style="width: 250px;">
+                                    <div class="table-responsive" style="width: 250px">
+                                        <div class="account">
+                                            <div class="account-head" style="padding-left: 10px">
+                                                <div class="account-head-img">
+                                                    <img src="/fast2feed/public/files/account/{{ $admin->avatar }}" alt="" width="60px" height="60px">
+                                                </div>
+                                                <div class="account-head-info">
+                                                    <p><strong>{{ $admin->username }}</strong></p>
+                                                    <span style="color: #9F9F9C;">{{ $admin->email }}</span>
+                                                </div>
                                             </div>
-                                            <div class="account-head-info">
-                                                <p><strong>{{ $admin->username }}</strong></p>
-                                                <span style="color: #9F9F9C;">{{ $admin->email }}</span>
+                                            <div class="clear"></div>
+                                            <div style="border-top: 1px solid #F8F8F8;border-bottom: 1px solid #F8F8F8;">
+                                                @php
+                                                    if(session()->get('admin')[0]->role == 3){
+                                                        $routeInfo = route('trangInfoShipper');
+                                                    }else{
+                                                        $routeInfo = route('trangTTtaikhoan');
+                                                    }
+                                                @endphp
+                                                
+                                                <a href="{{ $routeInfo }}" title="">
+                                                    <div class="account-body">
+                                                        <strong><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;Thông tin tài khoản</strong>
+                                                    </div>
+                                                </a>
+                                                <a href="#" title="">
+                                                    <div class="account-body">
+                                                        <strong><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;Tổng tiền</strong>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            @if (Session::has('msg'))
+                                            <script type="text/javascript">
+                                                alert("{{ Session::get('msg') }}");
+                                            </script>
+                                            @endif
+                                            <div class="account-foot">
+                                                <a href="#" title="">
+                                                    <a href="{{ route('trangDangXuat') }}" title="">
+                                                        <div class="account-body">
+                                                            <strong><i class="fa fa-power-off"></i>&nbsp;Đăng xuất</strong>
+                                                        </div>
+                                                    </a>
+                                                </a>
                                             </div>
                                         </div>
-                                    </a>
-                                    @php
-                                        if(session()->get('admin')[0]->role == 3){
-                                            $routeInfo = route('trangInfoShipper');
-                                        }else{
-                                            $routeInfo = route('trangTTtaikhoan');
-                                        }
-                                    @endphp
-                                    <a href="{{ $routeInfo }}"><strong><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;Thông tin tài khoản</strong></a>
-                                    @if (Session::has('msg'))
-                                        <script type="text/javascript">
-                                            alert("{{ Session::get('msg') }}");
-                                        </script>
-                                    @endif
-                                    <a href="{{ route('trangDangXuat') }}"><strong><i class="fa fa-power-off"></i>&nbsp;Đăng xuất</strong></a>
-                                  </div>
-                                </div>
+                                    </div>
+                                </ul>
                             </li>
-                            @endforeach
-                            @else()
+                            @endforeach @else()
                             <li><a href="{{ route('trangDangNhap') }}">Đăng nhập</a></li>
                             @endif @if(!session()->has('admin'))
                             <li><a href="{{ route('trangDangKiShipper') }}">Trở thành shipper</a></li>
                             @endif
-                            @if(session()->has('admin')) @php $role = session()->get('admin')[0]->role; if($role == 2){ $url = route('trangpostProduct'); echo '
-                            <li><a href="'.$url.'">Đăng sản phẩm</a></li>'; } @endphp
-                             @endif
+                            <li><a href="#">Tải App</a></li>
+
+                            
                              
 
                         </ul>

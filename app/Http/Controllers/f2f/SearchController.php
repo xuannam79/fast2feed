@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use App\Model\Admin\Cat;
 class SearchController extends Controller
 {
+
+
 	public function __construct(Account $acc, Cat $cat, Customer $customer)
 	{
 		$this->acc = $acc;
@@ -42,15 +44,40 @@ class SearchController extends Controller
                     ->join('catalog', 'catalog.catalog_id', '=', 'customer.catalog_id')
                     ->select('customer.customer_id', 'product.product_name', 'customer.customer_name', 'customer.images', 'customer.address', 'catalog.catalog_name')
                     ->where('customer.customer_name', 'like', "%$keySearch%")
-                    ->get();
-        for($i=0;$i<count($getSearch)-1;$i++){
-               if($getSearch[$i]->customer_id == $getSearch[$i+1]->customer_id){
-                unset($getSearch[$i]);
-            }
 
-        }
-        
-       dd($getSearch);
+                    ->orWhere('product.product_name', 'like', "%$keySearch%")
+                    ->get();
+        // for($i=0;$i<count($getSearch)-1;$i++){
+        //        if($getSearch[$i]->customer_id == $getSearch[$i+1]->customer_id){
+        //         unset($getSearch[$i]);
+        //     }
+
+        // }
+        // for($i=count($getSearch)-1;$i>4 ;$i--){
+        //        if($getSearch[$i]->customer_id == $getSearch[$i-1]->customer_id){
+        //         unset($getSearch[$i]);
+        //     }
+
+        // }
+        // $copy = $getSearch; // create copy to delete dups from 
+        // $usedEmails = array(); // used emails 
+
+        // for($i=0; $i<count($getSearch); $i++) { 
+
+        //     if (in_array($getSearch[$i]->customer_id, $usedEmails)) { 
+        //      unset($copy[$i]); 
+        //     } 
+        //     else { 
+        //      $usedEmails[] = $getSearch[$i]->customer_id; 
+        //     } 
+
+        // } 
+        $newArr = array(); 
+        foreach ($getSearch as $val) { 
+            $newArr[$val->customer_id] = $val;  
+        } 
+        $getSearch = array_values($newArr); 
+
         return view('f2f.search.index', compact('getSearch', 'cats', 'getCatOffset0', 'getCatOffset2', 'getAdmin'));
     }
 }

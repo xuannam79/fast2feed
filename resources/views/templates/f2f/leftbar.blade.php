@@ -25,8 +25,9 @@
   <div class="mk-fullscreen-search-overlay" id="mk-search-overlay">
     <a href="#" class="mk-fullscreen-close" id="mk-fullscreen-close-button"><i class="fa fa-times"></i></a>
     <div id="mk-fullscreen-search-wrapper">
-      <form method="get" id="mk-fullscreen-searchform" action="">
-        <input type="text" value="" placeholder="Đặt Đồ ăn, giao hàng từ 20'... ở Đà Nẵng từ 06:30 - 21:00" id="mk-fullscreen-search-input">
+      <form method="post" id="mk-fullscreen-searchform" action="{{ route('trangTimKiem') }}">
+      	{{ csrf_field() }}
+        <input type="text" name="searchinput" value="" placeholder="Đặt Đồ ăn, giao hàng từ 20'... ở Đà Nẵng từ 06:30 - 21:00" id="mk-fullscreen-search-input">
         <i class="fa fa-search fullscreen-search-icon"><input value="" type="submit"></i>
       </form>
     </div>

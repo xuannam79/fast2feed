@@ -64,17 +64,18 @@
 						  	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clearpadding">
 						  		<div class="alert alert-success alert-block">
 									<button type="button" class="close" data-dismiss="alert">×</button>	
-								        <strong>aaaaaaaaaaaaaaaa</strong>
+								    <strong>aaaaaaaaaaaaaaaa</strong>
 								</div>
-						  		{{-- @foreach($customers as $key => $customer)
+								@if(isset($getSearch))
+						  		@foreach($getSearch as $key => $getsearch)
 						  		@php
-						  			$cusId = $customer->customer_id;
-						  			$images = $customer->images;
-						  			$customer_name = $customer->customer_name;
+						  			$cusId = $getsearch->customer_id;
+						  			$images = $getsearch->images;
+						  			$customer_name = $getsearch->customer_name;
 						  			$slug = str_slug($customer_name);
 						  			$name = title_case($customer_name);
-						  			$catalog = title_case($customer->catalog_name);
-						  			$oldAddress = title_case($customer->address);
+						  			$catalog = title_case($getsearch->catalog_name);
+						  			$oldAddress = title_case($getsearch->address);
 						  			$address = str_limit($oldAddress, 25);
 						  			$url = route('trangCustomer',['slug' => $slug, 'cusId' => $cusId])
 						  		@endphp
@@ -90,8 +91,8 @@
 										<p style="color: black;font-size: 14px;">{{ $catalog }}</p>
 						  			</div>
 								</div>
-								@endforeach --}}
-
+								@endforeach
+								@endif
 								<!-- <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 re-padding">
 						  			<div class="product_item">
 						  				<div class="product-image">

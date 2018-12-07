@@ -43,4 +43,5 @@ class Customer extends Model
     {
         return DB::table('customer')->join('catalog', 'customer.catalog_id', '=', 'catalog.catalog_id')->orderBy('customer.customer_id', 'DESC')->get();
     }
+    
 }

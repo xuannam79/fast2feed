@@ -64,7 +64,9 @@
 						  	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clearpadding">
 						  		<div class="alert alert-success alert-block">
 									<button type="button" class="close" data-dismiss="alert">×</button>	
-								    <strong>aaaaaaaaaaaaaaaa</strong>
+								    <strong>Từ khóa: <span style="color: red">{{$keySearch}},</span>
+										<p style="color: red">{{ count($getSearch) }} kết quả:</p>
+								    </strong>
 								</div>
 								@if(isset($getSearch))
 						  		@foreach($getSearch as $key => $getsearch)

@@ -47,37 +47,11 @@ class SearchController extends Controller
 
                     ->orWhere('product.product_name', 'like', "%$keySearch%")
                     ->get();
-        // for($i=0;$i<count($getSearch)-1;$i++){
-        //        if($getSearch[$i]->customer_id == $getSearch[$i+1]->customer_id){
-        //         unset($getSearch[$i]);
-        //     }
-
-        // }
-        // for($i=count($getSearch)-1;$i>4 ;$i--){
-        //        if($getSearch[$i]->customer_id == $getSearch[$i-1]->customer_id){
-        //         unset($getSearch[$i]);
-        //     }
-
-        // }
-        // $copy = $getSearch; // create copy to delete dups from 
-        // $usedEmails = array(); // used emails 
-
-        // for($i=0; $i<count($getSearch); $i++) { 
-
-        //     if (in_array($getSearch[$i]->customer_id, $usedEmails)) { 
-        //      unset($copy[$i]); 
-        //     } 
-        //     else { 
-        //      $usedEmails[] = $getSearch[$i]->customer_id; 
-        //     } 
-
-        // } 
-        $newArr = array(); 
+        $newArrSearch = array(); 
         foreach ($getSearch as $val) { 
-            $newArr[$val->customer_id] = $val;  
+            $newArrSearch[$val->customer_id] = $val;  
         } 
-        $getSearch = array_values($newArr); 
-
-        return view('f2f.search.index', compact('getSearch', 'cats', 'getCatOffset0', 'getCatOffset2', 'getAdmin'));
+        $getSearch = array_values($newArrSearch); 
+        return view('f2f.search.index', compact('getSearch', 'cats', 'getCatOffset0', 'getCatOffset2', 'getAdmin', 'keySearch'));
     }
 }

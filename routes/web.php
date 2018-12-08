@@ -67,6 +67,10 @@ Route::namespace('f2f')->group(function(){
 		'uses' => 'DanhSachHDController@index',
 		'as' => 'trangDanhSachHD'
 	]);
+	Route::get('/detail-HD/{slug}-{order}',[
+		'uses' => 'DetailDanhSachHDController@index',
+		'as' => 'trangDetailDanhSachHD'
+	]);
 	Route::get('/xac-nhan-code',[
 		'uses' => 'ConfirmCodeController@index',
 		'as' => 'trangConfirmCode'

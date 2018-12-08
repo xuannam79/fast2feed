@@ -104,7 +104,25 @@ class RestauController extends Controller
     }
     public function postAddMenu(AddMenuRequest $request)
     {
+        if(session()->has('admin')){
+             $idAcc = session()->get('admin')[0]->account_id;
+        } 
+        $getCusByAccid = $this->customer->getCusByAccid($idAcc);
+        $cusName = $getCusByAccid->customer_name;
+        $slug = str_slug($cusName);
+        $cusID = $getCusByAccid->customer_id;
+        
         $name = $request->menu;
+
+        $arrAdd['cusID'] = $cusID;
+        $arrAdd['name'] = $name;
+
+        $resultAdd = $this->menu->addMenu($arrAdd);
+        if($resultAdd){
+            return redirect(route('trangCustomer', ['slug' => $slug, 'cusId' => $cusID]))->with('msg','Thêm menu thành công');
+        }else{
+            return redirect(route('trangThemMenu'))->with('msg','Thêm menu không thành công');
+        }
     }
 
 }

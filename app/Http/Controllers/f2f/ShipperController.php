@@ -23,10 +23,11 @@ class ShipperController extends Controller
     	if(session()->has('admin')){
              $mail = session()->get('admin')[0]->email;
              $getAdmin = $this->account->getAccount($mail);
+             $accId = session()->get('admin')[0]->account_id;
         }  
         $getCatOffset0 = $this->cat->getCatOffset0();
         $getCatOffset2 = $this->cat->getCatOffset2();
-        $getAllDanhSachHD = $this->order->getAllDanhSachHD();
+        $getAllDanhSachHD = $this->shipper->getAllDanhSachHDShipper($accId);
         $getAmountProduct = $this->order->getAmountProduct();
     	return view('f2f.shipper.index', compact('getAdmin','getAllDanhSachHD','getCatOffset0','getCatOffset2','getAmountProduct'));
     }

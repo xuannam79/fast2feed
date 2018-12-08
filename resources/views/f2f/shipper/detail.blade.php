@@ -17,8 +17,9 @@ Chi Tiết Hóa Đơn
     $phone = ($getAllDanhSachHD->phone_res);
     $date = ($getAllDanhSachHD->date_create);
     $time = ($getAllDanhSachHD->time);
+    $slug = str_slug($res_name);
+    $url = route('trangTestMap',['slug' => $slug, 'order' => $order]) 
 @endphp
-
 <!-- model content -->
 <div id="myModel" style="display: block" class="model fade1 model-order show1" tabindex="-1"
      role="dialog" data-backdrop="static" data-keyboard="false">
@@ -133,11 +134,14 @@ Chi Tiết Hóa Đơn
                 </div>
             </div>
             <div class="model-footer">
-                <div class="submit-order">NHẬN</div>
+                
+                <a href="{{ $url }}" title="chọn để tới bảng hướng dẫn đường đi" style="width: 885px" target="_blank"><div class="submit-order">CHỈ ĐƯỜNG ĐI</div></a>
+                
             </div>
         </div>
      </div>
 </div>
+
 <div class="row" style="margin-bottom: 375px">
     
 </div>

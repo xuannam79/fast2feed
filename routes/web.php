@@ -107,7 +107,7 @@ Route::namespace('f2f')->group(function(){
 		'uses' => 'ThongBaoController@index',
 		'as' => 'trangThongBao'
 	]);
-	Route::get('/test-map',[
+	Route::get('/test-map/{slug}-{order}',[
 		'uses' => 'TestMapController@index',
 		'as' => 'trangTestMap'
 	]);

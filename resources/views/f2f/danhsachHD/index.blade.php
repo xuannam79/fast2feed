@@ -104,8 +104,11 @@ Danh Sách Hóa Đơn
                                     @if($status == 1)
                                     <a href="{{ $url }}" style="color: black"><button title="Nhấn vào để xem chi tiết" class="font_weight_bold order_table_status gray pointer" id="myBtn"style="width: 70px;float: left;" data-toggle="modal" data-target="#mymodal"  data-total-price="{{$total_product}}">Xem
                                     </button></a>
+                                    @else
+                                    @endif
                                 </td>
                                 <td>
+                                  @if($status == 1)
                                     <button title="Nhấn vào để nhận đơn hàng"
                                                 class="order_table_status gray pointer" style="width: 105px; float: right;">Nhận đơn
                                     </button>

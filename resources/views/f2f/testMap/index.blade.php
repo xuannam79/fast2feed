@@ -77,16 +77,14 @@
     </style>
   </head>
   <body>
-    <div id="floating-panel">
-      @foreach($getTransactionHistory as $key => $value)
-      @php
-        $address_res = $value->address;
-        $address_cus = $value->address_res;
+    @php
+        $address_res = ($getService->address);
+        $address_cus = ($getService->address_res);
       @endphp
+    <div id="floating-panel">
       <input id="start" type="hidden" value="{{ $address_res }}" style="width: 300px;">
       <input id="end" type="hidden" value="{{ $address_cus }}" style="width: 300px">
       <input id="submit" type="submit" value="Chỉ đường" style="width: 100px">
-      @endforeach
     </div>
     <div id="right-panel"></div>
     <div id="map"></div>

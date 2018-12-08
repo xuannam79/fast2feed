@@ -8,6 +8,7 @@ use App\Model\Admin\Customer;
 use App\Model\Admin\Account;
 use App\Model\Admin\Menu;
 use App\Model\Admin\Product;
+use App\Http\Requests\AddMenuRequest;
 use App\Model\Admin\Cat;
 
 class RestauController extends Controller
@@ -101,9 +102,9 @@ class RestauController extends Controller
         $getCusByAccid = $this->customer->getCusByAccid($idAcc);
         return view('f2f.restau.addMenu', compact('cats', 'getCatOffset0', 'getCatOffset2', 'menus', 'getAdmin'));
     }
-    public function postAddMenu()
+    public function postAddMenu(AddMenuRequest $request)
     {
-
+        $name = $request->menu;
     }
 
 }

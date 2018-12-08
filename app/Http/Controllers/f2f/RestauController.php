@@ -88,5 +88,22 @@ class RestauController extends Controller
             return redirect()->route('trangDangNhap');
         }
     }
+    public function addMenu()
+    {
+        if(session()->has('admin')){
+             $mail = session()->get('admin')[0]->email;
+             $getAdmin = $this->account->getAccount($mail);
+             $idAcc = session()->get('admin')[0]->account_id;
+        } 
+        $cats = $this->cat->getAll();
+        $getCatOffset0 = $this->cat->getCatOffset0();
+        $getCatOffset2 = $this->cat->getCatOffset2();
+        $getCusByAccid = $this->customer->getCusByAccid($idAcc);
+        return view('f2f.restau.addMenu', compact('cats', 'getCatOffset0', 'getCatOffset2', 'menus', 'getAdmin'));
+    }
+    public function postAddMenu()
+    {
+
+    }
 
 }

@@ -51,125 +51,152 @@
                 <h1 class="order_title mb-4 text-center" style="font-size: 20px">Hóa đơn đã nhận</h1>
                 <div class="order_table">
                     <div class="order_list">
-                        <div class="order_list_heading order_table_row">
-                            <div class="order_table_cell order_list_row_col1">STT
-                            </div>
-                            <div class="order_table_cell order_list_row_col2">Nơi nhận hàng
-                            </div>
-                            <div class="order_table_cell order_list_row_col3">Nơi giao hàng
-                            </div>
-                            <div class="order_table_cell order_list_row_col6">Trạng thái
-                            </div>
-                            <div class="order_table_cell order_list_row_col7">
-                            </div>
-                        </div>
-                        <div class="order_table_row">
+                        <table class="table table-data2">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Mã hóa đơn</th>
+                                <th style="width: 310px">Nơi nhận hàng</th>
+                                <th style="width: 310px">Nơi giao hàng</th>
+                                <th style="width: 150px">Trạng thái</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             @foreach($getAllDanhSachHD as $key => $value)
+                            @php
+                                $order = $value->order_id;
+                                $address = $value->address;
+                                $address_cus = $value->address_res;
+                                $name_res = $value->customer_name;
+                                $name_cus = $value->restaurant_name;
+                                $phone = $value->phone_res;
+                                $status = $value->status;
+                                $transport_fee = $value->transport_fee;
+                                $count_product = 0;
+                                $total_product=0;
+                            @endphp
+                                @foreach($getAmountProduct as $key => $value)
                                 @php
-                                    $order = $value->order_id;
-                                    $address = $value->address_res;
-                                    $address_cus = $value->address;
-                                    $status = $value->status;
-                                    $transport_fee = $value->transport_fee;
+                                    $sanpham = $value->order_id;
+                                    if($order == $sanpham){
+                                        $product_name = $value->product_name;
+                                        $amount = $value->amount;
+                                        $price = $value->price;
+                                        $total = $amount * $price;
+                                        $total2 = number_format($total);
+                                        $count_product += $amount;
+                                        $total_product = $total_product + $total;
+                                    }   
+                                    else continue;
                                 @endphp
-                            <div class="order_table_cell order_list_row_col1">{{ $order }}
-                            </div>
-                            <div class="order_table_cell order_list_row_col2">{{ $address }}
-                            </div>
-                            <div class="order_table_cell order_list_row_col3">{{ $address_cus }}
-                            </div>
-                            <div class="order_table_cell order_list_row_col6">Còn 5 phút
-                            </div>
-                            <div class="order_table_cell order_list_row_col7">
-                                <button title="Nhấn vào để xem chi tiết"
-                                        class="font_weight_bold order_table_status gray pointer" id="myBtn"
-                                        style="width: 70px">Xem
-                                </button>
-
-                                <div id="myModel" class="model">
-
+                                @endforeach
+                            <tr>
+                                <td>{{ $loop->index+1 }}</td>
+                                <td style="padding-left: 40px">{{ $order }}</td>
+                                <td>{{ $address }}</td>
+                                <td>{{ $address_cus }}</td>
+                                <td>
+                                    @if($status == 1)
+                                    Còn 10 phút
+                                    @else
+                                    Đã hủy
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($status == 1)
+                                    <button id="myBtn" title="Nhấn vào để xem chi tiết" class="font_weight_bold order_table_status gray pointer" style="width: 70px;float: left;" data-total-price="{{$total_product}}">Xem
+                                    </button>
                                     <!-- model content -->
-                                    <div id="myModel" class="model fade1 model-order show1" id="model-order"
-                                         tabindex="-1"
-                                         role="dialog" data-backdrop="static" data-keyboard="false"
-                                         style="padding-right: 16px; display: block;">
+                                    <div id="myModel" class="model fade1 model-order show1" tabindex="-1"
+                                         role="dialog" data-backdrop="static" data-keyboard="false">
                                         <div class="model-dialog model-dialog-centered" role="document">
-                                            <div class="model-content model-order-detail"><span class="close"
+                                            <div class="model-content model-order-detail"><span id="x" class="close"
                                                                                                 data-dismiss="model">x</span>
                                                 <div class="model-header">Chi tiết hóa đơn</div>
                                                 <div class="model-body">
                                                     <div class="order-left">
-                                                        <div id="map" class="map-order">
-                                                            
-                                                        </div>
+                                                        <div id="map" class="map-order"></div>
                                                         <div class="direction-content">
                                                             <div class="direction-info">
                                                                 <div class="direction-from">
-                                                                    <div class="direction-name">Điểm lấy hàng - Tên quán
+                                                                    <div class="direction-name">Điểm lấy hàng - {{ $name_res }}
                                                                     </div>
-                                                                    <input id="start" type="hidden" value="254 Nguyễn Văn Linh, Thanh Khê, Đà Nẵng" style="width: 300px">254 Nguyễn Văn Linh, Thanh Khê, Đà Nẵng
-                                                                    
+                                                                    <input id="start" type="hidden" value="{{ $address }}" style="width: 300px">
+                                                                    {{ $address }}
                                                                 </div>
                                                                 <div class="direction-to">
                                                                     <div class="">
                                                                         <div class="direction-name"
                                                                              id="shipping-address">
-                                                                            <span>Điểm giao hàng - Tên khách</span><span> - Sđt khách </span>
+                                                                            <span>Điểm giao hàng - {{ $name_cus }}</span><span> - {{ $phone }} </span>
                                                                         </div>
-                                                                        <input id="end" type="hidden" value="25 Đồng Kè, Đà Nẵng" style="width: 300px">25 Đồng Kè, Đà Nẵng
+                                                                        <input id="end" type="hidden" value="{{ $address_cus }}" style="width: 300px">
+                                                                        {{ $address_cus }}
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div>
-                                                                <div class="direction-time"><span class="fa"><i
+                                                                <div id="result" class="direction-time"><span class="fa"><i
                                                                                 class="far fa-clock"></i></span><span
-                                                                            class="txt-bold"> Thời gian giao:  15:35 - 24/10 - </span><span
-                                                                            class="txt-red">3.0km</span></div>
-                                                                <div id="submit" class="change-info">Hiển thị khoảng cách trên bản đồ
+                                                                            class="txt-bold"> Thời gian giao:  {{ $dt->toTimeString() }} - {{ $dt->toDateString() }} - </span><span id="in_kilo"
+                                                                            class="txt-red"></span></div>
+                                                                <div id="submit" class="change-info">
                                                                 </div>
                                                                 
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="order-right"><p class="title-popup-order">Thông tin sản
-                                                            phẩm</p>
+                                                    @php
+                                                        $count_product = 0;
+                                                        $total_product = 0;
+                                                    @endphp
+                                                    <div class="order-right">
+                                                        <p class="title-popup-order">Thông tin sản phẩm</p>
                                                         <div class="order-list">
-                                                            <div class="order-item"><span
-                                                                        class="order-item-number">1</span>
+                                                            @foreach($getAmountProduct as $key => $value)
+                                                                @php
+                                                                    $sanpham = $value->order_id;
+                                                                    if($order == $sanpham){
+                                                                        $product_name = $value->product_name;
+                                                                        $money_transport_fee = $value->transport_fee_order;
+                                                                        $total = $value->total;
+                                                                        $amount = $value->amount;
+                                                                        $price = $value->price;
+                                                                        $total3 = $amount * $price;
+                                                                        $total2 = number_format($total3);
+                                                                        $count_product += $amount;
+                                                                        $total_product = $total_product + $total3;
+                                                                    }   
+                                                                    else continue;
+                                                                @endphp
+                                                            <div class="order-item">
+                                                                <span class="order-item-number">{{ $amount }}</span>
                                                                 <div class="order-item-info">
-                                                                    <div class="order-item-name"><span class="txt-bold">Bún thịt nướng chả giò&nbsp;</span>
+                                                                    <div class="order-item-name"><span class="txt-bold">
+                                                                    {{ $product_name }}&nbsp;</span>
                                                                     </div>
                                                                     <div class="order-item-note"></div>
                                                                 </div>
-                                                                <div class="order-item-price">55,000 <span class="unit">đ</span>
+                                                                <div class="order-item-price">{{ $total2 }} <span class="unit">đ</span>
                                                                 </div>
+                                                               
                                                             </div>
-                                                            <div class="order-item"><span
-                                                                        class="order-item-number">1</span>
-                                                                <div class="order-item-info">
-                                                                    <div class="order-item-name"><span class="txt-bold">Cơm gà&nbsp;</span>
-                                                                    </div>
-                                                                    <div class="order-item-note"></div>
-                                                                </div>
-                                                                <div class="order-item-price">40,000 <span class="unit">đ</span>
-                                                                </div>
-                                                            </div>
+                                                            @endforeach
                                                         </div>
                                                         <div class="info-order">
                                                             <div class="row1">
-                                                                <div class="cel">Tổng tiền lấy <span
-                                                                            class="txt-bold">2</span>
-                                                                    sản phẩm
+                                                                <div class="cel">Tổng tiền lấy <span class="txt-bold">{{ $count_product }}</span> phần
                                                                 </div>
-                                                                <div class="cel-auto txt-bold">95,000 <span
-                                                                            class="unit">đ</span></div>
+                                                                <div class="cel-auto txt-bold">{{ number_format($total_product)     }} <span class="unit">đ</span>
+                                                                </div>
                                                             </div>
                                                             <div class="row1">
                                                                 <div class="cel">Phí vận chuyển: <span
-                                                                            class="txt-red">3.0km</span><span
+                                                                            class="txt-red" id="in_kilo1"></span><span
                                                                             class="show1-fee-min">&nbsp;</span>
                                                                 </div>
-                                                                <div class="cel-auto">21,000 <span class="unit">đ</span>
+                                                                <div class="cel-auto"><span></span>{{ number_format($money_transport_fee) }} <span class="unit">đ</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -177,53 +204,45 @@
                                                         <div class="pedding-10 txt-bold font16">
                                                             <div class="row1">
                                                                 <div class="cel"><span>Tổng tiền giao hàng</span></div>
-                                                                <div class="cel-auto"><span>116,000 </span><span
-                                                                            class="unit">đ</span></div>
+                                                                <div class="cel-auto"><span>{{ number_format($total) }} </span><span class="unit">đ</span></div>
                                                             </div>
                                                         </div>
                                                         <div class="payment-methods">
                                                             <div class="row1">
-                                                                <div class="cel"><span
-                                                                            class="txt-bold font16 txt-black">Kiểu thanh toán</span>
+                                                                <div class="cel"><span class="txt-bold font16 txt-black">Kiểu thanh toán</span>
                                                                 </div>
-                                                                <div class="cel-auto"><span
-                                                                            class="txt-blue">Trực tiếp</span><i
-                                                                            class="icon-arrow-thin right"
-                                                                            aria-hidden="true"></i></div>
+                                                                <div class="cel-auto"><span class="txt-blue">
+                                                                        Trực tiếp
+                                                                    </span><i class="icon-arrow-thin right" aria-hidden="true"></i>
+                                                                </div>
                                                             </div>
                                                         </div>
 
-                                                        <div class="not-vat"><span class="icon icon-vatnot"></span><span
-                                                                    class="txt-gray">Hóa đơn VAT không dược cung cấp</span>
+                                                        <div class="not-vat"><span class="icon icon-vatnot"></span><span 
+                                                            class="txt-gray">Hóa đơn VAT không dược cung cấp</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="model-footer">
-                                                    <a href="{{ route('trangTestMap') }}" target="_blank" 
-                                                    style="color: #fff;
-                                                    background-color: #0288d1;
-                                                    font-size: 16px;
-                                                    font-weight: 700;
-                                                    display: block;
-                                                    padding: 10px 0;
-                                                    cursor: pointer;
-                                                    transition: all .2s ease;
-                                                    width: 100%;
-                                                    border-radius: 5px;">CHỈ ĐƯỜNG ĐI</a>
+                                                    <a href="{{ route('trangTestMap') }}" target="_blank" style="width: 885px"><div class="submit-order">CHỈ ĐƯỜNG ĐI</div></a>
                                                 </div>
                                             </div>
-                                        </div>
+                                         </div>
                                     </div>
-                                </div>
-
-                            </div>
-                            <div class="order_table_cell order_list_row_col8">
-                                <button title="Nhấn vào để hủy đơn hàng"
-                                        class="order_table_status gray pointer" style="width: 105px">Hủy
-                                </button>
-                            </div>
+                                    <!-- end model -->                
+                                </td>
+                                <td>
+                                    <button title="Nhấn vào để nhận đơn hàng"
+                                                class="order_table_status gray pointer" style="width: 105px; float: right;">Hủy
+                                    </button>
+                                    @else
+                                    @endif
+                                </td>
+                            </tr>
                             @endforeach
-                        </div>
+                        </tbody>
+                    </table>
+                        
                         
                     </div>
                 </div>
@@ -254,8 +273,9 @@
 
         var onChangeHandler = function() {
           calculateAndDisplayRoute(directionsService, directionsDisplay);
+          test(directionsService, directionsDisplay);
         };
-        document.getElementById('submit').addEventListener('click', onChangeHandler);
+        document.getElementById('myBtn').addEventListener('click', onChangeHandler);
         //document.getElementById('start').addEventListener('click', onChangeHandler);
         //document.getElementById('end').addEventListener('click', onChangeHandler);
       }
@@ -300,6 +320,52 @@
             i.setContent(content);
             i.setPosition(middle);
             i.open(map);
+          }
+        })
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+      function test(directionsService, directionsDisplay) {
+        var start = document.getElementById('start').value;
+        var end = document.getElementById('end').value;
+        directionsService.route({
+          origin: start,
+          destination: end,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+            var m = Math.ceil((response.routes[0].overview_path.length)/2);
+            var middle = response.routes[0].overview_path[m];
+            var service = new google.maps.DistanceMatrixService;
+            service.getDistanceMatrix({
+              origins: [start],
+              destinations: [end],
+              travelMode: 'DRIVING',
+              unitSystem: google.maps.UnitSystem.METRIC,
+              avoidHighways: false,
+              avoidTolls: false
+        }, function(response, status) {
+          if (status === 'OK') {
+            var originList = response.originAddresses;
+            var destinationList = response.destinationAddresses;
+            for (var i = 0; i < originList.length; i++) {
+              var results = response.rows[i].elements;
+              for (var j = 0; j < results.length; j++){
+                var element = results[j];
+                var dt = element.distance.text;
+                var dr = element.duration.text;
+              }
+            }
+            var i = new google.maps.InfoWindow();
+            var myin_kilo = document.getElementById('in_kilo');
+            //dt = in_kilo.innerHTML();
+            document.getElementById('in_kilo').innerHTML= dt;
+            document.getElementById('in_kilo1').innerHTML=dt;
+            //var total_price = so * total;
+            
           }
         })
           } else {

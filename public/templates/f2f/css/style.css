@@ -341,7 +341,7 @@ address {
     overflow-x: hidden;
     overflow-y: auto;
 }
-.fade11 {
+.fade1 {
     transition: opacity .15s linear;
 }
 
@@ -354,7 +354,7 @@ address {
 .model.show1 .model-dialog {
     transform: translate(0);
 }
-.model.fade11 .model-dialog {
+.model.fade1 .model-dialog {
     transition: transform .3s ease-out;
 }
 .model-order .model-dialog {

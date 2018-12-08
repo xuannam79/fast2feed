@@ -110,7 +110,7 @@
                             </li>
                             @endif @endif
                             <!-- Modal thông báo order -->
-                            <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal fade" id="" role="dialog">
                                 <div class="modal-dialog">
                                     <!-- Modal content-->
                                     <div class="modal-content" style="width: 175%;right:226px;">

@@ -7,6 +7,7 @@ use App\Model\Admin\Account;
 use App\Model\Admin\Shipper;
 use App\Model\Admin\Order;
 use App\Model\Admin\Cat;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 
 class ShipperController extends Controller
@@ -20,14 +21,16 @@ class ShipperController extends Controller
 	}
     public function index()
     {
+        $dt = Carbon::now('Asia/Ho_Chi_Minh');
     	if(session()->has('admin')){
              $mail = session()->get('admin')[0]->email;
              $getAdmin = $this->account->getAccount($mail);
         }  
         $getCatOffset0 = $this->cat->getCatOffset0();
         $getCatOffset2 = $this->cat->getCatOffset2();
+        $getAmountProduct = $this->order->getAmountProduct();    
         $getAllDanhSachHD = $this->order->getAllDanhSachHD();
-    	return view('f2f.shipper.index', compact('getAdmin','getAllDanhSachHD','getCatOffset0','getCatOffset2'));
+    	return view('f2f.shipper.index', compact('getAdmin','getAllDanhSachHD','getCatOffset0','getCatOffset2','getAmountProduct','dt'));
     }
     public function getProfile(){
          return view('f2f.shipper.edit-profile');

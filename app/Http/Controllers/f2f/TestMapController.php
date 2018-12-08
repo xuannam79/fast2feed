@@ -14,7 +14,7 @@ class TestMapController extends Controller
 	}
     public function index()
     {
-    	$getTransactionHistory = $this->order->getTransaction();
+    	$getTransactionHistory = $this->order->getAllDanhSachHD2();
     	return view('f2f.testMap.index',compact('getTransactionHistory'));
     }
 }

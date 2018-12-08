@@ -111,101 +111,14 @@
 		</div>
 	 	
 
-		
-	 	<div id="floating-panel" style="width: 370px">
-      <strong>Start:</strong>
-      <input id="start" type="text" value="254 Nguyễn Văn Linh, Thanh Khê, Đà Nẵng" style="width: 300px">
-      <br>
-      <strong>End:</strong>
-      <input id="end" type="text" value="254 Hoàng Diệu, Hải Châu, Đà Nẵng" style="width: 300px">
-      <input id="submit" type="submit" value="Chỉ đường">
-    </div>
 	<div class="row">
-	 		<div id="map" style="width:1169px;height:300px;z-index: 1px;position: relative;">
-	 		</div>
+	 		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1083.7054444049604!2d108.20952073055754!3d16.060118857219933!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219b4239d8e51%3A0x8e614086e99beb7c!2zMTgyIE5ndXnhu4VuIFbEg24gTGluaCwgVGjhuqFjIEdpw6FuLCBRLiBUaGFuaCBLaMOqLCDEkMOgIE7hurVuZyA1NTAwMDAsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1544232103812" width="1169" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
 	 		
 	</div>
 	
 	
 
-	<script>
-      var map;
-      function initMap() {
-        var directionsDisplay = new google.maps.DirectionsRenderer;
-        var directionsService = new google.maps.DirectionsService;
-        map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 12,
-          center: {lat: 16.0544068, lng: 108.2021667}
-        });
-        var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
-        var beachMarker = new google.maps.Marker({
-          position: {lat: 16.0544068, lng: 108.2021667},
-          map: map,
-          icon: image
-        });
-        directionsDisplay.setMap(map);
-        directionsDisplay.setPanel(document.getElementById('right-panel'));
-        
-        var control = document.getElementById('floating-panel');
-        control.style.display = 'block';
-        map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
-
-        var onChangeHandler = function() {
-          calculateAndDisplayRoute(directionsService, directionsDisplay);
-        };
-        document.getElementById('submit').addEventListener('click', onChangeHandler);
-        //document.getElementById('start').addEventListener('click', onChangeHandler);
-        //document.getElementById('end').addEventListener('click', onChangeHandler);
-      }
-
-      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        var start = document.getElementById('start').value;
-        var end = document.getElementById('end').value;
-        directionsService.route({
-          origin: start,
-          destination: end,
-          travelMode: 'DRIVING'
-        }, function(response, status) {
-          if (status === 'OK') {
-            directionsDisplay.setDirections(response);
-            var m = Math.ceil((response.routes[0].overview_path.length)/2);
-            var middle = response.routes[0].overview_path[m];
-            var service = new google.maps.DistanceMatrixService;
-            service.getDistanceMatrix({
-              origins: [start],
-              destinations: [end],
-              travelMode: 'DRIVING',
-              unitSystem: google.maps.UnitSystem.METRIC,
-              avoidHighways: false,
-              avoidTolls: false
-        }, function(response, status) {
-          if (status === 'OK') {
-            var originList = response.originAddresses;
-            var destinationList = response.destinationAddresses;
-            for (var i = 0; i < originList.length; i++) {
-              var results = response.rows[i].elements;
-              for (var j = 0; j < results.length; j++){
-                var element = results[j];
-                var dt = element.distance.text;
-                var dr = element.duration.text;
-              }
-            }
-            var i = new google.maps.InfoWindow();
-            var content = '<div>'+dt+
-            '<br>'+dr+
-            '</div>';
-            //alert(content);
-            i.setContent(content);
-            i.setPosition(middle);
-            i.open(map);
-          }
-        })
-          } else {
-            window.alert('Directions request failed due to ' + status);
-          }
-        });
-      }
-    </script>
+	
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzmyhWaNEQ_i55-LLOfNPka-8BAhZRUaM&callback=initMap"
     async defer></script>
 {{-- test --}}

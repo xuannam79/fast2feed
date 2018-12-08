@@ -17,7 +17,7 @@ class Order extends Model
     }
     public function getTransaction()
     {
-        return DB::table('orders')->join('customer', 'customer.customer_id', '=', 'orders.customer_id')->join('restaurant', 'restaurant.restaurant_id', '=', 'orders.restaurant_id')->select('orders.order_id','customer.address','restaurant.address_res')->simplePaginate(1);
+        return DB::table('orders')->join('customer', 'customer.customer_id', '=', 'orders.customer_id')->join('restaurant', 'restaurant.restaurant_id', '=', 'orders.restaurant_id')->select('orders.order_id','customer.address','restaurant.address_res','restaurant.restaurant_name','customer.customer_name','orders.date_create','orders.total','orders.status')->orderBy('orders.order_id','DESC')->get();
     }
     public function getAllDanhSachHD()
     {

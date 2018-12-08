@@ -20,8 +20,8 @@ class ManagePostAdminController extends Controller
              $mail = session()->get('admin')[0]->email;
              $getAdmin = $this->account->getAccount($mail);
         }  
-    	$customers = $this->customer->getPost();
-        $nopost = $this->customer->getNoPost();
-    	return view('admin.customer.managePost', compact('customers', 'getAdmin','nopost'));
+    	$getPost = $this->customer->getAllPost();
+        $getNoPost = $this->customer->getAllNoPost();
+    	return view('admin.customer.managePost', compact('getPost', 'getAdmin','getNoPost'));
     }
 }

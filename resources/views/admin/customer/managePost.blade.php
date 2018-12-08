@@ -34,19 +34,19 @@
                                                 <th>images</th>
                                                 <th>address</th>
                                                 <th>phone</th>
-                                                <th>catalog</th>
+                                                <th>poster</th>
                                                 <th>status</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($customers as $key => $customer)
+                                            @foreach($getPost as $key => $customer)
                                             @php
                                                 $name = $customer->customer_name;
                                                 $images = $customer->images;
-                                                $address = $customer->address_res;
-                                                $phone = $customer->phone_res;
-                                                $catalog = $customer->catalog_name;
+                                                $address = $customer->address;
+                                                $phone = $customer->phone;
+                                                $cus_name = $customer->restaurant_name;
                                                 $status = $customer->status_customer;
                                                 
 
@@ -68,7 +68,7 @@
                                                 </td>
                                                 <td>{{ $address }}</td>
                                                 <td>{{ $phone }}</td>
-                                                <td>{{ $catalog }}</td>
+                                                <td>{{ $cus_name }}</td>
                                                 <td>
                                                     @if($status == 1)
                                                     <span style="color: green">Đã duyệt</span>
@@ -77,10 +77,10 @@
                                                 
                                                 <td>
                                                     <div class="table-data-feature">
-                                                        <a href="#" title="" class="item">
+                                                        <a href="#" title="chọn để sửa bài đăng" class="item">
                                                             <i class="zmdi zmdi-edit"></i>
                                                         </a>
-                                                        <a href="#" title="" class="item">
+                                                        <a href="#" title="chọn để xóa bài đăng" class="item">
                                                             <i class="zmdi zmdi-delete"></i>
                                                         </a>
                                                     </div>
@@ -110,19 +110,19 @@
                                                 <th>images</th>
                                                 <th>address</th>
                                                 <th>phone</th>
-                                                <th>catalog</th>
+                                                <th>poster</th>
                                                 <th>status</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($nopost as $key => $customer)
+                                            @foreach($getNoPost as $key => $customer)
                                             @php
                                                 $name = $customer->customer_name;
                                                 $images = $customer->images;
-                                                $address = $customer->address_res;
-                                                $phone = $customer->phone_res;
-                                                $catalog = $customer->catalog_name;
+                                                $address = $customer->address;
+                                                $phone = $customer->phone;
+                                                $cus_name = $customer->restaurant_name;
                                                 $status = $customer->status_customer;
                                             @endphp
                                             <tr class="tr-shadow">
@@ -142,7 +142,7 @@
                                                 </td>
                                                 <td>{{ $address }}</td>
                                                 <td>{{ $phone }}</td>
-                                                <td>{{ $catalog }}</td>
+                                                <td>{{ $cus_name }}</td>
                                                 <td>
                                                     @if($status == 2)
                                                     <span style="color: red">Chưa duyệt</span>
@@ -151,10 +151,10 @@
                                                 
                                                 <td>
                                                     <div class="table-data-feature">
-                                                        <a href="#" title="" style="margin-right: 20px; margin-top: 5px">
+                                                        <a href="#" title="chọn để duyệt bài đăng" style="margin-right: 20px; margin-top: 5px">
                                                             Duyệt
                                                         </a>
-                                                        <a href="#" title="" class="item">
+                                                        <a href="#" title="chọn để xóa bài đăng" class="item">
                                                             <i class="zmdi zmdi-delete"></i>
                                                         </a>
                                                     </div>

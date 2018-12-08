@@ -43,5 +43,12 @@ class Customer extends Model
     {
         return DB::table('customer')->join('catalog', 'customer.catalog_id', '=', 'catalog.catalog_id')->orderBy('customer.customer_id', 'DESC')->get();
     }
+    public function getCusByAccid($idAcc)
+    {
+        return DB::table('customer')
+        ->join('account', 'account.account_id', '=', 'customer.account_id')
+        ->where('customer.account_id', $idAcc)
+        ->first();
+    }
     
 }

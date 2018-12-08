@@ -48,6 +48,8 @@
 				    <strong style="font-size: 15px">Địa chỉ</strong>
 				    <div style="font-size: 12px;color: gray;margin-top: 15px">
 				    	<p>Team TANQ Capstone 1</p>
+				    	<p>Chuyên ngành Công nghệ phần mềm</p>
+				    	<p>Khoa Đào Tạo Quốc Tế</p>
 				    	<p>Trường Đại Học Duy Tân</p>
 				    	<p>254 Nguyễn Văn Linh, P.Thạc Gián, Q.Thanh Khê, TP.Đà Nẵng</p>
 				    	<img src="/fast2feed/public/templates/f2f/images/footer_DKBCT.jpg" alt="" width="180px">

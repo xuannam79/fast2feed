@@ -51,6 +51,10 @@ Route::namespace('f2f')->group(function(){
 		'uses' => 'PostProductController@index',
 		'as' => 'trangpostProduct'
 	]);
+	Route::post('/postProduct',[
+		'uses' => 'PostProductController@postProduct',
+		'as' => 'trangpostProduct'
+	]);
 	Route::get('/index-shipper',[
 		'uses' => 'ShipperController@index',
 		'as' => 'trangShipper'

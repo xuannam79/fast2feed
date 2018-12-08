@@ -18,7 +18,7 @@ class Menu extends Model
     }
     public function getItem($cusId)
     {
-    	return DB::table('menu')->select('menu.menu_name', 'menu.menu_id')->join('customer', 'menu.customer_id', '=', 'customer.customer_id')->where('menu.customer_id', $cusId)->get();
+    	return DB::table('menu')->select('menu.menu_name', 'menu.menu_id', 'menu.status')->join('customer', 'menu.customer_id', '=', 'customer.customer_id')->where('menu.customer_id', $cusId)->get();
     }
     public function updateStatusMenu($id, $presentStatus){
         if($presentStatus == "1"){

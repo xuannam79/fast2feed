@@ -65,7 +65,9 @@
                                     $slug = str_slug($catOffset0->catalog_name);
                                     $nameCatOffset0 = title_case($catOffset0->catalog_name);
                                 @endphp
+                                @if($catOffset0->status == 1)
                                 <li><a href="{{ route('trangDanhMuc', ['slug' => $slug, 'cid' => $idCatOffset0]) }}">{{ $nameCatOffset0 }}</a></li>
+                                @endif
                             @endforeach
                             <li>
                                 <a href="#">...</a>
@@ -76,8 +78,10 @@
                                         $slug2 = str_slug($catOffset2->catalog_name);
                                         $nameCatOffset2 = title_case($catOffset2->catalog_name);
                                     @endphp
+                                    @if($catOffset2->status == 1)
                                         <li><a href="{{ route('trangDanhMuc', ['slug' => $slug2, 'cid' => $idCatOffset2]) }}">{{ $nameCatOffset2 }}</a>
                                         </li>
+                                    @endif
                                     @endforeach
                                 </ul>
                             </li>

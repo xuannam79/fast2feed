@@ -43,7 +43,7 @@
 				                <a href="/fast2feed/public/files/customer/{{ $images }}" class="jqzoom" rel="gal1" title="triumph">
 						            <img src="/fast2feed/public/files/customer/{{ $images }}" alt="" style="width:480px;height: 300px">
 						        </a>
-								<p style="margin-top: 35px;font-size: 15px;text-align: left;padding-left: 12px">Đặt món giao hàng tận nơi tại {{ $name }}</p>
+								<p style="margin-top: 35px;font-size: 15px;text-align: left;padding-left: 12px">Đặt món giao hàng tận nơi tại <strong>{{ $name }}</strong></p>
 						  	</div>
 						  	<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="font-family: Time New Roman;border-bottom: 1px solid #EEEEEE">
 						  		<span style="font-size: 14px">
@@ -138,8 +138,9 @@
 					  			$menuName = title_case($menu->menu_name);
 					  			$idMenu = $menu->menu_id;
 					  		@endphp
-						  	<a href="#menu{{ $idMenu }}" class="list-group-item">{{ $menuName }}</a>
-						  	
+							@if($menu->status == 1)
+						  		<a href="#menu{{ $idMenu }}" class="list-group-item">{{ $menuName }}</a>
+						  	@endif
 						  	@endforeach
 						  	{{-- <a id="active" href="{{ route('trangDanhMuc') }}" class="list-group-item">Kem sữa</a> --}}
 						</div>
@@ -176,6 +177,7 @@
 					  			$nameMenu = $menuProduct->menu_name;
 					  			$idMenuPK = $menuProduct->menu_id;
 					  		@endphp
+					  		@if($menuProduct->status == 1)
 					  		<div class="item">
 						  		<div class="item-cat" id="menu{{ $idMenuPK }}">
 						  			<h4>{{ $nameMenu }}</h4>
@@ -237,6 +239,7 @@
 								@endif
 								@endforeach
 							</div>
+							@endif
 							@endforeach
 					  	</div>
 
@@ -304,11 +307,6 @@
 		        	window.setTimeout(function(){window.location.reload()}, 300);
 		       }
 		    </script>
-			<script>
-        // function tai_lai_trang(){
-        //     location.reload();
-        // }
-    </script>
 			{{-- //smooth scrolling page --}}
 			<script>
 				$("a[href*='#']:not([href='#])").click(function() {
@@ -336,6 +334,7 @@
 					@endphp
 					@foreach($arrCart as $key => $aCart)
 					@php
+						$idProduct = $aCart['idProduct'];
 						$name = $aCart['nameProduct'];
 						$amount = $aCart['amountProduct'];
 						$price = $aCart['priceProduct'];
@@ -343,17 +342,48 @@
 						$totalPrice += ($amount * $price);
 						$totalPrice1 = number_format($totalPrice);
 					@endphp
-
+					@if($amount > 0)
 			  				<div class="giohang" style="height: 45px;">
-					  			<a href="#" title=""><i class="fa fa-plus-square" aria-hidden="true" style="color: green"></i></a>
-					  				<strong><span class="onCartProduct1_{{$key}}">{{ $amount }}</span></strong>
-					  			<a href="#" title=""><i class="fa fa-minus-square" aria-hidden="true" style="color: black"></i></a>
+			  					<span onclick="return ajaxToggleMinusProduct('{{$slug}}', {{$idCus}}, {{$idProduct}}, {{$amount}})" style="cursor: pointer;"><i class="fa fa-minus-square" aria-hidden="true" style="color: black"></i></span>
+					  			<strong><span class="onCartProduct1_{{$key}}">{{ $amount }}</span></strong>
+					  			<span onclick="return ajaxTogglePlusProduct('{{$slug}}', {{$idCus}}, {{$idProduct}}, {{$amount}})" style="cursor: pointer;"><i class="fa fa-plus-square" aria-hidden="true" style="color: green"></i></span>
 					  			<strong>{{ $name }}</strong>
 					  			<input type="text" name="" style="border: none" placeholder="Thêm ghi chú..."><span style="float: right;" class="onCartProduct2_{{$key}}">{{ $countPrice }}đ</span>
 
 					  		</div>
+					 @endif
 			  		@endforeach
-			  		
+			  {{-- ajax minus --}}
+			  <script type="text/javascript">
+		        function ajaxToggleMinusProduct(slug, idCus, idProduct, amount){
+		        		$.ajaxSetup({
+			                headers: {
+			                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			                  }
+			            });
+			            $.ajax({
+			                url: "{{ route('trangMinusProduct', ['slug' => $slug, 'cusId' => $idCus]) }}",
+			                type: 'POST',
+			                cache: false,
+			                data: {idProduct:idProduct, amount:amount},
+			            });
+		        	window.setTimeout(function(){window.location.reload()}, 300);
+		       }
+		       function ajaxTogglePlusProduct(slug, idCus, idProduct, amount){
+		        		$.ajaxSetup({
+			                headers: {
+			                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			                  }
+			            });
+			            $.ajax({
+			                url: "{{ route('trangPlusProduct', ['slug' => $slug, 'cusId' => $idCus]) }}",
+			                type: 'POST',
+			                cache: false,
+			                data: {idProduct:idProduct, amount:amount},
+			            });
+		        	window.setTimeout(function(){window.location.reload()}, 300);
+		       }
+		    </script>
 			  	<div class="onCart{{$idCus}}">
 			  	</div>
 				<div class="giohang" style="background-color: #F9F9F9;">

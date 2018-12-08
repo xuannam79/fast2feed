@@ -52,6 +52,7 @@ class RestauController extends Controller
                     $tmp = 0;
                     $aCart = array(
                         $idProduct => array(
+                            'idProduct' => $idProduct,
                             'nameProduct' => $nameProduct,
                             'amountProduct' => $amountProduct,
                             'imagesProduct' => $imagesProduct,
@@ -75,6 +76,7 @@ class RestauController extends Controller
                 $tmp = 0;
                 $arrCart = array(
                     $idProduct => array(
+                        'idProduct' => $idProduct,
                         'nameProduct' => $nameProduct,
                         'amountProduct' => $amountProduct,
                         'imagesProduct' => $imagesProduct,
@@ -124,5 +126,36 @@ class RestauController extends Controller
             return redirect(route('trangThemMenu'))->with('msg','Thêm menu không thành công');
         }
     }
-
+    public function minusProduct(Request $request, $slug, $cusId)
+    {
+        $getCustomer = $this->customer->getItem($cusId);
+        $slug = str_slug($getCustomer->customer_name);
+        $cusId = $getCustomer->customer_id;
+        $idProduct = $request->idProduct;
+        $amountProduct = $request->amount;
+        $arrName = 'arrCart'.$cusId;
+        if (session()->has($arrName)){
+            $arrCart = $request->session()->get($arrName);
+                $arrCart[$idProduct]['amountProduct'] = $arrCart[$idProduct]['amountProduct'] - 1;
+                $newAmount = $arrCart[$idProduct]['amountProduct'];
+                $newCountPrice = $newAmount * $arrCart[$idProduct]['priceProduct'];
+                $request->session()->put($arrName,$arrCart);
+        }
+    }
+    public function plusProduct(Request $request, $slug, $cusId)
+    {
+        $getCustomer = $this->customer->getItem($cusId);
+        $slug = str_slug($getCustomer->customer_name);
+        $cusId = $getCustomer->customer_id;
+        $idProduct = $request->idProduct;
+        $amountProduct = $request->amount;
+        $arrName = 'arrCart'.$cusId;
+        if (session()->has($arrName)){
+            $arrCart = $request->session()->get($arrName);
+                $arrCart[$idProduct]['amountProduct'] = $arrCart[$idProduct]['amountProduct'] + 1;
+                $newAmount = $arrCart[$idProduct]['amountProduct'];
+                $newCountPrice = $newAmount * $arrCart[$idProduct]['priceProduct'];
+                $request->session()->put($arrName,$arrCart);
+        }
+    }
 }

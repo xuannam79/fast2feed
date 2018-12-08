@@ -63,6 +63,10 @@ Route::namespace('f2f')->group(function(){
 		'uses' => 'ShipperController@accountInfo',
 		'as' => 'trangInfoShipper'
 	]);
+	Route::get('/detail-shipper/{slug}-{order}',[
+		'uses' => 'DetailShipperController@index',
+		'as' => 'trangDetailShipper'
+	]);
 	Route::get('/profile/edit',[
 		'uses' => 'ShipperController@getProfile',
 		'as' => 'trangThongTinShipper'

@@ -69,12 +69,14 @@
                                 $address = $value->address;
                                 $address_cus = $value->address_res;
                                 $name_res = $value->customer_name;
+                                $slug = str_slug($name_res); 
                                 $name_cus = $value->restaurant_name;
                                 $phone = $value->phone_res;
                                 $status = $value->status;
                                 $transport_fee = $value->transport_fee;
                                 $count_product = 0;
                                 $total_product=0;
+                                $url = route('trangDetailShipper',['slug' => $slug, 'order' => $order])
                             @endphp
                                 @foreach($getAmountProduct as $key => $value)
                                 @php
@@ -105,131 +107,9 @@
                                 </td>
                                 <td>
                                     @if($status == 1)
-                                    <button id="myBtn" title="Nhấn vào để xem chi tiết" class="font_weight_bold order_table_status gray pointer" style="width: 70px;float: left;" data-total-price="{{$total_product}}">Xem
+                                    <a href="{{ $url }}" style="color: black"><button title="Nhấn vào để xem chi tiết" class="font_weight_bold order_table_status gray pointer" style="width: 70px;float: left;">Xem
                                     </button>
-                                    <!-- model content -->
-                                    <div id="myModel" class="model fade1 model-order show1" tabindex="-1"
-                                         role="dialog" data-backdrop="static" data-keyboard="false">
-                                        <div class="model-dialog model-dialog-centered" role="document">
-                                            <div class="model-content model-order-detail"><span id="x" class="close"
-                                                                                                data-dismiss="model">x</span>
-                                                <div class="model-header">Chi tiết hóa đơn</div>
-                                                <div class="model-body">
-                                                    <div class="order-left">
-                                                        <div id="map" class="map-order"></div>
-                                                        <div class="direction-content">
-                                                            <div class="direction-info">
-                                                                <div class="direction-from">
-                                                                    <div class="direction-name">Điểm lấy hàng - {{ $name_res }}
-                                                                    </div>
-                                                                    <input id="start" type="hidden" value="{{ $address }}" style="width: 300px">
-                                                                    {{ $address }}
-                                                                </div>
-                                                                <div class="direction-to">
-                                                                    <div class="">
-                                                                        <div class="direction-name"
-                                                                             id="shipping-address">
-                                                                            <span>Điểm giao hàng - {{ $name_cus }}</span><span> - {{ $phone }} </span>
-                                                                        </div>
-                                                                        <input id="end" type="hidden" value="{{ $address_cus }}" style="width: 300px">
-                                                                        {{ $address_cus }}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div>
-                                                                <div id="result" class="direction-time"><span class="fa"><i
-                                                                                class="far fa-clock"></i></span><span
-                                                                            class="txt-bold"> Thời gian giao:  3 - 3 - </span><span id="in_kilo"
-                                                                            class="txt-red"></span></div>
-                                                                <div id="submit" class="change-info">
-                                                                </div>
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    @php
-                                                        $count_product = 0;
-                                                        $total_product = 0;
-                                                    @endphp
-                                                    <div class="order-right">
-                                                        <p class="title-popup-order">Thông tin sản phẩm</p>
-                                                        <div class="order-list">
-                                                            @foreach($getAmountProduct as $key => $value)
-                                                                @php
-                                                                    $sanpham = $value->order_id;
-                                                                    if($order == $sanpham){
-                                                                        $product_name = $value->product_name;
-                                                                        $money_transport_fee = $value->transport_fee_order;
-                                                                        $total = $value->total;
-                                                                        $amount = $value->amount;
-                                                                        $price = $value->price;
-                                                                        $total3 = $amount * $price;
-                                                                        $total2 = number_format($total3);
-                                                                        $count_product += $amount;
-                                                                        $total_product = $total_product + $total3;
-                                                                    }   
-                                                                    else continue;
-                                                                @endphp
-                                                            <div class="order-item">
-                                                                <span class="order-item-number">{{ $amount }}</span>
-                                                                <div class="order-item-info">
-                                                                    <div class="order-item-name"><span class="txt-bold">
-                                                                    {{ $product_name }}&nbsp;</span>
-                                                                    </div>
-                                                                    <div class="order-item-note"></div>
-                                                                </div>
-                                                                <div class="order-item-price">{{ $total2 }} <span class="unit">đ</span>
-                                                                </div>
-                                                               
-                                                            </div>
-                                                            @endforeach
-                                                        </div>
-                                                        <div class="info-order">
-                                                            <div class="row1">
-                                                                <div class="cel">Tổng tiền lấy <span class="txt-bold">{{ $count_product }}</span> phần
-                                                                </div>
-                                                                <div class="cel-auto txt-bold">{{ number_format($total_product)     }} <span class="unit">đ</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row1">
-                                                                <div class="cel">Phí vận chuyển: <span
-                                                                            class="txt-red" id="in_kilo1"></span><span
-                                                                            class="show1-fee-min">&nbsp;</span>
-                                                                </div>
-                                                                <div class="cel-auto"><span></span>{{ number_format($money_transport_fee) }} <span class="unit">đ</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="note-order "></div>
-                                                        <div class="pedding-10 txt-bold font16">
-                                                            <div class="row1">
-                                                                <div class="cel"><span>Tổng tiền giao hàng</span></div>
-                                                                <div class="cel-auto"><span>{{ number_format($total) }} </span><span class="unit">đ</span></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="payment-methods">
-                                                            <div class="row1">
-                                                                <div class="cel"><span class="txt-bold font16 txt-black">Kiểu thanh toán</span>
-                                                                </div>
-                                                                <div class="cel-auto"><span class="txt-blue">
-                                                                        Trực tiếp
-                                                                    </span><i class="icon-arrow-thin right" aria-hidden="true"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="not-vat"><span class="icon icon-vatnot"></span><span 
-                                                            class="txt-gray">Hóa đơn VAT không dược cung cấp</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="model-footer">
-                                                    <a href="{{ route('trangTestMap') }}" target="_blank" style="width: 885px"><div class="submit-order">CHỈ ĐƯỜNG ĐI</div></a>
-                                                </div>
-                                            </div>
-                                         </div>
-                                    </div>
-                                    <!-- end model -->                
+                                    </a>                
                                 </td>
                                 <td>
                                     <button title="Nhấn vào để nhận đơn hàng"
@@ -255,151 +135,6 @@
             
     </div>
 
-    <script>
-      var map;
-      function initMap() {
-        var directionsDisplay = new google.maps.DirectionsRenderer;
-        var directionsService = new google.maps.DirectionsService;
-        map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 12,
-          center: {lat: 16.0544068, lng: 108.2021667},
-          disableDefaultUI: true
-        });
-        
-        directionsDisplay.setMap(map);
-        directionsDisplay.setPanel(document.getElementById('right-panel'));
-        
-        
-
-        var onChangeHandler = function() {
-          calculateAndDisplayRoute(directionsService, directionsDisplay);
-          test(directionsService, directionsDisplay);
-        };
-        document.getElementById('myBtn').addEventListener('click', onChangeHandler);
-        //document.getElementById('start').addEventListener('click', onChangeHandler);
-        //document.getElementById('end').addEventListener('click', onChangeHandler);
-      }
-
-      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        var start = document.getElementById('start').value;
-        var end = document.getElementById('end').value;
-        directionsService.route({
-          origin: start,
-          destination: end,
-          travelMode: 'DRIVING'
-        }, function(response, status) {
-          if (status === 'OK') {
-            directionsDisplay.setDirections(response);
-            var m = Math.ceil((response.routes[0].overview_path.length)/2);
-            var middle = response.routes[0].overview_path[m];
-            var service = new google.maps.DistanceMatrixService;
-            service.getDistanceMatrix({
-              origins: [start],
-              destinations: [end],
-              travelMode: 'DRIVING',
-              unitSystem: google.maps.UnitSystem.METRIC,
-              avoidHighways: false,
-              avoidTolls: false
-        }, function(response, status) {
-          if (status === 'OK') {
-            var originList = response.originAddresses;
-            var destinationList = response.destinationAddresses;
-            for (var i = 0; i < originList.length; i++) {
-              var results = response.rows[i].elements;
-              for (var j = 0; j < results.length; j++){
-                var element = results[j];
-                var dt = element.distance.text;
-                var dr = element.duration.text;
-              }
-            }
-            var i = new google.maps.InfoWindow();
-            var content = '<div>'+dt+
-            '<br>'+dr+
-            '</div>';
-            //alert(content);
-            i.setContent(content);
-            i.setPosition(middle);
-            i.open(map);
-          }
-        })
-          } else {
-            window.alert('Directions request failed due to ' + status);
-          }
-        });
-      }
-      function test(directionsService, directionsDisplay) {
-        var start = document.getElementById('start').value;
-        var end = document.getElementById('end').value;
-        directionsService.route({
-          origin: start,
-          destination: end,
-          travelMode: 'DRIVING'
-        }, function(response, status) {
-          if (status === 'OK') {
-            directionsDisplay.setDirections(response);
-            var m = Math.ceil((response.routes[0].overview_path.length)/2);
-            var middle = response.routes[0].overview_path[m];
-            var service = new google.maps.DistanceMatrixService;
-            service.getDistanceMatrix({
-              origins: [start],
-              destinations: [end],
-              travelMode: 'DRIVING',
-              unitSystem: google.maps.UnitSystem.METRIC,
-              avoidHighways: false,
-              avoidTolls: false
-        }, function(response, status) {
-          if (status === 'OK') {
-            var originList = response.originAddresses;
-            var destinationList = response.destinationAddresses;
-            for (var i = 0; i < originList.length; i++) {
-              var results = response.rows[i].elements;
-              for (var j = 0; j < results.length; j++){
-                var element = results[j];
-                var dt = element.distance.text;
-                var dr = element.duration.text;
-              }
-            }
-            var i = new google.maps.InfoWindow();
-            var myin_kilo = document.getElementById('in_kilo');
-            //dt = in_kilo.innerHTML();
-            document.getElementById('in_kilo').innerHTML= dt;
-            document.getElementById('in_kilo1').innerHTML=dt;
-            //var total_price = so * total;
-            
-          }
-        })
-          } else {
-            window.alert('Directions request failed due to ' + status);
-          }
-        });
-      }
-      // Get the model
-        var model = document.getElementById('myModel');
-
-        // Get the button that opens the model
-        var btn = document.getElementById("myBtn");
-
-        // Get the <span> element that closes the model
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks the button, open the model
-        btn.onclick = function () {
-            model.style.display = "block";
-        }
-
-        // When the user clicks on <span> (x), close the model
-        span.onclick = function () {
-            model.style.display = "none";
-
-        }
-
-        // When the user clicks anywhere outside of the model, close it
-       window.onclick = function (event) {
-            if (event.target == model) {
-                model.style.display = "none";
-            }
-        }
-    </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzmyhWaNEQ_i55-LLOfNPka-8BAhZRUaM&callback=initMap"
     async defer></script>
 

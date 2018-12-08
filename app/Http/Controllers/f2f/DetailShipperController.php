@@ -29,7 +29,8 @@ class DetailShipperController extends Controller
              $accId = session()->get('admin')[0]->account_id;
         }
         $getAllDanhSachHD = $this->order->getHD($orderID);
+        $getAllDanhSachHD2 = $this->order->getAllDanhSachHD2();
         $getAmountProduct = $this->order->getAmountProduct();    
-        return view('f2f.shipper.detail', compact('getAdmin','getAllDanhSachHD','getAmountProduct','getCatOffset0','getCatOffset2','dt'));
+        return view('f2f.shipper.detail', compact('getAdmin','getAllDanhSachHD','getAmountProduct','getCatOffset0','getCatOffset2','getAllDanhSachHD2'));
     }
 }

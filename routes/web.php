@@ -47,6 +47,14 @@ Route::namespace('f2f')->group(function(){
 		'uses' => 'RestauController@postProduct',
 		'as' => 'trangAjaxCart'
 	]);
+	Route::post('/nha-hang/minus/{slug}-{cusId}',[
+		'uses' => 'RestauController@minusProduct',
+		'as' => 'trangMinusProduct'
+	]);
+	Route::post('/nha-hang/plus/{slug}-{cusId}',[
+		'uses' => 'RestauController@plusProduct',
+		'as' => 'trangPlusProduct'
+	]);
 	Route::get('/nha-hang/add-menu',[
 		'uses' => 'RestauController@addMenu',
 		'as' => 'trangThemMenu'

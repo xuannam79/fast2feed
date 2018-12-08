@@ -11,10 +11,21 @@
 
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Thông tin liên hệ</h3>
+                        <h3 class="panel-title">Đăng sản phẩm</h3>
                     </div>
+                    @if ($errors->any())
+					    <div class="alert alert-danger alert-block">
+							<button type="button" class="close" data-dismiss="alert">×</button>	
+							<ul>
+								@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+					            @endforeach
+							</ul>
+						</div>
+					@endif
                     <div class="panel-body">
-                        <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                        <form class="form-horizontal" action="{{ route('trangpostProduct') }}" method="post" enctype="multipart/form-data">
+                        	{{ csrf_field() }}
                             <div class="form-group">
                                 <label for="inputEmail3" class="col-sm-offset-1 col-sm-2 control-label">Tên sản phẩm</label>
                                 <div class="col-sm-8">
@@ -24,7 +35,7 @@
                             <div class="form-group">
                                 <label for="inputEmail3" class="col-sm-offset-1 col-sm-2 control-label">Giá</label>
                                 <div class="col-sm-8">
-                                    <input type="email" class="form-control" id="inputEmail3" name="price" placeholder="nhập giá">
+                                    <input type="number" class="form-control" id="inputEmail3" name="price" placeholder="nhập giá">
                                 </div>
                             </div>
                             <div class="form-group">

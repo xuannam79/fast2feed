@@ -8,6 +8,7 @@ use App\Model\Admin\Account;
 use App\Model\Admin\Cat;
 use App\Model\Admin\Menu;
 use App\Model\Admin\Customer;
+use App\Http\Requests\PostProductRequest;
 
 class PostProductController extends Controller
 {
@@ -32,5 +33,26 @@ class PostProductController extends Controller
         $menus = $this->menu->getItem($getCusByAccid->customer_id);
     	return view('f2f.restau.postProduct', 
             compact('cats', 'getAdmin', 'getCatOffset0', 'getCatOffset2', 'menus'));
+    }
+    public function postProduct(PostProductRequest $request)
+    {
+        $name = $request->name;
+        $price = $request->price;
+        $amount = $request->amount;
+        $cat = $request->cat;
+        $menu = $request->menu;
+
+        $images = $request->file('images');
+        $time = time();
+        $end_file = $images->getClientOriginalExtension();
+        $file_name = 'Product-'.$time.'.'.$end_file;
+        $images->move('files/product', $file_name);
+
+        $arrPost['name'] = $name;
+        $arrPost['price'] = $price;
+        $arrPost['amount'] = $amount;
+        $arrPost['cat'] = $cat;
+        $arrPost['menu'] = $menu;
+        $arrPost['images'] = $file_name;
     }
 }

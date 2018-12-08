@@ -28,5 +28,14 @@ class Menu extends Model
             return DB::table('menu')->where('menu_id', $id)->update(['status' => 1]);
         }
     }
+    public function addMenu($arrAdd)
+    {
+        return DB::table('menu')->insert(
+                                    ['menu_name' => $arrAdd['name'],
+                                    'status' => 1,
+                                    'customer_id' => $arrAdd['cusID']
+
+                                    ]);
+    }
     
 }

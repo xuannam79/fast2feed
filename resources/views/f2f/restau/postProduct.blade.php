@@ -5,7 +5,7 @@
 @section('content')
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clearpadding" style="margin-top: 15px;">
-        @include('templates.f2f.leftbar')
+       @include('templates.f2f.leftInfoAcc')
         <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 clearpaddingr">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clearpadding">
 

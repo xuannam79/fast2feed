@@ -14,7 +14,7 @@
                         <h3 class="panel-title">Thông tin liên hệ</h3>
                     </div>
                     <div class="panel-body">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="inputEmail3" class="col-sm-offset-1 col-sm-2 control-label">Tên sản phẩm</label>
                                 <div class="col-sm-8">

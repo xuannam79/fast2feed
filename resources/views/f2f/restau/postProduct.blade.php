@@ -23,6 +23,9 @@
 							</ul>
 						</div>
 					@endif
+                    @if (Session::has('msg'))
+                        <script type="text/javascript">alert("{{ Session::get('msg') }}");</script>
+                    @endif
                     <div class="panel-body">
                         <form class="form-horizontal" action="{{ route('trangpostProduct') }}" method="post" enctype="multipart/form-data">
                         	{{ csrf_field() }}

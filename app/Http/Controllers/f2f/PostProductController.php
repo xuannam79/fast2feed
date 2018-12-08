@@ -8,16 +8,18 @@ use App\Model\Admin\Account;
 use App\Model\Admin\Cat;
 use App\Model\Admin\Menu;
 use App\Model\Admin\Customer;
+use App\Model\Admin\Product;
 use App\Http\Requests\PostProductRequest;
 
 class PostProductController extends Controller
 {
-	public function __construct(Cat $cat,Account $account, Menu $menu, Customer $customer)
+	public function __construct(Cat $cat,Account $account, Menu $menu, Customer $customer, Product $product)
 	{
 		$this->cat = $cat;
         $this->account = $account;
         $this->menu = $menu;
-		$this->customer = $customer;
+        $this->customer = $customer;
+		$this->product = $product;
 	}
     public function index()
     {
@@ -36,12 +38,21 @@ class PostProductController extends Controller
     }
     public function postProduct(PostProductRequest $request)
     {
+        if(session()->has('admin')){
+             $idAcc = session()->get('admin')[0]->account_id;
+        }
+        $getCusByAccid = $this->customer->getCusByAccid($idAcc);
+        $cusID = $getCusByAccid->customer_id;
+        $cusName = $getCusByAccid->customer_name;
+        $slug = str_slug($cusName);
+
         $name = $request->name;
         $price = $request->price;
         $amount = $request->amount;
         $cat = $request->cat;
         $menu = $request->menu;
-
+        $preparetion_time = $request->time;
+        
         $images = $request->file('images');
         $time = time();
         $end_file = $images->getClientOriginalExtension();
@@ -54,5 +65,14 @@ class PostProductController extends Controller
         $arrPost['cat'] = $cat;
         $arrPost['menu'] = $menu;
         $arrPost['images'] = $file_name;
+        $arrPost['time'] = $preparetion_time;
+        $arrPost['cusID'] = $getCusByAccid->customer_id;
+
+        $resultProduct = $this->product->postProduct($arrPost);
+        if($resultProduct){
+            return redirect(route('trangCustomer', ['slug' => $slug, 'cusId' => $cusID]))->with('msg','Thêm sản phẩm thành công');
+        }else{
+            return redirect(route('trangpostProduct'))->with('msg','Thêm sản phẩm không thành công');
+        }
     }
 }

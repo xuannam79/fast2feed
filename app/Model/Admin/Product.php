@@ -25,4 +25,20 @@ class Product extends Model
     {
         return DB::table('product')->where('customer_id', $cusId)->get();
     }
+    public function postProduct($arrPost)
+    {
+        return DB::table('product')->insert(
+                                    ['product_name' => $arrPost['name'],
+                                    'price' => $arrPost['price'],
+                                    'amount' => $arrPost['amount'],
+                                    'images' => $arrPost['images'],
+                                    'quantify_ordered' => 111,
+                                    'preparation_time' => $arrPost['time'],
+                                    'menu_id' => $arrPost['menu'],
+                                    'customer_id' => $arrPost['cusID'],
+                                    'approved' => 0,
+                                    'catalog_id' => $arrPost['cat']
+
+                                    ]);
+    }
 }

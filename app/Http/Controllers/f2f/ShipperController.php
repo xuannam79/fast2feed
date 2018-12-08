@@ -27,7 +27,8 @@ class ShipperController extends Controller
         $getCatOffset0 = $this->cat->getCatOffset0();
         $getCatOffset2 = $this->cat->getCatOffset2();
         $getAllDanhSachHD = $this->order->getAllDanhSachHD();
-    	return view('f2f.shipper.index', compact('getAdmin','getAllDanhSachHD','getCatOffset0','getCatOffset2'));
+        $getAmountProduct = $this->order->getAmountProduct();
+    	return view('f2f.shipper.index', compact('getAdmin','getAllDanhSachHD','getCatOffset0','getCatOffset2','getAmountProduct'));
     }
     public function getProfile(){
          return view('f2f.shipper.edit-profile');

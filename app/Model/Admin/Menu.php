@@ -28,4 +28,5 @@ class Menu extends Model
             return DB::table('menu')->where('menu_id', $id)->update(['status' => 1]);
         }
     }
+    
 }

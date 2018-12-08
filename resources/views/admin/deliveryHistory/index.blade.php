@@ -75,10 +75,10 @@
                                                 <td>
                                                     @if($status_2 == 1)
                                                     <span style="color: green">Đã Giao</span>
-                                                    @elseif($status_2 == 2)
-                                                    <span style="color: blue">Đang Giao</span>
-                                                    @else
+                                                    @elseif($status_2 == 0)
                                                     <span style="color: red">Đã Hủy</span>
+                                                    @else
+                                                    <span style="color: blue">Đang giao</span>
                                                     @endif
                                                 </td>
                                                 <td>

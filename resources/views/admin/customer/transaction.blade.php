@@ -63,7 +63,7 @@
                                                 <td>{{ $nhahang }}</td>
                                                 <td>{{ $date }}</td>
                                                 <td>
-                                                    <span>{{ $total }}</span>
+                                                    <span>{{ number_format($total) }}</span>
                                                 </td>
                                                 <td>
                                                     @if($status == 1)

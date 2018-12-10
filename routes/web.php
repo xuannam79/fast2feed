@@ -196,6 +196,10 @@ Route::namespace('f2f')->group(function(){
 		'uses' => 'SearchController@postSearch',
 		'as' => 'trangTimKiem'
 	]);
+	Route::get('/location-order/{slug}-{order}',[
+		'uses' => 'LocationOrderController@index',
+		'as' => 'trangLocationOrder'
+	]);
 
 });
 

@@ -48,4 +48,8 @@ class Cat extends Model
         return $this->offset(5)->limit($count-2)->get();
 
     }
+    public function findItem($id)
+    {
+        return $this->find($id);
+    }
 }

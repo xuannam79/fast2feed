@@ -23,11 +23,11 @@
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
                                             <div class="icon">
-                                                <i class="zmdi zmdi-account-o"></i>
+                                                <i class="fas fa-warehouse" style="font-size: 45px"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>10368</h2>
-                                                <span>members online</span>
+                                                <h2>{{ $countCus }}</h2>
+                                                <span>Customer</span>
                                             </div>
                                         </div>
                                         <div class="overview-chart">
@@ -41,11 +41,11 @@
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
                                             <div class="icon">
-                                                <i class="zmdi zmdi-shopping-cart"></i>
+                                                <i class="fas fa-utensils" style="font-size: 45px"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>388,688</h2>
-                                                <span>items solid</span>
+                                                <h2>{{ $countProduct }}</h2>
+                                                <span>Product</span>
                                             </div>
                                         </div>
                                         <div class="overview-chart">
@@ -59,11 +59,11 @@
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
                                             <div class="icon">
-                                                <i class="zmdi zmdi-calendar-note"></i>
+                                                <i class="fas fa-motorcycle" style="font-size: 45px"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>1,086</h2>
-                                                <span>this week</span>
+                                                <h2>{{ $countShipper }}</h2>
+                                                <span>Shipper</span>
                                             </div>
                                         </div>
                                         <div class="overview-chart" style="height: 175px">
@@ -77,11 +77,11 @@
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
                                             <div class="icon">
-                                                <i class="zmdi zmdi-money"></i>
+                                                <i class="far fa-address-book" style="font-size: 45px"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>$1,060,386</h2>
-                                                <span>total earnings</span>
+                                                <h2>{{ $countContact }}</h2>
+                                                <span>Contact</span>
                                             </div>
                                         </div>
                                         <div class="overview-chart">

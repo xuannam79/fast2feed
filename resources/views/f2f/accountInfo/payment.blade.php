@@ -21,7 +21,7 @@
 				                <p href="#" class="list-group-item" position: relative style="font-size: 16px;font-weight: bold; text-align: center; background: #4C66A4; color: white">CHỌN PHƯƠNG THỨC THANH TOÁN</p>
 				                
 								<div class="list-group">
-									<a href="#" class="list-group-item">Thanh toán trực tiếp<i class="glyphicon glyphicon-edit" style="float: right;"></i></a>
+									<a href="#" class="list-group-item">Thanh toán trực tiếp</a>
 				                	<a href="#" class="list-group-item">Thẻ ATM nội địa</a>
 						        	<a href="#" class="list-group-item">Pay Pal</a>
 								</div>

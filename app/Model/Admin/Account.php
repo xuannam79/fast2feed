@@ -17,7 +17,7 @@ class Account extends Model
     }
         public function getCus()
     {
-        return DB::table('account')->where('role','=',2)->get();
+        return DB::table('account')->join('restaurant','restaurant.account_id','=','account.account_id')->where('role','=',2)->get();
     }
     public function checkAccount($email,$password)
     {
@@ -101,7 +101,7 @@ class Account extends Model
             {
                 $join->on('customer.customer_id','=','orders.customer_id')
                 ->join('account','account.account_id','=','customer.account_id');
-            })->select('account.account_id','orders.payment','customer.customer_name','orders.order_id','orders.date_create','orders.total','orders.payment')->where('account.account_id', $accId)->get();
+            })->select('account.account_id','orders.payment','customer.customer_name','orders.order_id','orders.date_create','orders.total','orders.status','orders.status_2')->where('account.account_id', $accId)->get();
     }
     public function deliveryHistory($accId)
     {

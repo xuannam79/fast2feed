@@ -39,7 +39,6 @@
                                                 <th>name</th>
                                                 <th>images</th>
                                                 <th>email</th>
-                                                <th>password</th>
                                                 <th>status</th>
                                                 <th></th>
                                             </tr>
@@ -47,11 +46,10 @@
                                         <tbody>
                                             @foreach($customers as $key => $account)
                                             @php
-                                                $username = $account->username;
-                                                    $email = $account->email;
-                                                    $avatar = $account->avatar;
-                                                    $status = $account->status;
-                                                    $password = $account->password;
+                                                $username = $account->restaurant_name;
+                                                $email = $account->email;
+                                                $avatar = $account->avatar;
+                                                $status = $account->status;
                                                 
 
                                             @endphp
@@ -71,7 +69,6 @@
                                                     </div>
                                                 </td>
                                                 <td>{{ $email }}</td>
-                                                <td>{{ $password }}</td>
                                                 <td>
                                                     <label class="switch switch-3d switch-success mr-3">
                                                         <input type="checkbox" class="switch-input" 

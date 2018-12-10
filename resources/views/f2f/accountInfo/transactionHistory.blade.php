@@ -37,13 +37,16 @@
                                                 $date = $info->date_create;
                                                 $total = $info->total;
                                                 $payment = $info->payment;
-												$status = $info->payment;
+												$status = $info->status;
+                                                $status_2 = $info->status_2;
+                                                $slug = str_slug($restaurant);
+                                                $url = route('trangLocationOrder',['slug' => $slug, 'order' => $order]) 
 											@endphp
                                             <tr>
                                                 <td>
                                                     {{ $loop->index+1 }}
                                                 </td>
-                                                <td style="width: 100px"><span>{{ $order }}</span></td>
+                                                <td style="width: 100px; text-align: center; padding-right: 30px"><span>{{ $order }}</span></td>
                                                 <td style="width: 200px">
                                                     <span><span>{{ $restaurant }}</span>
                                                 </td>
@@ -52,26 +55,22 @@
                                                 <td>
                                                     @if($status == 1)
                                                     <span>Đã thanh toán</span>
-                                                    @elseif($status == 2)
+                                                    @else
                                                     <span>Chưa thanh toán</span>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if($status_2 == 1)
+                                                    <span>Đã giao</span>
+                                                    @elseif($status_2 == 2)
+                                                    <span>Đang giao</span>
                                                     @else
                                                     <span>Đã hủy</span>
                                                     @endif
                                                 </td>
-                                                <td>
-                                                    @if($status == 1)
-                                                    <span>Đã giao</span>
-                                                    @elseif($status == 2)
-                                                    <span>Đang giao</span>
-                                                    @else
-                                                    <span></span>
-                                                    @endif
-                                                </td>
                                                  <td>
-                                                    @if($status == 1)
-                                                    <span></span>
-                                                    @elseif($status == 2)
-                                                    <a href="#">Xem vị trí</a>
+                                                    @if($status_2 == 2)
+                                                    <a href="{{ $url }}" target="_blank">Xem vị trí</a>
                                                     @else
                                                     <span></span>
                                                     @endif

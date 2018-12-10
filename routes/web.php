@@ -270,6 +270,10 @@ Route::namespace('Admin')->middleware('MyMiddle', 'CustomerMiddle')->prefix('adm
 		'uses' => 'CatController@postEdit',
 		'as' => 'editcatAdmin'
 	]);
+	Route::get('/cat/delete-{cid}',[
+		'uses' => 'CatController@del',
+		'as' => 'delCatAdmin'
+	]);
 	Route::get('/menu',[
 		'uses' => 'MenuController@index',
 		'as' => 'menuAdmin'

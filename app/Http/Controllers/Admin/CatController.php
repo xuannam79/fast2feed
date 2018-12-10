@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Admin\Cat;
 use App\Http\Requests\CatRequest;
+use Illuminate\Support\Facades\DB;
 use App\Model\Admin\Account;
 
 
@@ -47,8 +48,12 @@ class CatController extends Controller
     }
     public function getEdit($cid)
     {
+        if(session()->has('admin')){
+             $mail = session()->get('admin')[0]->email;
+             $getAdmin = $this->account->getAccount($mail);
+        } 
         $objCat = $this->cat->getItem($cid);
-        return view('admin.cat.edit', compact('objCat'));
+        return view('admin.cat.edit', compact('objCat', 'getAdmin'));
     }
     public function postEdit($cid, CatRequest $request)
     {
@@ -69,5 +74,13 @@ class CatController extends Controller
         $this->cat->updateStatus($id, $presentStatus);
         return view('admin.cat.ajaxToggleActive', compact('presentStatus', 'id'));
     }
-    // test
+    public function del($id)
+    {
+        $objItem = $this->cat->findItem($id);
+        if($objItem->delete()){
+            return redirect(route('catAdmin'))->with('msg','Xóa thành công');
+        } else {
+            return redirect(route('catAdmin'))->with('msg','Xóa không thành công');
+        }
+    }
 }

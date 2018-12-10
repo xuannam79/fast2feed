@@ -458,11 +458,11 @@
                                                 <input id="start" type="hidden" value="254 Nguyễn Văn Linh, Thanh Khê, Đà Nẵng" style="width: 300px">254 Nguyễn Văn Linh, Thanh Khê, Đà Nẵng
                                             </div>
                                             <div class="directionn-to">
-                                                    <div class="directionn-name"
-                                                        id="shipping-address">
-                                                        <span>Điểm giao hàng - Tên khách</span><span> - Sđt khách </span>
-                                                    </div>
-                                                        <input id="end" type="hidden" value="254 Hoàng Diệu, Hải Châu, Đà Nẵng" style="width: 300px">254 Hoàng Diệu, Hải Châu, Đà Nẵng
+                                                <div class="directionn-name"
+                                                    id="shipping-address">
+                                                    <span>Điểm giao hàng - Tên khách</span><span> - Sđt khách </span>
+                                                </div>
+                                                    <input id="end" type="hidden" value="254 Hoàng Diệu, Hải Châu, Đà Nẵng" style="width: 300px">254 Hoàng Diệu, Hải Châu, Đà Nẵng
                                             </div>
                                         </div>
                                         <div>

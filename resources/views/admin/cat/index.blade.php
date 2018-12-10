@@ -45,7 +45,7 @@
                                                 $name = $cat->catalog_name;
                                                 $status = $cat->status;
                                                 $urlEdit = route('editcatAdmin', $id);
-                                               
+                                                $urlDel = route('delCatAdmin', $id);
                                             @endphp
                                             <tr class="tr-shadow">
                                                 <td>
@@ -77,7 +77,7 @@
                                                         <a href="{{ $urlEdit }}" title="" class="item">
                                                             <i class="zmdi zmdi-edit"></i>
                                                         </a>
-                                                        <a href="#" title="" class="item">
+                                                        <a href="{{ $urlDel }}" title="" class="item" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
                                                             <i class="zmdi zmdi-delete"></i>
                                                         </a>
                                                     </div>

@@ -163,7 +163,7 @@ Route::namespace('f2f')->group(function(){
 		'uses' => 'DinhViMapController@index',
 		'as' => 'trangDinhViMap'
 	]);
-	Route::get('/manage-post',[
+	Route::get('/history-post-restaurant',[
 		'uses' => 'ManagePostController@index',
 		'as' => 'trangManagePost'
 	]);
@@ -183,6 +183,10 @@ Route::namespace('f2f')->group(function(){
 	Route::get('/post-product',[
 		'uses' => 'PostController@index',
 		'as' => 'trangPost'
+	]);
+	Route::get('/post-restaurant',[
+		'uses' => 'PostRestaurantController@index',
+		'as' => 'trangPostRestaurant'
 	]);
 	Route::get('/payment',[
 		'uses' => 'PaymentController@index',

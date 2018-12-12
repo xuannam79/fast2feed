@@ -90,7 +90,7 @@ class Account extends Model
         if(session()->has('admin')){
              $id = session()->get('admin')[0]->account_id;
         }
-        return DB::table('customer')->join('account', 'account.account_id', '=', 'customer.account_id')->join('catalog', 'catalog.catalog_id', '=', 'customer.catalog_id')->select('account.account_id','customer.date','customer.customer_name','customer.address','catalog.catalog_name','customer.status_customer')->where('account.account_id', $accId)->get();
+        return DB::table('customer')->join('account', 'account.account_id', '=', 'customer.account_id')->join('catalog', 'catalog.catalog_id', '=', 'customer.catalog_id')->select('account.account_id','customer.date','customer.customer_name','customer.address','catalog.catalog_name','customer.status_customer','customer.customer_id','customer.images')->where('account.account_id', $accId)->get();
     }
     public function transactionHistory($accId)
     {

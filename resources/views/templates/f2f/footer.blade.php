@@ -60,6 +60,25 @@
 		</div>
 	</div>
     <script src="/fast2feed/public/templates/f2f/bootstrap/js/bootstrap.min.js"></script>
-    
+
+    {{-- button scroll to top --}}
+	 <div class='lentop'>
+		<div>
+			<img src='https://1.bp.blogspot.com/-k6sikOdzFXQ/VwqCKDosmEI/AAAAAAAAKxE/nLxLhkTIO6o3iE5ZWmtxo2bf4QHdzPQNQ/s1600/top.png'/>
+		</div>
+	</div>
+	
+	{{-- jquery scroll to rop --}}
+	<script>
+		$(function(){
+			$(window).scroll(function () {
+				if ($(this).scrollTop() > 100) $(".lentop").fadeIn();
+				else $(".lentop").fadeOut();
+				});
+				$(".lentop").click(function () {
+				$("body,html").animate({scrollTop: 0}, "slow");
+			});
+		});
+	</script>
 </body>
 </html>

@@ -21,8 +21,9 @@
                                                 <i class="zmdi zmdi-view-list"></i>transaction history
                                             </a>
                                             <a href="{{ route('managePostAdmin') }}" title="" class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                                <i class="zmdi zmdi-mall"></i>manage posts
+                                                <i class="zmdi zmdi-view-list"></i>manage post
                                             </a>
+                                            
                                         </div>
                                     </div>
                                 </div>

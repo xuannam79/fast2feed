@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Model\Admin\Account;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
@@ -83,17 +84,20 @@ class RegisterController extends Controller
             'email' => 'required',
             'password' => 'required',
             'avatar' => 'required',
+            'fullname' => 'required',
             'repassword' => 'required|same:password'
         ],[
             'username.required' => 'Bạn chưa nhập username',
             'email.required' => 'Bạn chưa nhập email',
+            'fullname.required' => 'Bạn chưa nhập tên đầy đủ',
             'password.required' => 'Bạn chưa nhập password',
-            'repassword.required' => 'Vui lòng điền đầy đủ',
+            'repassword.required' => 'Vui lòng nhập lại mật khẩu',
             'repassword.same' => 'Password không khớp',
             'avatar.required' => 'Bạn chưa thêm avatar'
         ]);
         $username = $request->username;
         $email = $request->email;
+        $fullname = $request->fullname;
         $password = md5($request->password);
 
     	$avatar = $request->file('avatar');
@@ -109,7 +113,17 @@ class RegisterController extends Controller
 
         $resultRegis = $this->account->register($arrRegister);
         if($resultRegis){
-            return redirect(route('trangDangNhap'))->with('msg','Đăng kí thành công');
+            $newAccID = DB::table('account')->max('account_id');
+            $resultAddCus = DB::table('restaurant')->insert([
+                                                        'restaurant_name' => $fullname,
+                                                        'address_res' => 'null',
+                                                        'phone_res' => 'null', 
+                                                        'account_id' => $newAccID
+                                                        ]);
+            if($resultAddCus){
+                return redirect(route('trangDangNhap'))->with('msg','Đăng kí thành công');
+            }
+            
         }else{
             return redirect(route('trangDangKi'))->with('msg','Đăng kí không thành công');
         }

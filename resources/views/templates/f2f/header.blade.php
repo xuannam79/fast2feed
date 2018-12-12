@@ -165,6 +165,8 @@
                                 {{-- end modal --}}
 
                         </ul>
+                        @php
+                        @endphp
                         <ul class="nav navbar-nav navbar-right">
                             @if(session()->has('admin')) @php $role = session()->get('admin')[0]->role; if($role == 2){ $url = route('trangpostProduct'); echo '
                             <li><a href="'.$url.'">Đăng sản phẩm</a></li>'; } @endphp @endif @if(session()->has('admin')) @foreach($getAdmin as $key => $admin)

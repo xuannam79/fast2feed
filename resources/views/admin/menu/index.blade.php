@@ -11,16 +11,12 @@
                             <div class="col-md-12">
                                 <!-- DATA TABLE -->
                                 <h3 class="title-5 m-b-35">data Menu</h3>
-                            	<div class="table-data__tool">
-                                    <div class="table-data__tool-right">
-                                        
-                                        <a href="{{ route('addmenuAdmin') }}" title="" class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                            <i class="zmdi zmdi-plus"></i>add menu
-                                        </a>
-                                    </div>
-                                </div>
+                            	
                             </div>
                                 <div class="table-responsive table-responsive-data2">
+                                    @if (Session::has('msg'))
+                                        <p style="color: red">{{ Session::get('msg') }}</p>
+                                    @endif
                                     <table class="table table-data2">
                                         <thead>
                                             <tr>
@@ -42,6 +38,8 @@
                                                 $id = $menu->menu_id;
                                                 $name = $menu->menu_name;
                                                 $status = $menu->status;
+                                                $urlEdit = route('editMenuAdmin', $id);
+                                                $urlDel = route('delMenuAdmin', $id);
                                             @endphp
                                             <tr class="tr-shadow">
                                                 <td>
@@ -70,10 +68,10 @@
                                                 
                                                 <td>
                                                     <div class="table-data-feature">
-                                                        <a href="#" title="" class="item">
+                                                        <a href="{{ $urlEdit }}" title="" class="item">
                                                             <i class="zmdi zmdi-edit"></i>
                                                         </a>
-                                                        <a href="#" title="" class="item">
+                                                        <a href="{{ $urlDel }}" title="" class="item">
                                                             <i class="zmdi zmdi-delete"></i>
                                                         </a>
                                                     </div>

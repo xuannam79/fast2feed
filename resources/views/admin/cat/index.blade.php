@@ -77,7 +77,7 @@
                                                         <a href="{{ $urlEdit }}" title="" class="item">
                                                             <i class="zmdi zmdi-edit"></i>
                                                         </a>
-                                                        <a href="{{ $urlDel }}" title="" class="item" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
+                                                        <a href="{{ $urlDel }}" title="" class="item">
                                                             <i class="zmdi zmdi-delete"></i>
                                                         </a>
                                                     </div>

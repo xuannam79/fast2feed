@@ -34,8 +34,14 @@ class Menu extends Model
                                     ['menu_name' => $arrAdd['name'],
                                     'status' => 1,
                                     'customer_id' => $arrAdd['cusID']
-
                                     ]);
     }
-    
+    public function findItem($id)
+    {
+        return DB::table('menu')->where('menu_id', $id)->first();
+    }
+    public function editMenu($id, $arrEdit)
+    {
+        return $this->where('menu_id', $id)->update($arrEdit);
+    }
 }

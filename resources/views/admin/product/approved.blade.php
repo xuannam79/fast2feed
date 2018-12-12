@@ -10,25 +10,13 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- DATA TABLE -->
-                                <h3 class="title-5 m-b-35"></h3>
-                                <a href="{{ route('trangApproved') }}" title="" class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                                <i class="zmdi zmdi-mall"></i>approved
-                                            </a>
-                                <br>
-                                <br>
-                                </div>
-                                <h3 class="title-5 m-b-35">data Product</h3>
+                                <h3 class="title-5 m-b-35">Approved</h3>
                                 
                                 <div class="table-responsive table-responsive-data2">
                                     <table class="table table-data2">
                                         <thead>
                                             <tr>
-                                                <th>
-                                                    <label class="au-checkbox">
-                                                        <input type="checkbox">
-                                                        <span class="au-checkmark"></span>
-                                                    </label>
-                                                </th>
+                                                
                                                 <th>name</th>
                                                 <th>images</th>
                                                 <th>price</th>
@@ -36,12 +24,13 @@
                                                 <th>catalog_name</th>
                                                 <th>menu_name</th>
                                                 <th>customer_name</th>
-                                                <th></th>
+                                                <th>approved</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach($products as $key => $product)
                                             @php
+                                                $id = $product->product_id;
                                                 $name = $product->product_name;
                                                 $images = $product->images;
                                                 $price = $product->price;
@@ -51,14 +40,9 @@
                                                 $customerName = $product->customer_name;
                                                 $approved = $product->approved;
                                             @endphp
-                                            @if($approved == 1)
+                                            @if($approved == 0)
                                             <tr class="tr-shadow">
-                                                <td>
-                                                    <label class="au-checkbox">
-                                                        <input type="checkbox">
-                                                        <span class="au-checkmark"></span>
-                                                    </label>
-                                                </td>
+                                                
                                                 <td class="desc">{{ $name }}</td>
                                                 
                                                 <td>
@@ -81,23 +65,59 @@
                                                     <span class="block-email">{{ $customerName }}</span>
                                                 </td>
                                                 <td>
-                                                    <div class="table-data-feature">
-                                                        <a href="#" title="" class="item">
-                                                            <i class="zmdi zmdi-edit"></i>
-                                                        </a>
+                                                    <label class="switch switch-3d switch-success mr-3" id="active{{$id}}">
+                                                        @if($approved == 1)
+                                                        <input type="checkbox" class="switch-input" checked="true" onchange="return ajaxToggleActiveStatusProduct({{ $id }}, 1)">
+                                                        <span class="switch-label"></span>
+                                                        <span class="switch-handle"></span>
+
+                                                        @else
+                                                        <input type="checkbox" class="switch-input" onchange="return ajaxToggleActiveStatusProduct({{ $id }}, 0)">
+                                                        <span class="switch-label"></span>
+                                                        <span class="switch-handle"></span>
+                                                        @endif
+                                                        
+                                                    </label>
+                                                    <div class="table-data-feature" style="display: inline;">
+                                                        
                                                         <a href="#" title="" class="item">
                                                             <i class="zmdi zmdi-delete"></i>
                                                         </a>
                                                     </div>
                                                 </td>
+                                                
                                             </tr>
                                             @endif
                                             @endforeach
                                         </tbody>
                                     </table>
                                 </div>
-                                <!-- END DATA TABLE -->
+                                <br>
+                                
+                                
                             </div>
                         </div>
-                        
+                        <script type="text/javascript">
+                            function ajaxToggleActiveStatusProduct(id, presentStatus){
+
+                                $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                      }
+                                });
+                                $.ajax({
+                                    url: "{{ route('updateStatusProduct') }}",
+                                    type: 'POST',
+                                    cache: false,
+                                    data: {id:id, presentStatus:presentStatus},
+                                    success: function(data){
+                                        $('#active'+id).html(data);
+                                        
+                                    },
+                                    error: function (){
+                                        alert('có lỗi xảy ra');
+                                    }
+                                });
+                           }
+                        </script>
 @endsection

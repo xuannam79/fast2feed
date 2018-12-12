@@ -44,8 +44,10 @@ class SearchController extends Controller
                     ->join('catalog', 'catalog.catalog_id', '=', 'customer.catalog_id')
                     ->select('customer.customer_id', 'product.product_name', 'customer.customer_name', 'customer.images', 'customer.address', 'catalog.catalog_name')
                     ->where('customer.customer_name', 'like', "%$keySearch%")
-
-                    ->orWhere('product.product_name', 'like', "%$keySearch%")
+                    ->orWhere([
+                            ['product.product_name', 'like', "%$keySearch%"], 
+                            ['product.approved', '=', 1]
+                        ])
                     ->get();
         $newArrSearch = array(); 
         foreach ($getSearch as $val) { 

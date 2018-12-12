@@ -7,32 +7,38 @@ use App\Http\Controllers\Controller;
 use App\Model\Admin\Customer;
 use App\Model\Admin\Account;
 use App\Model\Admin\Menu;
+use App\Model\Admin\Restaurant;
 use App\Model\Admin\Product;
 use App\Http\Requests\AddMenuRequest;
 use App\Model\Admin\Cat;
+use Carbon\Carbon;
 
 class RestauController extends Controller
 {
-	public function __construct(Customer $customer, Menu $menu,Account $account, Product $product, Cat $cat)
+	public function __construct(Customer $customer, Menu $menu,Account $account, Product $product, Cat $cat, Restaurant $restaurant)
 	{
 		$this->customer = $customer;
         $this->account = $account;
         $this->menu = $menu;
         $this->product = $product;
-		$this->cat = $cat;
+        $this->cat = $cat;
+		$this->restaurant = $restaurant;
 	}
     public function index($slug, $cusId)
     {
+        $dt = Carbon::now('Asia/Ho_Chi_Minh');
         if(session()->has('admin')){
              $mail = session()->get('admin')[0]->email;
              $getAdmin = $this->account->getAccount($mail);
+             $accId = session()->get('admin')[0]->account_id;
         } 
         $getCatOffset0 = $this->cat->getCatOffset0();
         $getCatOffset2 = $this->cat->getCatOffset2();
-    	$getCustomer = $this->customer->getItem($cusId);
+        $getCustomer = $this->customer->getItem($cusId);
+    	$getRestaurant = $this->account->getItemNameCus($accId);
     	$getMenu = $this->menu->getItem($cusId);
         $getProduct = $this->product->getProductById($cusId);
-    	return view('f2f.restau.index', compact('getCustomer', 'getMenu', 'getAdmin', 'getProduct', 'getCatOffset0', 'getCatOffset2'));
+    	return view('f2f.restau.index', compact('getCustomer', 'getMenu', 'getAdmin', 'getProduct', 'getCatOffset0', 'getCatOffset2','getRestaurant','dt'));
     }
     public function postProduct(Request $request, $slug, $cusId)
     {

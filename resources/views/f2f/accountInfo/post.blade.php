@@ -15,8 +15,14 @@
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clearpadding">
 					<div class="panel panel-info">
 						<div class="panel-body" style="padding:0px">
+							<ul class="nav navbar-nav" style="margin-bottom: 20px;border-bottom: 3px solid #bce8f1; text-align: center;">
+								<li style="width: 215px"><a href="{{ route('trangPostRestaurant') }}">Bài đăng</a></li>
+								<li style="width: 215px"><a href="{{ route('trangPost') }}">Thêm nhà hàng</a></li>
+								<li style="width: 215px"><a href="{{ route('trangThemMenu') }}">Thêm menu</a></li>
+								<li style="width: 215px"><a href="{{ route('trangpostProduct') }}">Thêm sản phẩm</a></li>
+							</ul>
 			           		<div class="list-group">
-				                <p href="#" class="list-group-item" position: relative style="font-size: 16px;font-weight: bold; text-align: center; background: #4C66A4; color: white">THÊM NHÀ HÀNG</p>
+				                
 				                <div style="margin: 10px">
 			                                
 				                	<form action="#" enctype="multipart/form-data" method="post">

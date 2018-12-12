@@ -13,7 +13,7 @@
 					<div class="panel panel-info">
 						<div class="panel-body" style="padding:0px">
 			           		<div class="list-group">
-				                <p href="#" class="list-group-item" position: relative style="font-size: 16px;font-weight: bold; text-align: center; background: #4C66A4; color: white">Cập nhật thông tin cá nhân</p>
+				                <p href="#" class="list-group-item" position: relative style="font-size: 16px;font-weight: bold; text-align: center; background: #4C66A4; color: white">Cập nhật mật khẩu</p>
 				                
 								@php
 									$username = $getAccountInfo[0]->username;

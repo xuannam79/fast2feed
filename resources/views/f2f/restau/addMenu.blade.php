@@ -10,9 +10,12 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clearpadding">
 
                 <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Thêm menu</h3>
-                    </div>
+                    <ul class="nav navbar-nav" style="margin-bottom: 20px;border-bottom: 3px solid #bce8f1; text-align: center;">
+                                <li style="width: 215px"><a href="{{ route('trangPostRestaurant') }}">Bài đăng</a></li>
+                                <li style="width: 215px"><a href="{{ route('trangPost') }}">Thêm nhà hàng</a></li>
+                                <li style="width: 215px"><a href="{{ route('trangThemMenu') }}">Thêm menu</a></li>
+                                <li style="width: 215px"><a href="{{ route('trangpostProduct') }}">Thêm sản phẩm</a></li>
+                            </ul>
                     @if ($errors->any())
 					    <div class="alert alert-danger alert-block">
 							<button type="button" class="close" data-dismiss="alert">×</button>	

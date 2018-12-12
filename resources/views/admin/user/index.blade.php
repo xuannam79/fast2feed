@@ -11,7 +11,7 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <!-- USER DATA-->
-                                <div class="user-data m-b-30" style="width: 960px">
+                                <div class="user-data m-b-30" style="width: 150%">
                                     <h3 class="title-3 m-b-30">
                                         <i class="zmdi zmdi-account-calendar"></i>Account data
                                     </h3>

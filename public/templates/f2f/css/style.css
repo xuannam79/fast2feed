@@ -199,6 +199,7 @@ button.order_table_status.gray {
 }
 .product_item:hover{
     border: 1px solid #ff9900;
+    color: #ff9900;
 }
 .product_title{
   text-transform: uppercase;

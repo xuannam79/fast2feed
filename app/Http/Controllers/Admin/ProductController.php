@@ -38,4 +38,13 @@ class ProductController extends Controller
         $this->product->updateStatusProduct($id, $presentStatus);
         return view('admin.product.ajaxToggleActiveProduct', compact('presentStatus', 'id'));
     }
+    public function approved()
+    {
+        if(session()->has('admin')){
+             $mail = session()->get('admin')[0]->email;
+             $getAdmin = $this->account->getAccount($mail);
+        }  
+        $products = $this->product->getAll();
+        return view('admin.product.approved', compact('products', 'getAdmin'));
+    }
 }

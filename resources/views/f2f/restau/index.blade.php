@@ -190,6 +190,7 @@
 						  			$name = $product->product_name;
 						  			$ordered = $product->quantify_ordered;
 						  			$price = $product->price;
+						  			$approved = $product->approved;
 						  			$amount = 1;
 						  			$bool = 0;
 						  			if(session()->has('admin')){
@@ -219,6 +220,7 @@
 									@endforeach
 								@endif
 						  		@if($idMenuFK == $idMenuPK)
+						  		@if($approved == 1)
 								<div class="list-item">
 									<div class="img-item">
 										<img src="/fast2feed/public/files/product/{{ $images }}" alt="">
@@ -236,6 +238,7 @@
 									</div>
 									<div class="clear"></div>
 								</div>
+								@endif
 								@endif
 								@endforeach
 							</div>

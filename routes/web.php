@@ -290,6 +290,18 @@ Route::namespace('Admin')->middleware('MyMiddle', 'CustomerMiddle')->prefix('adm
 		'uses' => 'MenuController@getAdd',
 		'as' => 'addmenuAdmin'
 	]);
+	Route::get('/menu/edit-{id}',[
+		'uses' => 'MenuController@getEdit',
+		'as' => 'editMenuAdmin'
+	]);
+	Route::post('/menu/edit-{id}',[
+		'uses' => 'MenuController@postEdit',
+		'as' => 'editMenuAdmin'
+	]);
+	Route::get('/menu/delete-{id}',[
+		'uses' => 'MenuController@del',
+		'as' => 'delMenuAdmin'
+	]);
 	Route::get('/customer',[
 		'uses' => 'CustomerController@index',
 		'as' => 'customerAdmin'
@@ -301,6 +313,10 @@ Route::namespace('Admin')->middleware('MyMiddle', 'CustomerMiddle')->prefix('adm
 	Route::get('/product',[
 		'uses' => 'ProductController@index',
 		'as' => 'productAdmin'
+	]);
+	Route::get('/product/approved',[
+		'uses' => 'ProductController@approved',
+		'as' => 'trangApproved'
 	]);
 	Route::post('/product/update-Status',[
 		'uses' => 'ProductController@updateStatus',

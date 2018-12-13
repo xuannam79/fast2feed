@@ -35,6 +35,20 @@ class Order extends Model
                 ->join('account','account.account_id','=','customer.account_id');
             })->join('restaurant', 'restaurant.restaurant_id', '=', 'orders.restaurant_id')->select('orders.status','orders.order_id','customer.address','restaurant.address_res','customer.customer_name','restaurant.phone_res','restaurant.restaurant_name','account.username','customer.transport_fee','orders.date_create')->orderBy('orders.order_id','DESC')->simplePaginate(1);
     }
+    public function getAllDanhSachHD3()
+    {
+        return DB::table('orders')
+        ->join('customer',function($join)
+            {
+                $join->on('customer.customer_id','=','orders.customer_id')
+                ->join('account','account.account_id','=','customer.account_id');
+            })
+        ->join('restaurant', 'restaurant.restaurant_id', '=', 'orders.restaurant_id')
+        ->join('shipper', 'shipper.shipper_id', '=', 'orders.shipper_id')
+        ->select('orders.status','orders.order_id','customer.address','restaurant.address_res','customer.customer_name','restaurant.phone_res','restaurant.restaurant_name','account.username','customer.transport_fee','orders.date_create','shipper.shipper_id','shipper.shipper_name','orders.status_2')
+        ->orderBy('orders.order_id','DESC')
+        ->get();
+    }
     public function getHD($order){
         return DB::table('orders')->join('customer',function($join)
             {

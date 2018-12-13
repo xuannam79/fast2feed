@@ -358,6 +358,10 @@ Route::namespace('Admin')->middleware('MyMiddle', 'CustomerMiddle')->prefix('adm
 		'uses' => 'ManagePostAdminController@index',
 		'as' => 'managePostAdmin'
 	]);
+	Route::get('/order',[
+		'uses' => 'OrderController@index',
+		'as' => 'orderAdmin'
+	]);
 
 });
 

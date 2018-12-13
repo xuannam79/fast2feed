@@ -410,7 +410,7 @@
 				</div>
 
 				<div class="giohang">
-					<button class="dat-truoc" type="submit" style="" data-toggle="modal" data-target="#payModal"><i class="fa fa-check-circle" aria-hidden="true" style="color: white;font-size: 16px"></i>&nbsp;<span style="color: white">Đặt trước</span></button>
+					<button id="submit" class="dat-truoc" type="submit" style="" data-toggle="modal" data-target="#payModal"><i class="fa fa-check-circle" aria-hidden="true" style="color: white;font-size: 16px"></i>&nbsp;<span style="color: white">Đặt trước</span></button>
 				</div>
 				
 				@else
@@ -432,7 +432,7 @@
 						</span>
 					</div>
 					<div class="giohang">
-					<button class="dat-truoc" type="submit" style="" data-toggle="modal" data-target="#payModal"><i class="fa fa-check-circle" aria-hidden="true" style="color: white;font-size: 16px"></i>&nbsp;<span style="color: white">Đặt trước</span></button>
+					<button id="submit" class="dat-truoc" type="submit" style="" data-toggle="modal" data-target="#payModal"><i class="fa fa-check-circle" aria-hidden="true" style="color: white;font-size: 16px"></i>&nbsp;<span style="color: white">Đặt trước</span></button>
 				</div>
 				@endif
 
@@ -504,7 +504,7 @@
                                                   class="txt-bold"> Thời gian đặt:  {{ $dt->toTimeString() }} - {{ $dt->toDateString() }} - </span><span
                                                   class="txt-red" id="in_kilo"></span>
                                             </div>
-                                            <div id="submit" class="change-info" style="font-size: 14px;
+                                            <div class="change-info" style="font-size: 14px;
 											    color: #0288d1;
 											    padding: 10px;
 											    position: relative;

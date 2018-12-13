@@ -9,36 +9,39 @@ use App\Model\Admin\Account;
 use App\Model\Admin\Menu;
 use App\Model\Admin\Restaurant;
 use App\Model\Admin\Product;
+use App\Model\Admin\Shipper;
 use App\Http\Requests\AddMenuRequest;
 use App\Model\Admin\Cat;
 use Carbon\Carbon;
 
 class RestauController extends Controller
 {
-	public function __construct(Customer $customer, Menu $menu,Account $account, Product $product, Cat $cat, Restaurant $restaurant)
+	public function __construct(Customer $customer, Menu $menu,Account $account, Product $product, Cat $cat, Restaurant $restaurant, Shipper $shipper)
 	{
 		$this->customer = $customer;
         $this->account = $account;
         $this->menu = $menu;
         $this->product = $product;
         $this->cat = $cat;
-		$this->restaurant = $restaurant;
+        $this->restaurant = $restaurant;
+		$this->shipper = $shipper;
 	}
     public function index($slug, $cusId)
     {
         $dt = Carbon::now('Asia/Ho_Chi_Minh');
         if(session()->has('admin')){
-             $mail = session()->get('admin')[0]->email;
-             $getAdmin = $this->account->getAccount($mail);
-             $accId = session()->get('admin')[0]->account_id;
+            $mail = session()->get('admin')[0]->email;
+            $getAdmin = $this->account->getAccount($mail);
+            $accId = session()->get('admin')[0]->account_id;
+            $getRestaurant = $this->restaurant->getItem($accId);
+            $getShipper = $this->shipper->getItem2($accId);
         } 
         $getCatOffset0 = $this->cat->getCatOffset0();
         $getCatOffset2 = $this->cat->getCatOffset2();
         $getCustomer = $this->customer->getItem($cusId);
-    	$getRestaurant = $this->account->getItemNameCus($accId);
     	$getMenu = $this->menu->getItem($cusId);
         $getProduct = $this->product->getProductById($cusId);
-    	return view('f2f.restau.index', compact('getCustomer', 'getMenu', 'getAdmin', 'getProduct', 'getCatOffset0', 'getCatOffset2','getRestaurant','dt'));
+    	return view('f2f.restau.index', compact('getCustomer', 'getMenu', 'getAdmin', 'getProduct', 'getCatOffset0', 'getCatOffset2','getRestaurant','dt','getShipper'));
     }
     public function postProduct(Request $request, $slug, $cusId)
     {

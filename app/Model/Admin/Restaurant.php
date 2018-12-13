@@ -19,6 +19,6 @@ class Restaurant extends Model
         return DB::table('restaurant')
         ->join('account', 'account.account_id', '=', 'restaurant.account_id')
         ->where('account.account_id', $accId)
-        ->get();
+        ->first();
     }
 }

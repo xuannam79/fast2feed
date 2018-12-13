@@ -121,5 +121,19 @@ class Account extends Model
         }
         return DB::table('shipper')->join('account','account.account_id','=','shipper.account_id')->join('personal_account', 'personal_account.personal_id', '=', 'shipper.personal_id')->select('account.account_id','personal_account.money','personal_account.status','shipper.shipper_name','personal_account.EXP','personal_account.number')->where('account.account_id', $accId)->get();
     }
+    public function getItemNameCus($accId)
+    {
+        if(session()->has('admin')){
+             $id = session()->get('admin')[0]->account_id;
+        }
+        return DB::table('restaurant')
+        ->join('account',function($join)
+            {
+                $join->on('account.account_id','=','restaurant.account_id')
+                ->join('customer','customer.account_id','=','account.account_id');
+            })
+        ->where('account.account_id', $accId)
+        ->first();
+    }
 
 }

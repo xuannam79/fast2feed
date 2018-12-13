@@ -456,16 +456,16 @@
 				          			<div class="directionn-content" >
                                         <div class="directionn-info">
                                             <div class="directionn-from">
-                                                <div class="directionn-name">Điểm lấy hàng - Tên quán
+                                                <div class="directionn-name">Điểm lấy hàng - {{ $getCustomer->customer_name }}
                                                 </div>
-                                                <input id="start" type="hidden" value="254 Nguyễn Văn Linh, Thanh Khê, Đà Nẵng" style="width: 300px">254 Nguyễn Văn Linh, Thanh Khê, Đà Nẵng
+                                                <input id="start" type="hidden" value="{{ $getCustomer->address }}" style="width: 300px">{{ $getCustomer->address }}
                                             </div>
                                             <div class="directionn-to">
                                                 <div class="directionn-name"
                                                     id="shipping-address">
-                                                    <span>Điểm giao hàng - Tên khách</span><span> - Sđt khách </span>
+                                                    <span>Điểm giao hàng - {{ $getRestaurant->restaurant_name }}</span><span> - {{ $getRestaurant->phone_res }} </span>
                                                 </div>
-                                                    <input id="end" type="hidden" value="254 Hoàng Diệu, Hải Châu, Đà Nẵng" style="width: 300px">254 Hoàng Diệu, Hải Châu, Đà Nẵng
+                                                    <input id="end" type="hidden" value="{{ $getRestaurant->address_res }}" style="width: 300px">{{ $getRestaurant->address_res }}
                                             </div>
                                         </div>
                                         <div>
@@ -475,8 +475,8 @@
 												    padding: 2px 3px;
 												    background-color: #fbf9d8;"><span class="fa">
 											    <i class="far fa-clock"></i></span><span
-                                                  class="txt-bold"> Thời gian giao:  15:35 - 24/10 - </span><span
-                                                  class="txt-red">3.0km</span>
+                                                  class="txt-bold"> Thời gian giao:  {{ $dt->toTimeString() }} - {{ $dt->toDateString() }} - </span><span
+                                                  class="txt-red" id="in_kilo"></span>
                                             </div>
                                             <div id="submit" class="change-info" style="font-size: 14px;
 											    color: #0288d1;
@@ -534,8 +534,8 @@
 				          		<div>
 				          			<div style="padding-left: 10px;height: 54px;font-size: 16px;line-height: 28px;">
 				          				<span style="color: #464646">Tổng cộng <strong>{{ $countAmount }}</strong> phần</span><strong style="float: right;">{{$totalPrice1}}đ</strong><br>
-				          				<span style="color: #464646">Phí vận chuyển: </span><span style="color: #CF2127">0.5 km</span>
-										<i class="fa fa-question-circle-o" aria-hidden="true" style="font-size: 15px"></i><span style="float: right;">{{$newtransport_fee}}đ</span>
+				          				<span style="color: #464646">Phí vận chuyển: </span><span id="in_kilo1" style="color: #CF2127"></span>
+										<i class="fa fa-question-circle-o" aria-hidden="true" style="font-size: 15px"></i><span style="float: right;">đ</span><span id="phiVanChuyen" style="float: right;"></span>
 				          			</div>
 				          			<div style="background-color: #FBF9D8;height: 32px;font-size: 16px;line-height: 29px;">
 				          				<span style="padding-left: 10px;margin-right: 42px;">Mã khuyến mãi</span>
@@ -543,7 +543,7 @@
 				          				
 				          			</div>
 				          			<div style="padding-left: 10px;height: 50px;font-size: 18px;line-height: 50px;">
-				          				<span><strong>Tổng cộng</strong></span><span style="float: right;">{{$bigtotal}}đ</span>
+				          				<span><strong>Tổng cộng</strong></span><span style="float: right;">đ</span><span id="bigTotal" style="float: right;"></span>
 				          			</div>
 				          			<div style="background-color: #FBF9D8;height: 40px;font-size: 18px;line-height: 40px;">
 				          				<a href="" title="">
@@ -560,7 +560,8 @@
 			          <a href="#" title="">
 		          		<div class="payButton">
 		          			<strong><span class="payDathang">Đặt hàng &nbsp;<i class="fa fa-arrow-right" style="font-size:19px"></i></span></strong>
-		          			<span class="payGia">{{$bigtotal}}đ</span>
+		          			<span class="payGia">đ</span>
+		          			<span class="payGia" style="padding-right: 10px;" id="bigTotal1"></span>
 		          		</div>
 			          </a>
 			        </div>
@@ -591,6 +592,7 @@
 
         var onChangeHandler = function() {
           calculateAndDisplayRoute(directionsService, directionsDisplay);
+          test(directionsService, directionsDisplay);
         };
         document.getElementById('submit').addEventListener('click', onChangeHandler);
         //document.getElementById('start').addEventListener('click', onChangeHandler);
@@ -644,6 +646,67 @@
           }
         });
       }
+      function test(directionsService, directionsDisplay) {
+        var start = document.getElementById('start').value;
+        var end = document.getElementById('end').value;
+        directionsService.route({
+          origin: start,
+          destination: end,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+            var m = Math.ceil((response.routes[0].overview_path.length)/2);
+            var middle = response.routes[0].overview_path[m];
+            var service = new google.maps.DistanceMatrixService;
+            service.getDistanceMatrix({
+              origins: [start],
+              destinations: [end],
+              travelMode: 'DRIVING',
+              unitSystem: google.maps.UnitSystem.METRIC,
+              avoidHighways: false,
+              avoidTolls: false
+        }, function(response, status) {
+          if (status === 'OK') {
+            var originList = response.originAddresses;
+            var destinationList = response.destinationAddresses;
+            for (var i = 0; i < originList.length; i++) {
+              var results = response.rows[i].elements;
+              for (var j = 0; j < results.length; j++){
+                var element = results[j];
+                var dt = element.distance.text;
+                var dr = element.duration.text;
+              }
+            }
+            var i = new google.maps.InfoWindow();
+            var myin_kilo = document.getElementById('in_kilo');
+            //dt = in_kilo.innerHTML();
+            document.getElementById('in_kilo').innerHTML= dt;
+            document.getElementById('in_kilo1').innerHTML=dt;
+            var phi = parseFloat(dt);
+            var transport_fee = 7000*phi;
+            document.getElementById('phiVanChuyen').innerHTML=formatMoney(transport_fee);
+            var total = <?php echo json_encode($totalPrice); ?>;
+            var newtotal = total + transport_fee;
+            document.getElementById('bigTotal').innerHTML=formatMoney(newtotal);
+            document.getElementById('bigTotal1').innerHTML=formatMoney(newtotal);
+          }
+        })
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+      function formatMoney(n, c, d, t) {
+                      var c = isNaN(c = Math.abs(c)) ? 0 : c,
+                        d = d == undefined ? "." : d,
+                        t = t == undefined ? "," : t,
+                        s = n < 0 ? "-" : "",
+                        i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
+                        j = (j = i.length) > 3 ? j % 3 : 0;
+
+                      return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+                    };
 		</script>
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzmyhWaNEQ_i55-LLOfNPka-8BAhZRUaM&callback=initMap"
     async defer></script>

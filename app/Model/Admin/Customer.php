@@ -19,6 +19,16 @@ class Customer extends Model
     {
     	return DB::table('customer')->join('catalog', 'customer.catalog_id', '=', 'catalog.catalog_id')->join('account', 'account.account_id', '=', 'customer.account_id')->where('customer_id', $cusId)->first();
     }
+    public function getItem2($accId)
+    {
+        if(session()->has('admin')){
+             $id = session()->get('admin')[0]->account_id;
+        }
+        return DB::table('restaurant')
+        ->join('account', 'account.account_id', '=', 'restaurant.account_id')
+        ->where('account.account_id', $accId)
+        ->get();
+    }
     public function updateInfo2($idAcc,$arrCus )
     {
         return $this->where('account_id', $idAcc)->update($arrCus);

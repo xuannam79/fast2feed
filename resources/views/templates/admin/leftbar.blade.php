@@ -41,6 +41,10 @@
                                         <i class="fas fa-motorcycle"></i>Shipper</a>
                                 </li>
                                 <li>
+                                    <a href="{{ route('orderAdmin') }}">
+                                        <i class="fa fa-list-alt"></i>Order</a>
+                                </li>
+                                <li>
                                     <a href="{{ route('contactAdmin') }}">
                                         <i class="far fa-address-book"></i>Liên hệ</a>
                                 </li>

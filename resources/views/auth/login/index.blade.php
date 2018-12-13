@@ -42,7 +42,7 @@
                 <div class="login-wrap">
                     <div class="login-content">
                         <div class="login-logo">
-                            <a href="#">
+                            <a href="{{ route('trangChu') }}">
                                 <img src="/fast2feed/public/templates/admin/images/icon/f2f.png" alt="Fast2Feed">
                             </a>
                         </div>

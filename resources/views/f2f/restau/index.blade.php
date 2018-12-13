@@ -461,11 +461,37 @@
                                                 <input id="start" type="hidden" value="{{ $getCustomer->address }}" style="width: 300px">{{ $getCustomer->address }}
                                             </div>
                                             <div class="directionn-to">
-                                                <div class="directionn-name"
-                                                    id="shipping-address">
-                                                    <span>Điểm giao hàng - {{ $getRestaurant->restaurant_name }}</span><span> - {{ $getRestaurant->phone_res }} </span>
+                                                <div class="directionn-name" id="shipping-address">
+													@if(session()->has('admin')) 
+	                                            	@php $role = session()->get('admin')[0]->role; 
+	                                            	if($role == 2){
+														$url1 = $getRestaurant->restaurant_name;
+														$url2 = $getRestaurant->phone_res;
+	                                            		echo ' <span>Điểm giao hàng - '.$url1.' </span> <span> - '.$url2.' </span>';
+	                                            	}
+													else {
+														$url1 = $getShipper->shipper_name;
+														$url2 = $getShipper->phone;
+														echo ' <span>Điểm giao hàng - '.$url1.'</span> <span> - '.$url2.' </span>';
+													}
+													@endphp
+													@endif
                                                 </div>
-                                                    <input id="end" type="hidden" value="{{ $getRestaurant->address_res }}" style="width: 300px">{{ $getRestaurant->address_res }}
+                                                @if(session()->has('admin')) 
+	                                            	@php $role = session()->get('admin')[0]->role; 
+	                                            	if($role == 2){
+														$url1 = $getRestaurant->address_res;
+	                                            		echo ' <input id="end" type="text" value="'.$url1.'" style="width: 200px;" >
+	                                            		<input id="reset" type="submit" value="Cập nhật">';
+	                                            	}
+													else {
+														$url1 = $getShipper->address;
+														echo ' <input id="end" type="text" value="'.$url1.'" style="width: 200px">
+														<input id="reset" type="submit" value="Cập nhật">';
+													}
+													@endphp
+													@endif
+                                                    
                                             </div>
                                         </div>
                                         <div>
@@ -475,7 +501,7 @@
 												    padding: 2px 3px;
 												    background-color: #fbf9d8;"><span class="fa">
 											    <i class="far fa-clock"></i></span><span
-                                                  class="txt-bold"> Thời gian giao:  {{ $dt->toTimeString() }} - {{ $dt->toDateString() }} - </span><span
+                                                  class="txt-bold"> Thời gian đặt:  {{ $dt->toTimeString() }} - {{ $dt->toDateString() }} - </span><span
                                                   class="txt-red" id="in_kilo"></span>
                                             </div>
                                             <div id="submit" class="change-info" style="font-size: 14px;
@@ -599,6 +625,12 @@
         //document.getElementById('end').addEventListener('click', onChangeHandler);
       }
 
+      var obj = document.getElementById('reset');
+
+      obj.onclick = function(){
+      	initMap();
+      }
+
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         var start = document.getElementById('start').value;
         var end = document.getElementById('end').value;
@@ -697,6 +729,20 @@
           }
         });
       }
+      	 function AutocompleteDirectionsHandler(map) {
+	        this.map = map;
+	        this.originPlaceId = null;
+	        this.destinationPlaceId = null;
+	        var destinationInput = document.getElementById('end');
+
+	        var destinationAutocomplete = new google.maps.places.Autocomplete(
+	            destinationInput, {placeIdOnly: true});
+	        this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
+
+	        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(destinationInput);
+
+	      }
+
       function formatMoney(n, c, d, t) {
                       var c = isNaN(c = Math.abs(c)) ? 0 : c,
                         d = d == undefined ? "." : d,
@@ -708,6 +754,6 @@
                       return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
                     };
 		</script>
-		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzmyhWaNEQ_i55-LLOfNPka-8BAhZRUaM&callback=initMap"
+		<script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAzmyhWaNEQ_i55-LLOfNPka-8BAhZRUaM&callback=initMap"
     async defer></script>
 @endsection

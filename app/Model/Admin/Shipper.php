@@ -19,6 +19,16 @@ class Shipper extends Model
     {
     	return DB::table('shipper')->join('account','account.account_id','=','shipper.account_id')->where('shipper_id', $shiId)->first();
     }
+    public function getItem2($accId)
+    {
+        if(session()->has('admin')){
+             $id = session()->get('admin')[0]->account_id;
+        }
+        return DB::table('shipper')
+        ->join('account', 'account.account_id', '=', 'shipper.account_id')
+        ->where('account.account_id', $accId)
+        ->first();
+    }
     public function updateStatus($idAcc, $arrShip)
     {
         return $this->where('account_id', $idAcc)->update($arrShip);

@@ -410,7 +410,7 @@
 				</div>
 
 				<div class="giohang">
-					<button id="submit" class="dat-truoc" type="submit" style="" data-toggle="modal" data-target="#payModal"><i class="fa fa-check-circle" aria-hidden="true" style="color: white;font-size: 16px"></i>&nbsp;<span style="color: white">Đặt trước</span></button>
+					<button id="submit2" class="dat-truoc" type="submit" style="" data-toggle="modal" data-target="#payModal"><i class="fa fa-check-circle" aria-hidden="true" style="color: white;font-size: 16px"></i>&nbsp;<span style="color: white">Đặt trước</span></button>
 				</div>
 				
 				@else
@@ -432,7 +432,7 @@
 						</span>
 					</div>
 					<div class="giohang">
-					<button id="submit" class="dat-truoc" type="submit" style="" data-toggle="modal" data-target="#payModal"><i class="fa fa-check-circle" aria-hidden="true" style="color: white;font-size: 16px"></i>&nbsp;<span style="color: white">Đặt trước</span></button>
+					<button id="submit2" class="dat-truoc" type="submit" style="" data-toggle="modal" data-target="#payModal"><i class="fa fa-check-circle" aria-hidden="true" style="color: white;font-size: 16px"></i>&nbsp;<span style="color: white">Đặt trước</span></button>
 				</div>
 				@endif
 
@@ -443,7 +443,7 @@
 			    <div class="modal-dialog modal-lg">
 			      <div class="modal-content" style="height: 610px;background-color: #EBEBEB">
 			        <div class="modal-header">
-			          <button type="button" class="close" data-dismiss="modal">&times;</button>
+			          <button id="dongMap" type="button" class="close" data-dismiss="modal">&times;</button>
 			          <h4 class="modal-title"><strong>Xác nhận đơn hàng</strong></h4>
 			        </div>
 			        <div class="modal-body" style="height: 470px">
@@ -504,7 +504,7 @@
                                                   class="txt-bold"> Thời gian đặt:  {{ $dt->toTimeString() }} - {{ $dt->toDateString() }} - </span><span
                                                   class="txt-red" id="in_kilo"></span>
                                             </div>
-                                            <div class="change-info" style="font-size: 14px;
+                                            <div id="submit" class="change-info" style="font-size: 14px;
 											    color: #0288d1;
 											    padding: 10px;
 											    position: relative;
@@ -602,7 +602,8 @@
 		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b4ec0a436ed7084"></script>
 		<script>
 			var map;
-      function initMap() {
+			
+			function initMap() {
         var directionsDisplay = new google.maps.DirectionsRenderer;
         var directionsService = new google.maps.DirectionsService;
         map = new google.maps.Map(document.getElementById('map'), {
@@ -611,25 +612,35 @@
           disableDefaultUI: true
         });
         
-        directionsDisplay.setMap(map);
-        directionsDisplay.setPanel(document.getElementById('right-panel'));
-        
-        
 
         var onChangeHandler = function() {
-          calculateAndDisplayRoute(directionsService, directionsDisplay);
-          test(directionsService, directionsDisplay);
+        	directionsDisplay.setMap(map);
+          	calculateAndDisplayRoute(directionsService, directionsDisplay);
         };
+        var onChangeHandler2 = function() {
+        	//directionsService = null;
+          	test(directionsService, directionsDisplay);
+        };
+        var onChangeHandler3 = function() {
+        	calculateAndDisplayRoute(directionsService, directionsDisplay);
+        	test(directionsService, directionsDisplay);
+        };
+        var onChangeHandler4 = function() {
+        	map = new google.maps.Map(document.getElementById('map'), {
+	          zoom: 12,
+	          center: {lat: 16.0544068, lng: 108.2021667},
+	          disableDefaultUI: true
+	        });
+        };
+
         document.getElementById('submit').addEventListener('click', onChangeHandler);
+        document.getElementById('submit2').addEventListener('click', onChangeHandler2);
+        document.getElementById('reset').addEventListener('click', onChangeHandler3);
+        document.getElementById('dongMap').addEventListener('click', onChangeHandler4);
         //document.getElementById('start').addEventListener('click', onChangeHandler);
         //document.getElementById('end').addEventListener('click', onChangeHandler);
       }
 
-      var obj = document.getElementById('reset');
-
-      obj.onclick = function(){
-      	initMap();
-      }
 
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         var start = document.getElementById('start').value;
@@ -663,14 +674,14 @@
                 var dr = element.duration.text;
               }
             }
-            var i = new google.maps.InfoWindow();
+            //var InfoWindow = new google.maps.InfoWindow();
             var content = '<div>'+dt+
             '<br>'+dr+
             '</div>';
             //alert(content);
-            i.setContent(content);
-            i.setPosition(middle);
-            i.open(map);
+            InfoWindow.setContent(content);
+            InfoWindow.setPosition(middle);
+            InfoWindow.open(map);
           }
         })
           } else {
@@ -710,7 +721,6 @@
                 var dr = element.duration.text;
               }
             }
-            var i = new google.maps.InfoWindow();
             var myin_kilo = document.getElementById('in_kilo');
             //dt = in_kilo.innerHTML();
             document.getElementById('in_kilo').innerHTML= dt;

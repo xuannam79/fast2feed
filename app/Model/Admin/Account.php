@@ -112,7 +112,7 @@ class Account extends Model
             {
                 $join->on('orders.shipper_id','=','shipper.shipper_id')->join('restaurant','restaurant.restaurant_id','=','orders.restaurant_id')
                 ->join('customer','customer.customer_id','=','orders.customer_id');
-            })->join('account', 'account.account_id', '=', 'shipper.account_id')->select('account.account_id','orders.order_id','orders.date_create','orders.total','orders.status','restaurant.restaurant_name','customer.customer_name')->where('account.account_id', $accId)->get();
+            })->join('account', 'account.account_id', '=', 'shipper.account_id')->select('account.account_id','orders.order_id','orders.date_create','orders.total','orders.status_2','restaurant.restaurant_name','customer.customer_name')->where('account.account_id', $accId)->get();
     }
     public function personal($accId)
     {

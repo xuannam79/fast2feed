@@ -47,7 +47,7 @@
                                                 $name_res = $value->customer_name;
                                                 $name_cus = $value->restaurant_name;
                                                 $date = $value->date_create;
-                                                $status = $value->status;
+                                                $status = $value->status_2;
                                             @endphp
                                             <tr>
                                                 <td>
@@ -60,10 +60,12 @@
                                                 <td><span>{{ $name_cus }}</span></td>
                                                 <td>{{ $date }}</td>
                                                 <td>
-                                                    @if($status == 1)
-                                                    Đã giao
-                                                    @else
+                                                    @if($status == 0)
+                                                    Đã hủy
+                                                    @elseif($status == 1)
                                                     Đang giao
+                                                    @else
+                                                    Đã giao
                                                     @endif
                                                 </td>
                                             </tr>

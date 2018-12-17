@@ -25,7 +25,17 @@ class Order extends Model
             {
                 $join->on('customer.customer_id','=','orders.customer_id')
                 ->join('account','account.account_id','=','customer.account_id');
-            })->join('restaurant', 'restaurant.restaurant_id', '=', 'orders.restaurant_id')->select('orders.status','orders.order_id','customer.address','restaurant.address_res','customer.customer_name','restaurant.phone_res','restaurant.restaurant_name','account.username','customer.transport_fee','orders.date_create')->orderBy('orders.order_id','DESC')->simplePaginate(5);
+            })->join('restaurant', 'restaurant.restaurant_id', '=', 'orders.restaurant_id')->select('orders.status','orders.order_id','customer.address','restaurant.address_res','customer.customer_name','restaurant.phone_res','restaurant.restaurant_name','account.username','customer.transport_fee','orders.date_create','orders.status_2','orders.shipper_id')->where('orders.shipper_id','=','0')->orderBy('orders.order_id','DESC')->simplePaginate(5);
+    }
+    public function getOrderByShipper($accID)
+    {
+        if(session()->has('admin')){
+             $id = session()->get('admin')[0]->account_id;
+        }
+        return DB::table('shipper')
+        ->join('account','account.account_id','=','shipper.account_id')
+        ->where('shipper.account_id', $accID)
+        ->first();
     }
     public function getAllDanhSachHD2()
     {

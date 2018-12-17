@@ -54,7 +54,7 @@ class Shipper extends Model
                 ->join('customer','customer.customer_id','=','orders.customer_id')
                 ->join('restaurant','restaurant.restaurant_id','=','orders.restaurant_id');
             })
-        ->select('orders.status','orders.order_id','customer.address','restaurant.address_res','customer.customer_name','restaurant.phone_res','restaurant.restaurant_name','customer.transport_fee','orders.date_create')
+        ->select('orders.status','orders.order_id','customer.address','restaurant.address_res','customer.customer_name','restaurant.phone_res','restaurant.restaurant_name','customer.transport_fee','orders.date_create','orders.status_2')
         ->where('shipper.account_id', $accID)
         ->orderBy('orders.order_id','DESC')
         ->simplePaginate(5);

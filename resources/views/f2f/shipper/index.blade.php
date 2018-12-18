@@ -118,9 +118,27 @@
                                 </td>
                                 <td>
                                     @if($status_2 == 1)
-                                    <button title="Nhấn vào để nhận đơn hàng"
-                                                class="order_table_status gray pointer" style="width: 105px; float: right;">Hủy
-                                    </button>
+                                    <form action="{{ route('trangShipper') }}" method="post">
+                                        {{  csrf_field() }}
+                                        <input type="hidden" name="orderID" value="{{  $order }}">
+                                        <button type="submit" title="Nhấn vào để hủy đơn hàng"
+                                                class="order_table_status gray pointer" style="width: 80px; float: right;">Hủy
+                                        </button>
+                                    </form>
+                                    
+                                    @else
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($status_2 == 1)
+                                    <form action="{{ route('functionDelivered') }}" method="post">
+                                        {{  csrf_field() }}
+                                        <input type="hidden" name="orderID" value="{{  $order }}">
+                                        <button type="submit" title="Nhấn vào khi đã giao hàng"
+                                                class="order_table_status gray pointer" style="width: 80px; float: right;">Đã giao
+                                        </button>
+                                    </form>
+                                    
                                     @else
                                     @endif
                                 </td>

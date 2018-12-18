@@ -59,4 +59,8 @@ class Shipper extends Model
         ->orderBy('orders.order_id','DESC')
         ->simplePaginate(5);
     }
+    public function getShipperByAccID($AccID){
+        return DB::table('shipper')->where('account_id' , $AccID)->first();
+    }
+
 }

@@ -82,4 +82,13 @@ class Order extends Model
         ->where('orders.order_id', $order)
         ->first();
     }
+    public function acceptOrder($orderID, $arrOrder)
+    {
+        return DB::table('orders')
+        ->where('order_id', $orderID)
+        ->update([
+                'shipper_id' => $arrOrder['shipper_id'],
+                'status_2' => 1
+                ]);
+    }
 }

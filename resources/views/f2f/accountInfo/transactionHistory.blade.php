@@ -53,7 +53,7 @@
                                                 <td><span>{{ $date }}</span></td>
                                                 <td>{{ $total }}</td>
                                                 <td>
-                                                    @if($status == 1)
+                                                    @if($status_2 == 1)
                                                     <span>Đã thanh toán</span>
                                                     @else
                                                     <span>Chưa thanh toán</span>

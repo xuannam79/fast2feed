@@ -71,9 +71,17 @@ Route::namespace('f2f')->group(function(){
 		'uses' => 'PostProductController@postProduct',
 		'as' => 'trangpostProduct'
 	]);
-	Route::get('/index-shipper',[
+	Route::get('/hoa-don-da-nhan',[
 		'uses' => 'ShipperController@index',
 		'as' => 'trangShipper'
+	]);
+	Route::post('/hoa-don-da-nhan',[
+		'uses' => 'ShipperController@cancelOrder',
+		'as' => 'trangShipper'
+	]);
+	Route::post('/delivered',[
+		'uses' => 'ShipperController@delivered',
+		'as' => 'functionDelivered'
 	]);
 	Route::get('/info-shipper',[
 		'uses' => 'ShipperController@accountInfo',
@@ -89,6 +97,10 @@ Route::namespace('f2f')->group(function(){
 	]);
 	Route::get('/danhsachHD',[
 		'uses' => 'DanhSachHDController@index',
+		'as' => 'trangDanhSachHD'
+	]);
+	Route::post('/danhsachHD',[
+		'uses' => 'DanhSachHDController@acceptOrder',
 		'as' => 'trangDanhSachHD'
 	]);
 	Route::get('/detail-HD/{slug}-{order}',[

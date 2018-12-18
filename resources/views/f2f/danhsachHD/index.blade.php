@@ -109,9 +109,14 @@ Danh Sách Hóa Đơn
                                 </td>
                                 <td>
                                   @if($status == 1)
-                                    <button title="Nhấn vào để nhận đơn hàng"
+                                    <form action="{{ route('trangDanhSachHD') }}" method="post">
+                                      {{ csrf_field() }}
+                                      <input type="hidden" name="orderID" value="{{ $order }}">
+                                      
+                                    <button type="submit" title="Nhấn vào để nhận đơn hàng"
                                                 class="order_table_status gray pointer" style="width: 105px; float: right;">Nhận đơn
                                     </button>
+                                    </form>
                                     @else
                                     @endif
                                 </td>

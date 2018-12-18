@@ -29,7 +29,7 @@
         <script>
             $('body').append('<div style="" id="loadingDiv"><div class="loader"></div></div>');
             $(window).on('load', function(){
-              setTimeout(removeLoader, 300); //wait for page load PLUS two seconds.
+              setTimeout(removeLoader, 200); //wait for page load PLUS two seconds.
             });
             function removeLoader(){
                 $( "#loadingDiv" ).fadeOut(500, function() {

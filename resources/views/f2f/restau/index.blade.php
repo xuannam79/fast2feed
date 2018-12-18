@@ -633,6 +633,8 @@
 	        });
         };
 
+        new AutocompleteDirectionsHandler(map);
+
         document.getElementById('submit').addEventListener('click', onChangeHandler);
         document.getElementById('submit2').addEventListener('click', onChangeHandler2);
         document.getElementById('reset').addEventListener('click', onChangeHandler3);

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Model\Admin\Account;
 use App\Model\Admin\Shipper;
 use App\Model\Admin\Order;
+use Illuminate\Support\Facades\DB;
 use App\Model\Admin\Cat;
 use App\Http\Controllers\Controller;
 
@@ -47,5 +48,29 @@ class ShipperController extends Controller
         $getCatOffset0 = $this->cat->getCatOffset0();
         $getCatOffset2 = $this->cat->getCatOffset2();
         return view('f2f.accountShipperInfo.index', compact('getAdmin', 'getShipper','getCatOffset0','getCatOffset2'));
+    }
+    public function cancelOrder(Request $request)
+    {
+        $orderID = $request->orderID;
+        $resultCancel = DB::table('orders')
+                        ->where('order_id', $orderID)
+                        ->update(['shipper_id' => 0]);
+        if($resultCancel) {
+            return redirect()->route('trangDanhSachHD')->with('msg', 'Đã hủy order');
+        } else {
+            return redirect()->route('trangShipper')->with('msg', 'Hủy không thành công');
+        }
+    }
+    public function delivered(Request $request)
+    {
+        $orderID = $request->orderID;
+        $resultDelivered = DB::table('orders')
+                        ->where('order_id', $orderID)
+                        ->update(['status_2' => 2]);
+        if($resultDelivered) {
+            return redirect()->route('trangShipper')->with('msg', 'Cám ơn bạn! Bạn vất vả rồi ^^');
+        } else {
+            return redirect()->route('trangShipper')->with('msg', 'Xác nhận không thành công');
+        }
     }
 }

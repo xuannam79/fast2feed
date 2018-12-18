@@ -5,12 +5,13 @@
 				    <div class="footer-info">            
 				      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
 				        <strong style="font-size: 15px">Công ty</strong>
-				          <li style="margin-top: 15px"> <a href="#" title="" style="color: gray;font-size: 13px;">Giới thiệu</a></li> 
-				          <li> <a href="#" title="" style="color: gray;font-size: 13px">Quy trình đặt món</a></li> 
-				          <li> <a href="#" title="" style="color: gray;font-size: 13px">Hướng dẫn thanh toán</a></li> 
-				          <li> <a href="{{ route('trangLienHe') }}" title="" style="color: gray;font-size: 13px">Liên hệ</a></li> 
-				          <li> <a href="#" title="" style="color: gray;font-size: 13px">Hợp tác nhân viên giao nhận</a></li> 
-				          
+				          	<div style="color: gray;font-size: 13px">
+				          		<li style="margin-top: 15px"> <a href="#" title="Giới thiệu">Giới thiệu</a></li> 
+					          	<li> <a href="#" title="Quy trình đặt món">Quy trình đặt món</a></li> 
+					          	<li> <a href="#" title="Hướng dẫn thanh toán">Hướng dẫn thanh toán</a></li> 
+					          	<li> <a href="{{ route('trangLienHe') }}" title="Liên hệ">Liên hệ</a></li> 
+					          	<li> <a href="#" title="Hợp tác nhân viên giao nhận">Hợp tác nhân viên giao nhận</a></li> 
+				          	</div>
 				      </div>
 				      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
 				        <strong style="font-size: 15px;">F2F App</strong>
@@ -46,7 +47,7 @@
 				</div>
 				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" style="text-align: right;">
 				    <strong style="font-size: 15px">Địa chỉ</strong>
-				    <div style="font-size: 12px;color: gray;margin-top: 15px">
+				    <div style="font-size: 12px;color: #464646;margin-top: 15px">
 				    	<p>Team TANQ Capstone 1</p>
 				    	<p>Chuyên ngành Công nghệ phần mềm</p>
 				    	<p>Khoa Đào Tạo Quốc Tế</p>

@@ -40,8 +40,8 @@
 						  
 						  <div class="panel-body">
 					  		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center">
-				                <a href="/fast2feed/public/files/customer/{{ $images }}" class="jqzoom" rel="gal1" title="triumph">
-						            <img src="/fast2feed/public/files/customer/{{ $images }}" alt="" style="width:480px;height: 300px">
+				                <a href="/files/customer/{{ $images }}" class="jqzoom" rel="gal1" title="triumph">
+						            <img src="/files/customer/{{ $images }}" alt="" style="width:480px;height: 300px">
 						        </a>
 								<p style="margin-top: 35px;font-size: 15px;text-align: left;padding-left: 12px">Đặt món giao hàng tận nơi tại <strong>{{ $name }}</strong></p>
 						  	</div>
@@ -154,8 +154,8 @@
 						<div class="discount">
 					  		<div class="code-discount">
 					  			<div class="code-discount-img">
-					  				<img src="/fast2feed/public/templates/f2f/images/discount.png" alt="">
-					  				<img src="/fast2feed/public/templates/f2f/images/airpay.png" alt="">
+					  				<img src="/templates/f2f/images/discount.png" alt="">
+					  				<img src="/templates/f2f/images/airpay.png" alt="">
 					  			</div>
 					  			<div class="code-discount-text">
 					  				<div class="discount-text1">
@@ -223,7 +223,7 @@
 						  		@if($approved == 1)
 								<div class="list-item">
 									<div class="img-item">
-										<img src="/fast2feed/public/files/product/{{ $images }}" alt="">
+										<img src="/files/product/{{ $images }}" alt="">
 									</div>
 									<div class="name-item">
 										<h4>{{ $name }}</h4>
@@ -266,7 +266,7 @@
 					  return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 					};
 		        	if(adminStatus != 1){
-		        		top.location.href = '/fast2feed/public/dang-nhap';
+		        		top.location.href = '/dang-nhap';
 		        	}else {
 		        		$.ajaxSetup({
 			                headers: {
@@ -324,7 +324,7 @@
 			<div style="float: right;width: 270px;height: 100%;border: 1px solid #BCE8F1;border-radius: 5px;font-size: 13px">
 
 				<div class="giohang" style="background-color: #F9F9F9;height: 45px;">
-					<img src="/fast2feed/public/files/account/{{ $avatar }}" class="img-circle" alt="{{$accName}}" width="35px">&nbsp;<span style="font-weight: 800;color: #6D6F71;line-height: 33px">{{ $accName }}</span><span style="float: right;line-height: 35px;"></span>
+					<img src="/files/account/{{ $avatar }}" class="img-circle" alt="{{$accName}}" width="35px">&nbsp;<span style="font-weight: 800;color: #6D6F71;line-height: 33px">{{ $accName }}</span><span style="float: right;line-height: 35px;"></span>
 				</div>
 				@if(!session()->has($arrName))
 					<div class="onCart{{$idCus}}"></div>
@@ -409,10 +409,10 @@
 					</span>
 				</div>
 
-				<div class="giohang">
-					<button id="submit2" class="dat-truoc" type="submit" style="" data-toggle="modal" data-target="#payModal"><i class="fa fa-check-circle" aria-hidden="true" style="color: white;font-size: 16px"></i>&nbsp;<span style="color: white">Đặt trước</span></button>
-				</div>
-				
+						<div class="giohang">
+							<button id="submit2" class="dat-truoc" type="submit" style="" data-toggle="modal" data-target="#payModal"><i class="fa fa-check-circle" aria-hidden="true" style="color: white;font-size: 16px"></i>&nbsp;<span style="color: white">Đặt trước</span></button>
+						</div>
+
 				@else
 					<div class="giohang" style="background-color: #F9F9F9;">
 						<span>Cộng</span>
@@ -597,6 +597,23 @@
 			      </div>
 			    </div>
 			  </div>
+			  @else
+			  	<!-- Modal -->
+				  <div class="modal fade" id="payModal" role="dialog">
+				    <div class="modal-dialog modal-lg" style="padding-top: 150px">
+				      <div class="modal-content" style="width: 92%">
+				        <div class="modal-header" style="background-color: #F2F2F2">
+				          <button type="button" class="close" data-dismiss="modal">&times;</button>
+				          <h5 class="modal-title"><strong style="color: #CF2127">Fast2Feed</strong>&nbsp;<strong>Thông báo</strong></h5>
+				        </div>
+				        <div class="modal-body" style="background-image: url('/templates/f2f/images/background2.png'); height: 173px;">
+				        </div>
+				        <div class="modal-footer">
+				          <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #CF2127;color: white">OK</button>
+				        </div>
+				      </div>
+				    </div>
+				  </div>
 			  @endif
 			</div>
 

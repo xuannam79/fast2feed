@@ -90,5 +90,21 @@ class Order extends Model
                 'shipper_id' => $arrOrder['shipper_id'],
                 'status_2' => 1
                 ]);
+    }   
+    public function addOrder($arrPost)
+    {
+        return DB::table('orders')->insert(
+                                    ['status' => 1,
+                                    'payment' => 1,
+                                    'date_create' => $arrPost['date'],
+                                    'time' => $arrPost['time'],
+                                    'customer_id' => $arrPost['cusID'],
+                                    'shipper_id' => 0,
+                                    'status_2' => 2,
+                                    'total' => 200000,
+                                    'restaurant_id' => $arrPost['resID'],
+                                    'transport_fee_order' => 20000
+
+                                    ]);
     }
 }

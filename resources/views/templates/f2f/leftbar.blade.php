@@ -27,8 +27,12 @@
   <div class="mk-fullscreen-search-overlay" id="mk-search-overlay">
     <a href="#" class="mk-fullscreen-close" id="mk-fullscreen-close-button"><i class="fa fa-times"></i></a>
     <div id="mk-fullscreen-search-wrapper">
-      <form method="post" id="mk-fullscreen-searchform" action="{{ route('trangTimKiem') }}">
+
+      <form method="post" id="mk-fullscreen-searchform" action="{{ route('trangTimKiem') }}" >
       	{{ csrf_field() }}
+        <div class="imagesScreen">
+        
+      </div>
         <input type="text" name="searchinput" value="" placeholder="Đặt Đồ ăn, giao hàng từ 20'... ở Đà Nẵng từ 06:30 - 21:00" id="mk-fullscreen-search-input">
         <i class="fa fa-search fullscreen-search-icon"><input value="" type="submit"></i>
       </form>
@@ -40,11 +44,11 @@
 jQuery(document).ready(function($) {
   var wHeight = window.innerHeight;
   //search bar middle alignment
-  $('#mk-fullscreen-searchform').css('top', wHeight / 2);
+  $('#mk-fullscreen-searchform').css('top', wHeight / 3);
   //reform search bar
   jQuery(window).resize(function() {
     wHeight = window.innerHeight;
-    $('#mk-fullscreen-searchform').css('top', wHeight / 2);
+    $('#mk-fullscreen-searchform').css('top', wHeight / 3);
   });
   // Search
   $('#search-button').click(function() {

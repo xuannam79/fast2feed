@@ -33,7 +33,7 @@
 			           			<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 re-padding">
 						  			<div class="product_item">
 						  				<div class="product-image">
-						  					<a href="#"><img src="/fast2feed/public/files/customer/{{ $images }}" alt="" class=""></a>
+						  					<a href="#"><img src="/files/customer/{{ $images }}" alt="" class=""></a>
 						  				</div>
 										<a href="#" title="{{ $name }}">
 											<p><span class='price text-right'>{{ $name }}</span></p>

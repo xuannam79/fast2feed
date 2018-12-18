@@ -34,12 +34,12 @@
 				        
 				      </div>
 				      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-				        <img src="/fast2feed/public/templates/f2f/images/f2f2.png" alt=""style="width: 120px;margin: 0px 47px;"> 
+				        <img src="/templates/f2f/images/f2f2.png" alt=""style="width: 120px;margin: 0px 47px;"> 
 				        <p style="font-size: 12px;color: gray; padding-left: 12px">© 2018 Fast2Feed - by XuanNam</p>
 				        <div style="padding-left: 50px">
-				        	<a href="http://fb.com/phamxuannam97"><img src="/fast2feed/public/templates/f2f/images/icon/facebook.png" alt="" style="width: 20%"></a>
-							<a href="#"><img src="/fast2feed/public/templates/f2f/images/icon/twitter.png" alt="" style="width: 20%"></a>
-							<a href="#"><img src="/fast2feed/public/templates/f2f/images/icon/google.png" alt="" style="width: 20%"></a>
+				        	<a href="http://fb.com/phamxuannam97"><img src="/templates/f2f/images/icon/facebook.png" alt="" style="width: 20%"></a>
+							<a href="#"><img src="/templates/f2f/images/icon/twitter.png" alt="" style="width: 20%"></a>
+							<a href="#"><img src="/templates/f2f/images/icon/google.png" alt="" style="width: 20%"></a>
 						</div>
 				      </div>
 
@@ -53,14 +53,14 @@
 				    	<p>Khoa Đào Tạo Quốc Tế</p>
 				    	<p>Trường Đại Học Duy Tân</p>
 				    	<p>254 Nguyễn Văn Linh, P.Thạc Gián, Q.Thanh Khê, TP.Đà Nẵng</p>
-				    	<img src="/fast2feed/public/templates/f2f/images/footer_DKBCT.jpg" alt="" width="180px">
+				    	<img src="/templates/f2f/images/footer_DKBCT.jpg" alt="" width="180px">
 				    </div>
 				    
 				</div>
 			</div>
 		</div>
 	</div>
-    <script src="/fast2feed/public/templates/f2f/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/templates/f2f/bootstrap/js/bootstrap.min.js"></script>
 
     {{-- button scroll to top --}}
 	 <div class='lentop'>

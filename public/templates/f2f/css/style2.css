@@ -468,7 +468,11 @@ body{
 
 
 /* Search Overlay */
-
+.imagesScreen {
+  width: 795px;
+  height: 147px;
+  background-image: url('/templates/f2f/images/background.png');
+}
 .mk-fullscreen-search-overlay #mk-fullscreen-search-wrapper #mk-fullscreen-searchform input[type=submit] {
   position: absolute;
   width: 100px;

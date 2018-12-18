@@ -9,11 +9,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {{-- <meta http-equiv="refresh" content="number"> --}}
     
-    <script src="/fast2feed/public/templates/f2f/js/jquery-3.1.1.js" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="/fast2feed/public/templates/f2f/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="/fast2feed/public/templates/f2f/bootstrap/css/bootstrap.min.js">
-    <link rel="stylesheet" type="text/css" href="/fast2feed/public/templates/f2f/css/style.css">
-    <link rel="stylesheet" type="text/css" href="/fast2feed/public/templates/f2f/css/style2.css">
+    <script src="/templates/f2f/js/jquery-3.1.1.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="/templates/f2f/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/templates/f2f/bootstrap/css/bootstrap.min.js">
+    <link rel="stylesheet" type="text/css" href="/templates/f2f/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/templates/f2f/css/style2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVq1eRO3SMYnmnXu213mAa9hTj_B7EMcI&callback=initMap"
@@ -39,8 +39,8 @@
             }
         </script>
     <div class="container">
-        <a href="{{ route('trangChu') }}" title=""><img src="/fast2feed/public/templates/f2f/images/f2f.png" alt="" width="290px" height="145px"></a>
-        <a href="#" title=""><img src="/fast2feed/public/templates/f2f/images/banner.gif" alt="" width="845px" height="110px"></a>
+        <a href="{{ route('trangChu') }}" title=""><img src="/templates/f2f/images/f2f.png" alt="" width="290px" height="145px"></a>
+        <a href="#" title=""><img src="/templates/f2f/images/banner.gif" alt="" width="845px" height="110px"></a>
         <div class="row">
             <nav class="navbar navbar-info re-navbar" style="margin-top: 10px">
                 <div class="container-fluid re-container-fluid">
@@ -172,7 +172,7 @@
                             <li><a href="'.$url.'">Đăng sản phẩm</a></li>'; } @endphp @endif @if(session()->has('admin')) @foreach($getAdmin as $key => $admin)
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
-                               <img src="/fast2feed/public/files/account/{{ $admin->avatar }}" alt="" width="20px" height="20px">
+                               <img src="/files/account/{{ $admin->avatar }}" alt="" width="20px" height="20px">
                                <span>{{ $admin->username }}</span>
                                <span class="caret"></span>
                                </a>
@@ -181,7 +181,7 @@
                                         <div class="account">
                                             <div class="account-head" style="padding-left: 10px">
                                                 <div class="account-head-img">
-                                                    <img src="/fast2feed/public/files/account/{{ $admin->avatar }}" alt="" width="60px" height="60px">
+                                                    <img src="/files/account/{{ $admin->avatar }}" alt="" width="60px" height="60px">
                                                 </div>
                                                 <div class="account-head-info">
                                                     <p><strong>{{ $admin->username }}</strong></p>

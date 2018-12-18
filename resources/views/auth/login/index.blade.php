@@ -13,25 +13,25 @@
     <title>Login</title>
 
     <!-- Fontfaces CSS-->
-    <link href="/fast2feed/public/templates/admin/css/font-face.css" rel="stylesheet" media="all">
-    <link href="/fast2feed/public/templates/admin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="/fast2feed/public/templates/admin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-    <link href="/fast2feed/public/templates/admin/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="/templates/admin/css/font-face.css" rel="stylesheet" media="all">
+    <link href="/templates/admin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/templates/admin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="/templates/admin/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 
     <!-- Bootstrap CSS-->
-    <link href="/fast2feed/public/templates/admin/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="/templates/admin/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
 
     <!-- Vendor CSS-->
-    <link href="/fast2feed/public/templates/admin/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="/fast2feed/public/templates/admin/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="/fast2feed/public/templates/admin/vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="/fast2feed/public/templates/admin/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="/fast2feed/public/templates/admin/vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="/fast2feed/public/templates/admin/vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="/fast2feed/public/templates/admin/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <link href="/templates/admin/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="/templates/admin/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="/templates/admin/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="/templates/admin/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="/templates/admin/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="/templates/admin/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="/templates/admin/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
-    <link href="/fast2feed/public/templates/admin/css/theme.css" rel="stylesheet" media="all">
+    <link href="/templates/admin/css/theme.css" rel="stylesheet" media="all">
 
 </head>
 
@@ -43,7 +43,7 @@
                     <div class="login-content">
                         <div class="login-logo">
                             <a href="{{ route('trangChu') }}">
-                                <img src="/fast2feed/public/templates/admin/images/icon/f2f.png" alt="Fast2Feed">
+                                <img src="/templates/admin/images/icon/f2f.png" alt="Fast2Feed">
                             </a>
                         </div>
                         @php
@@ -103,28 +103,28 @@
     </div>
 
     <!-- Jquery JS-->
-    <script src="/fast2feed/public/templates/admin/vendor/jquery-3.2.1.min.js"></script>
+    <script src="/templates/admin/vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
-    <script src="/fast2feed/public/templates/admin/vendor/bootstrap-4.1/popper.min.js"></script>
-    <script src="/fast2feed/public/templates/admin/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <script src="/templates/admin/vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="/templates/admin/vendor/bootstrap-4.1/bootstrap.min.js"></script>
     <!-- Vendor JS       -->
-    <script src="/fast2feed/public/templates/admin/vendor/slick/slick.min.js">
+    <script src="/templates/admin/vendor/slick/slick.min.js">
     </script>
-    <script src="/fast2feed/public/templates/admin/vendor/wow/wow.min.js"></script>
-    <script src="/fast2feed/public/templates/admin/vendor/animsition/animsition.min.js"></script>
-    <script src="/fast2feed/public/templates/admin/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    <script src="/templates/admin/vendor/wow/wow.min.js"></script>
+    <script src="/templates/admin/vendor/animsition/animsition.min.js"></script>
+    <script src="/templates/admin/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
     </script>
-    <script src="/fast2feed/public/templates/admin/vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="/fast2feed/public/templates/admin/vendor/counter-up/jquery.counterup.min.js">
+    <script src="/templates/admin/vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="/templates/admin/vendor/counter-up/jquery.counterup.min.js">
     </script>
-    <script src="/fast2feed/public/templates/admin/vendor/circle-progress/circle-progress.min.js"></script>
-    <script src="/fast2feed/public/templates/admin/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="/fast2feed/public/templates/admin/vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="/fast2feed/public/templates/admin/vendor/select2/select2.min.js">
+    <script src="/templates/admin/vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="/templates/admin/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="/templates/admin/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="/templates/admin/vendor/select2/select2.min.js">
     </script>
 
     <!-- Main JS-->
-    <script src="/fast2feed/public/templates/admin/js/main.js"></script>
+    <script src="/templates/admin/js/main.js"></script>
 
 </body>
 

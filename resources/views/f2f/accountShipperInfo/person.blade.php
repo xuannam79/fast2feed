@@ -38,8 +38,8 @@
 				                @endphp
 				                <p style="margin-top: 10px">Xin chào,<strong style="font-size: 20px">{{ $name }}</strong></p>
 				                <p>Trạng thái: <i style="color: blue">đã kích hoạt</i></p>
-				                <div style="margin: 0 auto;width: 339px; height: 225px;background-image: url('/fast2feed/public/files/shipper/the-ngan-hang1.png');background-repeat: no-repeat;background-size: 339px 220px ">
-				                	<img src="/fast2feed/public/templates/f2f/images/f2f.png" alt="" width="50" height="30" style="margin-top: 15px;margin-left: 15px ">
+				                <div style="margin: 0 auto;width: 339px; height: 225px;background-image: url('/files/shipper/the-ngan-hang1.png');background-repeat: no-repeat;background-size: 339px 220px ">
+				                	<img src="/templates/f2f/images/f2f.png" alt="" width="50" height="30" style="margin-top: 15px;margin-left: 15px ">
 				                	<strong style="font-weight: normal;padding-left: 160px; color: #DCDCDC"><strong style="color: white"><i class="glyphicon glyphicon-send" style="color: orange"></i> TANQ</strong>Bank</strong>
 				                	<p style="padding-top: 65px; color: white; padding-left: 20px"><strong style="font-size: 25px">{{ $soThe }}</strong><br><br>
 				                		<strong style="font-size: 12px"><strong style="color: yellow">EXP</strong> {{ $date }}</strong><br>

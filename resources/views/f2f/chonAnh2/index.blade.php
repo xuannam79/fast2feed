@@ -60,7 +60,7 @@
 									<a style="display: flex;" href="#">
 										<div class="au-input au-input--full" style="background: #eaeff2; text-align: center">
 											<div class="no-image">
-												<img src="/public/fast2feed/public/templates/f2f/images/placeholder-landscape.png" width="200" height="236"
+												<img src="/public/templates/f2f/images/placeholder-landscape.png" width="200" height="236"
 												style="margin-top: 2em; margin-bottom: 2em;"> 
 												<p style="ine-height: 1.5em;font-size: .9em;">Click vào đây để đăng ảnh</p>
 											</div>
@@ -77,7 +77,7 @@
 								<p><span class="glyphicon glyphicon-ok" style="font-size: 13px;color:green"></span> Ảnh rõ nét, không bị mờ.</p>
 								<p><span class="glyphicon glyphicon-ok" style="font-size: 13px;color:green"></span> Nền trơn, màu trắng hoặc xanh dương.</p>
 								<div class="form-group" style="text-align: center;">
-                                    <img src="/public/fast2feed/public/templates/f2f/images/sample_profile_photo.jpg" width="200" height="236"
+                                    <img src="/public/templates/f2f/images/sample_profile_photo.jpg" width="200" height="236"
 												style="margin-top: 2em; margin-bottom: 2em;"> 
                                 </div>
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Tiếp tục</button>

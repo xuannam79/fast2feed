@@ -35,7 +35,7 @@
 				                	<form action="{{ route('trangCapNhatTK') }}" enctype="multipart/form-data" method="post">
                                 	{{ csrf_field() }}
 										<div style="float: right; margin-top: 30px; margin-right: 70px">
-						                	<img src="/fast2feed/public/files/account/{{$avatar}}" alt="" width="200" height="200">
+						                	<img src="/files/account/{{$avatar}}" alt="" width="200" height="200">
 						                	<input type="file" name="avatar">
 						                </div>
 				                		<strong>Username:</strong>

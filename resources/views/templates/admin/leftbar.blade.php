@@ -2,7 +2,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="{{ route('trangChuAdmin') }}">
-                    <img src="/fast2feed/public/templates/admin/images/icon/f2f.png" alt="Fast2Feed"/>
+                    <img src="/templates/admin/images/icon/f2f.png" alt="Fast2Feed"/>
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">

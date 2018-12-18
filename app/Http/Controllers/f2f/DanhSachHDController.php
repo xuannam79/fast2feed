@@ -28,11 +28,9 @@ class DanhSachHDController extends Controller
              $mail = session()->get('admin')[0]->email;
              $getAdmin = $this->account->getAccount($mail);
              $accId = session()->get('admin')[0]->account_id;
-             $getOrderByShipper = $this->order->getOrderByShipper($accId);
         }
         $getAllDanhSachHD = $this->order->getAllDanhSachHD();
-        $getAmountProduct = $this->order->getAmountProduct();    
-        $updateShipperId = $this->order->updateShipperId();    
-    	return view('f2f.danhsachHD.index', compact('getAdmin','getAllDanhSachHD','getAmountProduct','getCatOffset0','getCatOffset2','dt','getOrderByShipper','updateShipperId'));
+        $getAmountProduct = $this->order->getAmountProduct();       
+    	return view('f2f.danhsachHD.index', compact('getAdmin','getAllDanhSachHD','getAmountProduct','getCatOffset0','getCatOffset2','dt'));
     }
 }

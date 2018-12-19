@@ -502,7 +502,8 @@
 												    background-color: #fbf9d8;"><span class="fa">
 											    <i class="far fa-clock"></i></span><span
                                                   class="txt-bold"> Thời gian đặt:  {{ $dt->toTimeString() }} - {{ $dt->toDateString() }} - </span><span
-                                                  class="txt-red" id="in_kilo"></span>
+                                                  class="txt-red" id="in_kilo" ></span>
+                                                  
                                             </div>
                                             <div id="submit" class="change-info" style="font-size: 14px;
 											    color: #0288d1;
@@ -523,9 +524,10 @@
 				          			<strong>CHI TIẾT ĐƠN HÀNG</strong><i class="fa fa-angle-right" style="font-size:22px;position: absolute;right: 22px;color: #959595"></i>
 				          			</a>
 				          		</div>
+				          		<input type="hidden" id="in_kilo3" name="in_kilo3" />
 				          		<div class="pay-right-top-body">
 									
-					
+									
 									@php
 										$arrCart = session()->get($arrName);
 										$totalPrice = 0;
@@ -533,6 +535,7 @@
 										$countAmount = 0;
 										$newtransport_fee = 0;
 										$bigtotal = 0;
+										$distance = 0.5;
 									@endphp
 									@foreach($arrCart as $key => $aCart)
 									@php
@@ -544,7 +547,7 @@
 										$totalPrice += ($price * $amount);
 										$totalPrice1 = number_format($totalPrice);
 										$total = number_format($amount * $price);
-										$distance = 0.5;
+										
 										$newtransport_fee = number_format($transport_fee * $distance);
 										$bigtotal = number_format(($transport_fee * $distance) + $totalPrice);
 									@endphp
@@ -572,7 +575,7 @@
 				          				<span><strong>Tổng cộng</strong></span><span style="float: right;">đ</span><span id="bigTotal" style="float: right;"></span>
 				          			</div>
 				          			<div style="background-color: #FBF9D8;height: 40px;font-size: 18px;line-height: 40px;">
-				          				<a href="" title="">
+				          				<a href="#" title="">
 				          					<strong style="color: black;padding-left: 10px">Tiền mặt</strong><span style="float: right;">Thay đổi &nbsp;<i class="fa fa-angle-right" style="font-size:22px;color: #959595"></i></span>
 				          				</a>
 				          			</div>
@@ -633,7 +636,7 @@
 	        });
         };
 
-        new AutocompleteDirectionsHandler(map);
+        
 
         document.getElementById('submit').addEventListener('click', onChangeHandler);
         document.getElementById('submit2').addEventListener('click', onChangeHandler2);
@@ -641,6 +644,7 @@
         document.getElementById('dongMap').addEventListener('click', onChangeHandler4);
         //document.getElementById('start').addEventListener('click', onChangeHandler);
         //document.getElementById('end').addEventListener('click', onChangeHandler);
+        new AutocompleteDirectionsHandler(map);
       }
 
 

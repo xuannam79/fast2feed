@@ -364,7 +364,7 @@
     width: 100%;
     height: 100%;
     z-index: 9999;
-    background: url(/fast2feed/public/templates/f2f/images/loader/Preloader_8.gif) center no-repeat #fff;
+    background: url(/templates/f2f/images/loader/Preloader_8.gif) center no-repeat #fff;
 }
 @-webkit-keyframes load8 {
     0% {

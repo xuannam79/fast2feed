@@ -17,6 +17,8 @@ Chi Tiết Hóa Đơn
     $phone = ($getAllDanhSachHD->phone_res);
     $date = ($getAllDanhSachHD->date_create);
     $time = ($getAllDanhSachHD->time);
+    $money_transport_fee = ($getAllDanhSachHD->transport_fee_order);
+    $total = ($getAllDanhSachHD->total);
 @endphp
 
 <!-- model content -->
@@ -69,8 +71,7 @@ Chi Tiết Hóa Đơn
                         $sanpham = $value->order_id;
                         if($order == $sanpham){
                             $product_name = $value->product_name;
-                            $money_transport_fee = $value->transport_fee_order;
-                            $total = $value->total;
+                            
                             $amount = $value->amount;
                             $price = $value->price;
                             $total3 = $amount * $price;

@@ -75,9 +75,9 @@
                                                 <td>
                                                     @if($shipper_id==0)
                                                     <span style="color: green">Còn 10 phút</span>
-                                                    @elseif($shipper_id !=0 && $status == 1 && $status_2 == 2)
+                                                    @elseif($shipper_id !=0 && $status == 1 && $status_2 == 1)
                                                     <span style="color: orange">Đã giao</span>
-                                                    @elseif($shipper_id !=0 && $status == 1)
+                                                    @elseif($shipper_id !=0 && $status == 1 && $status_2 == 2)
                                                     <span style="color: blue">Đang giao</span>
                                                     @else
                                                     <span style="color: red">Đã hủy</span>

@@ -3,6 +3,9 @@
 	Khách hàng
 @endsection
 @section('content')
+<script>
+    $( window ).on( "load", function() { console.log('ádadadadas'); })
+    </script>
 	@php
 		$name = title_case($getCustomer->customer_name);
 		$images = $getCustomer->images;
@@ -408,9 +411,7 @@
 						@endphp
 					</span>
 				</div>
-						@php
 						
-						@endphp
 						<div class="giohang">
 							<form action="" method="post">
 								{{ csrf_field() }}
@@ -660,7 +661,9 @@
 	        });
         };
 
-        
+        directionsDisplay.addListener('directions_changed', function() {
+          computeTotalDistance(directionsDisplay.getDirections());
+        });
 
         document.getElementById('submit').addEventListener('click', onChangeHandler);
         document.getElementById('submit2').addEventListener('click', onChangeHandler2);
@@ -670,6 +673,7 @@
         //document.getElementById('end').addEventListener('click', onChangeHandler);
         new AutocompleteDirectionsHandler(map);
       }
+
 
 
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
@@ -719,6 +723,33 @@
           }
         });
       }
+      function computeTotalDistance(result) {
+		  var total = 0;
+		  var myroute = result.routes[0];
+		  for (var i = 0; i < myroute.legs.length; i++) {
+		    total += myroute.legs[i].distance.value;
+		  }
+		  total = total / 1000;
+		  var total2 = parseFloat(total).toFixed(1);
+		  document.getElementById('in_kilo').innerHTML = total2 + ' km';
+		  document.getElementById('in_kilo1').innerHTML = total2 + ' km';
+        var transport_fee = 7000*total2;
+        document.getElementById('phiVanChuyen').innerHTML=formatMoney(transport_fee);
+        var total = <?php echo json_encode($totalPrice); ?>;
+        var newtotal = total + transport_fee;
+        document.getElementById('bigTotal').innerHTML=formatMoney(newtotal);
+        document.getElementById('bigTotal1').innerHTML=formatMoney(newtotal);
+        $.ajax({
+            type: 'POST',
+            dataType: "JSON",
+            url: '{{ route('trangCustomer', ['slug' => $slug, 'cusId' => $idCus]) }}',
+            data: {id: total2 },
+            success: function (data) {
+               alert(data);
+            }
+        });
+
+		}
       function test(directionsService, directionsDisplay) {
         var start = document.getElementById('start').value;
         var end = document.getElementById('end').value;
@@ -751,17 +782,7 @@
                 var dr = element.duration.text;
               }
             }
-            var myin_kilo = document.getElementById('in_kilo');
-            //dt = in_kilo.innerHTML();
-            document.getElementById('in_kilo').innerHTML= dt;
-            document.getElementById('in_kilo1').innerHTML=dt;
-            var phi = parseFloat(dt);
-            var transport_fee = 7000*phi;
-            document.getElementById('phiVanChuyen').innerHTML=formatMoney(transport_fee);
-            var total = <?php echo json_encode($totalPrice); ?>;
-            var newtotal = total + transport_fee;
-            document.getElementById('bigTotal').innerHTML=formatMoney(newtotal);
-            document.getElementById('bigTotal1').innerHTML=formatMoney(newtotal);
+
           }
         })
           } else {

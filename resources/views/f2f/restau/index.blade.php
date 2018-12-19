@@ -408,9 +408,16 @@
 						@endphp
 					</span>
 				</div>
-
+						@php
+						
+						@endphp
 						<div class="giohang">
+							<form action="" method="post">
+								{{ csrf_field() }}
+
 							<button id="submit2" class="dat-truoc" type="submit" style="" data-toggle="modal" data-target="#payModal"><i class="fa fa-check-circle" aria-hidden="true" style="color: white;font-size: 16px"></i>&nbsp;<span style="color: white">Đặt trước</span></button>
+							</form>
+
 						</div>
 
 				@else

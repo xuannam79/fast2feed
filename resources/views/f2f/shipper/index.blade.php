@@ -55,7 +55,7 @@
                         <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>Mã hóa đơn</th>
+                                <th style="width: 100px">Mã hóa đơn</th>
                                 <th style="width: 310px">Nơi nhận hàng</th>
                                 <th style="width: 310px">Nơi giao hàng</th>
                                 <th style="width: 150px">Trạng thái</th>
@@ -96,7 +96,7 @@
                                 @endforeach
                             <tr>
                                 <td>{{ $loop->index+1 }}</td>
-                                <td style="padding-left: 40px">{{ $order }}</td>
+                                <td style="padding-left: 35px">{{ $order }}</td>
                                 <td>{{ $address }}</td>
                                 <td>{{ $address_cus }}</td>
                                 <td>

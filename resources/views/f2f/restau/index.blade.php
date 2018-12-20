@@ -24,11 +24,11 @@
 		if(session()->has('admin')){
 			$avatar = session()->get('admin')[0]->avatar;
 			$accName = session()->get('admin')[0]->username;
+			$account_id = session()->get('admin')[0]->account_id;
 		}else{
 			$avatar = 'userUnKnown.png';
 			$accName = '';
 		}
-
 	@endphp
 	<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clearpadding" style="margin-top: 15px;">
@@ -234,7 +234,7 @@
 										{{-- <a href="#" title=""><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px"></i></a> --}}
 										@php
 										@endphp
-										<button onclick="ajaxToggleCartUpdate('{{$slug}}', {{$idCus}}, {{$idProduct}}, '{{$name}}', {{$price}}, {{$amount}}, {{$bool}}, {{$adminStatus}}, {{$totalPrice}}, {{$transport_fee}});" style="border: none;background-color: white"><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px;" ></i></button>
+										<button class="PlusDistance" onclick="ajaxToggleCartUpdate('{{$slug}}', {{$idCus}}, {{$idProduct}}, '{{$name}}', {{$price}}, {{$amount}}, {{$bool}}, {{$adminStatus}}, {{$totalPrice}}, {{$transport_fee}});" style="border: none;background-color: white"><i class="fa fa-plus-square" aria-hidden="true" style="color: #CF2127;font-size: 25px;" ></i></button>
 									</div>
 									<div class="clear"></div>
 								</div>
@@ -309,6 +309,263 @@
 		        	}
 		        	window.setTimeout(function(){window.location.reload()}, 300);
 		       }
+		       var map;
+			
+			function initMap() {
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+        var directionsService = new google.maps.DirectionsService;
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: {lat: 16.0544068, lng: 108.2021667},
+          disableDefaultUI: true
+        });
+        
+
+        var onChangeHandler = function() {
+        	directionsDisplay.setMap(map);
+          	calculateAndDisplayRoute(directionsService, directionsDisplay);
+        };
+        var onChangeHandler2 = function() {
+        	//directionsService = null;
+          	test(directionsService, directionsDisplay);
+        };
+        var onChangeHandler3 = function() {
+        	calculateAndDisplayRoute(directionsService, directionsDisplay);
+        	test(directionsService, directionsDisplay);
+        };
+        var onChangeHandler4 = function() {
+        	map = new google.maps.Map(document.getElementById('map'), {
+	          zoom: 12,
+	          center: {lat: 16.0544068, lng: 108.2021667},
+	          disableDefaultUI: true
+	        });
+        };
+        var onChangeHandler5 = function() {
+        	test2(directionsService, directionsDisplay);
+        };
+
+        directionsDisplay.addListener('directions_changed', function() {
+          computeTotalDistance(directionsDisplay.getDirections());
+        });
+
+        document.getElementById('submit').addEventListener('click', onChangeHandler);
+        document.getElementById('submit2').addEventListener('click', onChangeHandler2);
+        document.getElementById('reset').addEventListener('click', onChangeHandler3);
+        document.getElementById('dongMap').addEventListener('click', onChangeHandler4);
+        document.getElementById('totalTotal').addEventListener('click', onChangeHandler5);
+        //document.getElementById('start').addEventListener('click', onChangeHandler);
+        //document.getElementById('end').addEventListener('click', onChangeHandler);
+        new AutocompleteDirectionsHandler(map);
+      }
+
+
+
+      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        var start = document.getElementById('start').value;
+        var end = document.getElementById('end').value;
+        directionsService.route({
+          origin: start,
+          destination: end,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+            var m = Math.ceil((response.routes[0].overview_path.length)/2);
+            var middle = response.routes[0].overview_path[m];
+            var service = new google.maps.DistanceMatrixService;
+            service.getDistanceMatrix({
+              origins: [start],
+              destinations: [end],
+              travelMode: 'DRIVING',
+              unitSystem: google.maps.UnitSystem.METRIC,
+              avoidHighways: false,
+              avoidTolls: false
+        }, function(response, status) {
+          if (status === 'OK') {
+            var originList = response.originAddresses;
+            var destinationList = response.destinationAddresses;
+            for (var i = 0; i < originList.length; i++) {
+              var results = response.rows[i].elements;
+              for (var j = 0; j < results.length; j++){
+                var element = results[j];
+                var dt = element.distance.text;
+                var dr = element.duration.text;
+              }
+            }
+            //var InfoWindow = new google.maps.InfoWindow();
+            var content = '<div>'+dt+
+            '<br>'+dr+
+            '</div>';
+            //alert(content);
+            InfoWindow.setContent(content);
+            InfoWindow.setPosition(middle);
+            InfoWindow.open(map);
+          }
+        })
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+      function computeTotalDistance(result) {
+		  var total = 0;
+		  var myroute = result.routes[0];
+		  for (var i = 0; i < myroute.legs.length; i++) {
+		    total += myroute.legs[i].distance.value;
+		  }
+		  total = total / 1000;
+		  var total2 = parseFloat(total).toFixed(1);
+		  document.getElementById('in_kilo').innerHTML = total2 + ' km';
+		  document.getElementById('in_kilo1').innerHTML = total2 + ' km';
+        var transport_fee = 7000*total2;
+        document.getElementById('phiVanChuyen').innerHTML=formatMoney(transport_fee);
+        var total = <?php echo json_encode($totalPrice); ?>;
+        var newtotal = total + transport_fee;
+        document.getElementById('bigTotal').innerHTML=formatMoney(newtotal);
+        document.getElementById('bigTotal1').innerHTML=formatMoney(newtotal);
+        
+		}
+		function computeTotalDistance2(result) {
+		  var total = 0;
+		  var myroute = result.routes[0];
+		  for (var i = 0; i < myroute.legs.length; i++) {
+		    total += myroute.legs[i].distance.value;
+		  }
+		  total = total / 1000;
+		  var total2 = parseFloat(total).toFixed(1);
+		  document.getElementById('in_kilo').innerHTML = total2 + ' km';
+		  document.getElementById('in_kilo1').innerHTML = total2 + ' km';
+        var transport_fee = 7000*total2;
+        document.getElementById('phiVanChuyen').innerHTML=formatMoney(transport_fee);
+        var total = <?php echo json_encode($totalPrice); ?>;
+        var newtotal = total + transport_fee;
+        document.getElementById('bigTotal').innerHTML=formatMoney(newtotal);
+        document.getElementById('bigTotal1').innerHTML=formatMoney(newtotal);
+		}
+      
+      
+      function test(directionsService, directionsDisplay) {
+        var start = document.getElementById('start').value;
+        var end = document.getElementById('end').value;
+        directionsService.route({
+          origin: start,
+          destination: end,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+            var m = Math.ceil((response.routes[0].overview_path.length)/2);
+            var middle = response.routes[0].overview_path[m];
+            var service = new google.maps.DistanceMatrixService;
+            service.getDistanceMatrix({
+              origins: [start],
+              destinations: [end],
+              travelMode: 'DRIVING',
+              unitSystem: google.maps.UnitSystem.METRIC,
+              avoidHighways: false,
+              avoidTolls: false
+        }, function(response, status) {
+          if (status === 'OK') {
+            var originList = response.originAddresses;
+            var destinationList = response.destinationAddresses;
+            for (var i = 0; i < originList.length; i++) {
+              var results = response.rows[i].elements;
+              for (var j = 0; j < results.length; j++){
+                var element = results[j];
+                var dt = element.distance.text;
+                var dr = element.duration.text;
+              }
+            }
+
+          }
+        })
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+      function test2(directionsService, directionsDisplay) {
+        var start = document.getElementById('start').value;
+        var end = document.getElementById('end').value;
+        directionsService.route({
+          origin: start,
+          destination: end,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+            var m = Math.ceil((response.routes[0].overview_path.length)/2);
+            var middle = response.routes[0].overview_path[m];
+            var service = new google.maps.DistanceMatrixService;
+            service.getDistanceMatrix({
+              origins: [start],
+              destinations: [end],
+              travelMode: 'DRIVING',
+              unitSystem: google.maps.UnitSystem.METRIC,
+              avoidHighways: false,
+              avoidTolls: false
+        }, function(response, status) {
+          if (status === 'OK') {
+            var originList = response.originAddresses;
+            var destinationList = response.destinationAddresses;
+            for (var i = 0; i < originList.length; i++) {
+              var results = response.rows[i].elements;
+              for (var j = 0; j < results.length; j++){
+                var element = results[j];
+                var dt = element.distance.text;
+                var dr = element.duration.text;
+              }
+            }
+            var total2 = parseFloat(dt);
+	        var transport_fee = 7000*total2;
+
+	        var total = <?php echo json_encode($totalPrice); ?>;
+	        var slug = <?php echo json_encode($slug); ?>;
+	        var idCus = <?php echo json_encode($idCus); ?>;
+	        var account_id = <?php echo json_encode($account_id); ?>;
+	        var newtotal = total + transport_fee;
+	        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+            });
+
+            $.ajax({
+
+                url: "{{ route('trangAjaxOrder', ['slug' => $slug, 'cusId' => $idCus]) }}",
+                type: 'POST',
+                cache: false,
+                data: {newtotal:newtotal, transport_fee:transport_fee, account_id:account_id},
+                success: function(data){
+                	console.log(data);
+          //           
+                },
+                error: function (){
+                    alert('có lỗi xảy ra');
+                }
+            });
+            window.setTimeout(function(){window.location.reload()}, 300);
+          }
+        })
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+      	 function AutocompleteDirectionsHandler(map) {
+	        this.map = map;
+	        this.originPlaceId = null;
+	        this.destinationPlaceId = null;
+	        var destinationInput = document.getElementById('end');
+
+	        var destinationAutocomplete = new google.maps.places.Autocomplete(
+	            destinationInput, {placeIdOnly: true});
+	        this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
+
+	        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(destinationInput);
+
+	      }
+
 		    </script>
 			{{-- //smooth scrolling page --}}
 			<script>
@@ -412,6 +669,7 @@
 						<div class="giohang">
 							<button id="submit2" class="dat-truoc" type="submit" style="" data-toggle="modal" data-target="#payModal"><i class="fa fa-check-circle" aria-hidden="true" style="color: white;font-size: 16px"></i>&nbsp;<span style="color: white">Đặt trước</span></button>
 						</div>
+						
 
 				@else
 					<div class="giohang" style="background-color: #F9F9F9;">
@@ -553,7 +811,7 @@
 									@endphp
 
 				          			<div class="list-order">
-				          				<span class="order-number">{{$amount}}</span><strong class="order-name">{{$name}}</strong><span>[Sốt thêm]</span><span class="order-price">{{$total}}đ</span>
+				          				<span class="order-number">{{$amount}}</span><strong class="order-name">{{$name}}</strong><span class="order-price">{{$total}}đ</span>
 				          			</div>
 				          			@endforeach
 
@@ -562,7 +820,8 @@
 				          	<div class="pay-right-bot">
 				          		<div>
 				          			<div style="padding-left: 10px;height: 54px;font-size: 16px;line-height: 28px;">
-				          				<span style="color: #464646">Tổng cộng <strong>{{ $countAmount }}</strong> phần</span><strong style="float: right;">{{$totalPrice1}}đ</strong><br>
+				          				<span style="color: #464646">Tổng cộng <strong>{{ $countAmount }}</strong> phần</span>
+				          				<strong style="float: right;">{{$totalPrice1}}đ</strong><br>
 				          				<span style="color: #464646">Phí vận chuyển: </span><span id="in_kilo1" style="color: #CF2127"></span>
 										<i class="fa fa-question-circle-o" aria-hidden="true" style="font-size: 15px"></i><span style="float: right;">đ</span><span id="phiVanChuyen" style="float: right;"></span>
 				          			</div>
@@ -572,7 +831,8 @@
 				          				
 				          			</div>
 				          			<div style="padding-left: 10px;height: 50px;font-size: 18px;line-height: 50px;">
-				          				<span><strong>Tổng cộng</strong></span><span style="float: right;">đ</span><span id="bigTotal" style="float: right;"></span>
+				          				<span><strong>Tổng cộng</strong></span>
+				          				<span style="float: right;">đ</span><span id="bigTotal" style="float: right;"></span>
 				          			</div>
 				          			<div style="background-color: #FBF9D8;height: 40px;font-size: 18px;line-height: 40px;">
 				          				<a href="#" title="">
@@ -586,13 +846,12 @@
 
 			        </div>
 			        <div class="modal-footer">
-			          <a href="#" title="">
 		          		<div class="payButton">
-		          			<strong><span class="payDathang">Đặt hàng &nbsp;<i class="fa fa-arrow-right" style="font-size:19px"></i></span></strong>
+		          			<button style="background: #0288D1; width: 870px; height: 50px;" id="totalTotal" type="submit">Đặt hàng</button>
+		          			
 		          			<span class="payGia">đ</span>
 		          			<span class="payGia" style="padding-right: 10px;" id="bigTotal1"></span>
 		          		</div>
-			          </a>
 			        </div>
 			      </div>
 			    </div>
@@ -621,180 +880,7 @@
 		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b4ec0a436ed7084"></script>
 		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b4ec0a436ed7084"></script>
 		<script>
-			var map;
 			
-			function initMap() {
-        var directionsDisplay = new google.maps.DirectionsRenderer;
-        var directionsService = new google.maps.DirectionsService;
-        map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 12,
-          center: {lat: 16.0544068, lng: 108.2021667},
-          disableDefaultUI: true
-        });
-        
-
-        var onChangeHandler = function() {
-        	directionsDisplay.setMap(map);
-          	calculateAndDisplayRoute(directionsService, directionsDisplay);
-        };
-        var onChangeHandler2 = function() {
-        	//directionsService = null;
-          	test(directionsService, directionsDisplay);
-        };
-        var onChangeHandler3 = function() {
-        	calculateAndDisplayRoute(directionsService, directionsDisplay);
-        	test(directionsService, directionsDisplay);
-        };
-        var onChangeHandler4 = function() {
-        	map = new google.maps.Map(document.getElementById('map'), {
-	          zoom: 12,
-	          center: {lat: 16.0544068, lng: 108.2021667},
-	          disableDefaultUI: true
-	        });
-        };
-
-        directionsDisplay.addListener('directions_changed', function() {
-          computeTotalDistance(directionsDisplay.getDirections());
-        });
-
-        document.getElementById('submit').addEventListener('click', onChangeHandler);
-        document.getElementById('submit2').addEventListener('click', onChangeHandler2);
-        document.getElementById('reset').addEventListener('click', onChangeHandler3);
-        document.getElementById('dongMap').addEventListener('click', onChangeHandler4);
-        //document.getElementById('start').addEventListener('click', onChangeHandler);
-        //document.getElementById('end').addEventListener('click', onChangeHandler);
-        new AutocompleteDirectionsHandler(map);
-      }
-
-
-
-      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        var start = document.getElementById('start').value;
-        var end = document.getElementById('end').value;
-        directionsService.route({
-          origin: start,
-          destination: end,
-          travelMode: 'DRIVING'
-        }, function(response, status) {
-          if (status === 'OK') {
-            directionsDisplay.setDirections(response);
-            var m = Math.ceil((response.routes[0].overview_path.length)/2);
-            var middle = response.routes[0].overview_path[m];
-            var service = new google.maps.DistanceMatrixService;
-            service.getDistanceMatrix({
-              origins: [start],
-              destinations: [end],
-              travelMode: 'DRIVING',
-              unitSystem: google.maps.UnitSystem.METRIC,
-              avoidHighways: false,
-              avoidTolls: false
-        }, function(response, status) {
-          if (status === 'OK') {
-            var originList = response.originAddresses;
-            var destinationList = response.destinationAddresses;
-            for (var i = 0; i < originList.length; i++) {
-              var results = response.rows[i].elements;
-              for (var j = 0; j < results.length; j++){
-                var element = results[j];
-                var dt = element.distance.text;
-                var dr = element.duration.text;
-              }
-            }
-            //var InfoWindow = new google.maps.InfoWindow();
-            var content = '<div>'+dt+
-            '<br>'+dr+
-            '</div>';
-            //alert(content);
-            InfoWindow.setContent(content);
-            InfoWindow.setPosition(middle);
-            InfoWindow.open(map);
-          }
-        })
-          } else {
-            window.alert('Directions request failed due to ' + status);
-          }
-        });
-      }
-      function computeTotalDistance(result) {
-		  var total = 0;
-		  var myroute = result.routes[0];
-		  for (var i = 0; i < myroute.legs.length; i++) {
-		    total += myroute.legs[i].distance.value;
-		  }
-		  total = total / 1000;
-		  var total2 = parseFloat(total).toFixed(1);
-		  document.getElementById('in_kilo').innerHTML = total2 + ' km';
-		  document.getElementById('in_kilo1').innerHTML = total2 + ' km';
-        var transport_fee = 7000*total2;
-        document.getElementById('phiVanChuyen').innerHTML=formatMoney(transport_fee);
-        var total = <?php echo json_encode($totalPrice); ?>;
-        var newtotal = total + transport_fee;
-        document.getElementById('bigTotal').innerHTML=formatMoney(newtotal);
-        document.getElementById('bigTotal1').innerHTML=formatMoney(newtotal);
-        $.ajax({
-            type: 'POST',
-            dataType: "JSON",
-            url: '{{ route('trangCustomer', ['slug' => $slug, 'cusId' => $idCus]) }}',
-            data: {id: total2 },
-            success: function (data) {
-               alert(data);
-            }
-        });
-
-		}
-      function test(directionsService, directionsDisplay) {
-        var start = document.getElementById('start').value;
-        var end = document.getElementById('end').value;
-        directionsService.route({
-          origin: start,
-          destination: end,
-          travelMode: 'DRIVING'
-        }, function(response, status) {
-          if (status === 'OK') {
-            directionsDisplay.setDirections(response);
-            var m = Math.ceil((response.routes[0].overview_path.length)/2);
-            var middle = response.routes[0].overview_path[m];
-            var service = new google.maps.DistanceMatrixService;
-            service.getDistanceMatrix({
-              origins: [start],
-              destinations: [end],
-              travelMode: 'DRIVING',
-              unitSystem: google.maps.UnitSystem.METRIC,
-              avoidHighways: false,
-              avoidTolls: false
-        }, function(response, status) {
-          if (status === 'OK') {
-            var originList = response.originAddresses;
-            var destinationList = response.destinationAddresses;
-            for (var i = 0; i < originList.length; i++) {
-              var results = response.rows[i].elements;
-              for (var j = 0; j < results.length; j++){
-                var element = results[j];
-                var dt = element.distance.text;
-                var dr = element.duration.text;
-              }
-            }
-
-          }
-        })
-          } else {
-            window.alert('Directions request failed due to ' + status);
-          }
-        });
-      }
-      	 function AutocompleteDirectionsHandler(map) {
-	        this.map = map;
-	        this.originPlaceId = null;
-	        this.destinationPlaceId = null;
-	        var destinationInput = document.getElementById('end');
-
-	        var destinationAutocomplete = new google.maps.places.Autocomplete(
-	            destinationInput, {placeIdOnly: true});
-	        this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
-
-	        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(destinationInput);
-
-	      }
 
       function formatMoney(n, c, d, t) {
                       var c = isNaN(c = Math.abs(c)) ? 0 : c,

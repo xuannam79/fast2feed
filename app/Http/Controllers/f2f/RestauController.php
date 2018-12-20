@@ -12,11 +12,13 @@ use App\Model\Admin\Product;
 use App\Model\Admin\Shipper;
 use App\Http\Requests\AddMenuRequest;
 use App\Model\Admin\Cat;
+use App\Model\Admin\Order;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 class RestauController extends Controller
 {
-	public function __construct(Customer $customer, Menu $menu,Account $account, Product $product, Cat $cat, Restaurant $restaurant, Shipper $shipper)
+	public function __construct(Customer $customer, Menu $menu,Account $account, Product $product, Cat $cat, Restaurant $restaurant, Shipper $shipper, Order $order)
 	{
 		$this->customer = $customer;
         $this->account = $account;
@@ -24,7 +26,8 @@ class RestauController extends Controller
         $this->product = $product;
         $this->cat = $cat;
         $this->restaurant = $restaurant;
-		$this->shipper = $shipper;
+        $this->shipper = $shipper;
+		$this->order = $order;
 	}
     public function index($slug, $cusId)
     {
@@ -130,9 +133,9 @@ class RestauController extends Controller
 
         $resultAdd = $this->menu->addMenu($arrAdd);
         if($resultAdd){
-            return redirect(route('trangCustomer', ['slug' => $slug, 'cusId' => $cusID]))->with('msg','Thêm menu thành công');
+            return redirect()->route('trangCustomer', ['slug' => $slug, 'cusId' => $cusID])->with('msg','Thêm menu thành công');
         }else{
-            return redirect(route('trangThemMenu'))->with('msg','Thêm menu không thành công');
+            return redirect()->route('trangThemMenu')->with('msg','Thêm menu không thành công');
         }
     }
     public function minusProduct(Request $request, $slug, $cusId)
@@ -166,5 +169,21 @@ class RestauController extends Controller
                 $newCountPrice = $newAmount * $arrCart[$idProduct]['priceProduct'];
                 $request->session()->put($arrName,$arrCart);
         }
+    }
+    public function order(Request $request, $slug, $cusId)
+    {
+
+        $arrPost['total'] = $request->newtotal;
+        $account_id = $request->account_id;
+        $arrPost['transport_fee'] = $request->transport_fee;
+        $dt = Carbon::now('Asia/Ho_Chi_Minh');
+        $arrPost['date'] = $dt->toDateString();
+        $arrPost['time'] = $dt->toTimeString();
+        $arrPost['cusID'] = $cusId;
+        $resultRes = DB::table('restaurant')->where('account_id', $account_id)->first();
+        $arrPost['resID'] = $resultRes->restaurant_id;
+
+        $resultOrder = $this->order->addOrder($arrPost);
+        
     }
 }

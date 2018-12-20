@@ -47,6 +47,10 @@ Route::namespace('f2f')->group(function(){
 		'uses' => 'RestauController@postProduct',
 		'as' => 'trangAjaxCart'
 	]);
+	Route::post('/nha-hang/ajaxOrder/{slug}-{cusId}',[
+		'uses' => 'RestauController@order',
+		'as' => 'trangAjaxOrder'
+	]);
 	Route::post('/nha-hang/minus/{slug}-{cusId}',[
 		'uses' => 'RestauController@minusProduct',
 		'as' => 'trangMinusProduct'

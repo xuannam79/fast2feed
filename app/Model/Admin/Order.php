@@ -57,7 +57,7 @@ class Order extends Model
                 ->join('account','account.account_id','=','customer.account_id');
             })
         ->join('restaurant', 'restaurant.restaurant_id', '=', 'orders.restaurant_id')
-        ->select('orders.status','orders.order_id','customer.address','restaurant.address_res','customer.customer_name','restaurant.phone_res','restaurant.restaurant_name','account.username','customer.transport_fee','orders.date_create','orders.time')
+        ->select('orders.status','orders.order_id','customer.address','restaurant.address_res','customer.customer_name','restaurant.phone_res','restaurant.restaurant_name','account.username','customer.transport_fee','orders.date_create','orders.time','orders.transport_fee_order','orders.total')
         ->where('orders.order_id', $order)
         ->first();
     }
@@ -94,17 +94,17 @@ class Order extends Model
     public function addOrder($arrPost)
     {
         return DB::table('orders')->insert(
-                                    ['status' => 1,
-                                    'payment' => 1,
+                                    [
+                                    'status' => '1',
+                                    'payment' => '1',
                                     'date_create' => $arrPost['date'],
-                                    'time' => $arrPost['time'],
                                     'customer_id' => $arrPost['cusID'],
-                                    'shipper_id' => 0,
-                                    'status_2' => 2,
-                                    'total' => 200000,
+                                    'shipper_id' => '0',
+                                    'status_2' => '1',
+                                    'total' => $arrPost['total'],
                                     'restaurant_id' => $arrPost['resID'],
-                                    'transport_fee_order' => 20000
-
+                                    'transport_fee_order' => $arrPost['transport_fee'],
+                                    'time' => $arrPost['time']
                                     ]);
     }
 }

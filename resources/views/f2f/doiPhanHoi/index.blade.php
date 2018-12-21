@@ -51,7 +51,7 @@
                                 <div class="form-group">
                                     <p style="text-align:justify">Cảm ơn bạn đã đăng ký trở thành shipper. Vui lòng đợi hệ thống xác nhận thông tin. Chúng tôi sẽ liên hệ bạn trong thời gian sớm nhất.</p>
                                 </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Quay lại trang chủ</button>
+                                <a href="{{ route('trangChu') }}" class="au-btn au-btn--block au-btn--green m-b-20" style="color: white; text-align: center;">Quay lại trang chủ</a>
                             </form>
                         </div>
                     </div>

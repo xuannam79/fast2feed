@@ -100,7 +100,7 @@
                                 </div>
 								<div class="form-group">
                                     <p style="margin-top: 1em; font-size:13px">Ngày cấp<span style="color: red"> *</span></p>
-                                    <input class="au-input au-input--full" type="date" value="2018-01-01" placeholder="" style="background: #eaeff2;">
+                                    <input class="au-input au-input--full" type="date" value="2018-01-01" placeholder="" style="background: #eaeff2;height: 25px">
                                 </div>
 								<div class="form-group">
                                     <p style="margin-top: 1em; font-size:13px">Nơi cấp<span style="color: red"> *</span></p>
@@ -115,7 +115,7 @@
 										<option value="A4">A4</option>
 									</select>
                                 </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Tiếp tục</button>
+                                <a href="{{ route('trangChonAnh') }}" style="color: white; text-align: center;" class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Tiếp tục</a>
                             </form>
 
                         </div>

@@ -18,6 +18,8 @@ use Carbon\Carbon;
 
 class RestauController extends Controller
 {
+    
+
 	public function __construct(Customer $customer, Menu $menu,Account $account, Product $product, Cat $cat, Restaurant $restaurant, Shipper $shipper, Order $order)
 	{
 		$this->customer = $customer;
@@ -172,7 +174,7 @@ class RestauController extends Controller
     }
     public function order(Request $request, $slug, $cusId)
     {
-
+        // insert order
         $arrPost['total'] = $request->newtotal;
         $account_id = $request->account_id;
         $arrPost['transport_fee'] = $request->transport_fee;
@@ -184,6 +186,20 @@ class RestauController extends Controller
         $arrPost['resID'] = $resultRes->restaurant_id;
 
         $resultOrder = $this->order->addOrder($arrPost);
+
+        $order_idMAX = DB::table('orders')->max('order_id');
+
+        // insert transaction 
+        $arrCart = $request->arrCart;
         
+        foreach ($arrCart as $key => $value) {
+            DB::table('transaction')->insert(
+                [
+                'order_id' => $order_idMAX,
+                'product_id' => $value['idProduct'],
+                'amount' => $value['amountProduct']
+                ]);
+        }
+
     }
 }

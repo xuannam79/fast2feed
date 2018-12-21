@@ -99,14 +99,14 @@
                                     <input class="au-input au-input--full" type="text" name="username" placeholder="" style="background: #eaeff2;">
                                 </div>
 								<div class="form-group">
-                                    <p style="margin-top: 1em; font-size:13px">Ngày cấp<span style="color: red"> *</span></p>
-                                    <input class="au-input au-input--full" type="date" value="2018-01-01" placeholder="" style="background: #eaeff2;">
+                                    <p style="margin-top: 1em; font-size:13px;">Ngày cấp<span style="color: red"> *</span></p>
+                                    <input class="au-input au-input--full" type="date" value="2018-01-01" placeholder="" style="background: #eaeff2;height: 25px">
                                 </div>
 								<div class="form-group">
                                     <p style="margin-top: 1em; font-size:13px">Nơi cấp<span style="color: red"> *</span></p>
                                     <input class="au-input au-input--full" type="text" name="username" placeholder="" style="background: #eaeff2;margin-bottom: 1em;">
                                 </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">TIẾP TỤC</button>
+                                <a href="{{ route('trangChonAnh') }}" style="color: white; text-align: center;" class="au-btn au-btn--block au-btn--green m-b-20" type="submit">TIẾP TỤC</a>
                             </form>
 
                         </div>

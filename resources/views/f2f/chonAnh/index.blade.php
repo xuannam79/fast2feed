@@ -77,7 +77,7 @@
 										</div>
 									</a>
 								</div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">GỬI</button>
+                                <a href="{{ route('trangDoiPhanHoi') }}" class="au-btn au-btn--block au-btn--green m-b-20" style="color: white; text-align: center;">GỬI</a>
                             </form>
                         </div>
                     </div>

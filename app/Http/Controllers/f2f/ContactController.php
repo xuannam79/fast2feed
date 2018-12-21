@@ -5,6 +5,8 @@ namespace App\Http\Controllers\f2f;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Admin\Cat;
+use App\Http\Requests\ContactRequest;
+use Illuminate\Support\Facades\DB;
 use App\Model\Admin\Account;
 
 class ContactController extends Controller
@@ -25,6 +27,23 @@ class ContactController extends Controller
     	$getCatOffset0 = $this->cat->getCatOffset0();
         $getCatOffset2 = $this->cat->getCatOffset2();
     	$cats = $this->cat->getAll();
-    	return view('f2f.contact.index', compact('cats', 'getAccountInfo', 'getCatOffset0', 'getCatOffset2'));
+    	return view('f2f.contact.index', compact('cats', 'getAccountInfo', 'getCatOffset0', 'getCatOffset2', 'getAdmin'));
+    }
+    public function postContact(ContactRequest $request)
+    {
+        $name = $request->name;
+        $phone = $request->phone;
+        $address = $request->address;
+        $mail = $request->mail;
+        $content = $request->content;
+
+        if(DB::table('contact')
+            ->insert(['contact_name'=>$name, 'address'=>$address, 'phone'=>$phone, 'email'=>$mail,  'content'=>$content]))
+        {
+            return redirect()->route('trangLienHe')->with('msg', 'Cám ơn bạn đã liên hệ');
+        } else {
+            return redirect()->route('trangLienHe')->with('msg', 'Liên hệ không thành công');
+
+        }
     }
 }

@@ -90,7 +90,12 @@ class Account extends Model
         if(session()->has('admin')){
              $id = session()->get('admin')[0]->account_id;
         }
-        return DB::table('customer')->join('account', 'account.account_id', '=', 'customer.account_id')->join('catalog', 'catalog.catalog_id', '=', 'customer.catalog_id')->select('account.account_id','customer.date','customer.customer_name','customer.address','catalog.catalog_name','customer.status_customer','customer.customer_id','customer.images')->where('account.account_id', $accId)->get();
+        return DB::table('customer')
+        ->join('account', 'account.account_id', '=', 'customer.account_id')
+        ->join('catalog', 'catalog.catalog_id', '=', 'customer.catalog_id')
+        ->select('account.account_id','customer.date','customer.customer_name','customer.address','catalog.catalog_name','customer.status_customer','customer.customer_id','customer.images')
+        ->where('account.account_id', $accId)
+        ->get();
     }
     public function transactionHistory($accId)
     {
@@ -101,7 +106,7 @@ class Account extends Model
             {
                 $join->on('customer.customer_id','=','orders.customer_id')
                 ->join('account','account.account_id','=','customer.account_id');
-            })->select('account.account_id','orders.payment','customer.customer_name','orders.order_id','orders.date_create','orders.total','orders.status','orders.status_2')->where('account.account_id', $accId)->orderBy('order_id', 'DESC')->get();
+            })->select('account.account_id','orders.payment','customer.customer_name','orders.order_id','orders.date_create','orders.total','orders.status','orders.status_2')->where('account.account_id', $accId)->orderBy('order_id', 'DESC')->simplePaginate(5);
     }
     public function deliveryHistory($accId)
     {

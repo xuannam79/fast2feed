@@ -84,6 +84,7 @@ class RegisterController extends Controller
             'email' => 'required',
             'password' => 'required',
             'avatar' => 'required',
+            'address' => 'required',
             'fullname' => 'required',
             'repassword' => 'required|same:password'
         ],[
@@ -93,11 +94,13 @@ class RegisterController extends Controller
             'password.required' => 'Bạn chưa nhập password',
             'repassword.required' => 'Vui lòng nhập lại mật khẩu',
             'repassword.same' => 'Password không khớp',
-            'avatar.required' => 'Bạn chưa thêm avatar'
+            'avatar.required' => 'Bạn chưa thêm avatar',
+            'address.required' => 'Bạn chưa thêm address'
         ]);
         $username = $request->username;
         $email = $request->email;
         $fullname = $request->fullname;
+        $address = $request->address;
         $password = md5($request->password);
 
     	$avatar = $request->file('avatar');
@@ -116,7 +119,7 @@ class RegisterController extends Controller
             $newAccID = DB::table('account')->max('account_id');
             $resultAddCus = DB::table('restaurant')->insert([
                                                         'restaurant_name' => $fullname,
-                                                        'address_res' => 'null',
+                                                        'address_res' => $address,
                                                         'phone_res' => 'null', 
                                                         'account_id' => $newAccID
                                                         ]);

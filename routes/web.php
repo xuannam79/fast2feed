@@ -30,6 +30,10 @@ Route::namespace('f2f')->group(function(){
 		'uses' => 'ContactController@index',
 		'as' => 'trangLienHe'
 	]);
+	Route::post('/lien-he',[
+		'uses' => 'ContactController@postContact',
+		'as' => 'trangLienHe'
+	]);
 	Route::get('/danh-muc/{slug}-{cid}',[
 		'uses' => 'CatController@index',
 		'as' => 'trangDanhMuc'

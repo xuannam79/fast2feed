@@ -174,7 +174,7 @@ class RestauController extends Controller
     }
     public function order(Request $request, $slug, $cusId)
     {
-        // insert order
+        // // insert order
         $arrPost['total'] = $request->newtotal;
         $account_id = $request->account_id;
         $arrPost['transport_fee'] = $request->transport_fee;

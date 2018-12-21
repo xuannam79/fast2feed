@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="login-checkbox">
                                 </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Gửi</button>
+                                <a href="{{ route('trangChonAnh') }}" class="au-btn au-btn--block au-btn--green m-b-20" style="text-align: center;">Gửi</a>
                             </form>
                             <div class="register-link">
                                 <p>

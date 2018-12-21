@@ -4,6 +4,7 @@
 @endsection
 @section('content')
 	@php
+
 		$name = title_case($getCustomer->customer_name);
 		$images = $getCustomer->images;
 		$catalog_name = title_case($getCustomer->catalog_name);
@@ -23,6 +24,7 @@
 		if(session()->has('admin')){
 			$avatar = session()->get('admin')[0]->avatar;
 			$accName = session()->get('admin')[0]->username;
+			$account_id = session()->get('admin')[0]->account_id;
 		}else{
 			$avatar = 'userUnKnown.png';
 			$accName = '';
@@ -35,7 +37,9 @@
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clearpadding">
 						
 						<div class="panel panel-info " style="margin-bottom: 15px">
-						  
+						  @if (Session::has('msg'))
+	                            <p style="color: red">{{ Session::get('msg') }}</p>
+	                        @endif
 						  <div class="panel-body">
 					  		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center">
 				                <a href="/files/customer/{{ $images }}" class="jqzoom" rel="gal1" title="triumph">
@@ -542,7 +546,7 @@
 									@endphp
 
 				          			<div class="list-order">
-				          				<span class="order-number">{{$amount}}</span><strong class="order-name">{{$name}}</strong><span>[Sốt thêm]</span><span class="order-price">{{$total}}đ</span>
+				          				<span class="order-number">{{$amount}}</span><strong class="order-name">{{$name}}</strong><span class="order-price">{{$total}}đ</span>
 				          			</div>
 				          			@endforeach
 
@@ -609,6 +613,7 @@
 		</div>
 		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b4ec0a436ed7084"></script>
 		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b4ec0a436ed7084"></script>
+		@if(!session()->has('admin'))
 		<script>
 			var map;
 			
@@ -640,6 +645,9 @@
 	          disableDefaultUI: true
 	        });
         };
+        var onChangeHandler5 = function() {
+        	test2(directionsService, directionsDisplay);
+        };
         directionsDisplay.addListener('directions_changed', function() {
           computeTotalDistance(directionsDisplay.getDirections());
         });
@@ -647,6 +655,7 @@
         document.getElementById('submit2').addEventListener('click', onChangeHandler2);
         document.getElementById('reset').addEventListener('click', onChangeHandler3);
         document.getElementById('dongMap').addEventListener('click', onChangeHandler4);
+        document.getElementById('totalTotal').addEventListener('click', onChangeHandler5);
         //document.getElementById('start').addEventListener('click', onChangeHandler);
         //document.getElementById('end').addEventListener('click', onChangeHandler);
         new AutocompleteDirectionsHandler(map);
@@ -714,15 +723,6 @@
         var newtotal = total + transport_fee;
         document.getElementById('bigTotal').innerHTML=formatMoney(newtotal);
         document.getElementById('bigTotal1').innerHTML=formatMoney(newtotal);
-        $.ajax({
-            type: 'POST',
-            dataType: "JSON",
-            url: '{{ route('trangCustomer', ['slug' => $slug, 'cusId' => $idCus]) }}',
-            data: {id: total2 },
-            success: function (data) {
-               alert(data);
-            }
-        });
 		}
       function test(directionsService, directionsDisplay) {
         var start = document.getElementById('start').value;
@@ -763,6 +763,53 @@
           }
         });
       }
+      function test2(directionsService, directionsDisplay) {
+        var start = document.getElementById('start').value;
+        var end = document.getElementById('end').value;
+        directionsService.route({
+          origin: start,
+          destination: end,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+            var m = Math.ceil((response.routes[0].overview_path.length)/2);
+            var middle = response.routes[0].overview_path[m];
+            var service = new google.maps.DistanceMatrixService;
+            service.getDistanceMatrix({
+              origins: [start],
+              destinations: [end],
+              travelMode: 'DRIVING',
+              unitSystem: google.maps.UnitSystem.METRIC,
+              avoidHighways: false,
+              avoidTolls: false
+        }, function(response, status) {
+          if (status === 'OK') {
+            var originList = response.originAddresses;
+            var destinationList = response.destinationAddresses;
+            for (var i = 0; i < originList.length; i++) {
+              var results = response.rows[i].elements;
+              for (var j = 0; j < results.length; j++){
+                var element = results[j];
+                var dt = element.distance.text;
+                var dr = element.duration.text;
+              }
+            }
+            var total2 = parseFloat(dt);
+	        var transport_fee = 7000*total2;
+
+	        var total = <?php echo json_encode($totalPrice); ?>;
+	        var slug = <?php echo json_encode($slug); ?>;
+	        var idCus = <?php echo json_encode($idCus); ?>;
+	        var newtotal = total + transport_fee;
+	        
+          }
+        })
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
       	 function AutocompleteDirectionsHandler(map) {
 	        this.map = map;
 	        this.originPlaceId = null;
@@ -783,6 +830,251 @@
                       return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
                     };
 		</script>
+		@else
+		@php
+			$arrCart = session()->get($arrName);
+
+		@endphp
+		@if(isset($arrCart))
+{{-- truong hop has session --}}
+		<script>
+			var map;
+			
+			function initMap() {
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+        var directionsService = new google.maps.DirectionsService;
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: {lat: 16.0544068, lng: 108.2021667},
+          disableDefaultUI: true
+        });
+        
+        var onChangeHandler = function() {
+        	directionsDisplay.setMap(map);
+          	calculateAndDisplayRoute(directionsService, directionsDisplay);
+        };
+        var onChangeHandler2 = function() {
+        	//directionsService = null;
+          	test(directionsService, directionsDisplay);
+        };
+        var onChangeHandler3 = function() {
+        	calculateAndDisplayRoute(directionsService, directionsDisplay);
+        	test(directionsService, directionsDisplay);
+        };
+        var onChangeHandler4 = function() {
+        	map = new google.maps.Map(document.getElementById('map'), {
+	          zoom: 12,
+	          center: {lat: 16.0544068, lng: 108.2021667},
+	          disableDefaultUI: true
+	        });
+        };
+        var onChangeHandler5 = function() {
+        	test2(directionsService, directionsDisplay);
+        };
+        directionsDisplay.addListener('directions_changed', function() {
+          computeTotalDistance(directionsDisplay.getDirections());
+        });
+        document.getElementById('submit').addEventListener('click', onChangeHandler);
+        document.getElementById('submit2').addEventListener('click', onChangeHandler2);
+        document.getElementById('reset').addEventListener('click', onChangeHandler3);
+        document.getElementById('dongMap').addEventListener('click', onChangeHandler4);
+        document.getElementById('totalTotal').addEventListener('click', onChangeHandler5);
+        //document.getElementById('start').addEventListener('click', onChangeHandler);
+        //document.getElementById('end').addEventListener('click', onChangeHandler);
+        new AutocompleteDirectionsHandler(map);
+      }
+      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        var start = document.getElementById('start').value;
+        var end = document.getElementById('end').value;
+        directionsService.route({
+          origin: start,
+          destination: end,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+            var m = Math.ceil((response.routes[0].overview_path.length)/2);
+            var middle = response.routes[0].overview_path[m];
+            var service = new google.maps.DistanceMatrixService;
+            service.getDistanceMatrix({
+              origins: [start],
+              destinations: [end],
+              travelMode: 'DRIVING',
+              unitSystem: google.maps.UnitSystem.METRIC,
+              avoidHighways: false,
+              avoidTolls: false
+        }, function(response, status) {
+          if (status === 'OK') {
+            var originList = response.originAddresses;
+            var destinationList = response.destinationAddresses;
+            for (var i = 0; i < originList.length; i++) {
+              var results = response.rows[i].elements;
+              for (var j = 0; j < results.length; j++){
+                var element = results[j];
+                var dt = element.distance.text;
+                var dr = element.duration.text;
+              }
+            }
+            //var InfoWindow = new google.maps.InfoWindow();
+            var content = '<div>'+dt+
+            '<br>'+dr+
+            '</div>';
+            //alert(content);
+            InfoWindow.setContent(content);
+            InfoWindow.setPosition(middle);
+            InfoWindow.open(map);
+          }
+        })
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+      function computeTotalDistance(result) {
+		  var total = 0;
+		  var myroute = result.routes[0];
+		  for (var i = 0; i < myroute.legs.length; i++) {
+		    total += myroute.legs[i].distance.value;
+		  }
+		  total = total / 1000;
+		  var total2 = parseFloat(total).toFixed(1);
+		  document.getElementById('in_kilo').innerHTML = total2 + ' km';
+		  document.getElementById('in_kilo1').innerHTML = total2 + ' km';
+        var transport_fee = 7000*total2;
+        document.getElementById('phiVanChuyen').innerHTML=formatMoney(transport_fee);
+        var total = <?php echo json_encode($totalPrice); ?>;
+        var newtotal = total + transport_fee;
+        document.getElementById('bigTotal').innerHTML=formatMoney(newtotal);
+        document.getElementById('bigTotal1').innerHTML=formatMoney(newtotal);
+		}
+      function test(directionsService, directionsDisplay) {
+        var start = document.getElementById('start').value;
+        var end = document.getElementById('end').value;
+        directionsService.route({
+          origin: start,
+          destination: end,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+            var m = Math.ceil((response.routes[0].overview_path.length)/2);
+            var middle = response.routes[0].overview_path[m];
+            var service = new google.maps.DistanceMatrixService;
+            service.getDistanceMatrix({
+              origins: [start],
+              destinations: [end],
+              travelMode: 'DRIVING',
+              unitSystem: google.maps.UnitSystem.METRIC,
+              avoidHighways: false,
+              avoidTolls: false
+        }, function(response, status) {
+          if (status === 'OK') {
+            var originList = response.originAddresses;
+            var destinationList = response.destinationAddresses;
+            for (var i = 0; i < originList.length; i++) {
+              var results = response.rows[i].elements;
+              for (var j = 0; j < results.length; j++){
+                var element = results[j];
+                var dt = element.distance.text;
+                var dr = element.duration.text;
+              }
+            }
+          }
+        })
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+      function test2(directionsService, directionsDisplay) {
+        var start = document.getElementById('start').value;
+        var end = document.getElementById('end').value;
+        directionsService.route({
+          origin: start,
+          destination: end,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+            var m = Math.ceil((response.routes[0].overview_path.length)/2);
+            var middle = response.routes[0].overview_path[m];
+            var service = new google.maps.DistanceMatrixService;
+            service.getDistanceMatrix({
+              origins: [start],
+              destinations: [end],
+              travelMode: 'DRIVING',
+              unitSystem: google.maps.UnitSystem.METRIC,
+              avoidHighways: false,
+              avoidTolls: false
+        }, function(response, status) {
+          if (status === 'OK') {
+            var originList = response.originAddresses;
+            var destinationList = response.destinationAddresses;
+            for (var i = 0; i < originList.length; i++) {
+              var results = response.rows[i].elements;
+              for (var j = 0; j < results.length; j++){
+                var element = results[j];
+                var dt = element.distance.text;
+                var dr = element.duration.text;
+              }
+            }
+            var total2 = parseFloat(dt);
+	        var transport_fee = 7000*total2;
+
+	        var total = <?php echo json_encode($totalPrice); ?>;
+	        var slug = <?php echo json_encode($slug); ?>;
+	        var idCus = <?php echo json_encode($idCus); ?>;
+	        var account_id = <?php echo json_encode($account_id); ?>;
+	        var arrCart = <?php echo json_encode($arrCart); ?>;
+	        var newtotal = total + transport_fee;
+	        
+		        $.ajaxSetup({
+	                headers: {
+	                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	                  }
+	            });
+	            $.ajax({
+	                url: "{{ route('trangAjaxOrder', ['slug' => $slug, 'cusId' => $idCus]) }}",
+	                type: 'POST',
+	                cache: false,
+	                data: {account_id:account_id, newtotal:newtotal, transport_fee:transport_fee, arrCart:arrCart},
+	                success: function(data){
+	                	window.location="http://fast2feed.vn/lich-su-dat-hang";
+	                },
+	                error: function (){
+	                    alert('có lỗi xảy ra');
+	                }
+	            });
+	            // window.setTimeout(function(){window.location.reload()}, 300);
+          }
+        })
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+      	 function AutocompleteDirectionsHandler(map) {
+	        this.map = map;
+	        this.originPlaceId = null;
+	        this.destinationPlaceId = null;
+	        var destinationInput = document.getElementById('end');
+	        var destinationAutocomplete = new google.maps.places.Autocomplete(
+	            destinationInput, {placeIdOnly: true});
+	        this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
+	        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(destinationInput);
+	      }
+      function formatMoney(n, c, d, t) {
+                      var c = isNaN(c = Math.abs(c)) ? 0 : c,
+                        d = d == undefined ? "." : d,
+                        t = t == undefined ? "," : t,
+                        s = n < 0 ? "-" : "",
+                        i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
+                        j = (j = i.length) > 3 ? j % 3 : 0;
+                      return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+                    };
+		</script>
+		@endif
+		@endif
 		<script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAzmyhWaNEQ_i55-LLOfNPka-8BAhZRUaM&callback=initMap"
     async defer></script>
 @endsection

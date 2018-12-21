@@ -79,6 +79,9 @@
                                            @endforeach
                                         </tbody>
                                     </table>
+                                    <div class="pagination" style="float: right;margin-top: 30px; margin-right: 10px">
+                                        {{ $getTransactionHistory->links() }}
+                                    </div>
                                 </div>
 			            	</div>
 			        	</div>

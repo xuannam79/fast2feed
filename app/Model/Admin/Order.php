@@ -17,7 +17,7 @@ class Order extends Model
     }
     public function getTransaction()
     {
-        return DB::table('orders')->join('customer', 'customer.customer_id', '=', 'orders.customer_id')->join('restaurant', 'restaurant.restaurant_id', '=', 'orders.restaurant_id')->select('orders.order_id','customer.address','restaurant.address_res','restaurant.restaurant_name','customer.customer_name','orders.date_create','orders.total','orders.status')->orderBy('orders.order_id','DESC')->get();
+        return DB::table('orders')->join('customer', 'customer.customer_id', '=', 'orders.customer_id')->join('restaurant', 'restaurant.restaurant_id', '=', 'orders.restaurant_id')->select('orders.order_id','customer.address','restaurant.address_res','restaurant.restaurant_name','customer.customer_name','orders.date_create','orders.total','orders.status','orders.status_2')->orderBy('orders.order_id','DESC')->get();
     }
     public function getAllDanhSachHD()
     {
@@ -39,14 +39,7 @@ class Order extends Model
     public function getAllDanhSachHD3()
     {
         return DB::table('orders')
-        ->join('customer',function($join)
-            {
-                $join->on('customer.customer_id','=','orders.customer_id')
-                ->join('account','account.account_id','=','customer.account_id');
-            })
-        ->join('restaurant', 'restaurant.restaurant_id', '=', 'orders.restaurant_id')
-        ->join('shipper', 'shipper.shipper_id', '=', 'orders.shipper_id')
-        ->select('orders.status','orders.order_id','customer.address','restaurant.address_res','customer.customer_name','restaurant.phone_res','restaurant.restaurant_name','account.username','customer.transport_fee','orders.date_create','shipper.shipper_id','shipper.shipper_name','orders.status_2')
+        ->select('orders.status','orders.order_id','orders.date_create','orders.shipper_id','orders.status_2')
         ->orderBy('orders.order_id','DESC')
         ->get();
     }

@@ -42,12 +42,18 @@
                 <div class="login-wrap">
                     <div class="login-content">
                         <div class="login-logo">
-                            <a href="#">
+                            <a href="{{ route('trangChu') }}">
                                 <img src="/templates/admin/images/icon/f2f.png" alt="Fast2Feed">
                             </a>
                         </div>
+                        @if ($errors->any())
+                            @foreach ($errors->all() as $error)
+                                <script type="text/javascript">alert("{{ $error }}");</script>
+                            @endforeach
+                        @endif
                         <div class="login-form">
-                            <form action="" method="post">
+                            <form action="{{ route('trangDangKi') }}" enctype="multipart/form-data" method="post">
+                                {{ csrf_field() }}
                                 <div class="form-group">
                                     <label>Username</label>
                                     <input class="au-input au-input--full" type="text" name="username" placeholder="Username">
@@ -57,20 +63,43 @@
                                     <input class="au-input au-input--full" type="email" name="email" placeholder="Email">
                                 </div>
                                 <div class="form-group">
+                                    <label>Full Name</label>
+                                    <input class="au-input au-input--full" type="text" name="fullname" placeholder="Full Name">
+                                </div>
+                                <div class="form-group">
                                     <label>Password</label>
                                     <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
                                 </div>
-								<div class="form-group">
-                                    <label>Phone Number</label>
-                                    <input class="au-input au-input--full" type="text" name="username" placeholder="Phone Number">
+                                <div class="form-group">
+                                    <label>Re-Password</label>
+                                    <input class="au-input au-input--full" type="password" name="repassword" placeholder="Re-Password">
+                                </div>
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input class="au-input au-input--full" type="text" name="address" placeholder="Address">
+                                </div>
+                                <div class="form-group">
+                                    <label>Driving_license</label>
+                                    <input class="au-input au-input--full" type="text" name="driving_license" placeholder="Driving_license">
+                                </div>
+                                <div class="form-group">
+                                    <label>Identity_card</label>
+                                    <input class="au-input au-input--full" type="text" name="identity_card" placeholder="Identity_card">
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="file-input" class=" form-control-label">Avatar</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="file" id="file-input" name="avatar" class="form-control-file">
+                                    </div>
                                 </div>
                                 <div class="login-checkbox">
                                     <label>
                                         <input type="checkbox" name="aggree">Agree the terms and policy
                                     </label>
                                 </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit"><a style="color:#ffffff" href="{{ route('trangConfirmCode') }}">register</a>
-								</button>
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">register</button>
                             </form>
                             <div class="register-link">
                                 <p>

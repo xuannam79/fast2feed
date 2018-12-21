@@ -47,7 +47,7 @@
                                                 $nhahang = $value->customer_name;
                                                 $date = $value->date_create;
                                                 $total = $value->total;
-                                                $status = $value->status;
+                                                $status = $value->status_2;
                                             @endphp
                                             <tr>
                                                 <td>
@@ -68,20 +68,13 @@
                                                 <td>
                                                     @if($status == 1)
                                                     <span style="color: green">Đã thanh toán</span>
+                                                    @elseif($status == 2)
+                                                    <span style="color: blue">Chưa thanh toán</span>
                                                     @else
                                                     <span style="color: red">Đã hủy</span>
                                                     @endif
                                                 </td>
-                                                <td>
-                                                    <div class="table-data-feature">
-                                                        <a href="#" title="" class="item">
-                                                            <i class="zmdi zmdi-edit"></i>
-                                                        </a>
-                                                        <a href="#" title="" class="item">
-                                                            <i class="zmdi zmdi-delete"></i>
-                                                        </a>
-                                                    </div>
-                                                </td>
+                                                <td></td>
                                             </tr>
                                             @endforeach
                                         </tbody>

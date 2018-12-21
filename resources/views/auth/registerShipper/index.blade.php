@@ -42,7 +42,7 @@
                 <div class="login-wrap">
                     <div class="login-content">
                         <div class="login-logo">
-                            <a href="#">
+                            <a href="{{ route('trangChu') }}">
                                 <img src="/templates/admin/images/icon/f2f.png" alt="Fast2Feed">
                             </a>
                         </div>
@@ -75,12 +75,16 @@
                                     <input class="au-input au-input--full" type="password" name="repassword" placeholder="Re-Password">
                                 </div>
                                 <div class="form-group">
-                                    <label>Drivinig_license</label>
-                                    <input class="au-input au-input--full" type="text" name="drivinig_license" placeholder="Drivinig_license">
+                                    <label>Address</label>
+                                    <input class="au-input au-input--full" type="text" name="address" placeholder="Address">
                                 </div>
                                 <div class="form-group">
-                                    <label>Identify_card</label>
-                                    <input class="au-input au-input--full" type="text" name="Identify_card" placeholder="Identify_card">
+                                    <label>Driving_license</label>
+                                    <input class="au-input au-input--full" type="text" name="driving_license" placeholder="Driving_license">
+                                </div>
+                                <div class="form-group">
+                                    <label>Identity_card</label>
+                                    <input class="au-input au-input--full" type="text" name="identity_card" placeholder="Identity_card">
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3">

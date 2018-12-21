@@ -49,10 +49,10 @@
                         <div class="login-form">
                             <form action="" method="post">
                                 <div class="form-group">
-                                    <p style="text-align:center">Vui lòng xác thực số điện thoại bằng cách nhập Mã Xác Thực (OTP) đã được gửi qua SMS đến bạn</p>
+                                    <p style="text-align:center">Vui lòng xác thực số email bằng cách nhập Mã Xác Thực (OTP) đã được gửi đến email của bạn</p>
                                 </div>
                                 <div class="form-group">
-                                    <p style="text-align:center">*******251</p>
+                                    <p style="text-align:center"></p>
                                 </div>
                                 <div class="form-group">
                                     <input class="au-input au-input--full" type="number" name="otp" pattern="[0-9]*" maxlength="4" value="" required="" 
@@ -60,11 +60,11 @@
                                 </div>
                                 <div class="login-checkbox">
                                 </div>
-                                <a href="{{ route('trangChonAnh') }}" class="au-btn au-btn--block au-btn--green m-b-20" style="text-align: center;">Gửi</a>
+                                <a href="{{ route('trangDoiPhanHoi') }}" class="au-btn au-btn--block au-btn--green m-b-20" style="text-align: center;">Gửi</a>
                             </form>
                             <div class="register-link">
                                 <p>
-                                    Bấm vào <a href="#">đây</a> để hệ thống gửi lại mã xác thực qua SMS (nếu bạn vẫn chưa nhận được sau 5 phút).
+                                    Bấm vào <a href="#">đây</a> để hệ thống gửi lại mã xác thực qua email (nếu bạn vẫn chưa nhận được sau 5 phút).
                                 </p>
                             </div>
                         </div>

@@ -250,7 +250,11 @@ Route::namespace('Auth')->group(function(){
 		'as' => 'trangDangKi'
 	]);
 	Route::get('/dang-ki-shipper',[
-		'uses' => 'RegisterShipperController@index',
+		'uses' => 'RegisterShipperController@getRegister',
+		'as' => 'trangDangKiShipper'
+	]);
+	Route::post('/dang-ki',[
+		'uses' => 'RegisterShipperController@postRegister',
 		'as' => 'trangDangKiShipper'
 	]);
 });

@@ -82,15 +82,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                   <div class="table-data-feature">
-                                                        <a href="#" title="" class="item">
-                                                            <i class="zmdi zmdi-edit"></i>
-                                                        </a>
-                                                        <a href="#" title="" class="item">
-                                                            <i class="zmdi zmdi-delete"></i>
-                                                        </a>
-                                                        
-                                                    </div>
+                                                   
                                                 </td>
                                             </tr>
                                             @endforeach

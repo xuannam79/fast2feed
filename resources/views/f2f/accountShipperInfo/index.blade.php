@@ -39,7 +39,7 @@
 				                
 				                <div  style="margin: 10px;height: 300px">
 				                	<div style=" float: right; margin-top: 30px; margin-right: 70px">
-				                		<img src="/files/account/{{ $avatar }}" alt="" width="200" height="200">
+				                		<img src="/fast2feed/public/files/account/{{ $avatar }}" alt="" width="200" height="200">
 						                </div>
 				                	
 				                	<br>

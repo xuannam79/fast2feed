@@ -51,7 +51,7 @@
 										<tr>
 											<td>{{ $STT }}</td>
 											<td>{{ $name }}</td>
-											<td><img src="/files/product/{{ $images }}" class="img-thumbnail" alt="" style="width: 50px;height: 40px"></td>
+											<td><img src="/fast2feed/public/files/product/{{ $images }}" class="img-thumbnail" alt="" style="width: 50px;height: 40px"></td>
 											<td><a href="">-</a><input type="text" value="{{ $amount }}" style="width: 30px"><a href="">+</a></td>
 											<td>{{ $countPrice }} VNĐ</td>
 											<td><a href=""><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>

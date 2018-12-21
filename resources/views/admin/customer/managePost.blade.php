@@ -61,8 +61,8 @@
                                                 <td class="desc">{{ $name }}</td>
                                                 <td>
                                                     <div class="image">
-                                                        <a href="/files/customer/{{ $images }}">
-                                                            <img src="/files/customer/{{ $images }}" alt="Admin" width="50px" />
+                                                        <a href="/fast2feed/public/files/customer/{{ $images }}">
+                                                            <img src="/fast2feed/public/files/customer/{{ $images }}" alt="Admin" width="50px" />
                                                         </a>
                                                     </div>
                                                 </td>
@@ -135,8 +135,8 @@
                                                 <td class="desc" style="width: 200px">{{ $name }}</td>
                                                 <td>
                                                     <div class="image">
-                                                        <a href="/files/customer/{{ $images }}">
-                                                            <img src="/files/customer/{{ $images }}" alt="Admin" width="50px" />
+                                                        <a href="/fast2feed/public/files/customer/{{ $images }}">
+                                                            <img src="/fast2feed/public/files/customer/{{ $images }}" alt="Admin" width="50px" />
                                                         </a>
                                                     </div>
                                                 </td>

@@ -3,6 +3,9 @@
 	Khách hàng
 @endsection
 @section('content')
+<script>
+    $( window ).on( "load", function() { console.log('ádadadadas'); })
+    </script>
 	@php
 		$name = title_case($getCustomer->customer_name);
 		$images = $getCustomer->images;
@@ -665,9 +668,7 @@
 						@endphp
 					</span>
 				</div>
-						@php
 						
-						@endphp
 						<div class="giohang">
 							<form action="" method="post">
 								{{ csrf_field() }}

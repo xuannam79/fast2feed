@@ -101,7 +101,7 @@ class Account extends Model
             {
                 $join->on('customer.customer_id','=','orders.customer_id')
                 ->join('account','account.account_id','=','customer.account_id');
-            })->select('account.account_id','orders.payment','customer.customer_name','orders.order_id','orders.date_create','orders.total','orders.status','orders.status_2')->where('account.account_id', $accId)->get();
+            })->select('account.account_id','orders.payment','customer.customer_name','orders.order_id','orders.date_create','orders.total','orders.status','orders.status_2')->where('account.account_id', $accId)->orderBy('order_id', 'DESC')->get();
     }
     public function deliveryHistory($accId)
     {

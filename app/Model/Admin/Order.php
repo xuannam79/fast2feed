@@ -100,7 +100,7 @@ class Order extends Model
                                     'date_create' => $arrPost['date'],
                                     'customer_id' => $arrPost['cusID'],
                                     'shipper_id' => '0',
-                                    'status_2' => '1',
+                                    'status_2' => '2',
                                     'total' => $arrPost['total'],
                                     'restaurant_id' => $arrPost['resID'],
                                     'transport_fee_order' => $arrPost['transport_fee'],

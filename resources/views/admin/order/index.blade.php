@@ -32,7 +32,6 @@
                                                 <th>order</th>
                                                 <th>date_create</th>
                                                 <th>shipper_id</th>
-                                                <th>shipper_name</th>
                                                 <th>status</th>
                                                 <th></th>
                                             </tr>
@@ -43,7 +42,6 @@
                                                 $order_id = $value->order_id;
                                                 $date = $value->date_create;
                                                 $shipper_id = $value->shipper_id;
-                                                $shipper_name = $value->shipper_name;
                                                 $status = $value->status;
                                                 $status_2 = $value->status_2;
                                             @endphp
@@ -67,13 +65,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if($shipper_id==0)
-                                                    <span></span>
-                                                    @else
-                                                    {{ $shipper_name }}
-                                                    @endif</td>
-                                                <td>
-                                                    @if($shipper_id==0)
+                                                    @if($shipper_id == 0)
                                                     <span style="color: green">Còn 10 phút</span>
                                                     @elseif($shipper_id !=0 && $status == 1 && $status_2 == 1)
                                                     <span style="color: orange">Đã giao</span>
@@ -85,15 +77,6 @@
                                                 </td>
                                                 
                                                 <td>
-                                                    <div class="table-data-feature">
-                                                        <a href="#" title="" class="item">
-                                                            <i class="zmdi zmdi-edit"></i>
-                                                        </a>
-                                                        <a href="#" title="" class="item">
-                                                            <i class="zmdi zmdi-delete"></i>
-                                                        </a>
-                                                        
-                                                    </div>
                                                 </td>
                                             </tr>
                                             @endforeach

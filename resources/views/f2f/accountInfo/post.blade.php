@@ -47,8 +47,8 @@
 											<input type="submit" name="submit" value="Thêm menu" style="float: right;margin-right: 20px;color: white; width: 100px; height: 25px;background: #4C66A4;">
 											<br>
 											<input type="submit" name="submit" value="Cập nhật" style="float: right;margin-right: 20px;color: white; width: 100px; height: 25px;background: #4C66A4;">
-											<label style="margin-top: 30px">Danh sách menu:</label><br>
-											<select style="width: 300px;height: 30px;margin-bottom: 10px">
+											<label style="margin-top: 20px">Danh sách menu:</label><br>
+											<select style="width: 250px;height: 30px;margin-bottom: 10px">
       											<option value="">Cơm gà quay</option>
 										      	<option value="">Cơm gà quay 2</option>
 										      	<option value="">Cơm gà quay 3</option>
@@ -67,7 +67,7 @@
 												<br>
 											</div>
 									</div>
-								<div style="background: #f2f2f2;">
+								<div style="background: #f2f2f2;margin-top: 50px">
 									<div style="width: 840px;height: 70px;">
 										<div style="float: left">
 											<label>Tên sản phẩm:</label><br>

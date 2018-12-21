@@ -14,25 +14,25 @@
     <title>@yield('title')</title>
 
     <!-- Fontfaces CSS-->
-    <link href="/templates/admin/css/font-face.css" rel="stylesheet" media="all">
-    <link href="/templates/admin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="/templates/admin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-    <link href="/templates/admin/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="/fast2feed/public/templates/admin/css/font-face.css" rel="stylesheet" media="all">
+    <link href="/fast2feed/public/templates/admin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/fast2feed/public/templates/admin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="/fast2feed/public/templates/admin/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 
     <!-- Bootstrap CSS-->
-    <link href="/templates/admin/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="/fast2feed/public/templates/admin/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
 
     <!-- Vendor CSS-->
-    <link href="/templates/admin/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="/templates/admin/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="/templates/admin/vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="/templates/admin/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="/templates/admin/vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="/templates/admin/vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="/templates/admin/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <link href="/fast2feed/public/templates/admin/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="/fast2feed/public/templates/admin/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="/fast2feed/public/templates/admin/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="/fast2feed/public/templates/admin/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="/fast2feed/public/templates/admin/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="/fast2feed/public/templates/admin/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="/fast2feed/public/templates/admin/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
-    <link href="/templates/admin/css/theme.css" rel="stylesheet" media="all">
+    <link href="/fast2feed/public/templates/admin/css/theme.css" rel="stylesheet" media="all">
 
 </head>
 <body class="animsition">
@@ -62,7 +62,7 @@
                                             </div>
                                             <div class="mess__item">
                                                 <div class="image img-cir img-40">
-                                                    <img src="/templates/admin/images/icon/avatar-06.jpg" alt="Michelle Moreno" />
+                                                    <img src="/fast2feed/public/templates/admin/images/icon/avatar-06.jpg" alt="Michelle Moreno" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>An Võ</h6>
@@ -72,7 +72,7 @@
                                             </div>
                                             <div class="mess__item">
                                                 <div class="image img-cir img-40">
-                                                    <img src="/templates/admin/images/icon/avatar-04.jpg" alt="Diane Myers" />
+                                                    <img src="/fast2feed/public/templates/admin/images/icon/avatar-04.jpg" alt="Diane Myers" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>Vũ Phan</h6>
@@ -131,7 +131,7 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="/files/account/{{ $admin->avatar }}" alt="Admin" />
+                                            <img src="/fast2feed/public/files/account/{{ $admin->avatar }}" alt="Admin" />
                                         </div>
                                         <div class="content">
                                             <a class="js-acc-btn" href="#">Admin</a>
@@ -140,7 +140,7 @@
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="/files/account/{{ $admin->avatar }}" alt="Admin" />
+                                                        <img src="/fast2feed/public/files/account/{{ $admin->avatar }}" alt="Admin" />
                                                     </a>
                                                 </div>
                                                 <div class="content">

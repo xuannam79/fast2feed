@@ -17,27 +17,27 @@
 			  <!-- Wrapper for slides -->
 			  <div class="carousel-inner" role="listbox">
 			    <div class="item active">
-			      <a href="#" title=""><img src="/templates/f2f/images/slide/slide1.jpg" alt="" style="width: 1169px;height: 300px"></a>
+			      <a href="#" title=""><img src="/fast2feed/public/templates/f2f/images/slide/slide1.jpg" alt="" style="width: 1169px;height: 300px"></a>
 			      <div class="carousel-caption">
 			      </div>
 			    </div>
 			    <div class="item">
-			      <a href="# title=""><img src="/templates/f2f/images/slide/slide2.jpg" alt="" style="width: 1169px;height: 300px"></a>
+			      <a href="# title=""><img src="/fast2feed/public/templates/f2f/images/slide/slide2.jpg" alt="" style="width: 1169px;height: 300px"></a>
 			      <div class="carousel-caption">
 			      </div>
 			    </div>
 			    <div class="item">
-			      <a href="#" title=""><img src="/templates/f2f/images/slide/slide3.jpg" alt="" style="width: 1169px;height: 300px"></a>
+			      <a href="#" title=""><img src="/fast2feed/public/templates/f2f/images/slide/slide3.jpg" alt="" style="width: 1169px;height: 300px"></a>
 			      <div class="carousel-caption">
 			      </div>
 			    </div>
 			    <div class="item">
-			      <a href="#" title=""><img src="/templates/f2f/images/slide/slide4.jpg" alt="" style="width: 1169px;height: 300px"></a>
+			      <a href="#" title=""><img src="/fast2feed/public/templates/f2f/images/slide/slide4.jpg" alt="" style="width: 1169px;height: 300px"></a>
 			      <div class="carousel-caption">
 			      </div>
 			    </div>
 			    <div class="item">
-			      <a href="#" title=""><img src="/templates/f2f/images/slide/slide5.jpg" alt="" style="width: 1169px;height: 300px"></a>
+			      <a href="#" title=""><img src="/fast2feed/public/templates/f2f/images/slide/slide5.jpg" alt="" style="width: 1169px;height: 300px"></a>
 			      <div class="carousel-caption">
 			      </div>
 			    </div>
@@ -77,7 +77,7 @@
 								<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 re-padding">
 						  			<div class="product_item">
 						  				<div class="product-image">
-						  					<a href="{{ $url }}"><img src="/files/customer/{{ $images }}" alt="" class=""></a>
+						  					<a href="{{ $url }}"><img src="/fast2feed/public/files/customer/{{ $images }}" alt="" class=""></a>
 						  				</div>
 										<a href="{{ $url }}" title="{{ $name }}">
 											<p><span class='price text-right'>{{ $name }}</span></p>
@@ -91,7 +91,7 @@
 								<!-- <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 re-padding">
 						  			<div class="product_item">
 						  				<div class="product-image">
-						  					<a href=""><img src="/templates/f2f/images/product/somi.png" alt="" class=""></a>
+						  					<a href=""><img src="/fast2feed/public/templates/f2f/images/product/somi.png" alt="" class=""></a>
 						  				</div>
 										<p><span class='price text-right'>200.000 VNĐ</span> <del class="product-discount">250.000 VNĐ</del></p>
 										<p><span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="Số lượt xem"></span> 190 <span class="glyphicon glyphicon-star-empty" aria-hidden="true" title="Số lượng đặt mua">9</p>

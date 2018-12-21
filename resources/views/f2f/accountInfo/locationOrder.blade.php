@@ -126,7 +126,7 @@
             infoWindow = new google.maps.InfoWindow({
                 content: contentS
             });
-            var image = '/files/shipper/scooter.png';
+            var image = '/fast2feed/public/files/shipper/scooter.png';
             marker = new google.maps.Marker({
                 position: middleS,
                 map: map,

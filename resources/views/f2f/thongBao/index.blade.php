@@ -16,17 +16,17 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
-                    <img src="/templates/f2f/images/slide/slide6.jpg" alt="" style="width: 1169px;height: 300px">
+                    <img src="/fast2feed/public/templates/f2f/images/slide/slide6.jpg" alt="" style="width: 1169px;height: 300px">
                     <div class="carousel-caption">
                     </div>
                 </div>
                 <div class="item">
-                    <img src="/templates/f2f/images/slide/slide7.jpg" alt="" style="width: 1169px;height: 300px">
+                    <img src="/fast2feed/public/templates/f2f/images/slide/slide7.jpg" alt="" style="width: 1169px;height: 300px">
                     <div class="carousel-caption">
                     </div>
                 </div>
                 <div class="item">
-                    <img src="/templates/f2f/images/slide/slide8.jpg" alt="" style="width: 1169px;height: 300px">
+                    <img src="/fast2feed/public/templates/f2f/images/slide/slide8.jpg" alt="" style="width: 1169px;height: 300px">
                     <div class="carousel-caption">
                     </div>
                 </div>

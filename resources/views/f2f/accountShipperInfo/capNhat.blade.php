@@ -28,7 +28,7 @@
 			           		<div class="list-group">
 				                <p href="#" class="list-group-item" position: relative style="font-size: 16px;font-weight: bold; text-align: center; background: #4C66A4; color: white">Cập nhật thông tin cá nhân</p>
 				                <div style="width: 120px;height: 110px; float: right; margin-top: 30px; margin-right: 50px">
-				                	<img src="/files/account/khach1.jpg" alt="" width="100" height="100">
+				                	<img src="/fast2feed/public/files/account/khach1.jpg" alt="" width="100" height="100">
 				                	<input type="file" name="">
 				                </div>
 				                Họ và tên: 

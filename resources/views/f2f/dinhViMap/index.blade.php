@@ -37,7 +37,7 @@
         map: map,
       });
         infoWindow = new google.maps.InfoWindow({
-          content: 'Bạn đang ở đây'
+          content: 'Shipper đang ở đây'
         });
         // Try HTML5 geolocation.
         if (navigator.geolocation) {

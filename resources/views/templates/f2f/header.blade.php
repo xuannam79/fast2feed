@@ -117,48 +117,43 @@
                             <div class="modal fade" id="myModal" role="dialog">
                                 <div class="modal-dialog">
                                     <!-- Modal content-->
-                                    <div class="modal-content" style="width: 175%;right:226px;">
+                                    <div class="modal-content" style="width: 193%;right:285px;">
                                         <div class="order_list">
-                                            <div class="order_list_heading order_table_row">
-                                                <div class="order_table_cell order_list_row_col1">STT
-                                                </div>
-                                                <div class="order_table_cell order_list_row_col2">Nơi nhận hàng
-                                                </div>
-                                                <div class="order_table_cell order_list_row_col3">Nơi giao hàng
-                                                </div>
-                                                <div class="order_table_cell order_list_row_col4">Tiền nhận hàng
-                                                </div>
-                                                <div class="order_table_cell order_list_row_col5">Tiền giao hàng
-                                                </div>
-                                                <div class="order_table_cell order_list_row_col6">Trạng thái
-                                                </div>
-                                                <div class="order_table_cell order_list_row_col7">
-                                                </div>
-                                                <div class="order_table_cell order_list_row_col8">
-                                                </div>
-                                            </div>
-                                            <div class="order_table_row">
-                                                <div class="order_table_cell order_list_row_col1">01
-                                                </div>
-                                                <div class="order_table_cell order_list_row_col2">134 Hoàng Diệu, P.2, Q. Hải Châu, TP.Đà Nẵng
-                                                </div>
-                                                <div class="order_table_cell order_list_row_col3">148 Tiểu La, P.3, Q. Hải Châu, TP.Đà Nẵng
-                                                </div>
-                                                <div class="order_table_cell order_list_row_col4">95.000đ
-                                                </div>
-                                                <div class="order_table_cell order_list_row_col5">116,000đ
-                                                </div>
-                                                <div class="order_table_cell order_list_row_col6">Còn 5 phút
-                                                </div>
-                                                <div class="order_table_cell order_list_row_col7">
-                                                    <button title="Nhấn vào để xem chi tiết" class="font_weight_bold order_table_status gray pointer" id="oderNoti">Xem
-                                                    </button>
-                                                    <div class="order_table_cell order_list_row_col8">
-                                                        <button title="Nhấn vào để nhận đơn hàng" class="order_table_status gray pointer" style="width: 100px">Nhận đơn
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <table class="table table-data2">
+                                                <thead>
+                                                    <tr>
+                                                        <th>STT</th>
+                                                        <th style="width: 100px">Mã hóa đơn</th>
+                                                        <th style="width: 310px">Nơi nhận hàng</th>
+                                                        <th style="width: 310px">Nơi giao hàng</th>
+                                                        <th style="width: 150px">Trạng thái</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>21</td>
+                                                        <td>146 Nguyễn hữu Thọ, Q.Hải Châu, Đà Nẵng</td>
+                                                        <td>151 Tiểu La, Đà Nẵng</td>
+                                                        <td>Còn 10 phút</td>
+                                                        <td>
+                                                            <a href="#" style="color: black"><button title="Nhấn vào để xem chi tiết" class="font_weight_bold order_table_status gray pointer" id="myBtn"style="width: 70px;float: left;" >Xem
+                                                            </button></a>
+                                                        </td>
+                                                        <td>
+                                                            <form action="#" method="post">
+                                                              <input type="hidden" name="orderID" value="">
+                                                              
+                                                            <button type="submit" title="Nhấn vào để nhận đơn hàng"
+                                                                        class="order_table_status gray pointer" style="width: 105px; float: right;">Nhận đơn
+                                                            </button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>    
                                         </div>
                                     </div>
                                 </div>

@@ -847,7 +847,7 @@
 			        </div>
 			        <div class="modal-footer">
 		          		<div class="payButton">
-		          			<button id="totalTotal" type="submit">Đặt hàng</button>
+		          			<button style="background: #0288D1; width: 870px; height: 50px;" id="totalTotal" type="submit">Đặt hàng</button>
 		          			
 		          			<span class="payGia">đ</span>
 		          			<span class="payGia" style="padding-right: 10px;" id="bigTotal1"></span>
